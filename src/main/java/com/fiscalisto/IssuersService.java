@@ -143,7 +143,7 @@ public final class IssuersService {
     /**
      * Firmar el contrato con el PAC
      * <p>
-     * Una sola vez por RFC antes de timbrar en producción: firma el contrato de servicio del PAC (Finkok) con la e.firma del emisor. La e.firma se usa en memoria para esa firma y nunca se guarda.
+     * Una sola vez por RFC antes de timbrar en producción: firma el contrato de servicio del PAC (Finkok) con la e.firma del emisor. La e.firma se usa en memoria para esa firma y no se guarda, salvo que mande keep_for_downloads: true para pedirle al SAT las facturas del emisor (POST /v1/sat_downloads); entonces se guarda cifrada y puede borrarla con DELETE.
      * <p>
      * POST /v1/issuers/{id}/efirma
      * <p>
@@ -155,6 +155,23 @@ public final class IssuersService {
 
     public Issuer signEfirma(String id, SignEfirmaParams params) {
         return signEfirma(id, params, null);
+    }
+
+    /**
+     * Borrar la e.firma guardada
+     * <p>
+     * Borra la e.firma que guardó con keep_for_downloads. El emisor sigue timbrando; ya no puede pedir descargas al SAT hasta que la mande de nuevo.
+     * <p>
+     * DELETE /v1/issuers/{id}/efirma
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/emisores/delete-efirma
+     */
+    public Issuer deleteEfirma(String id, RequestOptions options) {
+        return api.request("DELETE", "/v1/issuers/" + ApiClient.encode(id) + "/efirma", null, null, false, Issuer.class, options);
+    }
+
+    public Issuer deleteEfirma(String id) {
+        return deleteEfirma(id, null);
     }
 
     /**

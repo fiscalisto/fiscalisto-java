@@ -27,7 +27,7 @@ public class ListEventsParams {
     /**
      * Solo de este tipo.
      * <p>
-     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, issuer.ready, balance.low.
+     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, sat_download.completed, sat_download.failed, issuer.ready, balance.low.
      */
     @JsonProperty("type")
     private String type;
@@ -69,7 +69,7 @@ public class ListEventsParams {
     /**
      * Solo de este tipo.
      * <p>
-     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, issuer.ready, balance.low.
+     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, sat_download.completed, sat_download.failed, issuer.ready, balance.low.
      */
     public String getType() {
         return type;

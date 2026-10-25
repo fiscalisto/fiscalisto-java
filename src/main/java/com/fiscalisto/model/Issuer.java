@@ -77,6 +77,12 @@ public class Issuer {
     private IssuerCertificate certificate;
 
     /**
+     * Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at).
+     */
+    @JsonProperty("sat_downloads")
+    private IssuerSatDownloads satDownloads;
+
+    /**
      * Registro patronal ante el IMSS (RegistroPatronal), 11 caracteres. Necesario para timbrar nómina.
      */
     @JsonProperty("employer_registration")
@@ -231,6 +237,18 @@ public class Issuer {
 
     public Issuer setCertificate(IssuerCertificate certificate) {
         this.certificate = certificate;
+        return this;
+    }
+
+    /**
+     * Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at).
+     */
+    public IssuerSatDownloads getSatDownloads() {
+        return satDownloads;
+    }
+
+    public Issuer setSatDownloads(IssuerSatDownloads satDownloads) {
+        this.satDownloads = satDownloads;
         return this;
     }
 

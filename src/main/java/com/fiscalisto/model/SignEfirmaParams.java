@@ -37,6 +37,12 @@ public class SignEfirmaParams {
     private String password;
 
     /**
+     * true para guardarla (cifrada) y poder pedir al SAT las facturas del emisor con POST /v1/sat_downloads. Sin esto solo firma el contrato con el PAC y no se guarda.
+     */
+    @JsonProperty("keep_for_downloads")
+    private Boolean keepForDownloads;
+
+    /**
      * El archivo .cer en base64 (puede traer el prefijo data:).
      * <p>
      * Obligatorio.
@@ -75,6 +81,18 @@ public class SignEfirmaParams {
 
     public SignEfirmaParams setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    /**
+     * true para guardarla (cifrada) y poder pedir al SAT las facturas del emisor con POST /v1/sat_downloads. Sin esto solo firma el contrato con el PAC y no se guarda.
+     */
+    public Boolean getKeepForDownloads() {
+        return keepForDownloads;
+    }
+
+    public SignEfirmaParams setKeepForDownloads(Boolean keepForDownloads) {
+        this.keepForDownloads = keepForDownloads;
         return this;
     }
 }
