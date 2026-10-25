@@ -14,6 +14,7 @@ public final class ClientOptions {
     final String apiKey;
     final String baseUrl;
     final String apiVersion;
+    final String language;
     final int maxRetries;
     final Duration timeout;
     final HttpClient httpClient;
@@ -23,6 +24,7 @@ public final class ClientOptions {
         this.apiKey = b.apiKey;
         this.baseUrl = b.baseUrl.replaceAll("/+$", "");
         this.apiVersion = b.apiVersion;
+        this.language = b.language;
         this.maxRetries = b.maxRetries;
         this.timeout = b.timeout;
         this.httpClient = b.httpClient;
@@ -37,6 +39,7 @@ public final class ClientOptions {
         private String apiKey;
         private String baseUrl = DEFAULT_BASE_URL;
         private String apiVersion = ApiClient.API_VERSION;
+        private String language;
         private int maxRetries = 2;
         private Duration timeout = Duration.ofSeconds(80);
         private HttpClient httpClient;
@@ -59,6 +62,12 @@ public final class ClientOptions {
         /** Otra versión de la API (Fiscalisto-Version); con null, la fijada en la cuenta. */
         public Builder apiVersion(String apiVersion) {
             this.apiVersion = apiVersion;
+            return this;
+        }
+
+        /** "en": los mensajes de error en inglés (Accept-Language). */
+        public Builder language(String language) {
+            this.language = language;
             return this;
         }
 

@@ -45,6 +45,12 @@ public class ErrorBodyError {
     private String satCode;
 
     /**
+     * Con Accept-Language: en, el mensaje original en español cuando message solo dice en inglés qué significa el código.
+     */
+    @JsonProperty("message_es")
+    private String messageEs;
+
+    /**
      * La explicación de este código en la documentación.
      */
     @JsonProperty("doc_url")
@@ -115,6 +121,18 @@ public class ErrorBodyError {
 
     public ErrorBodyError setSatCode(String satCode) {
         this.satCode = satCode;
+        return this;
+    }
+
+    /**
+     * Con Accept-Language: en, el mensaje original en español cuando message solo dice en inglés qué significa el código.
+     */
+    public String getMessageEs() {
+        return messageEs;
+    }
+
+    public ErrorBodyError setMessageEs(String messageEs) {
+        this.messageEs = messageEs;
         return this;
     }
 

@@ -45,6 +45,7 @@ public final class ApiClient {
     private final String key;
     private final String baseUrl;
     private final String apiVersion;
+    private final String language;
     private final int maxRetries;
     private final Duration timeout;
     private final HttpClient http;
@@ -61,6 +62,7 @@ public final class ApiClient {
         this.key = k;
         this.baseUrl = options.baseUrl;
         this.apiVersion = options.apiVersion;
+        this.language = options.language;
         this.maxRetries = options.maxRetries;
         this.timeout = options.timeout;
         this.http = options.httpClient != null
@@ -155,6 +157,7 @@ public final class ApiClient {
                 .header("Accept", "application/json")
                 .method(method, data == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofByteArray(data));
         if (apiVersion != null) req.header("Fiscalisto-Version", apiVersion);
+        if (language != null) req.header("Accept-Language", language);
         if (data != null) req.header("Content-Type", "application/json");
         if (idempotencyKey != null) req.header("Idempotency-Key", idempotencyKey);
         HttpRequest request = req.build();
