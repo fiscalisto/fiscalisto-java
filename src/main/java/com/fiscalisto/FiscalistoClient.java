@@ -1,0 +1,166 @@
+// Generado por `bun run openapi` desde la especificación OpenAPI de la API: no lo edite.
+
+package com.fiscalisto;
+
+/**
+ * El cliente de la API de Fiscalisto. Cada recurso es un método: {@code client.invoices().create(…)}.
+ * <p>
+ * {@code var client = new FiscalistoClient();} toma la llave de FISCALISTO_API_KEY. Úselo desde
+ * varios hilos: no guarda estado entre llamadas.
+ */
+public final class FiscalistoClient {
+    private final ApiClient api;
+    private final AccountService account;
+    private final BalanceService balance;
+    private final IssuersService issuers;
+    private final InvoicesService invoices;
+    private final PaymentsService payments;
+    private final CreditNotesService creditNotes;
+    private final AdvancesService advances;
+    private final RetentionsService retentions;
+    private final EmployeesService employees;
+    private final PayrollReceiptsService payrollReceipts;
+    private final InvoiceBatchesService invoiceBatches;
+    private final TaxIdsService taxIds;
+    private final CustomersService customers;
+    private final CustomerDataRequestsService customerDataRequests;
+    private final ProductsService products;
+    private final SatCatalogsService satCatalogs;
+    private final SatListsService satLists;
+    private final WebhookEndpointsService webhookEndpoints;
+    private final EventsService events;
+
+    /** Con la llave de la variable FISCALISTO_API_KEY. */
+    public FiscalistoClient() {
+        this(ClientOptions.builder().build());
+    }
+
+    /** Con su llave fk_test_… o fk_live_…. */
+    public FiscalistoClient(String apiKey) {
+        this(ClientOptions.builder().apiKey(apiKey).build());
+    }
+
+    public FiscalistoClient(ClientOptions options) {
+        ApiClient api = new ApiClient(options);
+        this.api = api;
+        this.account = new AccountService(api);
+        this.balance = new BalanceService(api);
+        this.issuers = new IssuersService(api);
+        this.invoices = new InvoicesService(api);
+        this.payments = new PaymentsService(api);
+        this.creditNotes = new CreditNotesService(api);
+        this.advances = new AdvancesService(api);
+        this.retentions = new RetentionsService(api);
+        this.employees = new EmployeesService(api);
+        this.payrollReceipts = new PayrollReceiptsService(api);
+        this.invoiceBatches = new InvoiceBatchesService(api);
+        this.taxIds = new TaxIdsService(api);
+        this.customers = new CustomersService(api);
+        this.customerDataRequests = new CustomerDataRequestsService(api);
+        this.products = new ProductsService(api);
+        this.satCatalogs = new SatCatalogsService(api);
+        this.satLists = new SatListsService(api);
+        this.webhookEndpoints = new WebhookEndpointsService(api);
+        this.events = new EventsService(api);
+    }
+
+    /** true con una llave fk_live_ (producción), false con fk_test_ (pruebas). */
+    public boolean livemode() {
+        return api.livemode();
+    }
+
+    /** Cuenta. */
+    public AccountService account() {
+        return account;
+    }
+
+    /** Cuenta. */
+    public BalanceService balance() {
+        return balance;
+    }
+
+    /** Emisores. */
+    public IssuersService issuers() {
+        return issuers;
+    }
+
+    /** Facturas. */
+    public InvoicesService invoices() {
+        return invoices;
+    }
+
+    /** Pagos y notas de crédito. */
+    public PaymentsService payments() {
+        return payments;
+    }
+
+    /** Pagos y notas de crédito. */
+    public CreditNotesService creditNotes() {
+        return creditNotes;
+    }
+
+    /** Anticipos. */
+    public AdvancesService advances() {
+        return advances;
+    }
+
+    /** Retenciones. */
+    public RetentionsService retentions() {
+        return retentions;
+    }
+
+    /** Nómina. */
+    public EmployeesService employees() {
+        return employees;
+    }
+
+    /** Nómina. */
+    public PayrollReceiptsService payrollReceipts() {
+        return payrollReceipts;
+    }
+
+    /** Lotes. */
+    public InvoiceBatchesService invoiceBatches() {
+        return invoiceBatches;
+    }
+
+    /** Clientes. */
+    public TaxIdsService taxIds() {
+        return taxIds;
+    }
+
+    /** Clientes. */
+    public CustomersService customers() {
+        return customers;
+    }
+
+    /** Clientes. */
+    public CustomerDataRequestsService customerDataRequests() {
+        return customerDataRequests;
+    }
+
+    /** Productos. */
+    public ProductsService products() {
+        return products;
+    }
+
+    /** Catálogos del SAT. */
+    public SatCatalogsService satCatalogs() {
+        return satCatalogs;
+    }
+
+    /** Listas del SAT. */
+    public SatListsService satLists() {
+        return satLists;
+    }
+
+    /** Webhooks. */
+    public WebhookEndpointsService webhookEndpoints() {
+        return webhookEndpoints;
+    }
+
+    /** Eventos. */
+    public EventsService events() {
+        return events;
+    }
+}
