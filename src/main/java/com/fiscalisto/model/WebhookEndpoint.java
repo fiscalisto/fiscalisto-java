@@ -33,6 +33,12 @@ public class WebhookEndpoint {
     private String object;
 
     /**
+     * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
+     */
+    @JsonProperty("sandbox")
+    private String sandbox;
+
+    /**
      * Dirección https de su servidor que recibe los avisos.
      */
     @JsonProperty("url")
@@ -121,6 +127,18 @@ public class WebhookEndpoint {
 
     public WebhookEndpoint setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
+     */
+    public String getSandbox() {
+        return sandbox;
+    }
+
+    public WebhookEndpoint setSandbox(String sandbox) {
+        this.sandbox = sandbox;
         return this;
     }
 

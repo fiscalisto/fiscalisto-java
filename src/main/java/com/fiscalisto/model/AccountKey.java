@@ -45,6 +45,12 @@ public class AccountKey {
     private String expiresAt;
 
     /**
+     * El entorno de prueba (sbx_…) de la llave: solo ve sus emisores, webhooks y eventos. null si es de la cuenta.
+     */
+    @JsonProperty("sandbox")
+    private String sandbox;
+
+    /**
      * Id de la llave.
      */
     public String getId() {
@@ -101,6 +107,18 @@ public class AccountKey {
 
     public AccountKey setExpiresAt(String expiresAt) {
         this.expiresAt = expiresAt;
+        return this;
+    }
+
+    /**
+     * El entorno de prueba (sbx_…) de la llave: solo ve sus emisores, webhooks y eventos. null si es de la cuenta.
+     */
+    public String getSandbox() {
+        return sandbox;
+    }
+
+    public AccountKey setSandbox(String sandbox) {
+        this.sandbox = sandbox;
         return this;
     }
 }

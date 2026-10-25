@@ -12,6 +12,7 @@ public final class FiscalistoClient {
     private final ApiClient api;
     private final AccountService account;
     private final TestDataService testData;
+    private final SandboxesService sandboxes;
     private final BalanceService balance;
     private final IssuersService issuers;
     private final InvoicesService invoices;
@@ -55,6 +56,7 @@ public final class FiscalistoClient {
         this.api = api;
         this.account = new AccountService(api);
         this.testData = new TestDataService(api);
+        this.sandboxes = new SandboxesService(api);
         this.balance = new BalanceService(api);
         this.issuers = new IssuersService(api);
         this.invoices = new InvoicesService(api);
@@ -97,6 +99,11 @@ public final class FiscalistoClient {
     /** Cuenta. */
     public TestDataService testData() {
         return testData;
+    }
+
+    /** Entornos de prueba. */
+    public SandboxesService sandboxes() {
+        return sandboxes;
     }
 
     /** Cuenta. */

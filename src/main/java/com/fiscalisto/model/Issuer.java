@@ -101,6 +101,12 @@ public class Issuer {
     private String stampsAs;
 
     /**
+     * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
+     */
+    @JsonProperty("sandbox")
+    private String sandbox;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -285,6 +291,18 @@ public class Issuer {
 
     public Issuer setStampsAs(String stampsAs) {
         this.stampsAs = stampsAs;
+        return this;
+    }
+
+    /**
+     * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
+     */
+    public String getSandbox() {
+        return sandbox;
+    }
+
+    public Issuer setSandbox(String sandbox) {
+        this.sandbox = sandbox;
         return this;
     }
 
