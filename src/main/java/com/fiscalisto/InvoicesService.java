@@ -191,4 +191,38 @@ public final class InvoicesService {
     public Invoice substitute(String id, InvoiceCreate params) {
         return substitute(id, params, null);
     }
+
+    /**
+     * Marcar pagada
+     * <p>
+     * Una factura PUE timbrada con paid_later (o marcada por cobrar) ya se pagó: queda paid y llega invoice.paid. Una PPD se paga con su complemento de pago (POST /v1/payments).
+     * <p>
+     * POST /v1/invoices/{id}/mark_paid
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cuentas-por-cobrar/mark-invoice-paid
+     */
+    public Invoice markPaid(String id, RequestOptions options) {
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_paid", null, null, false, Invoice.class, options);
+    }
+
+    public Invoice markPaid(String id) {
+        return markPaid(id, null);
+    }
+
+    /**
+     * Marcar por cobrar
+     * <p>
+     * Una factura PUE que el cliente aún no paga (le paga este mes): queda unpaid hasta POST /v1/invoices/{id}/mark_paid. Si el mes termina sin pago, la ley pide sustituirla por una PPD (regla 2.7.1.39 de la RMF).
+     * <p>
+     * POST /v1/invoices/{id}/mark_unpaid
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cuentas-por-cobrar/mark-invoice-unpaid
+     */
+    public Invoice markUnpaid(String id, RequestOptions options) {
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_unpaid", null, null, false, Invoice.class, options);
+    }
+
+    public Invoice markUnpaid(String id) {
+        return markUnpaid(id, null);
+    }
 }

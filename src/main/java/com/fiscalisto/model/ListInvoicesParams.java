@@ -53,6 +53,14 @@ public class ListInvoicesParams {
     private String customer;
 
     /**
+     * Facturas de ingreso por lo que deben: unpaid, partial, open (unpaid o partial) o paid.
+     * <p>
+     * Valores: unpaid, partial, open, paid.
+     */
+    @JsonProperty("payment_status")
+    private String paymentStatus;
+
+    /**
      * Creadas desde, en ISO 8601. Un día solo (2026-10-01) cuenta desde su inicio en hora de la Ciudad de México.
      */
     @JsonProperty("created_gte")
@@ -141,6 +149,20 @@ public class ListInvoicesParams {
 
     public ListInvoicesParams setCustomer(String customer) {
         this.customer = customer;
+        return this;
+    }
+
+    /**
+     * Facturas de ingreso por lo que deben: unpaid, partial, open (unpaid o partial) o paid.
+     * <p>
+     * Valores: unpaid, partial, open, paid.
+     */
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public ListInvoicesParams setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
         return this;
     }
 

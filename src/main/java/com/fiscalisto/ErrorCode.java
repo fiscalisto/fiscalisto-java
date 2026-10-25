@@ -9,6 +9,9 @@ package com.fiscalisto;
 public final class ErrorCode {
     private ErrorCode() {}
 
+    /** El depósito no se puede conciliar, clasificar o reabrir así (ya está conciliado, las facturas son de otro cliente o una está cancelada…). El mensaje dice por qué. */
+    public static final String BANK_TRANSACTION_INVALID = "bank_transaction_invalid";
+
     /** Una factura del lote no pasa la revisión; param dice cuál (invoices.3.items.0.unit_price). Ninguna del lote se timbró. */
     public static final String BATCH_INVALID = "batch_invalid";
 
@@ -74,6 +77,9 @@ public final class ErrorCode {
 
     /** La factura no cumple una regla del SAT que Fiscalisto revisa antes de mandarla al PAC (uso contra régimen, totales, complementos…). No se usó ningún timbre. */
     public static final String INVOICE_INVALID = "invoice_invalid";
+
+    /** Solo una factura de ingreso PUE vigente se marca pagada o por cobrar; una PPD se paga con su complemento de pago (type P). */
+    public static final String INVOICE_NOT_MARKABLE = "invoice_not_markable";
 
     /** La acción es para facturas timbradas (enviar, cancelar, sustituir). */
     public static final String INVOICE_NOT_STAMPED = "invoice_not_stamped";

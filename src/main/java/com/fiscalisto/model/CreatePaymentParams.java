@@ -93,6 +93,12 @@ public class CreatePaymentParams {
     private Map<String, String> metadata;
 
     /**
+     * El depósito (btx_…) con que le pagaron: queda conciliado con este complemento, y date es su día si no manda otra.
+     */
+    @JsonProperty("bank_transaction")
+    private String bankTransaction;
+
+    /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
      */
     public String getIssuer() {
@@ -241,6 +247,18 @@ public class CreatePaymentParams {
 
     public CreatePaymentParams setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * El depósito (btx_…) con que le pagaron: queda conciliado con este complemento, y date es su día si no manda otra.
+     */
+    public String getBankTransaction() {
+        return bankTransaction;
+    }
+
+    public CreatePaymentParams setBankTransaction(String bankTransaction) {
+        this.bankTransaction = bankTransaction;
         return this;
     }
 }

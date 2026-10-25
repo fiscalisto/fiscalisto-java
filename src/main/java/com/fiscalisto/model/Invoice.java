@@ -147,6 +147,26 @@ public class Invoice {
     private BigDecimal total;
 
     /**
+     * Si ya se cobró (Cuentas por cobrar): paid, partial (complementos de pago o notas de crédito por una parte) o unpaid. Una PUE está paid, salvo con paid_later hasta POST /v1/invoices/{id}/mark_paid. null si no es de ingreso o no está vigente.
+     * <p>
+     * Valores: paid, partial, unpaid.
+     */
+    @JsonProperty("payment_status")
+    private String paymentStatus;
+
+    /**
+     * Lo que falta por cobrar, en su moneda, o null.
+     */
+    @JsonProperty("amount_due")
+    private BigDecimal amountDue;
+
+    /**
+     * Lo cobrado: complementos de pago y notas de crédito vigentes, o todo si es PUE pagada. null si no aplica.
+     */
+    @JsonProperty("amount_paid")
+    private BigDecimal amountPaid;
+
+    /**
      * CFDI relacionados (CfdiRelacionados): tipo de relación de c_TipoRelacion y los UUID.
      */
     @JsonProperty("related")
@@ -500,6 +520,52 @@ public class Invoice {
 
     public Invoice setTotal(double total) {
         return setTotal(BigDecimal.valueOf(total));
+    }
+
+    /**
+     * Si ya se cobró (Cuentas por cobrar): paid, partial (complementos de pago o notas de crédito por una parte) o unpaid. Una PUE está paid, salvo con paid_later hasta POST /v1/invoices/{id}/mark_paid. null si no es de ingreso o no está vigente.
+     * <p>
+     * Valores: paid, partial, unpaid.
+     */
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public Invoice setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+        return this;
+    }
+
+    /**
+     * Lo que falta por cobrar, en su moneda, o null.
+     */
+    public BigDecimal getAmountDue() {
+        return amountDue;
+    }
+
+    public Invoice setAmountDue(BigDecimal amountDue) {
+        this.amountDue = amountDue;
+        return this;
+    }
+
+    public Invoice setAmountDue(double amountDue) {
+        return setAmountDue(BigDecimal.valueOf(amountDue));
+    }
+
+    /**
+     * Lo cobrado: complementos de pago y notas de crédito vigentes, o todo si es PUE pagada. null si no aplica.
+     */
+    public BigDecimal getAmountPaid() {
+        return amountPaid;
+    }
+
+    public Invoice setAmountPaid(BigDecimal amountPaid) {
+        this.amountPaid = amountPaid;
+        return this;
+    }
+
+    public Invoice setAmountPaid(double amountPaid) {
+        return setAmountPaid(BigDecimal.valueOf(amountPaid));
     }
 
     /**
