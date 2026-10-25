@@ -30,6 +30,7 @@ public final class FiscalistoClient {
     private final SatListsService satLists;
     private final SatDownloadsService satDownloads;
     private final SatInvoicesService satInvoices;
+    private final TicketsService tickets;
     private final WebhookEndpointsService webhookEndpoints;
     private final EventsService events;
 
@@ -66,6 +67,7 @@ public final class FiscalistoClient {
         this.satLists = new SatListsService(api);
         this.satDownloads = new SatDownloadsService(api);
         this.satInvoices = new SatInvoicesService(api);
+        this.tickets = new TicketsService(api);
         this.webhookEndpoints = new WebhookEndpointsService(api);
         this.events = new EventsService(api);
     }
@@ -173,6 +175,11 @@ public final class FiscalistoClient {
     /** Descargas del SAT. */
     public SatInvoicesService satInvoices() {
         return satInvoices;
+    }
+
+    /** Autofactura. */
+    public TicketsService tickets() {
+        return tickets;
     }
 
     /** Webhooks. */

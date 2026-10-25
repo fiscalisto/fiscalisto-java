@@ -7,8 +7,10 @@ import com.fiscalisto.model.CreateIssuerParams;
 import com.fiscalisto.model.Issuer;
 import com.fiscalisto.model.IssuerOnboardingLink;
 import com.fiscalisto.model.ListIssuersParams;
+import com.fiscalisto.model.SelfInvoicing;
 import com.fiscalisto.model.SignEfirmaParams;
 import com.fiscalisto.model.UpdateIssuerParams;
+import com.fiscalisto.model.UpdateSelfInvoicingParams;
 import com.fiscalisto.model.UploadCertificateParams;
 
 /**
@@ -193,5 +195,41 @@ public final class IssuersService {
 
     public IssuerOnboardingLink createOnboardingLink(String id) {
         return createOnboardingLink(id, null, null);
+    }
+
+    /**
+     * Ver el portal de autofactura de un emisor
+     * <p>
+     * GET /v1/issuers/{id}/self_invoicing
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/autofactura/get-self-invoicing
+     */
+    public SelfInvoicing getSelfInvoicing(String id, RequestOptions options) {
+        return api.request("GET", "/v1/issuers/" + ApiClient.encode(id) + "/self_invoicing", null, null, false, SelfInvoicing.class, options);
+    }
+
+    public SelfInvoicing getSelfInvoicing(String id) {
+        return getSelfInvoicing(id, null);
+    }
+
+    /**
+     * Cambiar las reglas de autofactura
+     * <p>
+     * Hasta cuándo se puede facturar un ticket y cada cuánto se timbra la factura global.
+     * <p>
+     * POST /v1/issuers/{id}/self_invoicing
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/autofactura/update-self-invoicing
+     */
+    public SelfInvoicing updateSelfInvoicing(String id, UpdateSelfInvoicingParams params, RequestOptions options) {
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/self_invoicing", params, null, false, SelfInvoicing.class, options);
+    }
+
+    public SelfInvoicing updateSelfInvoicing(String id, UpdateSelfInvoicingParams params) {
+        return updateSelfInvoicing(id, params, null);
+    }
+
+    public SelfInvoicing updateSelfInvoicing(String id) {
+        return updateSelfInvoicing(id, null, null);
     }
 }
