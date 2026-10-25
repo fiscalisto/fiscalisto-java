@@ -107,6 +107,12 @@ public class Issuer {
     private String sandbox;
 
     /**
+     * Su reloj de prueba (solo emisores de prueba): la hora que es «hoy» para él, o null si va con la hora real. Vea POST /v1/issuers/{id}/test_clock.
+     */
+    @JsonProperty("test_clock")
+    private IssuerTestClock testClock;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -303,6 +309,18 @@ public class Issuer {
 
     public Issuer setSandbox(String sandbox) {
         this.sandbox = sandbox;
+        return this;
+    }
+
+    /**
+     * Su reloj de prueba (solo emisores de prueba): la hora que es «hoy» para él, o null si va con la hora real. Vea POST /v1/issuers/{id}/test_clock.
+     */
+    public IssuerTestClock getTestClock() {
+        return testClock;
+    }
+
+    public Issuer setTestClock(IssuerTestClock testClock) {
+        this.testClock = testClock;
         return this;
     }
 
