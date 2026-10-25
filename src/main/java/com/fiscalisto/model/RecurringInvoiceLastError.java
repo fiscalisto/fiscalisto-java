@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RecurringInvoiceLastError {
     /**
-     * Qué pasó y cómo corregirlo, para una persona.
+     * Qué pasó.
      */
     @JsonProperty("message")
     private String message;
 
     /**
-     * Qué pasó y cómo corregirlo, para una persona.
+     * Qué pasó.
      */
     public String getMessage() {
         return message;

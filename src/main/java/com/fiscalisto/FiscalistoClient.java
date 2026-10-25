@@ -33,6 +33,8 @@ public final class FiscalistoClient {
     private final SatDownloadsService satDownloads;
     private final SatInvoicesService satInvoices;
     private final TicketsService tickets;
+    private final AccountingService accounting;
+    private final StoreConnectionsService storeConnections;
     private final RecurringInvoicesService recurringInvoices;
     private final QuotesService quotes;
     private final WebhookEndpointsService webhookEndpoints;
@@ -74,6 +76,8 @@ public final class FiscalistoClient {
         this.satDownloads = new SatDownloadsService(api);
         this.satInvoices = new SatInvoicesService(api);
         this.tickets = new TicketsService(api);
+        this.accounting = new AccountingService(api);
+        this.storeConnections = new StoreConnectionsService(api);
         this.recurringInvoices = new RecurringInvoicesService(api);
         this.quotes = new QuotesService(api);
         this.webhookEndpoints = new WebhookEndpointsService(api);
@@ -198,6 +202,16 @@ public final class FiscalistoClient {
     /** Autofactura. */
     public TicketsService tickets() {
         return tickets;
+    }
+
+    /** Contabilidad. */
+    public AccountingService accounting() {
+        return accounting;
+    }
+
+    /** Tiendas en línea. */
+    public StoreConnectionsService storeConnections() {
+        return storeConnections;
     }
 
     /** Facturas recurrentes. */
