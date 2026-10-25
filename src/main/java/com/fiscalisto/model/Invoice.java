@@ -189,6 +189,12 @@ public class Invoice {
     private InvoiceError error;
 
     /**
+     * La factura recurrente (rin_…) que la timbró sola, o null si se timbró con una llamada.
+     */
+    @JsonProperty("recurring_invoice")
+    private String recurringInvoice;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -577,6 +583,18 @@ public class Invoice {
 
     public Invoice setError(InvoiceError error) {
         this.error = error;
+        return this;
+    }
+
+    /**
+     * La factura recurrente (rin_…) que la timbró sola, o null si se timbró con una llamada.
+     */
+    public String getRecurringInvoice() {
+        return recurringInvoice;
+    }
+
+    public Invoice setRecurringInvoice(String recurringInvoice) {
+        this.recurringInvoice = recurringInvoice;
         return this;
     }
 
