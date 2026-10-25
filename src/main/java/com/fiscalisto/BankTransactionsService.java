@@ -29,7 +29,7 @@ public final class BankTransactionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/conciliacion-bancaria/create-bank-transactions
      */
     public BankImport create(CreateBankTransactionsParams params, RequestOptions options) {
-        return api.request("POST", "/v1/bank_transactions", params, null, false, BankImport.class, options);
+        return api.request("POST", "/v1/bank_transactions", params, null, true, BankImport.class, options);
     }
 
     public BankImport create(CreateBankTransactionsParams params) {
@@ -95,7 +95,7 @@ public final class BankTransactionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/conciliacion-bancaria/match-bank-transaction
      */
     public BankTransaction match(String id, MatchBankTransactionParams params, RequestOptions options) {
-        return api.request("POST", "/v1/bank_transactions/" + ApiClient.encode(id) + "/match", params, null, false, BankTransaction.class, options);
+        return api.request("POST", "/v1/bank_transactions/" + ApiClient.encode(id) + "/match", params, null, true, BankTransaction.class, options);
     }
 
     public BankTransaction match(String id, MatchBankTransactionParams params) {
@@ -116,7 +116,7 @@ public final class BankTransactionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/conciliacion-bancaria/classify-bank-transaction
      */
     public BankTransaction classify(String id, ClassifyBankTransactionParams params, RequestOptions options) {
-        return api.request("POST", "/v1/bank_transactions/" + ApiClient.encode(id) + "/classify", params, null, false, BankTransaction.class, options);
+        return api.request("POST", "/v1/bank_transactions/" + ApiClient.encode(id) + "/classify", params, null, true, BankTransaction.class, options);
     }
 
     public BankTransaction classify(String id, ClassifyBankTransactionParams params) {
@@ -133,7 +133,7 @@ public final class BankTransactionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/conciliacion-bancaria/reopen-bank-transaction
      */
     public BankTransaction reopen(String id, RequestOptions options) {
-        return api.request("POST", "/v1/bank_transactions/" + ApiClient.encode(id) + "/reopen", null, null, false, BankTransaction.class, options);
+        return api.request("POST", "/v1/bank_transactions/" + ApiClient.encode(id) + "/reopen", null, null, true, BankTransaction.class, options);
     }
 
     public BankTransaction reopen(String id) {

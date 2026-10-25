@@ -25,7 +25,7 @@ public final class TaxIdsService {
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/validate-tax-id
      */
     public TaxIdValidation validate(ValidateTaxIdParams params, RequestOptions options) {
-        return api.request("POST", "/v1/tax_ids/validate", params, null, false, TaxIdValidation.class, options);
+        return api.request("POST", "/v1/tax_ids/validate", params, null, true, TaxIdValidation.class, options);
     }
 
     public TaxIdValidation validate(ValidateTaxIdParams params) {

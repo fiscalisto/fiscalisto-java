@@ -134,15 +134,18 @@ class ClientTest {
     }
 
     @Test
-    void postWithoutKeyIsNotRetried() throws IOException {
+    void postRetriesWithTheSameKey() throws IOException {
         AtomicInteger calls = new AtomicInteger();
+        java.util.Set<String> keys = java.util.concurrent.ConcurrentHashMap.newKeySet();
         FiscalistoClient c = client((ex, body) -> {
-            calls.incrementAndGet();
-            reply(ex, 500, "");
+            keys.add(String.valueOf(ex.getRequestHeaders().getFirst("Idempotency-Key")));
+            if (calls.incrementAndGet() < 3) reply(ex, 500, "");
+            else reply(ex, 200, "{\"id\":\"cus_1\"}");
         });
-        FiscalistoException e = assertThrows(FiscalistoException.class, () -> c.customers().update("cus_1", new UpdateCustomerParams()));
-        assertEquals(500, e.getStatusCode());
-        assertEquals(1, calls.get());
+        c.customers().update("cus_1", new UpdateCustomerParams());
+        assertEquals(3, calls.get());
+        assertEquals(1, keys.size());
+        assertTrue(keys.iterator().next().matches("[0-9a-f-]{36}"));
     }
 
     @Test

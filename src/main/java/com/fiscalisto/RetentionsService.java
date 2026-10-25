@@ -133,7 +133,7 @@ public final class RetentionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/retenciones/send-retention
      */
     public Retention send(String id, SendRetentionParams params, RequestOptions options) {
-        return api.request("POST", "/v1/retentions/" + ApiClient.encode(id) + "/send", params, null, false, Retention.class, options);
+        return api.request("POST", "/v1/retentions/" + ApiClient.encode(id) + "/send", params, null, true, Retention.class, options);
     }
 
     public Retention send(String id, SendRetentionParams params) {
@@ -154,7 +154,7 @@ public final class RetentionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/retenciones/cancel-retention
      */
     public Retention cancel(String id, CancelRetentionParams params, RequestOptions options) {
-        return api.request("POST", "/v1/retentions/" + ApiClient.encode(id) + "/cancel", params, null, false, Retention.class, options);
+        return api.request("POST", "/v1/retentions/" + ApiClient.encode(id) + "/cancel", params, null, true, Retention.class, options);
     }
 
     public Retention cancel(String id, CancelRetentionParams params) {

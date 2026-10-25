@@ -43,7 +43,7 @@ public final class SatListsService {
      * Vea https://fiscalisto.com/docs/api/referencia/listas-del-sat/check-sat-lists
      */
     public SatListCheckList check(CheckSatListsParams params, RequestOptions options) {
-        return api.request("POST", "/v1/sat_lists/check", params, null, false, SatListCheckList.class, options);
+        return api.request("POST", "/v1/sat_lists/check", params, null, true, SatListCheckList.class, options);
     }
 
     public SatListCheckList check(CheckSatListsParams params) {

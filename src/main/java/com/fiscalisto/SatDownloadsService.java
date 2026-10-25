@@ -26,7 +26,7 @@ public final class SatDownloadsService {
      * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/create-sat-download
      */
     public SatDownload create(CreateSatDownloadParams params, RequestOptions options) {
-        return api.request("POST", "/v1/sat_downloads", params, null, false, SatDownload.class, options);
+        return api.request("POST", "/v1/sat_downloads", params, null, true, SatDownload.class, options);
     }
 
     public SatDownload create(CreateSatDownloadParams params) {

@@ -25,7 +25,7 @@ public final class TestDataService {
      * Vea https://fiscalisto.com/docs/api/referencia/cuenta/reset-test-data
      */
     public TestDataReset reset(ResetTestDataParams params, RequestOptions options) {
-        return api.request("POST", "/v1/test_data/reset", params, null, false, TestDataReset.class, options);
+        return api.request("POST", "/v1/test_data/reset", params, null, true, TestDataReset.class, options);
     }
 
     public TestDataReset reset(ResetTestDataParams params) {

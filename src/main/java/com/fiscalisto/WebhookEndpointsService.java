@@ -31,7 +31,7 @@ public final class WebhookEndpointsService {
      * Vea https://fiscalisto.com/docs/api/referencia/webhooks/create-webhook-endpoint
      */
     public WebhookEndpoint create(CreateWebhookEndpointParams params, RequestOptions options) {
-        return api.request("POST", "/v1/webhook_endpoints", params, null, false, WebhookEndpoint.class, options);
+        return api.request("POST", "/v1/webhook_endpoints", params, null, true, WebhookEndpoint.class, options);
     }
 
     public WebhookEndpoint create(CreateWebhookEndpointParams params) {
@@ -93,7 +93,7 @@ public final class WebhookEndpointsService {
      * Vea https://fiscalisto.com/docs/api/referencia/webhooks/update-webhook-endpoint
      */
     public WebhookEndpoint update(String id, UpdateWebhookEndpointParams params, RequestOptions options) {
-        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id), params, null, false, WebhookEndpoint.class, options);
+        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id), params, null, true, WebhookEndpoint.class, options);
     }
 
     public WebhookEndpoint update(String id, UpdateWebhookEndpointParams params) {
@@ -129,7 +129,7 @@ public final class WebhookEndpointsService {
      * Vea https://fiscalisto.com/docs/api/referencia/webhooks/roll-webhook-secret
      */
     public WebhookEndpoint rollSecret(String id, RollWebhookSecretParams params, RequestOptions options) {
-        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id) + "/roll_secret", params, null, false, WebhookEndpoint.class, options);
+        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id) + "/roll_secret", params, null, true, WebhookEndpoint.class, options);
     }
 
     public WebhookEndpoint rollSecret(String id, RollWebhookSecretParams params) {
@@ -150,7 +150,7 @@ public final class WebhookEndpointsService {
      * Vea https://fiscalisto.com/docs/api/referencia/webhooks/test-webhook-endpoint
      */
     public WebhookTest test(String id, TestWebhookEndpointParams params, RequestOptions options) {
-        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id) + "/test", params, null, false, WebhookTest.class, options);
+        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id) + "/test", params, null, true, WebhookTest.class, options);
     }
 
     public WebhookTest test(String id, TestWebhookEndpointParams params) {

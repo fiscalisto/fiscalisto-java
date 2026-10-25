@@ -29,7 +29,7 @@ public final class RecurringInvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/facturas-recurrentes/create-recurring-invoice
      */
     public RecurringInvoice create(CreateRecurringInvoiceParams params, RequestOptions options) {
-        return api.request("POST", "/v1/recurring_invoices", params, null, false, RecurringInvoice.class, options);
+        return api.request("POST", "/v1/recurring_invoices", params, null, true, RecurringInvoice.class, options);
     }
 
     public RecurringInvoice create(CreateRecurringInvoiceParams params) {
@@ -95,7 +95,7 @@ public final class RecurringInvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/facturas-recurrentes/update-recurring-invoice
      */
     public RecurringInvoice update(String id, UpdateRecurringInvoiceParams params, RequestOptions options) {
-        return api.request("POST", "/v1/recurring_invoices/" + ApiClient.encode(id), params, null, false, RecurringInvoice.class, options);
+        return api.request("POST", "/v1/recurring_invoices/" + ApiClient.encode(id), params, null, true, RecurringInvoice.class, options);
     }
 
     public RecurringInvoice update(String id, UpdateRecurringInvoiceParams params) {
@@ -133,7 +133,7 @@ public final class RecurringInvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/facturas-recurrentes/skip-recurring-invoice
      */
     public RecurringInvoice skip(String id, RequestOptions options) {
-        return api.request("POST", "/v1/recurring_invoices/" + ApiClient.encode(id) + "/skip", null, null, false, RecurringInvoice.class, options);
+        return api.request("POST", "/v1/recurring_invoices/" + ApiClient.encode(id) + "/skip", null, null, true, RecurringInvoice.class, options);
     }
 
     public RecurringInvoice skip(String id) {
@@ -150,7 +150,7 @@ public final class RecurringInvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/facturas-recurrentes/run-recurring-invoice
      */
     public Invoice run(String id, RequestOptions options) {
-        return api.request("POST", "/v1/recurring_invoices/" + ApiClient.encode(id) + "/run", null, null, false, Invoice.class, options);
+        return api.request("POST", "/v1/recurring_invoices/" + ApiClient.encode(id) + "/run", null, null, true, Invoice.class, options);
     }
 
     public Invoice run(String id) {

@@ -42,7 +42,7 @@ public final class PayrollReceiptsService {
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/preview-payroll-receipt
      */
     public PayrollReceiptPreview preview(PreviewPayrollReceiptParams params, RequestOptions options) {
-        return api.request("POST", "/v1/payroll_receipts/preview", params, null, false, PayrollReceiptPreview.class, options);
+        return api.request("POST", "/v1/payroll_receipts/preview", params, null, true, PayrollReceiptPreview.class, options);
     }
 
     public PayrollReceiptPreview preview(PreviewPayrollReceiptParams params) {

@@ -26,7 +26,7 @@ public final class CustomerDataRequestsService {
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/create-customer-data-request
      */
     public CustomerDataRequest create(CreateCustomerDataRequestParams params, RequestOptions options) {
-        return api.request("POST", "/v1/customer_data_requests", params, null, false, CustomerDataRequest.class, options);
+        return api.request("POST", "/v1/customer_data_requests", params, null, true, CustomerDataRequest.class, options);
     }
 
     public CustomerDataRequest create(CreateCustomerDataRequestParams params) {

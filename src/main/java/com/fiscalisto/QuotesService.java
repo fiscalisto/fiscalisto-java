@@ -30,7 +30,7 @@ public final class QuotesService {
      * Vea https://fiscalisto.com/docs/api/referencia/cotizaciones/create-quote
      */
     public Quote create(CreateQuoteParams params, RequestOptions options) {
-        return api.request("POST", "/v1/quotes", params, null, false, Quote.class, options);
+        return api.request("POST", "/v1/quotes", params, null, true, Quote.class, options);
     }
 
     public Quote create(CreateQuoteParams params) {
@@ -98,7 +98,7 @@ public final class QuotesService {
      * Vea https://fiscalisto.com/docs/api/referencia/cotizaciones/update-quote
      */
     public Quote update(String id, UpdateQuoteParams params, RequestOptions options) {
-        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id), params, null, false, Quote.class, options);
+        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id), params, null, true, Quote.class, options);
     }
 
     public Quote update(String id, UpdateQuoteParams params) {
@@ -136,7 +136,7 @@ public final class QuotesService {
      * Vea https://fiscalisto.com/docs/api/referencia/cotizaciones/send-quote
      */
     public Quote send(String id, SendQuoteParams params, RequestOptions options) {
-        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id) + "/send", params, null, false, Quote.class, options);
+        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id) + "/send", params, null, true, Quote.class, options);
     }
 
     public Quote send(String id, SendQuoteParams params) {
@@ -157,7 +157,7 @@ public final class QuotesService {
      * Vea https://fiscalisto.com/docs/api/referencia/cotizaciones/accept-quote
      */
     public Quote accept(String id, RequestOptions options) {
-        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id) + "/accept", null, null, false, Quote.class, options);
+        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id) + "/accept", null, null, true, Quote.class, options);
     }
 
     public Quote accept(String id) {

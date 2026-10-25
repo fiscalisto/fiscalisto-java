@@ -26,7 +26,7 @@ public final class CustomersService {
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/create-customer
      */
     public Customer create(CreateCustomerParams params, RequestOptions options) {
-        return api.request("POST", "/v1/customers", params, null, false, Customer.class, options);
+        return api.request("POST", "/v1/customers", params, null, true, Customer.class, options);
     }
 
     public Customer create(CreateCustomerParams params) {
@@ -88,7 +88,7 @@ public final class CustomersService {
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/update-customer
      */
     public Customer update(String id, UpdateCustomerParams params, RequestOptions options) {
-        return api.request("POST", "/v1/customers/" + ApiClient.encode(id), params, null, false, Customer.class, options);
+        return api.request("POST", "/v1/customers/" + ApiClient.encode(id), params, null, true, Customer.class, options);
     }
 
     public Customer update(String id, UpdateCustomerParams params) {

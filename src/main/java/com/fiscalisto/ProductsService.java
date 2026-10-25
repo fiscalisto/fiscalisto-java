@@ -26,7 +26,7 @@ public final class ProductsService {
      * Vea https://fiscalisto.com/docs/api/referencia/productos/create-product
      */
     public Product create(CreateProductParams params, RequestOptions options) {
-        return api.request("POST", "/v1/products", params, null, false, Product.class, options);
+        return api.request("POST", "/v1/products", params, null, true, Product.class, options);
     }
 
     public Product create(CreateProductParams params) {
@@ -88,7 +88,7 @@ public final class ProductsService {
      * Vea https://fiscalisto.com/docs/api/referencia/productos/update-product
      */
     public Product update(String id, UpdateProductParams params, RequestOptions options) {
-        return api.request("POST", "/v1/products/" + ApiClient.encode(id), params, null, false, Product.class, options);
+        return api.request("POST", "/v1/products/" + ApiClient.encode(id), params, null, true, Product.class, options);
     }
 
     public Product update(String id, UpdateProductParams params) {

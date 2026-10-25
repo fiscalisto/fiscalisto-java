@@ -164,7 +164,7 @@ public final class InvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/facturas/cancel-invoice
      */
     public Invoice cancel(String id, CancelInvoiceParams params, RequestOptions options) {
-        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/cancel", params, null, false, Invoice.class, options);
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/cancel", params, null, true, Invoice.class, options);
     }
 
     public Invoice cancel(String id, CancelInvoiceParams params) {
@@ -202,7 +202,7 @@ public final class InvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/cuentas-por-cobrar/mark-invoice-paid
      */
     public Invoice markPaid(String id, RequestOptions options) {
-        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_paid", null, null, false, Invoice.class, options);
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_paid", null, null, true, Invoice.class, options);
     }
 
     public Invoice markPaid(String id) {
@@ -219,7 +219,7 @@ public final class InvoicesService {
      * Vea https://fiscalisto.com/docs/api/referencia/cuentas-por-cobrar/mark-invoice-unpaid
      */
     public Invoice markUnpaid(String id, RequestOptions options) {
-        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_unpaid", null, null, false, Invoice.class, options);
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_unpaid", null, null, true, Invoice.class, options);
     }
 
     public Invoice markUnpaid(String id) {

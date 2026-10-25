@@ -29,7 +29,7 @@ public final class StoreConnectionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/tiendas-en-linea/create-store-connection
      */
     public StoreConnection create(CreateStoreConnectionParams params, RequestOptions options) {
-        return api.request("POST", "/v1/store_connections", params, null, false, StoreConnection.class, options);
+        return api.request("POST", "/v1/store_connections", params, null, true, StoreConnection.class, options);
     }
 
     public StoreConnection create(CreateStoreConnectionParams params) {
@@ -95,7 +95,7 @@ public final class StoreConnectionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/tiendas-en-linea/update-store-connection
      */
     public StoreConnection update(String id, UpdateStoreConnectionParams params, RequestOptions options) {
-        return api.request("POST", "/v1/store_connections/" + ApiClient.encode(id), params, null, false, StoreConnection.class, options);
+        return api.request("POST", "/v1/store_connections/" + ApiClient.encode(id), params, null, true, StoreConnection.class, options);
     }
 
     public StoreConnection update(String id, UpdateStoreConnectionParams params) {
@@ -129,7 +129,7 @@ public final class StoreConnectionsService {
      * Vea https://fiscalisto.com/docs/api/referencia/tiendas-en-linea/import-store-orders
      */
     public StoreImport importOrders(String id, ImportStoreOrdersParams params, RequestOptions options) {
-        return api.request("POST", "/v1/store_connections/" + ApiClient.encode(id) + "/import_orders", params, null, false, StoreImport.class, options);
+        return api.request("POST", "/v1/store_connections/" + ApiClient.encode(id) + "/import_orders", params, null, true, StoreImport.class, options);
     }
 
     public StoreImport importOrders(String id, ImportStoreOrdersParams params) {

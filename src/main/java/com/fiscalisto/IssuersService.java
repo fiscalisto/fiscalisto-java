@@ -33,7 +33,7 @@ public final class IssuersService {
      * Vea https://fiscalisto.com/docs/api/referencia/emisores/create-issuer
      */
     public Issuer create(CreateIssuerParams params, RequestOptions options) {
-        return api.request("POST", "/v1/issuers", params, null, false, Issuer.class, options);
+        return api.request("POST", "/v1/issuers", params, null, true, Issuer.class, options);
     }
 
     public Issuer create(CreateIssuerParams params) {
@@ -97,7 +97,7 @@ public final class IssuersService {
      * Vea https://fiscalisto.com/docs/api/referencia/emisores/update-issuer
      */
     public Issuer update(String id, UpdateIssuerParams params, RequestOptions options) {
-        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id), params, null, false, Issuer.class, options);
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id), params, null, true, Issuer.class, options);
     }
 
     public Issuer update(String id, UpdateIssuerParams params) {
@@ -135,7 +135,7 @@ public final class IssuersService {
      * Vea https://fiscalisto.com/docs/api/referencia/emisores/upload-certificate
      */
     public Issuer uploadCertificate(String id, UploadCertificateParams params, RequestOptions options) {
-        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/certificates", params, null, false, Issuer.class, options);
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/certificates", params, null, true, Issuer.class, options);
     }
 
     public Issuer uploadCertificate(String id, UploadCertificateParams params) {
@@ -152,7 +152,7 @@ public final class IssuersService {
      * Vea https://fiscalisto.com/docs/api/referencia/emisores/sign-efirma
      */
     public Issuer signEfirma(String id, SignEfirmaParams params, RequestOptions options) {
-        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/efirma", params, null, false, Issuer.class, options);
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/efirma", params, null, true, Issuer.class, options);
     }
 
     public Issuer signEfirma(String id, SignEfirmaParams params) {
@@ -186,7 +186,7 @@ public final class IssuersService {
      * Vea https://fiscalisto.com/docs/api/referencia/emisores/create-issuer-onboarding-link
      */
     public IssuerOnboardingLink createOnboardingLink(String id, CreateIssuerOnboardingLinkParams params, RequestOptions options) {
-        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/onboarding_links", params, null, false, IssuerOnboardingLink.class, options);
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/onboarding_links", params, null, true, IssuerOnboardingLink.class, options);
     }
 
     public IssuerOnboardingLink createOnboardingLink(String id, CreateIssuerOnboardingLinkParams params) {
@@ -222,7 +222,7 @@ public final class IssuersService {
      * Vea https://fiscalisto.com/docs/api/referencia/autofactura/update-self-invoicing
      */
     public SelfInvoicing updateSelfInvoicing(String id, UpdateSelfInvoicingParams params, RequestOptions options) {
-        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/self_invoicing", params, null, false, SelfInvoicing.class, options);
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/self_invoicing", params, null, true, SelfInvoicing.class, options);
     }
 
     public SelfInvoicing updateSelfInvoicing(String id, UpdateSelfInvoicingParams params) {

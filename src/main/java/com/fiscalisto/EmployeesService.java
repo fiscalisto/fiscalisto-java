@@ -26,7 +26,7 @@ public final class EmployeesService {
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/create-employee
      */
     public Employee create(CreateEmployeeParams params, RequestOptions options) {
-        return api.request("POST", "/v1/employees", params, null, false, Employee.class, options);
+        return api.request("POST", "/v1/employees", params, null, true, Employee.class, options);
     }
 
     public Employee create(CreateEmployeeParams params) {
@@ -88,7 +88,7 @@ public final class EmployeesService {
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/update-employee
      */
     public Employee update(String id, UpdateEmployeeParams params, RequestOptions options) {
-        return api.request("POST", "/v1/employees/" + ApiClient.encode(id), params, null, false, Employee.class, options);
+        return api.request("POST", "/v1/employees/" + ApiClient.encode(id), params, null, true, Employee.class, options);
     }
 
     public Employee update(String id, UpdateEmployeeParams params) {

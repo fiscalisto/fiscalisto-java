@@ -27,7 +27,7 @@ public final class SandboxesService {
      * Vea https://fiscalisto.com/docs/api/referencia/entornos-de-prueba/create-sandbox
      */
     public Sandbox create(CreateSandboxParams params, RequestOptions options) {
-        return api.request("POST", "/v1/sandboxes", params, null, false, Sandbox.class, options);
+        return api.request("POST", "/v1/sandboxes", params, null, true, Sandbox.class, options);
     }
 
     public Sandbox create(CreateSandboxParams params) {

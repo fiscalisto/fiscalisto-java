@@ -26,7 +26,7 @@ public final class TicketsService {
      * Vea https://fiscalisto.com/docs/api/referencia/autofactura/create-ticket
      */
     public Ticket create(CreateTicketParams params, RequestOptions options) {
-        return api.request("POST", "/v1/tickets", params, null, false, Ticket.class, options);
+        return api.request("POST", "/v1/tickets", params, null, true, Ticket.class, options);
     }
 
     public Ticket create(CreateTicketParams params) {
