@@ -37,6 +37,18 @@ public class Account {
     private String name;
 
     /**
+     * La versión de la API de la cuenta (la de sus solicitudes sin Fiscalisto-Version). Ver Versiones.
+     */
+    @JsonProperty("api_version")
+    private String apiVersion;
+
+    /**
+     * La versión más reciente de la API.
+     */
+    @JsonProperty("latest_api_version")
+    private String latestApiVersion;
+
+    /**
      * La llave con que se hizo la solicitud: id, nombre y emisores a los que se limita.
      */
     @JsonProperty("key")
@@ -87,6 +99,30 @@ public class Account {
 
     public Account setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    /**
+     * La versión de la API de la cuenta (la de sus solicitudes sin Fiscalisto-Version). Ver Versiones.
+     */
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public Account setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /**
+     * La versión más reciente de la API.
+     */
+    public String getLatestApiVersion() {
+        return latestApiVersion;
+    }
+
+    public Account setLatestApiVersion(String latestApiVersion) {
+        this.latestApiVersion = latestApiVersion;
         return this;
     }
 

@@ -39,6 +39,12 @@ public class UpdateWebhookEndpointParams {
     private Boolean disabled;
 
     /**
+     * La versión de la API en que llegan sus eventos (por ejemplo 2026-10-24); null o sin mandar: la de la cuenta. Así actualiza un endpoint a la vez.
+     */
+    @JsonProperty("api_version")
+    private String apiVersion;
+
+    /**
      * Dirección https de su servidor que recibe los avisos.
      */
     public String getUrl() {
@@ -83,6 +89,18 @@ public class UpdateWebhookEndpointParams {
 
     public UpdateWebhookEndpointParams setDisabled(Boolean disabled) {
         this.disabled = disabled;
+        return this;
+    }
+
+    /**
+     * La versión de la API en que llegan sus eventos (por ejemplo 2026-10-24); null o sin mandar: la de la cuenta. Así actualiza un endpoint a la vez.
+     */
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public UpdateWebhookEndpointParams setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
         return this;
     }
 }

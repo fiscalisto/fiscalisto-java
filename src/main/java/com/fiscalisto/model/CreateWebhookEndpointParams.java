@@ -35,6 +35,12 @@ public class CreateWebhookEndpointParams {
     private String description;
 
     /**
+     * La versión de la API en que llegan sus eventos (por ejemplo 2026-10-24); null o sin mandar: la de la cuenta. Así actualiza un endpoint a la vez.
+     */
+    @JsonProperty("api_version")
+    private String apiVersion;
+
+    /**
      * Dirección https de su servidor que recibe los avisos.
      * <p>
      * Obligatorio.
@@ -69,6 +75,18 @@ public class CreateWebhookEndpointParams {
 
     public CreateWebhookEndpointParams setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    /**
+     * La versión de la API en que llegan sus eventos (por ejemplo 2026-10-24); null o sin mandar: la de la cuenta. Así actualiza un endpoint a la vez.
+     */
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public CreateWebhookEndpointParams setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
         return this;
     }
 }

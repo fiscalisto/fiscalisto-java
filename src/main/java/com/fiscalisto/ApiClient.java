@@ -29,6 +29,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class ApiClient {
     /** La versión del SDK, en el User-Agent. */
     public static final String VERSION = "0.1.0";
+    /** La versión de la API para la que se hizo este SDK (cabecera Fiscalisto-Version). */
+    public static final String API_VERSION = "2026-10-24";
 
     /** El ObjectMapper del SDK: campos desconocidos se ignoran; nulls no se mandan. */
     public static final ObjectMapper MAPPER = new ObjectMapper()
@@ -42,6 +44,7 @@ public final class ApiClient {
 
     private final String key;
     private final String baseUrl;
+    private final String apiVersion;
     private final int maxRetries;
     private final Duration timeout;
     private final HttpClient http;
@@ -57,6 +60,7 @@ public final class ApiClient {
                     "La llave de la API empieza con fk_live_ o fk_test_. (Un secreto whsec_ es para verificar webhooks.)");
         this.key = k;
         this.baseUrl = options.baseUrl;
+        this.apiVersion = options.apiVersion;
         this.maxRetries = options.maxRetries;
         this.timeout = options.timeout;
         this.http = options.httpClient != null
@@ -150,6 +154,7 @@ public final class ApiClient {
                 .header("User-Agent", "fiscalisto-java/" + VERSION)
                 .header("Accept", "application/json")
                 .method(method, data == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofByteArray(data));
+        if (apiVersion != null) req.header("Fiscalisto-Version", apiVersion);
         if (data != null) req.header("Content-Type", "application/json");
         if (idempotencyKey != null) req.header("Idempotency-Key", idempotencyKey);
         HttpRequest request = req.build();

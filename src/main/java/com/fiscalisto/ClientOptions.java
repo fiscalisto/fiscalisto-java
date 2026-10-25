@@ -13,6 +13,7 @@ public final class ClientOptions {
 
     final String apiKey;
     final String baseUrl;
+    final String apiVersion;
     final int maxRetries;
     final Duration timeout;
     final HttpClient httpClient;
@@ -21,6 +22,7 @@ public final class ClientOptions {
     private ClientOptions(Builder b) {
         this.apiKey = b.apiKey;
         this.baseUrl = b.baseUrl.replaceAll("/+$", "");
+        this.apiVersion = b.apiVersion;
         this.maxRetries = b.maxRetries;
         this.timeout = b.timeout;
         this.httpClient = b.httpClient;
@@ -34,6 +36,7 @@ public final class ClientOptions {
     public static final class Builder {
         private String apiKey;
         private String baseUrl = DEFAULT_BASE_URL;
+        private String apiVersion = ApiClient.API_VERSION;
         private int maxRetries = 2;
         private Duration timeout = Duration.ofSeconds(80);
         private HttpClient httpClient;
@@ -50,6 +53,12 @@ public final class ClientOptions {
         /** Otra dirección de la API (un proxy, pruebas). */
         public Builder baseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
+            return this;
+        }
+
+        /** Otra versión de la API (Fiscalisto-Version); con null, la fijada en la cuenta. */
+        public Builder apiVersion(String apiVersion) {
+            this.apiVersion = apiVersion;
             return this;
         }
 

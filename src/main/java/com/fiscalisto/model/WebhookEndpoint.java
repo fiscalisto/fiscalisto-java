@@ -83,6 +83,12 @@ public class WebhookEndpoint {
     private String previousSecretExpiresAt;
 
     /**
+     * La versión de la API de sus eventos; null: la de la cuenta.
+     */
+    @JsonProperty("api_version")
+    private String apiVersion;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -225,6 +231,18 @@ public class WebhookEndpoint {
 
     public WebhookEndpoint setPreviousSecretExpiresAt(String previousSecretExpiresAt) {
         this.previousSecretExpiresAt = previousSecretExpiresAt;
+        return this;
+    }
+
+    /**
+     * La versión de la API de sus eventos; null: la de la cuenta.
+     */
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public WebhookEndpoint setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
         return this;
     }
 
