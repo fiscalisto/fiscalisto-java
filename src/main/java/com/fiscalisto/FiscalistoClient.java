@@ -11,6 +11,7 @@ package com.fiscalisto;
 public final class FiscalistoClient {
     private final ApiClient api;
     private final AccountService account;
+    private final TestDataService testData;
     private final BalanceService balance;
     private final IssuersService issuers;
     private final InvoicesService invoices;
@@ -46,6 +47,7 @@ public final class FiscalistoClient {
         ApiClient api = new ApiClient(options);
         this.api = api;
         this.account = new AccountService(api);
+        this.testData = new TestDataService(api);
         this.balance = new BalanceService(api);
         this.issuers = new IssuersService(api);
         this.invoices = new InvoicesService(api);
@@ -76,6 +78,11 @@ public final class FiscalistoClient {
     /** Cuenta. */
     public AccountService account() {
         return account;
+    }
+
+    /** Cuenta. */
+    public TestDataService testData() {
+        return testData;
     }
 
     /** Cuenta. */

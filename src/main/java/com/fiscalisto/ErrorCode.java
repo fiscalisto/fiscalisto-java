@@ -156,6 +156,9 @@ public final class ErrorCode {
     /** Los complementos de pago y las notas de crédito no se sustituyen: se cancelan y se emite otro. */
     public static final String SUBSTITUTION_UNSUPPORTED = "substitution_unsupported";
 
+    /** Esto solo existe en pruebas (como reiniciar los datos de prueba): use su llave fk_test_. */
+    public static final String TEST_MODE_ONLY = "test_mode_only";
+
     /** La API no contestó a tiempo (connection_error). Con lo que timbra, repita con la misma Idempotency-Key para saber si se timbró. */
     public static final String TIMEOUT = "timeout";
 
