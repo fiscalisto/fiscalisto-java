@@ -46,6 +46,20 @@ public class ListSatDeclarationsParams {
     private String source;
 
     /**
+     * Solo las de un mes (1 a 12).
+     */
+    @JsonProperty("month")
+    private Long month;
+
+    /**
+     * normal o complementary (complementarias).
+     * <p>
+     * Valores: normal, complementary.
+     */
+    @JsonProperty("type")
+    private String type;
+
+    /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
      */
     public Long getLimit() {
@@ -114,6 +128,37 @@ public class ListSatDeclarationsParams {
 
     public ListSatDeclarationsParams setSource(String source) {
         this.source = source;
+        return this;
+    }
+
+    /**
+     * Solo las de un mes (1 a 12).
+     */
+    public Long getMonth() {
+        return month;
+    }
+
+    public ListSatDeclarationsParams setMonth(Long month) {
+        this.month = month;
+        return this;
+    }
+
+    @JsonIgnore
+    public ListSatDeclarationsParams setMonth(long month) {
+        return setMonth(Long.valueOf(month));
+    }
+
+    /**
+     * normal o complementary (complementarias).
+     * <p>
+     * Valores: normal, complementary.
+     */
+    public String getType() {
+        return type;
+    }
+
+    public ListSatDeclarationsParams setType(String type) {
+        this.type = type;
         return this;
     }
 }

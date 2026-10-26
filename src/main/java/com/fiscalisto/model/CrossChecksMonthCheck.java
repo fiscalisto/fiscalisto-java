@@ -16,15 +16,15 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CrossChecksMonthCheck {
     /**
-     * Qué cifra: vat_charged (IVA trasladado), vat_creditable (IVA acreditable), vat_withheld (IVA que le retuvieron) o isr_income (ingresos para ISR: nominales en persona moral, cobrados en los demás).
+     * Qué cifra: vat_charged (IVA trasladado), vat_creditable (IVA acreditable), vat_withheld (IVA que le retuvieron), isr_income (ingresos para ISR: nominales en persona moral, cobrados en los demás) y, solo en los meses en que retuvo, isr_withheld_salaries (ISR retenido por salarios y asimilados, contra sus recibos de nómina), isr_withheld_suppliers (ISR retenido por honorarios y arrendamiento, contra las facturas recibidas que pagó) o vat_withheld_suppliers (IVA retenido a proveedores).
      * <p>
-     * Valores: vat_charged, vat_creditable, vat_withheld, isr_income.
+     * Valores: vat_charged, vat_creditable, vat_withheld, isr_income, isr_withheld_salaries, isr_withheld_suppliers, vat_withheld_suppliers.
      */
     @JsonProperty("key")
     private String key;
 
     /**
-     * matches (hasta $2 de diferencia), differs, not_filed (no hay declaración del mes) o unreadable (la declaración no trae la cifra en un renglón reconocible).
+     * matches (hasta $2 de diferencia), differs, not_filed (no hay declaración del mes, o en una retención ninguna declaración del mes la trae) o unreadable (la declaración no trae la cifra en un renglón reconocible).
      * <p>
      * Valores: matches, differs, not_filed, unreadable.
      */
@@ -56,9 +56,9 @@ public class CrossChecksMonthCheck {
     private String operationNumber;
 
     /**
-     * Qué cifra: vat_charged (IVA trasladado), vat_creditable (IVA acreditable), vat_withheld (IVA que le retuvieron) o isr_income (ingresos para ISR: nominales en persona moral, cobrados en los demás).
+     * Qué cifra: vat_charged (IVA trasladado), vat_creditable (IVA acreditable), vat_withheld (IVA que le retuvieron), isr_income (ingresos para ISR: nominales en persona moral, cobrados en los demás) y, solo en los meses en que retuvo, isr_withheld_salaries (ISR retenido por salarios y asimilados, contra sus recibos de nómina), isr_withheld_suppliers (ISR retenido por honorarios y arrendamiento, contra las facturas recibidas que pagó) o vat_withheld_suppliers (IVA retenido a proveedores).
      * <p>
-     * Valores: vat_charged, vat_creditable, vat_withheld, isr_income.
+     * Valores: vat_charged, vat_creditable, vat_withheld, isr_income, isr_withheld_salaries, isr_withheld_suppliers, vat_withheld_suppliers.
      */
     public String getKey() {
         return key;
@@ -70,7 +70,7 @@ public class CrossChecksMonthCheck {
     }
 
     /**
-     * matches (hasta $2 de diferencia), differs, not_filed (no hay declaración del mes) o unreadable (la declaración no trae la cifra en un renglón reconocible).
+     * matches (hasta $2 de diferencia), differs, not_filed (no hay declaración del mes, o en una retención ninguna declaración del mes la trae) o unreadable (la declaración no trae la cifra en un renglón reconocible).
      * <p>
      * Valores: matches, differs, not_filed, unreadable.
      */

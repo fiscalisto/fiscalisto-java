@@ -21,6 +21,8 @@ public final class EmployeesService {
     /**
      * Crear un empleado
      * <p>
+     * Un empleado del emisor para sus recibos de nómina: RFC, CURP, NSS, salario diario, salario diario integrado y periodicidad. Lo que no mande tiene el valor usual (contrato indefinido, jornada diurna, quincenal, riesgo clase I). warnings dice lo que el SAT podría rechazar.
+     * <p>
      * POST /v1/employees
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/create-employee
@@ -35,6 +37,8 @@ public final class EmployeesService {
 
     /**
      * Listar empleados
+     * <p>
+     * Los empleados del emisor, los más recientes primero.
      * <p>
      * GET /v1/employees
      * <p>
@@ -68,6 +72,8 @@ public final class EmployeesService {
     /**
      * Ver un empleado
      * <p>
+     * Un empleado con sus datos y lo que el SAT podría rechazar en warnings.
+     * <p>
      * GET /v1/employees/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/get-employee
@@ -82,6 +88,8 @@ public final class EmployeesService {
 
     /**
      * Actualizar un empleado
+     * <p>
+     * Cambia solo los campos que manda; los recibos ya timbrados no cambian.
      * <p>
      * POST /v1/employees/{id}
      * <p>

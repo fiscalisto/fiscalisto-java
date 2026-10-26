@@ -36,6 +36,8 @@ public final class SatDownloadsService {
     /**
      * Listar descargas del SAT
      * <p>
+     * Las descargas pedidas al SAT, las más recientes primero, con su estado.
+     * <p>
      * GET /v1/sat_downloads
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/list-sat-downloads
@@ -67,6 +69,8 @@ public final class SatDownloadsService {
 
     /**
      * Ver una descarga del SAT
+     * <p>
+     * Una descarga del SAT: su periodo, su estado y cuántos CFDI trajo. Al terminar llega sat_download.completed.
      * <p>
      * GET /v1/sat_downloads/{id}
      * <p>

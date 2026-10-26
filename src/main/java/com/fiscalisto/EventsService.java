@@ -52,6 +52,8 @@ public final class EventsService {
     /**
      * Ver un evento
      * <p>
+     * Un evento de los últimos 30 días, con el objeto como estaba cuando pasó.
+     * <p>
      * GET /v1/events/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/eventos/get-event

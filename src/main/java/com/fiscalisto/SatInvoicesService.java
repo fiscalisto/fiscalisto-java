@@ -52,6 +52,8 @@ public final class SatInvoicesService {
     /**
      * Ver una factura del SAT
      * <p>
+     * Un CFDI que trajo una descarga del SAT, con sus importes y su estado ante el SAT.
+     * <p>
      * GET /v1/sat_invoices/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/get-sat-invoice

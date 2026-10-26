@@ -21,6 +21,8 @@ public final class CustomersService {
     /**
      * Crear un cliente
      * <p>
+     * Un cliente del catálogo del emisor, con sus datos fiscales como vienen en su constancia. Un RFC que ya está en el catálogo contesta customer_exists.
+     * <p>
      * POST /v1/customers
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/create-customer
@@ -35,6 +37,8 @@ public final class CustomersService {
 
     /**
      * Listar clientes
+     * <p>
+     * Los clientes del emisor, los más recientes primero. Con tax_id, el de ese RFC.
      * <p>
      * GET /v1/customers
      * <p>
@@ -68,6 +72,8 @@ public final class CustomersService {
     /**
      * Ver un cliente
      * <p>
+     * Un cliente del catálogo.
+     * <p>
      * GET /v1/customers/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/get-customer
@@ -82,6 +88,8 @@ public final class CustomersService {
 
     /**
      * Actualizar un cliente
+     * <p>
+     * Cambia solo los campos que manda. Las facturas ya timbradas no cambian.
      * <p>
      * POST /v1/customers/{id}
      * <p>
@@ -101,6 +109,8 @@ public final class CustomersService {
 
     /**
      * Borrar un cliente
+     * <p>
+     * Lo quita del catálogo. Sus facturas timbradas siguen igual.
      * <p>
      * DELETE /v1/customers/{id}
      * <p>

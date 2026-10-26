@@ -96,6 +96,8 @@ public final class InvoicesService {
     /**
      * Descargar el PDF
      * <p>
+     * La representación impresa del CFDI, como la recibe su cliente. En vez del id puede usar el UUID (con issuer si la cuenta tiene varios emisores).
+     * <p>
      * GET /v1/invoices/{id}/pdf
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/facturas/get-invoice-pdf

@@ -73,6 +73,8 @@ public final class StoreConnectionsService {
     /**
      * Ver una tienda
      * <p>
+     * Una tienda conectada (Shopify, Mercado Libre o WooCommerce), su estado y lo último que importó.
+     * <p>
      * GET /v1/store_connections/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/tiendas-en-linea/get-store-connection

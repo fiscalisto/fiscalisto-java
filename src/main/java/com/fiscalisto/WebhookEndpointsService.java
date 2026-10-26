@@ -41,6 +41,8 @@ public final class WebhookEndpointsService {
     /**
      * Listar webhooks
      * <p>
+     * Los webhooks del modo de la llave. Hasta 16 por modo.
+     * <p>
      * GET /v1/webhook_endpoints
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/webhooks/list-webhook-endpoints
@@ -73,6 +75,8 @@ public final class WebhookEndpointsService {
     /**
      * Ver un webhook
      * <p>
+     * Un webhook: su dirección, los eventos que recibe y si sus entregas fallan. El secreto solo viene al crearlo.
+     * <p>
      * GET /v1/webhook_endpoints/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/webhooks/get-webhook-endpoint
@@ -87,6 +91,8 @@ public final class WebhookEndpointsService {
 
     /**
      * Actualizar un webhook
+     * <p>
+     * Cambia su dirección, sus eventos, su descripción o su versión de la API; con disabled: false vuelve a encender uno que se apagó.
      * <p>
      * POST /v1/webhook_endpoints/{id}
      * <p>
@@ -106,6 +112,8 @@ public final class WebhookEndpointsService {
 
     /**
      * Borrar un webhook
+     * <p>
+     * Deja de mandar eventos a esa dirección. Los eventos siguen en GET /v1/events.
      * <p>
      * DELETE /v1/webhook_endpoints/{id}
      * <p>

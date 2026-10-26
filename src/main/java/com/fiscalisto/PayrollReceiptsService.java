@@ -37,6 +37,8 @@ public final class PayrollReceiptsService {
     /**
      * Calcular un recibo sin timbrar
      * <p>
+     * El recibo como se timbraría (percepciones, ISR con el subsidio para el empleo, cuotas IMSS y el neto), sin timbrar ni usar timbres.
+     * <p>
      * POST /v1/payroll_receipts/preview
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/preview-payroll-receipt

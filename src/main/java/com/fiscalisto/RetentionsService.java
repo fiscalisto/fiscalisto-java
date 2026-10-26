@@ -24,6 +24,8 @@ public final class RetentionsService {
     /**
      * Timbrar una constancia de retenciones
      * <p>
+     * Timbra una constancia de retenciones e información de pagos (Retenciones 2.0) con los folios RET1, RET2… del emisor. Una vez por Idempotency-Key; con send_email y email la manda al receptor al timbrarla.
+     * <p>
      * POST /v1/retentions
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/retenciones/create-retention
@@ -38,6 +40,8 @@ public final class RetentionsService {
 
     /**
      * Listar constancias
+     * <p>
+     * Las constancias del emisor, las más recientes primero.
      * <p>
      * GET /v1/retentions
      * <p>
@@ -71,6 +75,8 @@ public final class RetentionsService {
     /**
      * Ver una constancia
      * <p>
+     * Una constancia de retenciones con su estado, sus impuestos retenidos y, si se mandó, a quién.
+     * <p>
      * GET /v1/retentions/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/retenciones/get-retention
@@ -89,6 +95,8 @@ public final class RetentionsService {
 
     /**
      * Descargar el PDF
+     * <p>
+     * La representación impresa de la constancia.
      * <p>
      * GET /v1/retentions/{id}/pdf
      * <p>
@@ -109,6 +117,8 @@ public final class RetentionsService {
     /**
      * Descargar el XML
      * <p>
+     * El XML timbrado de la constancia, tal como lo tiene el SAT.
+     * <p>
      * GET /v1/retentions/{id}/xml
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/retenciones/get-retention-xml
@@ -127,6 +137,8 @@ public final class RetentionsService {
 
     /**
      * Enviar por correo
+     * <p>
+     * Manda el PDF y el XML de la constancia a los correos de to (o al que se dio al timbrarla). Dos envíos a la vez de la misma constancia: el segundo contesta email_failed.
      * <p>
      * POST /v1/retentions/{id}/send
      * <p>

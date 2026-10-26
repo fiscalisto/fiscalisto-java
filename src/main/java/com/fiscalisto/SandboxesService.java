@@ -37,6 +37,8 @@ public final class SandboxesService {
     /**
      * Listar entornos de prueba
      * <p>
+     * Los entornos de prueba de la cuenta, cada uno con su emisor de prueba y su llave fk_test_. Hasta 25 por cuenta.
+     * <p>
      * GET /v1/sandboxes
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/entornos-de-prueba/list-sandboxes
@@ -51,6 +53,8 @@ public final class SandboxesService {
 
     /**
      * Ver un entorno de prueba
+     * <p>
+     * Un entorno de prueba: su nombre, su emisor y lo que lleva usado hoy de sus reinicios.
      * <p>
      * GET /v1/sandboxes/{id}
      * <p>

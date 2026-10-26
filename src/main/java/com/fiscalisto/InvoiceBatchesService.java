@@ -36,6 +36,8 @@ public final class InvoiceBatchesService {
     /**
      * Listar lotes
      * <p>
+     * Los lotes de facturas, los más recientes primero, con cuántas se timbraron y cuántas fallaron.
+     * <p>
      * GET /v1/invoice_batches
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/lotes/list-invoice-batches

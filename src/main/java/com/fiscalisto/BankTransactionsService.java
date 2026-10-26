@@ -73,6 +73,8 @@ public final class BankTransactionsService {
     /**
      * Ver un depósito
      * <p>
+     * Un depósito mandado a conciliación, con las facturas que se le encontraron o el pago que se registró con él.
+     * <p>
      * GET /v1/bank_transactions/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/conciliacion-bancaria/get-bank-transaction

@@ -135,6 +135,12 @@ public class SatDeclaration {
     private SatDeclarationReceipt receipt;
 
     /**
+     * Las mismas cifras con nombres fijos, por obligación (ISR, IVA, cada retención), para leerlas igual cada mes sin conocer el formato del SAT. Una cifra que no viene en la declaración o no se pudo leer es null, nunca 0. En Declaraciones y pagos solo trae lo del acuse.
+     */
+    @JsonProperty("summary")
+    private SatDeclarationSummary summary;
+
+    /**
      * Qué archivos ya tiene: pdf (GET …/pdf), receipt (GET …/receipt) y financial_statements (GET …/financial_statements, solo en la anual de persona moral).
      */
     @JsonProperty("files")
@@ -417,6 +423,18 @@ public class SatDeclaration {
 
     public SatDeclaration setReceipt(SatDeclarationReceipt receipt) {
         this.receipt = receipt;
+        return this;
+    }
+
+    /**
+     * Las mismas cifras con nombres fijos, por obligación (ISR, IVA, cada retención), para leerlas igual cada mes sin conocer el formato del SAT. Una cifra que no viene en la declaración o no se pudo leer es null, nunca 0. En Declaraciones y pagos solo trae lo del acuse.
+     */
+    public SatDeclarationSummary getSummary() {
+        return summary;
+    }
+
+    public SatDeclaration setSummary(SatDeclarationSummary summary) {
+        this.summary = summary;
         return this;
     }
 

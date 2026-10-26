@@ -73,6 +73,8 @@ public final class RecurringInvoicesService {
     /**
      * Ver una factura recurrente
      * <p>
+     * Una factura recurrente: su calendario, la próxima fecha, la última factura que timbró y, si falló, por qué en last_error.
+     * <p>
      * GET /v1/recurring_invoices/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/facturas-recurrentes/get-recurring-invoice

@@ -40,6 +40,8 @@ public final class CustomerDataRequestsService {
     /**
      * Listar solicitudes de datos
      * <p>
+     * Las ligas para pedir datos fiscales, las más recientes primero, con su estado.
+     * <p>
      * GET /v1/customer_data_requests
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/clientes/list-customer-data-requests
@@ -71,6 +73,8 @@ public final class CustomerDataRequestsService {
 
     /**
      * Ver una solicitud de datos
+     * <p>
+     * Una solicitud de datos: su liga y, si el cliente ya contestó, sus datos fiscales y el cliente que se guardó.
      * <p>
      * GET /v1/customer_data_requests/{id}
      * <p>

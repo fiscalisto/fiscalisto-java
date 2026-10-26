@@ -70,6 +70,8 @@ public final class TicketsService {
     /**
      * Ver un ticket
      * <p>
+     * Un ticket de autofactura: si ya se facturó (invoice) o entró en la factura global (global_invoice).
+     * <p>
      * GET /v1/tickets/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/autofactura/get-ticket

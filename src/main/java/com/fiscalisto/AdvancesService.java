@@ -38,6 +38,8 @@ public final class AdvancesService {
     /**
      * Listar anticipos sin aplicar
      * <p>
+     * Los anticipos timbrados que todavía no se aplican a una factura, con lo que queda de cada uno. Filtre por customer para los de un cliente.
+     * <p>
      * GET /v1/advances
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/anticipos/list-advances

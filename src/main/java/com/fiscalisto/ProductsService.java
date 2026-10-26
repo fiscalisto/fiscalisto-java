@@ -21,6 +21,8 @@ public final class ProductsService {
     /**
      * Crear un producto
      * <p>
+     * Un producto o servicio del catálogo del emisor, con su clave del SAT, su unidad, su precio y sus impuestos, para usarlo en items con product.
+     * <p>
      * POST /v1/products
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/productos/create-product
@@ -35,6 +37,8 @@ public final class ProductsService {
 
     /**
      * Listar productos
+     * <p>
+     * Los productos del emisor, los más recientes primero. Filtre por sku o product_key.
      * <p>
      * GET /v1/products
      * <p>
@@ -68,6 +72,8 @@ public final class ProductsService {
     /**
      * Ver un producto
      * <p>
+     * Un producto del catálogo.
+     * <p>
      * GET /v1/products/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/productos/get-product
@@ -82,6 +88,8 @@ public final class ProductsService {
 
     /**
      * Actualizar un producto
+     * <p>
+     * Cambia solo los campos que manda. Las facturas ya timbradas no cambian.
      * <p>
      * POST /v1/products/{id}
      * <p>
@@ -101,6 +109,8 @@ public final class ProductsService {
 
     /**
      * Borrar un producto
+     * <p>
+     * Lo quita del catálogo. Las facturas que lo usaron siguen igual.
      * <p>
      * DELETE /v1/products/{id}
      * <p>

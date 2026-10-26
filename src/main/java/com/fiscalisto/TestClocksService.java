@@ -40,6 +40,8 @@ public final class TestClocksService {
     /**
      * Ver el reloj de prueba
      * <p>
+     * La hora que es «hoy» para un emisor de prueba y hasta dónde se ha adelantado. Solo emisores de prueba.
+     * <p>
      * GET /v1/issuers/{id}/test_clock
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/entornos-de-prueba/get-test-clock

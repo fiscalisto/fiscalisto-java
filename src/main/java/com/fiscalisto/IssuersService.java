@@ -43,6 +43,8 @@ public final class IssuersService {
     /**
      * Listar emisores
      * <p>
+     * Los emisores de la cuenta en el modo de la llave, los más recientes primero. Una llave limitada a algunos emisores solo ve los suyos.
+     * <p>
      * GET /v1/issuers
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/emisores/list-issuers
@@ -74,6 +76,8 @@ public final class IssuersService {
 
     /**
      * Ver un emisor
+     * <p>
+     * Un emisor: sus datos fiscales, si ya puede timbrar (status, CSD y contrato con el PAC) y su registro patronal.
      * <p>
      * GET /v1/issuers/{id}
      * <p>
@@ -199,6 +203,8 @@ public final class IssuersService {
 
     /**
      * Ver el portal de autofactura de un emisor
+     * <p>
+     * El portal de autofactura del emisor: su dirección, hasta cuándo se puede facturar un ticket y cómo se arma la factura global.
      * <p>
      * GET /v1/issuers/{id}/self_invoicing
      * <p>

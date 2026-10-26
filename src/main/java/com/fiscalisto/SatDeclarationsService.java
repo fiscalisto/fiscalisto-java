@@ -2,9 +2,11 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.GetSatDeclarationCalendarParams;
 import com.fiscalisto.model.ListSatDeclarationsParams;
 import com.fiscalisto.model.RefreshSatDeclarationsParams;
 import com.fiscalisto.model.SatDeclaration;
+import com.fiscalisto.model.SatDeclarationCalendar;
 import com.fiscalisto.model.SatDeclarationsRefresh;
 
 /**
@@ -73,7 +75,30 @@ public final class SatDeclarationsService {
     }
 
     /**
+     * Ver el año mes por mes
+     * <p>
+     * Cada mes del ejercicio con sus obligaciones: presentada (con sus declaraciones), falta (venció y no la encontramos) o por presentar, con el día en que vence (el 17 del mes siguiente, o el día hábil siguiente, más los días por el sexto dígito del RFC). Se arma con lo que trajeron sus consultas; no usa timbres.
+     * <p>
+     * GET /v1/sat_declarations/calendar
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/declaraciones-del-sat/get-sat-declaration-calendar
+     */
+    public SatDeclarationCalendar calendar(GetSatDeclarationCalendarParams params, RequestOptions options) {
+        return api.request("GET", "/v1/sat_declarations/calendar", null, params, false, SatDeclarationCalendar.class, options);
+    }
+
+    public SatDeclarationCalendar calendar(GetSatDeclarationCalendarParams params) {
+        return calendar(params, null);
+    }
+
+    public SatDeclarationCalendar calendar() {
+        return calendar(null, null);
+    }
+
+    /**
      * Ver una declaración del SAT
+     * <p>
+     * Una declaración presentada al SAT, con sus cifras en summary y si ya están su PDF y su acuse.
      * <p>
      * GET /v1/sat_declarations/{id}
      * <p>
