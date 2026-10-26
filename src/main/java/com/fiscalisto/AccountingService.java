@@ -2,10 +2,14 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.CrossChecks;
 import com.fiscalisto.model.Diot;
+import com.fiscalisto.model.FinancialStatements;
+import com.fiscalisto.model.GetCrossChecksParams;
 import com.fiscalisto.model.GetDiotFileParams;
 import com.fiscalisto.model.GetDiotParams;
 import com.fiscalisto.model.GetElectronicAccountingParams;
+import com.fiscalisto.model.GetFinancialStatementsParams;
 import com.fiscalisto.model.GetTrialBalanceParams;
 import com.fiscalisto.model.JournalEntry;
 import com.fiscalisto.model.LedgerAccountList;
@@ -26,7 +30,7 @@ public final class AccountingService {
     /**
      * Listar las pólizas de un mes
      * <p>
-     * Una póliza de diario por cada CFDI de ingreso o egreso vigente del mes, emitido o recibido (los recibidos con la categoría de su gasto), con sus cuentas y código agrupador del SAT. En pesos; un CFDI en otra moneda sin tipo de cambio no se registra. Es un punto de partida para su contador: no incluye bancos, nómina ni depreciaciones.
+     * Las pólizas de diario del mes, con sus cuentas y código agrupador del SAT: una por cada CFDI de ingreso o egreso vigente, emitido o recibido (los recibidos con la categoría de su gasto); una por cada pago de un complemento; una por cada recibo de nómina, y una con la depreciación de los activos fijos. Un PUE se registra cobrado o pagado según su forma de pago. En pesos; un CFDI en otra moneda sin tipo de cambio no se registra. No incluye movimientos de banco sin CFDI ni provisiones.
      * <p>
      * GET /v1/accounting/journal_entries
      * <p>
@@ -52,7 +56,7 @@ public final class AccountingService {
     /**
      * Ver la balanza de comprobación
      * <p>
-     * Saldo inicial, cargos, abonos y saldo final de cada cuenta en el mes. Los saldos iniciales se acumulan desde el primer CFDI (las de resultados, desde enero), y los resultados de cada año anterior se cierran a capital.
+     * Saldo inicial, cargos, abonos y saldo final de cada cuenta en el mes. Los saldos iniciales se acumulan desde el primer CFDI, o desde los saldos iniciales capturados en la app (las de resultados, desde enero), y los resultados de cada año anterior se cierran a capital.
      * <p>
      * GET /v1/accounting/trial_balance
      * <p>
@@ -64,6 +68,44 @@ public final class AccountingService {
 
     public TrialBalance trialBalance(GetTrialBalanceParams params) {
         return trialBalance(params, null);
+    }
+
+    /**
+     * Ver los estados financieros
+     * <p>
+     * El estado de resultados (del mes y del año hasta ese mes) y el balance general al cierre del mes, leídos de la misma balanza, así que siempre suman las mismas pólizas.
+     * <p>
+     * GET /v1/accounting/financial_statements
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-financial-statements
+     */
+    public FinancialStatements financialStatements(GetFinancialStatementsParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/financial_statements", null, params, false, FinancialStatements.class, options);
+    }
+
+    public FinancialStatements financialStatements(GetFinancialStatementsParams params) {
+        return financialStatements(params, null);
+    }
+
+    /**
+     * Cruzar lo declarado con lo facturado
+     * <p>
+     * Cada mes ya vencido del año: el IVA trasladado, acreditable y retenido y los ingresos para ISR que el emisor declaró (de GET /v1/sat_declarations, después de POST /v1/sat_declarations/refresh) contra lo que dicen sus CFDI. Hasta $2 de diferencia es redondeo (las declaraciones van en pesos enteros). Una cifra que la declaración no trae en un renglón reconocible es unreadable con declared null, nunca 0. También el IVA a favor y el régimen con que factura. Gratis: no consulta al SAT.
+     * <p>
+     * GET /v1/accounting/cross_checks
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-cross-checks
+     */
+    public CrossChecks crossChecks(GetCrossChecksParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/cross_checks", null, params, false, CrossChecks.class, options);
+    }
+
+    public CrossChecks crossChecks(GetCrossChecksParams params) {
+        return crossChecks(params, null);
+    }
+
+    public CrossChecks crossChecks() {
+        return crossChecks(null, null);
     }
 
     /**

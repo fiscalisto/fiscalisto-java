@@ -216,7 +216,9 @@ class ClientTest {
     }
 
     private static JsonNode fixture(String name) throws IOException {
-        return ApiClient.MAPPER.readTree(Files.readString(Path.of("../fixtures/" + name)));
+        // In the published repository the shared fixtures sit in fixtures/ next to the code.
+        Path local = Path.of("fixtures", name);
+        return ApiClient.MAPPER.readTree(Files.readString(Files.exists(local) ? local : Path.of("../fixtures", name)));
     }
 
     @Test

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * JournalEntry: La póliza de diario de un CFDI: sus cargos y abonos, que siempre cuadran.
+ * JournalEntry: Una póliza de diario (de un CFDI, un pago, un recibo de nómina o la depreciación del mes): sus cargos y abonos, que siempre cuadran.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -41,43 +41,51 @@ public class JournalEntry {
     private String issuer;
 
     /**
-     * La fecha del CFDI.
+     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina) o depreciation (la depreciación del mes de los activos fijos).
+     * <p>
+     * Valores: invoice, payment_received, payment_made, payroll, depreciation.
+     */
+    @JsonProperty("type")
+    private String type;
+
+    /**
+     * La fecha del CFDI o del pago; en la depreciación, el último día del mes.
      */
     @JsonProperty("date")
     private String date;
 
     /**
-     * Factura o nota de crédito, su folio y la contraparte.
+     * El documento, su folio y la contraparte.
      */
     @JsonProperty("description")
     private String description;
 
     /**
-     * La factura (inv_…) si la timbró este emisor; null si la recibió.
+     * La factura (inv_…) si es la póliza de un CFDI que timbró este emisor; null en los demás casos.
      */
     @JsonProperty("invoice")
     private String invoice;
 
     /**
-     * El folio fiscal del CFDI.
+     * El folio fiscal del CFDI (o del complemento de pago); null en la depreciación.
      */
     @JsonProperty("uuid")
     private String uuid;
 
     /**
-     * El RFC de la contraparte (cliente o proveedor).
+     * El RFC de la contraparte (cliente, proveedor o empleado); null en la depreciación.
      */
     @JsonProperty("tax_id")
     private String taxId;
 
     /**
-     * El total del CFDI, en su moneda.
+     * El total del documento, en su moneda.
      */
     @JsonProperty("total")
     private BigDecimal total;
 
     /**
-     * La moneda del CFDI.
+     * La moneda del documento.
      */
     @JsonProperty("currency")
     private String currency;
@@ -143,7 +151,21 @@ public class JournalEntry {
     }
 
     /**
-     * La fecha del CFDI.
+     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina) o depreciation (la depreciación del mes de los activos fijos).
+     * <p>
+     * Valores: invoice, payment_received, payment_made, payroll, depreciation.
+     */
+    public String getType() {
+        return type;
+    }
+
+    public JournalEntry setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * La fecha del CFDI o del pago; en la depreciación, el último día del mes.
      */
     public String getDate() {
         return date;
@@ -155,7 +177,7 @@ public class JournalEntry {
     }
 
     /**
-     * Factura o nota de crédito, su folio y la contraparte.
+     * El documento, su folio y la contraparte.
      */
     public String getDescription() {
         return description;
@@ -167,7 +189,7 @@ public class JournalEntry {
     }
 
     /**
-     * La factura (inv_…) si la timbró este emisor; null si la recibió.
+     * La factura (inv_…) si es la póliza de un CFDI que timbró este emisor; null en los demás casos.
      */
     public String getInvoice() {
         return invoice;
@@ -179,7 +201,7 @@ public class JournalEntry {
     }
 
     /**
-     * El folio fiscal del CFDI.
+     * El folio fiscal del CFDI (o del complemento de pago); null en la depreciación.
      */
     public String getUuid() {
         return uuid;
@@ -191,7 +213,7 @@ public class JournalEntry {
     }
 
     /**
-     * El RFC de la contraparte (cliente o proveedor).
+     * El RFC de la contraparte (cliente, proveedor o empleado); null en la depreciación.
      */
     public String getTaxId() {
         return taxId;
@@ -203,7 +225,7 @@ public class JournalEntry {
     }
 
     /**
-     * El total del CFDI, en su moneda.
+     * El total del documento, en su moneda.
      */
     public BigDecimal getTotal() {
         return total;
@@ -220,7 +242,7 @@ public class JournalEntry {
     }
 
     /**
-     * La moneda del CFDI.
+     * La moneda del documento.
      */
     public String getCurrency() {
         return currency;
