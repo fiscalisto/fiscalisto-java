@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,6 +43,7 @@ public class BalanceAutoRecharge {
         return this;
     }
 
+    @JsonIgnore
     public BalanceAutoRecharge setTimbres(long timbres) {
         return setTimbres(Long.valueOf(timbres));
     }
@@ -58,6 +60,7 @@ public class BalanceAutoRecharge {
         return this;
     }
 
+    @JsonIgnore
     public BalanceAutoRecharge setAt(long at) {
         return setAt(Long.valueOf(at));
     }
@@ -74,6 +77,7 @@ public class BalanceAutoRecharge {
         return this;
     }
 
+    @JsonIgnore
     public BalanceAutoRecharge setMaxPerMonth(long maxPerMonth) {
         return setMaxPerMonth(Long.valueOf(maxPerMonth));
     }

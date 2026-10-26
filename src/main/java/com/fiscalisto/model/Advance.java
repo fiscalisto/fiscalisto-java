@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -158,6 +159,7 @@ public class Advance {
         return this;
     }
 
+    @JsonIgnore
     public Advance setAmount(double amount) {
         return setAmount(BigDecimal.valueOf(amount));
     }
@@ -174,6 +176,7 @@ public class Advance {
         return this;
     }
 
+    @JsonIgnore
     public Advance setTotal(double total) {
         return setTotal(BigDecimal.valueOf(total));
     }

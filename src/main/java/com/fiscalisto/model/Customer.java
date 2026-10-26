@@ -85,6 +85,12 @@ public class Customer {
     private Boolean iepsTaxpayer;
 
     /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    @JsonProperty("created_at")
+    private String createdAt;
+
+    /**
      * Cuándo cambió por última vez, ISO 8601 (-06:00).
      */
     @JsonProperty("updated_at")
@@ -231,6 +237,18 @@ public class Customer {
 
     public Customer setIepsTaxpayer(Boolean iepsTaxpayer) {
         this.iepsTaxpayer = iepsTaxpayer;
+        return this;
+    }
+
+    /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public Customer setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
 

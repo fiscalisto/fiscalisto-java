@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -66,6 +67,7 @@ public class WebhookTestDelivery {
         return this;
     }
 
+    @JsonIgnore
     public WebhookTestDelivery setStatus(long status) {
         return setStatus(Long.valueOf(status));
     }
@@ -106,6 +108,7 @@ public class WebhookTestDelivery {
         return this;
     }
 
+    @JsonIgnore
     public WebhookTestDelivery setDurationMs(long durationMs) {
         return setDurationMs(Long.valueOf(durationMs));
     }

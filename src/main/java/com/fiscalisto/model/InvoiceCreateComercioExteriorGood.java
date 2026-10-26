@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -96,6 +97,7 @@ public class InvoiceCreateComercioExteriorGood {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateComercioExteriorGood setQuantity(double quantity) {
         return setQuantity(BigDecimal.valueOf(quantity));
     }
@@ -112,6 +114,7 @@ public class InvoiceCreateComercioExteriorGood {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateComercioExteriorGood setUnitValueUsd(double unitValueUsd) {
         return setUnitValueUsd(BigDecimal.valueOf(unitValueUsd));
     }

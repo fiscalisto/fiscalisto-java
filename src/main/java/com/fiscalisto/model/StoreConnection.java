@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -218,6 +219,7 @@ public class StoreConnection {
         return this;
     }
 
+    @JsonIgnore
     public StoreConnection setOrdersCount(long ordersCount) {
         return setOrdersCount(Long.valueOf(ordersCount));
     }

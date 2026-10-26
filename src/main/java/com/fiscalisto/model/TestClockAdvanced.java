@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,6 +43,7 @@ public class TestClockAdvanced {
         return this;
     }
 
+    @JsonIgnore
     public TestClockAdvanced setRecurringInvoices(long recurringInvoices) {
         return setRecurringInvoices(Long.valueOf(recurringInvoices));
     }
@@ -58,6 +60,7 @@ public class TestClockAdvanced {
         return this;
     }
 
+    @JsonIgnore
     public TestClockAdvanced setQuotesExpired(long quotesExpired) {
         return setQuotesExpired(Long.valueOf(quotesExpired));
     }
@@ -74,6 +77,7 @@ public class TestClockAdvanced {
         return this;
     }
 
+    @JsonIgnore
     public TestClockAdvanced setGlobalInvoices(long globalInvoices) {
         return setGlobalInvoices(Long.valueOf(globalInvoices));
     }

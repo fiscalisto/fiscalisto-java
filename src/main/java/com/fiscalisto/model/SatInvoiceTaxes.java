@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -68,6 +69,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setIva(double iva) {
         return setIva(BigDecimal.valueOf(iva));
     }
@@ -84,6 +86,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setIeps(double ieps) {
         return setIeps(BigDecimal.valueOf(ieps));
     }
@@ -100,6 +103,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setIvaWithheld(double ivaWithheld) {
         return setIvaWithheld(BigDecimal.valueOf(ivaWithheld));
     }
@@ -116,6 +120,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setIsrWithheld(double isrWithheld) {
         return setIsrWithheld(BigDecimal.valueOf(isrWithheld));
     }
@@ -132,6 +137,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setIepsWithheld(double iepsWithheld) {
         return setIepsWithheld(BigDecimal.valueOf(iepsWithheld));
     }
@@ -148,6 +154,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setLocalTransferred(double localTransferred) {
         return setLocalTransferred(BigDecimal.valueOf(localTransferred));
     }
@@ -164,6 +171,7 @@ public class SatInvoiceTaxes {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoiceTaxes setLocalWithheld(double localWithheld) {
         return setLocalWithheld(BigDecimal.valueOf(localWithheld));
     }

@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -86,6 +87,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setSalaries(double salaries) {
         return setSalaries(BigDecimal.valueOf(salaries));
     }
@@ -102,6 +104,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setTaxed(double taxed) {
         return setTaxed(BigDecimal.valueOf(taxed));
     }
@@ -118,6 +121,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setExempt(double exempt) {
         return setExempt(BigDecimal.valueOf(exempt));
     }
@@ -134,6 +138,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setPerceptions(double perceptions) {
         return setPerceptions(BigDecimal.valueOf(perceptions));
     }
@@ -150,6 +155,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setOtherDeductions(double otherDeductions) {
         return setOtherDeductions(BigDecimal.valueOf(otherDeductions));
     }
@@ -166,6 +172,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setTaxesWithheld(double taxesWithheld) {
         return setTaxesWithheld(BigDecimal.valueOf(taxesWithheld));
     }
@@ -182,6 +189,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setDeductions(double deductions) {
         return setDeductions(BigDecimal.valueOf(deductions));
     }
@@ -198,6 +206,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setOtherPayments(double otherPayments) {
         return setOtherPayments(BigDecimal.valueOf(otherPayments));
     }
@@ -214,6 +223,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setSubtotal(double subtotal) {
         return setSubtotal(BigDecimal.valueOf(subtotal));
     }
@@ -230,6 +240,7 @@ public class PayrollReceiptPreviewTotals {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewTotals setNet(double net) {
         return setNet(BigDecimal.valueOf(net));
     }

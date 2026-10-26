@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -144,6 +145,7 @@ public class TrialBalanceAccount {
         return this;
     }
 
+    @JsonIgnore
     public TrialBalanceAccount setOpeningBalance(double openingBalance) {
         return setOpeningBalance(BigDecimal.valueOf(openingBalance));
     }
@@ -160,6 +162,7 @@ public class TrialBalanceAccount {
         return this;
     }
 
+    @JsonIgnore
     public TrialBalanceAccount setDebit(double debit) {
         return setDebit(BigDecimal.valueOf(debit));
     }
@@ -176,6 +179,7 @@ public class TrialBalanceAccount {
         return this;
     }
 
+    @JsonIgnore
     public TrialBalanceAccount setCredit(double credit) {
         return setCredit(BigDecimal.valueOf(credit));
     }
@@ -192,6 +196,7 @@ public class TrialBalanceAccount {
         return this;
     }
 
+    @JsonIgnore
     public TrialBalanceAccount setClosingBalance(double closingBalance) {
         return setClosingBalance(BigDecimal.valueOf(closingBalance));
     }

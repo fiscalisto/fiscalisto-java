@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -180,6 +181,7 @@ public class InvoiceBatch {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceBatch setTotal(long total) {
         return setTotal(Long.valueOf(total));
     }
@@ -196,6 +198,7 @@ public class InvoiceBatch {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceBatch setStamped(long stamped) {
         return setStamped(Long.valueOf(stamped));
     }
@@ -212,6 +215,7 @@ public class InvoiceBatch {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceBatch setFailed(long failed) {
         return setFailed(Long.valueOf(failed));
     }
@@ -228,6 +232,7 @@ public class InvoiceBatch {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceBatch setProcessing(long processing) {
         return setProcessing(Long.valueOf(processing));
     }

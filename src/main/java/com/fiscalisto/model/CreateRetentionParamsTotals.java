@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -48,6 +49,7 @@ public class CreateRetentionParamsTotals {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsTotals setOperation(double operation) {
         return setOperation(BigDecimal.valueOf(operation));
     }
@@ -64,6 +66,7 @@ public class CreateRetentionParamsTotals {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsTotals setTaxed(double taxed) {
         return setTaxed(BigDecimal.valueOf(taxed));
     }
@@ -80,6 +83,7 @@ public class CreateRetentionParamsTotals {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsTotals setExempt(double exempt) {
         return setExempt(BigDecimal.valueOf(exempt));
     }

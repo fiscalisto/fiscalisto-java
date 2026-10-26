@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -92,6 +93,7 @@ public class PayrollReceiptPreviewPerception {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewPerception setTaxed(double taxed) {
         return setTaxed(BigDecimal.valueOf(taxed));
     }
@@ -108,6 +110,7 @@ public class PayrollReceiptPreviewPerception {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewPerception setExempt(double exempt) {
         return setExempt(BigDecimal.valueOf(exempt));
     }

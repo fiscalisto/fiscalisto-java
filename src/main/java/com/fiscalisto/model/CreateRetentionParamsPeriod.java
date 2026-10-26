@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -52,6 +53,7 @@ public class CreateRetentionParamsPeriod {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsPeriod setYear(long year) {
         return setYear(Long.valueOf(year));
     }
@@ -68,6 +70,7 @@ public class CreateRetentionParamsPeriod {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsPeriod setMonth(long month) {
         return setMonth(Long.valueOf(month));
     }
@@ -84,6 +87,7 @@ public class CreateRetentionParamsPeriod {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsPeriod setFromMonth(long fromMonth) {
         return setFromMonth(Long.valueOf(fromMonth));
     }
@@ -100,6 +104,7 @@ public class CreateRetentionParamsPeriod {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsPeriod setToMonth(long toMonth) {
         return setToMonth(Long.valueOf(toMonth));
     }

@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -271,6 +272,7 @@ public class InvoiceCreateCartaPorteSea {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteSea setYear(long year) {
         return setYear(Long.valueOf(year));
     }
@@ -315,6 +317,7 @@ public class InvoiceCreateCartaPorteSea {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteSea setGrossTonnage(double grossTonnage) {
         return setGrossTonnage(BigDecimal.valueOf(grossTonnage));
     }
@@ -345,6 +348,7 @@ public class InvoiceCreateCartaPorteSea {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteSea setLength(double length) {
         return setLength(BigDecimal.valueOf(length));
     }
@@ -361,6 +365,7 @@ public class InvoiceCreateCartaPorteSea {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteSea setBeam(double beam) {
         return setBeam(BigDecimal.valueOf(beam));
     }
@@ -377,6 +382,7 @@ public class InvoiceCreateCartaPorteSea {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteSea setDraft(double draft) {
         return setDraft(BigDecimal.valueOf(draft));
     }
@@ -393,6 +399,7 @@ public class InvoiceCreateCartaPorteSea {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteSea setDepth(double depth) {
         return setDepth(BigDecimal.valueOf(depth));
     }

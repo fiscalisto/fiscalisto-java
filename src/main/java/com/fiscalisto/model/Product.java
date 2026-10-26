@@ -2,11 +2,13 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Product: Un producto o servicio del catálogo de un emisor.
@@ -81,6 +83,12 @@ public class Product {
     private BigDecimal unitPrice;
 
     /**
+     * Precio abierto: el producto no tiene precio fijo y cada concepto con él manda su unit_price.
+     */
+    @JsonProperty("open_price")
+    private Boolean openPrice;
+
+    /**
      * Objeto de impuesto (ObjetoImp), c_ObjetoImp: 01 no objeto, 02 sí objeto (por omisión), 03 sin desglose, 04 no causa…
      */
     @JsonProperty("taxability")
@@ -115,6 +123,18 @@ public class Product {
      */
     @JsonProperty("isr_retention")
     private BigDecimal isrRetention;
+
+    /**
+     * Impuestos locales (complemento implocal): traslados y retenciones estatales.
+     */
+    @JsonProperty("local_taxes")
+    private List<ProductLocalTax> localTaxes;
+
+    /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    @JsonProperty("created_at")
+    private String createdAt;
 
     /**
      * Cuándo cambió por última vez, ISO 8601 (-06:00).
@@ -254,8 +274,21 @@ public class Product {
         return this;
     }
 
+    @JsonIgnore
     public Product setUnitPrice(double unitPrice) {
         return setUnitPrice(BigDecimal.valueOf(unitPrice));
+    }
+
+    /**
+     * Precio abierto: el producto no tiene precio fijo y cada concepto con él manda su unit_price.
+     */
+    public Boolean getOpenPrice() {
+        return openPrice;
+    }
+
+    public Product setOpenPrice(Boolean openPrice) {
+        this.openPrice = openPrice;
+        return this;
     }
 
     /**
@@ -294,6 +327,7 @@ public class Product {
         return this;
     }
 
+    @JsonIgnore
     public Product setIeps(double ieps) {
         return setIeps(BigDecimal.valueOf(ieps));
     }
@@ -322,6 +356,7 @@ public class Product {
         return this;
     }
 
+    @JsonIgnore
     public Product setIvaRetention(double ivaRetention) {
         return setIvaRetention(BigDecimal.valueOf(ivaRetention));
     }
@@ -338,8 +373,33 @@ public class Product {
         return this;
     }
 
+    @JsonIgnore
     public Product setIsrRetention(double isrRetention) {
         return setIsrRetention(BigDecimal.valueOf(isrRetention));
+    }
+
+    /**
+     * Impuestos locales (complemento implocal): traslados y retenciones estatales.
+     */
+    public List<ProductLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public Product setLocalTaxes(List<ProductLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public Product setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+        return this;
     }
 
     /**

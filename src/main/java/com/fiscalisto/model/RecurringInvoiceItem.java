@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -80,6 +81,7 @@ public class RecurringInvoiceItem {
         return this;
     }
 
+    @JsonIgnore
     public RecurringInvoiceItem setQuantity(double quantity) {
         return setQuantity(BigDecimal.valueOf(quantity));
     }
@@ -108,6 +110,7 @@ public class RecurringInvoiceItem {
         return this;
     }
 
+    @JsonIgnore
     public RecurringInvoiceItem setUnitPrice(double unitPrice) {
         return setUnitPrice(BigDecimal.valueOf(unitPrice));
     }

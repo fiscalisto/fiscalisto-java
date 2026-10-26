@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -64,6 +65,7 @@ public class ListJournalEntriesParams {
         return this;
     }
 
+    @JsonIgnore
     public ListJournalEntriesParams setLimit(long limit) {
         return setLimit(Long.valueOf(limit));
     }

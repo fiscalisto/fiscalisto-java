@@ -1,0 +1,32 @@
+# Publishes the package to Maven Central when a version tag (v0.1.1) arrives from
+# Fiscalisto's repository (scripts/sdk-release.sh), after its tests. Maven Central has no
+# trusted publishing yet: it uses the organization's secrets CENTRAL_USERNAME and
+# CENTRAL_PASSWORD (a token from central.sonatype.com), GPG_PRIVATE_KEY and GPG_PASSPHRASE.
+name: release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+jobs:
+  central:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          server-id: central
+          server-username: CENTRAL_USERNAME
+          server-password: CENTRAL_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: GPG_PASSPHRASE
+      - name: The tag is the package's version
+        run: test "$(mvn -q -B help:evaluate -Dexpression=project.version -DforceStdout)" = "${GITHUB_REF_NAME#v}"
+      - run: mvn -B -P release deploy
+        env:
+          CENTRAL_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          CENTRAL_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

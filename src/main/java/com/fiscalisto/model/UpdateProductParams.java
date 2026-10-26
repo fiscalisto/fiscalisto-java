@@ -2,11 +2,13 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * UpdateProductParams: los campos de «Actualizar un producto».
@@ -57,6 +59,12 @@ public class UpdateProductParams {
     private BigDecimal unitPrice;
 
     /**
+     * Precio abierto: sin precio fijo (una noche de hotel que cambia cada día); cada factura manda su unit_price.
+     */
+    @JsonProperty("open_price")
+    private Boolean openPrice;
+
+    /**
      * Objeto de impuesto (ObjetoImp), c_ObjetoImp: 01 no objeto, 02 sí objeto (por omisión), 03 sin desglose, 04 no causa…
      * <p>
      * Valores: 01, 02, 03, 04, 05, 06, 07, 08.
@@ -97,6 +105,12 @@ public class UpdateProductParams {
      */
     @JsonProperty("isr_retention")
     private BigDecimal isrRetention;
+
+    /**
+     * Impuestos locales que lleva, como el ISH 3% de hospedaje: van en cada factura con él, sobre sus conceptos.
+     */
+    @JsonProperty("local_taxes")
+    private List<UpdateProductParamsLocalTax> localTaxes;
 
     /**
      * Nombre corto para encontrarlo, solo para usted; en el CFDI va description.
@@ -182,8 +196,21 @@ public class UpdateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public UpdateProductParams setUnitPrice(double unitPrice) {
         return setUnitPrice(BigDecimal.valueOf(unitPrice));
+    }
+
+    /**
+     * Precio abierto: sin precio fijo (una noche de hotel que cambia cada día); cada factura manda su unit_price.
+     */
+    public Boolean getOpenPrice() {
+        return openPrice;
+    }
+
+    public UpdateProductParams setOpenPrice(Boolean openPrice) {
+        this.openPrice = openPrice;
+        return this;
     }
 
     /**
@@ -226,6 +253,7 @@ public class UpdateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public UpdateProductParams setIeps(double ieps) {
         return setIeps(BigDecimal.valueOf(ieps));
     }
@@ -256,6 +284,7 @@ public class UpdateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public UpdateProductParams setIvaRetention(double ivaRetention) {
         return setIvaRetention(BigDecimal.valueOf(ivaRetention));
     }
@@ -272,7 +301,20 @@ public class UpdateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public UpdateProductParams setIsrRetention(double isrRetention) {
         return setIsrRetention(BigDecimal.valueOf(isrRetention));
+    }
+
+    /**
+     * Impuestos locales que lleva, como el ISH 3% de hospedaje: van en cada factura con él, sobre sus conceptos.
+     */
+    public List<UpdateProductParamsLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public UpdateProductParams setLocalTaxes(List<UpdateProductParamsLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
+        return this;
     }
 }

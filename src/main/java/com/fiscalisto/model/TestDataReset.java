@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -90,6 +91,7 @@ public class TestDataReset {
         return this;
     }
 
+    @JsonIgnore
     public TestDataReset setIssuers(long issuers) {
         return setIssuers(Long.valueOf(issuers));
     }
@@ -106,6 +108,7 @@ public class TestDataReset {
         return this;
     }
 
+    @JsonIgnore
     public TestDataReset setDeletedRows(long deletedRows) {
         return setDeletedRows(Long.valueOf(deletedRows));
     }
@@ -122,6 +125,7 @@ public class TestDataReset {
         return this;
     }
 
+    @JsonIgnore
     public TestDataReset setDeletedEvents(long deletedEvents) {
         return setDeletedEvents(Long.valueOf(deletedEvents));
     }
@@ -138,6 +142,7 @@ public class TestDataReset {
         return this;
     }
 
+    @JsonIgnore
     public TestDataReset setCustomersCreated(long customersCreated) {
         return setCustomersCreated(Long.valueOf(customersCreated));
     }
@@ -154,6 +159,7 @@ public class TestDataReset {
         return this;
     }
 
+    @JsonIgnore
     public TestDataReset setProductsCreated(long productsCreated) {
         return setProductsCreated(Long.valueOf(productsCreated));
     }

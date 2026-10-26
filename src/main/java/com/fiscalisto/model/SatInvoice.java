@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -330,6 +331,7 @@ public class SatInvoice {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoice setExchangeRate(double exchangeRate) {
         return setExchangeRate(BigDecimal.valueOf(exchangeRate));
     }
@@ -382,6 +384,7 @@ public class SatInvoice {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoice setSubtotal(double subtotal) {
         return setSubtotal(BigDecimal.valueOf(subtotal));
     }
@@ -398,6 +401,7 @@ public class SatInvoice {
         return this;
     }
 
+    @JsonIgnore
     public SatInvoice setTotal(double total) {
         return setTotal(BigDecimal.valueOf(total));
     }

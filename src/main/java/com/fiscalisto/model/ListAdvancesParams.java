@@ -19,7 +19,7 @@ public class ListAdvancesParams {
     private String issuer;
 
     /**
-     * RFC del cliente.
+     * RFC del cliente o su id (cus_…).
      */
     @JsonProperty("customer")
     private String customer;
@@ -37,7 +37,7 @@ public class ListAdvancesParams {
     }
 
     /**
-     * RFC del cliente.
+     * RFC del cliente o su id (cus_…).
      */
     public String getCustomer() {
         return customer;

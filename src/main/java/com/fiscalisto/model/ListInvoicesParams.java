@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,7 +48,7 @@ public class ListInvoicesParams {
     private String type;
 
     /**
-     * RFC del cliente.
+     * RFC del cliente o su id (cus_…).
      */
     @JsonProperty("customer")
     private String customer;
@@ -84,6 +85,7 @@ public class ListInvoicesParams {
         return this;
     }
 
+    @JsonIgnore
     public ListInvoicesParams setLimit(long limit) {
         return setLimit(Long.valueOf(limit));
     }
@@ -141,7 +143,7 @@ public class ListInvoicesParams {
     }
 
     /**
-     * RFC del cliente.
+     * RFC del cliente o su id (cus_…).
      */
     public String getCustomer() {
         return customer;

@@ -60,6 +60,9 @@ public final class ErrorCode {
     /** No se pudo mandar el correo; el comprobante sí está timbrado. */
     public static final String EMAIL_FAILED = "email_failed";
 
+    /** Ya hay un webhook con esa dirección en este modo; el mensaje dice cuál. Cámbielo en vez de crear otro. */
+    public static final String ENDPOINT_EXISTS = "endpoint_exists";
+
     /** La cuenta llegó al máximo de webhooks en este modo. */
     public static final String ENDPOINT_LIMIT = "endpoint_limit";
 
@@ -75,7 +78,7 @@ public final class ErrorCode {
     /** Esa Idempotency-Key ya se usó en las últimas 24 horas con otra solicitud (otra ruta u otro cuerpo). Use una nueva para cada operación distinta. */
     public static final String IDEMPOTENCY_KEY_REUSED = "idempotency_key_reused";
 
-    /** La cuenta no tiene timbres de producción. Compre un paquete en Desarrolladores › Timbres. En pruebas nunca pasa. Para enterarse antes, escuche balance.low o active la recarga automática. */
+    /** La cuenta no tiene timbres de producción: para timbrar, revisar RFC en las listas, consultar constancias o pedir descargas al SAT. Compre un paquete en Desarrolladores › Timbres. En pruebas nunca pasa. Para enterarse antes, escuche balance.low o active la recarga automática. */
     public static final String INSUFFICIENT_BALANCE = "insufficient_balance";
 
     /** Algo falló de nuestro lado. Repita la solicitud con la misma Idempotency-Key: nunca se timbra dos veces. Si sigue, escríbanos con el request_id. */
@@ -86,6 +89,9 @@ public final class ErrorCode {
 
     /** El cuerpo no es un objeto JSON válido. */
     public static final String INVALID_JSON = "invalid_json";
+
+    /** La respuesta no se pudo leer (api_error): no es el JSON de la API, sino la página de un proxy o de un portal de la red. status dice qué contestó. */
+    public static final String INVALID_RESPONSE = "invalid_response";
 
     /** La factura no cumple una regla del SAT que Fiscalisto revisa antes de mandarla al PAC (uso contra régimen, totales, complementos…). No se usó ningún timbre. */
     public static final String INVOICE_INVALID = "invoice_invalid";
@@ -141,7 +147,7 @@ public final class ErrorCode {
     /** Falta un campo obligatorio. param dice cuál. */
     public static final String PARAMETER_MISSING = "parameter_missing";
 
-    /** Mandó un campo que no existe (casi siempre un nombre mal escrito, como legalName en vez de legal_name). Nunca se ignora en silencio. */
+    /** Mandó un campo o un parámetro de la URL que no existe (casi siempre un nombre mal escrito, como legalName en vez de legal_name, o ?statuss= en vez de ?status=). Nunca se ignora en silencio. */
     public static final String PARAMETER_UNKNOWN = "parameter_unknown";
 
     /** El recibo de nómina no se puede calcular o timbrar con esos datos (periodo, días, registro patronal del emisor…). */
@@ -174,7 +180,7 @@ public final class ErrorCode {
     /** La factura recurrente está en pausa: reanúdela con active: true para timbrarla. */
     public static final String RECURRING_PAUSED = "recurring_paused";
 
-    /** Otra solicitud con la misma Idempotency-Key sigue en proceso (409, con Retry-After). Repítala en un momento con la misma llave: contestará lo mismo. */
+    /** Otra solicitud con la misma Idempotency-Key sigue en proceso, o otra solicitud está cambiando el mismo objeto (dos actualizaciones del mismo cliente a la vez esperan su turno hasta 15 segundos) (409, con Retry-After). Repítala en un momento con la misma llave: contestará lo mismo. */
     public static final String REQUEST_IN_PROGRESS = "request_in_progress";
 
     /** No existe un objeto con ese id (o es de otro emisor o del otro modo). */
@@ -195,8 +201,14 @@ public final class ErrorCode {
     /** No se pudo crear el entorno de prueba: falta su nombre o la cuenta ya tiene 25 (borre uno que ya no use). */
     public static final String SANDBOX_INVALID = "sandbox_invalid";
 
+    /** Las declaraciones de ese emisor se consultaron en el SAT hace menos de 10 minutos (cada consulta entra al SAT con su e.firma). Retry-After dice cuántos segundos faltan; lo que ya trajo está en GET /v1/sat_declarations. */
+    public static final String SAT_REFRESH_TOO_SOON = "sat_refresh_too_soon";
+
     /** El SAT rechazó la solicitud de descarga. El mensaje trae su motivo, por ejemplo que ya se pidió el mismo periodo con los mismos filtros demasiadas veces (el SAT pone un límite de por vida). */
     public static final String SAT_REQUEST_REJECTED = "sat_request_rejected";
+
+    /** El SAT no contestó o no dejó entrar con la e.firma del emisor. El mensaje trae lo que dijo; no se usó ningún timbre. Reintente en 10 minutos. */
+    public static final String SAT_UNAVAILABLE = "sat_unavailable";
 
     /** Demasiados timbres seguidos del mismo emisor. Espere lo que dice Retry-After; para muchas facturas use POST /v1/invoice_batches. */
     public static final String STAMP_RATE_LIMIT = "stamp_rate_limit";

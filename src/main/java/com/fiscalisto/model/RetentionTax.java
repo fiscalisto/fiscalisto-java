@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,6 +63,7 @@ public class RetentionTax {
         return this;
     }
 
+    @JsonIgnore
     public RetentionTax setBase(double base) {
         return setBase(BigDecimal.valueOf(base));
     }
@@ -78,6 +80,7 @@ public class RetentionTax {
         return this;
     }
 
+    @JsonIgnore
     public RetentionTax setAmount(double amount) {
         return setAmount(BigDecimal.valueOf(amount));
     }

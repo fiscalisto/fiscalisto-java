@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -89,6 +90,7 @@ public class PreviewPayrollReceiptParams {
         return this;
     }
 
+    @JsonIgnore
     public PreviewPayrollReceiptParams setDays(double days) {
         return setDays(BigDecimal.valueOf(days));
     }

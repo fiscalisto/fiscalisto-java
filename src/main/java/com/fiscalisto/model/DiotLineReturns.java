@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,6 +63,7 @@ public class DiotLineReturns {
         return this;
     }
 
+    @JsonIgnore
     public DiotLineReturns setBase16(double base16) {
         return setBase16(BigDecimal.valueOf(base16));
     }
@@ -78,6 +80,7 @@ public class DiotLineReturns {
         return this;
     }
 
+    @JsonIgnore
     public DiotLineReturns setBase8(double base8) {
         return setBase8(BigDecimal.valueOf(base8));
     }
@@ -94,6 +97,7 @@ public class DiotLineReturns {
         return this;
     }
 
+    @JsonIgnore
     public DiotLineReturns setBase0(double base0) {
         return setBase0(BigDecimal.valueOf(base0));
     }
@@ -110,6 +114,7 @@ public class DiotLineReturns {
         return this;
     }
 
+    @JsonIgnore
     public DiotLineReturns setExempt(double exempt) {
         return setExempt(BigDecimal.valueOf(exempt));
     }
@@ -126,6 +131,7 @@ public class DiotLineReturns {
         return this;
     }
 
+    @JsonIgnore
     public DiotLineReturns setNotTaxable(double notTaxable) {
         return setNotTaxable(BigDecimal.valueOf(notTaxable));
     }
@@ -142,6 +148,7 @@ public class DiotLineReturns {
         return this;
     }
 
+    @JsonIgnore
     public DiotLineReturns setVat(double vat) {
         return setVat(BigDecimal.valueOf(vat));
     }

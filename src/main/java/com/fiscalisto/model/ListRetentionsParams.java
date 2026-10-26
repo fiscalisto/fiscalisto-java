@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,6 +63,7 @@ public class ListRetentionsParams {
         return this;
     }
 
+    @JsonIgnore
     public ListRetentionsParams setLimit(long limit) {
         return setLimit(Long.valueOf(limit));
     }

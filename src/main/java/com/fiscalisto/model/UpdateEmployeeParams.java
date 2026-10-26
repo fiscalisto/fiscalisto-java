@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -256,6 +257,7 @@ public class UpdateEmployeeParams {
         return this;
     }
 
+    @JsonIgnore
     public UpdateEmployeeParams setDailySalary(double dailySalary) {
         return setDailySalary(BigDecimal.valueOf(dailySalary));
     }
@@ -272,6 +274,7 @@ public class UpdateEmployeeParams {
         return this;
     }
 
+    @JsonIgnore
     public UpdateEmployeeParams setIntegratedDailySalary(double integratedDailySalary) {
         return setIntegratedDailySalary(BigDecimal.valueOf(integratedDailySalary));
     }

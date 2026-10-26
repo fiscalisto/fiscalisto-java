@@ -34,6 +34,7 @@ public final class FiscalistoClient {
     private final SatListsService satLists;
     private final SatDownloadsService satDownloads;
     private final SatInvoicesService satInvoices;
+    private final SatDeclarationsService satDeclarations;
     private final TicketsService tickets;
     private final AccountingService accounting;
     private final StoreConnectionsService storeConnections;
@@ -79,6 +80,7 @@ public final class FiscalistoClient {
         this.satLists = new SatListsService(api);
         this.satDownloads = new SatDownloadsService(api);
         this.satInvoices = new SatInvoicesService(api);
+        this.satDeclarations = new SatDeclarationsService(api);
         this.tickets = new TicketsService(api);
         this.accounting = new AccountingService(api);
         this.storeConnections = new StoreConnectionsService(api);
@@ -211,6 +213,11 @@ public final class FiscalistoClient {
     /** Descargas del SAT. */
     public SatInvoicesService satInvoices() {
         return satInvoices;
+    }
+
+    /** Declaraciones del SAT. */
+    public SatDeclarationsService satDeclarations() {
+        return satDeclarations;
     }
 
     /** Autofactura. */

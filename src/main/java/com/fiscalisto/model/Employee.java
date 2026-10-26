@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -172,6 +173,12 @@ public class Employee {
     private List<String> warnings;
 
     /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    @JsonProperty("created_at")
+    private String createdAt;
+
+    /**
      * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
      */
     public String getId() {
@@ -339,6 +346,7 @@ public class Employee {
         return this;
     }
 
+    @JsonIgnore
     public Employee setDailySalary(double dailySalary) {
         return setDailySalary(BigDecimal.valueOf(dailySalary));
     }
@@ -355,6 +363,7 @@ public class Employee {
         return this;
     }
 
+    @JsonIgnore
     public Employee setIntegratedDailySalary(double integratedDailySalary) {
         return setIntegratedDailySalary(BigDecimal.valueOf(integratedDailySalary));
     }
@@ -488,6 +497,18 @@ public class Employee {
 
     public Employee setWarnings(List<String> warnings) {
         this.warnings = warnings;
+        return this;
+    }
+
+    /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public Employee setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
         return this;
     }
 }

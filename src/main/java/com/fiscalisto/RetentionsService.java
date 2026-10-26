@@ -147,7 +147,7 @@ public final class RetentionsService {
     /**
      * Cancelar una constancia
      * <p>
-     * Se cancela en el momento (no espera aceptación). Usa un timbre.
+     * Se cancela en el momento (no espera aceptación). No usa timbres.
      * <p>
      * POST /v1/retentions/{id}/cancel
      * <p>

@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -98,6 +99,7 @@ public class InvoicePayrollOtherPayment {
         return this;
     }
 
+    @JsonIgnore
     public InvoicePayrollOtherPayment setAmount(double amount) {
         return setAmount(BigDecimal.valueOf(amount));
     }
@@ -114,6 +116,7 @@ public class InvoicePayrollOtherPayment {
         return this;
     }
 
+    @JsonIgnore
     public InvoicePayrollOtherPayment setSubsidyCaused(double subsidyCaused) {
         return setSubsidyCaused(BigDecimal.valueOf(subsidyCaused));
     }
@@ -130,6 +133,7 @@ public class InvoicePayrollOtherPayment {
         return this;
     }
 
+    @JsonIgnore
     public InvoicePayrollOtherPayment setSubsidyApplied(double subsidyApplied) {
         return setSubsidyApplied(BigDecimal.valueOf(subsidyApplied));
     }

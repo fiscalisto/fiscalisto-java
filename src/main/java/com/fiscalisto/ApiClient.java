@@ -1,6 +1,7 @@
 package com.fiscalisto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
@@ -28,7 +29,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public final class ApiClient {
     /** La versión del SDK, en el User-Agent. */
-    public static final String VERSION = "0.1.0";
+    public static final String VERSION = "0.1.1";
     /** La versión de la API para la que se hizo este SDK (cabecera Fiscalisto-Version). */
     public static final String API_VERSION = "2026-10-24";
 
@@ -65,9 +66,16 @@ public final class ApiClient {
         this.language = options.language;
         this.maxRetries = options.maxRetries;
         this.timeout = options.timeout;
+        // Over plain http (fiscalisto mock, a local proxy) HTTP/2 would start with an h2c upgrade that
+        // most local servers drop without answering: HTTP/1.1 there, HTTP/2 over https.
         this.http = options.httpClient != null
                 ? options.httpClient
-                : HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(30)).build();
+                : HttpClient.newBuilder()
+                        .connectTimeout(Duration.ofSeconds(30))
+                        .version(options.baseUrl.startsWith("http://")
+                                ? HttpClient.Version.HTTP_1_1
+                                : HttpClient.Version.HTTP_2)
+                        .build();
         this.sleeper = options.sleeper;
     }
 
@@ -81,7 +89,7 @@ public final class ApiClient {
     }
 
     <T> T request(String method, String path, Object body, Object query, boolean idempotent, Class<T> type, RequestOptions options) {
-        return read(bytes(method, path, body, query, idempotent, options), MAPPER.constructType(type));
+        return read(answer(method, path, body, query, idempotent, options), MAPPER.constructType(type));
     }
 
     <T> Page<T> list(String path, Object query, Class<T> item, RequestOptions options) {
@@ -92,17 +100,35 @@ public final class ApiClient {
         Map<String, String> q = new java.util.LinkedHashMap<>(query);
         if (startingAfter != null) q.put("starting_after", startingAfter);
         JavaType type = MAPPER.getTypeFactory().constructParametricType(Page.class, item);
-        Page<T> page = read(bytes("GET", path, null, q, false, options), type);
+        Page<T> page = read(answer("GET", path, null, q, false, options), type);
         page.setFetch(after -> list(path, query, after, item, options));
         return page;
     }
 
-    private static <T> T read(byte[] answer, JavaType type) {
+    /** A success's body, with what an unreadable one needs to say where it came from. */
+    private record Answer(byte[] body, int status, String requestId) {}
+
+    private static <T> T read(Answer answer, JavaType type) {
         try {
-            return MAPPER.readValue(answer, type);
+            if (new String(answer.body(), StandardCharsets.UTF_8).isBlank()) throw new JsonParseException(null, "vacía");
+            return MAPPER.readValue(answer.body(), type);
+        } catch (JsonParseException e) {
+            throw invalidResponse(answer, e);
         } catch (IOException e) {
             throw new IllegalStateException("La respuesta de la API no se pudo leer: " + e.getMessage(), e);
         }
+    }
+
+    /** A success that isn't the API's JSON: a proxy's or a network portal's page answered instead. */
+    private static FiscalistoException invalidResponse(Answer answer, Exception cause) {
+        String text = new String(answer.body(), StandardCharsets.UTF_8).trim().replaceAll("\\s+", " ");
+        if (text.length() > 80) text = text.substring(0, 80);
+        ObjectNode raw = JsonNodeFactory.instance.objectNode();
+        raw.put("type", "api_error");
+        raw.put("code", ErrorCode.INVALID_RESPONSE);
+        raw.put("message", "La respuesta (" + answer.status() + ") no es de la API: " + (text.isEmpty() ? "vacía" : text)
+                + ". ¿Hay un proxy o un portal de por medio?");
+        return new FiscalistoException(raw, answer.status(), answer.requestId(), null, cause);
     }
 
     @SuppressWarnings("unchecked")
@@ -130,6 +156,10 @@ public final class ApiClient {
     }
 
     byte[] bytes(String method, String path, Object body, Object query, boolean idempotent, RequestOptions options) {
+        return answer(method, path, body, query, idempotent, options).body();
+    }
+
+    private Answer answer(String method, String path, Object body, Object query, boolean idempotent, RequestOptions options) {
         RequestOptions o = options != null ? options : new RequestOptions();
         int retries = o.maxRetries != null ? o.maxRetries : maxRetries;
         Duration wait = o.timeout != null ? o.timeout : timeout;
@@ -177,8 +207,8 @@ public final class ApiClient {
                 throw connectionError(e, idempotencyKey, wait);
             }
             int status = res.statusCode();
-            if (status >= 200 && status < 300) return res.body();
             String requestId = res.headers().firstValue("request-id").orElse(null);
+            if (status >= 200 && status < 300) return new Answer(res.body(), status, requestId);
             JsonNode raw = null;
             try {
                 JsonNode parsed = MAPPER.readTree(res.body());

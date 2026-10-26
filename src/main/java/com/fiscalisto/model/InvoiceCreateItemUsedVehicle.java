@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -109,6 +110,7 @@ public class InvoiceCreateItemUsedVehicle {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateItemUsedVehicle setPurchaseAmount(double purchaseAmount) {
         return setPurchaseAmount(BigDecimal.valueOf(purchaseAmount));
     }
@@ -127,6 +129,7 @@ public class InvoiceCreateItemUsedVehicle {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateItemUsedVehicle setSaleAmount(double saleAmount) {
         return setSaleAmount(BigDecimal.valueOf(saleAmount));
     }
@@ -237,6 +240,7 @@ public class InvoiceCreateItemUsedVehicle {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateItemUsedVehicle setGuideValue(double guideValue) {
         return setGuideValue(BigDecimal.valueOf(guideValue));
     }

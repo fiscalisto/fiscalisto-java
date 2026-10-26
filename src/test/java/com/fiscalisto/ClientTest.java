@@ -96,11 +96,21 @@ class ClientTest {
                 .setPaymentForm("03")
                 .setItems(List.of(new InvoiceCreateItem().setProduct("prd_1").setUnitPrice(2500))));
         assertEquals("inv_1", inv.getId());
-        assertEquals(0, new BigDecimal("116.10").compareTo(inv.getTotal()));
+        // As sent: never through a double (the setTotal(double) convenience is not Jackson's).
+        assertEquals(new BigDecimal("116.10"), inv.getTotal());
         assertNull(inv.getUuid());
         assertEquals(2, keys.size());
         assertNotNull(keys.get(0));
         assertEquals(keys.get(0), keys.get(1));
+    }
+
+    @Test
+    void moneyIsReadExactlyAndNullStaysNull() throws IOException {
+        Invoice inv = ApiClient.MAPPER.readValue(
+                "{\"total\":12345678901234567.89,\"exchange_rate\":null,\"amount_due\":null}", Invoice.class);
+        assertEquals(new BigDecimal("12345678901234567.89"), inv.getTotal());
+        assertNull(inv.getExchangeRate());
+        assertNull(inv.getAmountDue());
     }
 
     @Test

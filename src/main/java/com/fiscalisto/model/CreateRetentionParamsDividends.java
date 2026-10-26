@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -104,6 +105,7 @@ public class CreateRetentionParamsDividends {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsDividends setIsrMexico(double isrMexico) {
         return setIsrMexico(BigDecimal.valueOf(isrMexico));
     }
@@ -122,6 +124,7 @@ public class CreateRetentionParamsDividends {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsDividends setIsrForeign(double isrForeign) {
         return setIsrForeign(BigDecimal.valueOf(isrForeign));
     }
@@ -138,6 +141,7 @@ public class CreateRetentionParamsDividends {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsDividends setForeignRetention(double foreignRetention) {
         return setForeignRetention(BigDecimal.valueOf(foreignRetention));
     }
@@ -170,6 +174,7 @@ public class CreateRetentionParamsDividends {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsDividends setNationalCredit(double nationalCredit) {
         return setNationalCredit(BigDecimal.valueOf(nationalCredit));
     }
@@ -186,6 +191,7 @@ public class CreateRetentionParamsDividends {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsDividends setAccumulatedNational(double accumulatedNational) {
         return setAccumulatedNational(BigDecimal.valueOf(accumulatedNational));
     }
@@ -202,6 +208,7 @@ public class CreateRetentionParamsDividends {
         return this;
     }
 
+    @JsonIgnore
     public CreateRetentionParamsDividends setAccumulatedForeign(double accumulatedForeign) {
         return setAccumulatedForeign(BigDecimal.valueOf(accumulatedForeign));
     }

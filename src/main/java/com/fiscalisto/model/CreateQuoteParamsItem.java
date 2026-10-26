@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -238,6 +239,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setQuantity(double quantity) {
         return setQuantity(BigDecimal.valueOf(quantity));
     }
@@ -254,6 +256,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setUnitPrice(double unitPrice) {
         return setUnitPrice(BigDecimal.valueOf(unitPrice));
     }
@@ -270,6 +273,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setDiscount(double discount) {
         return setDiscount(BigDecimal.valueOf(discount));
     }
@@ -314,6 +318,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setIeps(double ieps) {
         return setIeps(BigDecimal.valueOf(ieps));
     }
@@ -344,6 +349,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setIepsUnits(double iepsUnits) {
         return setIepsUnits(BigDecimal.valueOf(iepsUnits));
     }
@@ -360,6 +366,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setIvaRetention(double ivaRetention) {
         return setIvaRetention(BigDecimal.valueOf(ivaRetention));
     }
@@ -376,6 +383,7 @@ public class CreateQuoteParamsItem {
         return this;
     }
 
+    @JsonIgnore
     public CreateQuoteParamsItem setIsrRetention(double isrRetention) {
         return setIsrRetention(BigDecimal.valueOf(isrRetention));
     }

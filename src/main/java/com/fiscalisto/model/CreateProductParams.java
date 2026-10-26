@@ -2,11 +2,13 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * CreateProductParams: los campos de «Crear un producto».
@@ -62,11 +64,15 @@ public class CreateProductParams {
 
     /**
      * Precio unitario antes de impuestos (ValorUnitario).
-     * <p>
-     * Obligatorio.
      */
     @JsonProperty("unit_price")
     private BigDecimal unitPrice;
+
+    /**
+     * Precio abierto: sin precio fijo (una noche de hotel que cambia cada día); cada factura manda su unit_price.
+     */
+    @JsonProperty("open_price")
+    private Boolean openPrice;
 
     /**
      * Objeto de impuesto (ObjetoImp), c_ObjetoImp: 01 no objeto, 02 sí objeto (por omisión), 03 sin desglose, 04 no causa…
@@ -109,6 +115,12 @@ public class CreateProductParams {
      */
     @JsonProperty("isr_retention")
     private BigDecimal isrRetention;
+
+    /**
+     * Impuestos locales que lleva, como el ISH 3% de hospedaje: van en cada factura con él, sobre sus conceptos.
+     */
+    @JsonProperty("local_taxes")
+    private List<CreateProductParamsLocalTax> localTaxes;
 
     /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
@@ -200,8 +212,6 @@ public class CreateProductParams {
 
     /**
      * Precio unitario antes de impuestos (ValorUnitario).
-     * <p>
-     * Obligatorio.
      */
     public BigDecimal getUnitPrice() {
         return unitPrice;
@@ -212,8 +222,21 @@ public class CreateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public CreateProductParams setUnitPrice(double unitPrice) {
         return setUnitPrice(BigDecimal.valueOf(unitPrice));
+    }
+
+    /**
+     * Precio abierto: sin precio fijo (una noche de hotel que cambia cada día); cada factura manda su unit_price.
+     */
+    public Boolean getOpenPrice() {
+        return openPrice;
+    }
+
+    public CreateProductParams setOpenPrice(Boolean openPrice) {
+        this.openPrice = openPrice;
+        return this;
     }
 
     /**
@@ -256,6 +279,7 @@ public class CreateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public CreateProductParams setIeps(double ieps) {
         return setIeps(BigDecimal.valueOf(ieps));
     }
@@ -286,6 +310,7 @@ public class CreateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public CreateProductParams setIvaRetention(double ivaRetention) {
         return setIvaRetention(BigDecimal.valueOf(ivaRetention));
     }
@@ -302,7 +327,20 @@ public class CreateProductParams {
         return this;
     }
 
+    @JsonIgnore
     public CreateProductParams setIsrRetention(double isrRetention) {
         return setIsrRetention(BigDecimal.valueOf(isrRetention));
+    }
+
+    /**
+     * Impuestos locales que lleva, como el ISH 3% de hospedaje: van en cada factura con él, sobre sus conceptos.
+     */
+    public List<CreateProductParamsLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public CreateProductParams setLocalTaxes(List<CreateProductParamsLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
+        return this;
     }
 }

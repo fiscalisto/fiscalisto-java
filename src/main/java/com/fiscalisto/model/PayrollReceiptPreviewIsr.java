@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -56,6 +57,7 @@ public class PayrollReceiptPreviewIsr {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewIsr setTariff(double tariff) {
         return setTariff(BigDecimal.valueOf(tariff));
     }
@@ -72,6 +74,7 @@ public class PayrollReceiptPreviewIsr {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewIsr setSubsidy(double subsidy) {
         return setSubsidy(BigDecimal.valueOf(subsidy));
     }
@@ -88,6 +91,7 @@ public class PayrollReceiptPreviewIsr {
         return this;
     }
 
+    @JsonIgnore
     public PayrollReceiptPreviewIsr setWithheld(double withheld) {
         return setWithheld(BigDecimal.valueOf(withheld));
     }

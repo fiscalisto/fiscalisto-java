@@ -157,7 +157,7 @@ public final class InvoicesService {
     /**
      * Cancelar una factura
      * <p>
-     * Pide la cancelación al SAT. Si el cliente debe aceptarla queda en pending (escuche invoice.canceled o invoice.cancellation_rejected). Usa un timbre la primera vez que el SAT acepta la solicitud; repetirla, o pedirla otra vez después de un rechazo, no. Nunca se niega por falta de timbres.
+     * Pide la cancelación al SAT. Si el cliente debe aceptarla queda en pending (escuche invoice.canceled o invoice.cancellation_rejected). No usa timbres.
      * <p>
      * POST /v1/invoices/{id}/cancel
      * <p>

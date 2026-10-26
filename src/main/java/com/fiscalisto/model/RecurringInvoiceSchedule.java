@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -71,6 +72,7 @@ public class RecurringInvoiceSchedule {
         return this;
     }
 
+    @JsonIgnore
     public RecurringInvoiceSchedule setInterval(long interval) {
         return setInterval(Long.valueOf(interval));
     }
@@ -99,6 +101,7 @@ public class RecurringInvoiceSchedule {
         return this;
     }
 
+    @JsonIgnore
     public RecurringInvoiceSchedule setHour(long hour) {
         return setHour(Long.valueOf(hour));
     }

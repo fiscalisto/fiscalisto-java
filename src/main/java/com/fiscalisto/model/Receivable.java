@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -152,6 +153,7 @@ public class Receivable {
         return this;
     }
 
+    @JsonIgnore
     public Receivable setAmountDue(double amountDue) {
         return setAmountDue(BigDecimal.valueOf(amountDue));
     }
@@ -168,6 +170,7 @@ public class Receivable {
         return this;
     }
 
+    @JsonIgnore
     public Receivable setOpenInvoices(long openInvoices) {
         return setOpenInvoices(Long.valueOf(openInvoices));
     }

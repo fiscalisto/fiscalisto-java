@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -52,6 +53,7 @@ public class InvoiceCreateCartaPorteGoodQuantity {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteGoodQuantity setQuantity(double quantity) {
         return setQuantity(BigDecimal.valueOf(quantity));
     }
@@ -70,6 +72,7 @@ public class InvoiceCreateCartaPorteGoodQuantity {
         return this;
     }
 
+    @JsonIgnore
     public InvoiceCreateCartaPorteGoodQuantity setDestination(long destination) {
         return setDestination(Long.valueOf(destination));
     }

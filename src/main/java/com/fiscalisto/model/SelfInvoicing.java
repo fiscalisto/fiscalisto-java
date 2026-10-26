@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -132,6 +133,7 @@ public class SelfInvoicing {
         return this;
     }
 
+    @JsonIgnore
     public SelfInvoicing setWindowDays(long windowDays) {
         return setWindowDays(Long.valueOf(windowDays));
     }
