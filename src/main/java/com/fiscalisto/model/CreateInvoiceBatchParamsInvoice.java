@@ -25,6 +25,18 @@ public class CreateInvoiceBatchParamsInvoice {
     private String issuer;
 
     /**
+     * Sucursal (brn_…) desde donde se factura: su código postal va en LugarExpedicion, su dirección en el PDF y, si las tiene, sus series. Sin ella, el domicilio fiscal del emisor (la Matriz).
+     */
+    @JsonProperty("branch")
+    private String branch;
+
+    /**
+     * Almacén (whs_…) de donde salen sus productos con track_stock. Por omisión, el de su sucursal (o el de la Matriz).
+     */
+    @JsonProperty("warehouse")
+    private String warehouse;
+
+    /**
      * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
      * <p>
      * Obligatorio.
@@ -219,6 +231,30 @@ public class CreateInvoiceBatchParamsInvoice {
 
     public CreateInvoiceBatchParamsInvoice setIssuer(String issuer) {
         this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * Sucursal (brn_…) desde donde se factura: su código postal va en LugarExpedicion, su dirección en el PDF y, si las tiene, sus series. Sin ella, el domicilio fiscal del emisor (la Matriz).
+     */
+    public String getBranch() {
+        return branch;
+    }
+
+    public CreateInvoiceBatchParamsInvoice setBranch(String branch) {
+        this.branch = branch;
+        return this;
+    }
+
+    /**
+     * Almacén (whs_…) de donde salen sus productos con track_stock. Por omisión, el de su sucursal (o el de la Matriz).
+     */
+    public String getWarehouse() {
+        return warehouse;
+    }
+
+    public CreateInvoiceBatchParamsInvoice setWarehouse(String warehouse) {
+        this.warehouse = warehouse;
         return this;
     }
 

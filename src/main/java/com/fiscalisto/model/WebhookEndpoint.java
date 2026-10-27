@@ -15,7 +15,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WebhookEndpoint {
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     @JsonProperty("id")
     private String id;
@@ -101,7 +101,7 @@ public class WebhookEndpoint {
     private String secret;
 
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     public String getId() {
         return id;

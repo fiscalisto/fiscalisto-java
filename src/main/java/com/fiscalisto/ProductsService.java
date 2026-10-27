@@ -6,6 +6,7 @@ import com.fiscalisto.model.CreateProductParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListProductsParams;
 import com.fiscalisto.model.Product;
+import com.fiscalisto.model.StockLevelList;
 import com.fiscalisto.model.UpdateProductParams;
 
 /**
@@ -122,5 +123,22 @@ public final class ProductsService {
 
     public Deleted delete(String id) {
         return delete(id, null);
+    }
+
+    /**
+     * Ver las existencias de un producto
+     * <p>
+     * Lo que hay del producto en cada almacén del emisor (también en 0), apartado por cotizaciones y disponible.
+     * <p>
+     * GET /v1/products/{id}/stock
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/inventario/get-product-stock
+     */
+    public StockLevelList stock(String id, RequestOptions options) {
+        return api.request("GET", "/v1/products/" + ApiClient.encode(id) + "/stock", null, null, false, StockLevelList.class, options);
+    }
+
+    public StockLevelList stock(String id) {
+        return stock(id, null);
     }
 }

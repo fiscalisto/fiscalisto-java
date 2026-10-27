@@ -15,7 +15,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Issuer {
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     @JsonProperty("id")
     private String id;
@@ -131,7 +131,7 @@ public class Issuer {
     private Map<String, String> metadata;
 
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     public String getId() {
         return id;

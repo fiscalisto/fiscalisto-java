@@ -18,7 +18,7 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Invoice {
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     @JsonProperty("id")
     private String id;
@@ -40,6 +40,12 @@ public class Invoice {
      */
     @JsonProperty("issuer")
     private String issuer;
+
+    /**
+     * La sucursal (brn_…) desde donde se timbró, o null (el domicilio fiscal del emisor). Sus pagos y notas de crédito la siguen.
+     */
+    @JsonProperty("branch")
+    private String branch;
 
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
@@ -252,7 +258,7 @@ public class Invoice {
     private InvoiceAdvanceApplication advanceApplication;
 
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     public String getId() {
         return id;
@@ -296,6 +302,18 @@ public class Invoice {
 
     public Invoice setIssuer(String issuer) {
         this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * La sucursal (brn_…) desde donde se timbró, o null (el domicilio fiscal del emisor). Sus pagos y notas de crédito la siguen.
+     */
+    public String getBranch() {
+        return branch;
+    }
+
+    public Invoice setBranch(String branch) {
+        this.branch = branch;
         return this;
     }
 

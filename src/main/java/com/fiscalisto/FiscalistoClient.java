@@ -27,9 +27,15 @@ public final class FiscalistoClient {
     private final PayrollReceiptsService payrollReceipts;
     private final InvoiceBatchesService invoiceBatches;
     private final TaxIdsService taxIds;
+    private final BranchesService branches;
     private final CustomersService customers;
     private final CustomerDataRequestsService customerDataRequests;
     private final ProductsService products;
+    private final SatMailboxMessagesService satMailboxMessages;
+    private final SatFindingsService satFindings;
+    private final WarehousesService warehouses;
+    private final StockMovementsService stockMovements;
+    private final StockAdjustmentsService stockAdjustments;
     private final SatCatalogsService satCatalogs;
     private final SatListsService satLists;
     private final SatDownloadsService satDownloads;
@@ -73,9 +79,15 @@ public final class FiscalistoClient {
         this.payrollReceipts = new PayrollReceiptsService(api);
         this.invoiceBatches = new InvoiceBatchesService(api);
         this.taxIds = new TaxIdsService(api);
+        this.branches = new BranchesService(api);
         this.customers = new CustomersService(api);
         this.customerDataRequests = new CustomerDataRequestsService(api);
         this.products = new ProductsService(api);
+        this.satMailboxMessages = new SatMailboxMessagesService(api);
+        this.satFindings = new SatFindingsService(api);
+        this.warehouses = new WarehousesService(api);
+        this.stockMovements = new StockMovementsService(api);
+        this.stockAdjustments = new StockAdjustmentsService(api);
         this.satCatalogs = new SatCatalogsService(api);
         this.satLists = new SatListsService(api);
         this.satDownloads = new SatDownloadsService(api);
@@ -180,6 +192,11 @@ public final class FiscalistoClient {
         return taxIds;
     }
 
+    /** Sucursales. */
+    public BranchesService branches() {
+        return branches;
+    }
+
     /** Clientes. */
     public CustomersService customers() {
         return customers;
@@ -193,6 +210,31 @@ public final class FiscalistoClient {
     /** Productos. */
     public ProductsService products() {
         return products;
+    }
+
+    /** Cumplimiento SAT. */
+    public SatMailboxMessagesService satMailboxMessages() {
+        return satMailboxMessages;
+    }
+
+    /** Cumplimiento SAT. */
+    public SatFindingsService satFindings() {
+        return satFindings;
+    }
+
+    /** Inventario. */
+    public WarehousesService warehouses() {
+        return warehouses;
+    }
+
+    /** Inventario. */
+    public StockMovementsService stockMovements() {
+        return stockMovements;
+    }
+
+    /** Inventario. */
+    public StockAdjustmentsService stockAdjustments() {
+        return stockAdjustments;
     }
 
     /** Catálogos del SAT. */

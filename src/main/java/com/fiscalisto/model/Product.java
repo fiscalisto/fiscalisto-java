@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     @JsonProperty("id")
     private String id;
@@ -131,6 +131,30 @@ public class Product {
     private List<ProductLocalTax> localTaxes;
 
     /**
+     * true si lleva existencias (Inventario).
+     */
+    @JsonProperty("track_stock")
+    private Boolean trackStock;
+
+    /**
+     * Su costo por unidad en pesos sin IVA, o null.
+     */
+    @JsonProperty("cost")
+    private BigDecimal cost;
+
+    /**
+     * Su código de barras, o null.
+     */
+    @JsonProperty("barcode")
+    private String barcode;
+
+    /**
+     * Su existencia mínima, o null.
+     */
+    @JsonProperty("min_stock")
+    private BigDecimal minStock;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -143,7 +167,7 @@ public class Product {
     private String updatedAt;
 
     /**
-     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, evt_, whe_).
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     public String getId() {
         return id;
@@ -388,6 +412,64 @@ public class Product {
     public Product setLocalTaxes(List<ProductLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
         return this;
+    }
+
+    /**
+     * true si lleva existencias (Inventario).
+     */
+    public Boolean getTrackStock() {
+        return trackStock;
+    }
+
+    public Product setTrackStock(Boolean trackStock) {
+        this.trackStock = trackStock;
+        return this;
+    }
+
+    /**
+     * Su costo por unidad en pesos sin IVA, o null.
+     */
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public Product setCost(BigDecimal cost) {
+        this.cost = cost;
+        return this;
+    }
+
+    @JsonIgnore
+    public Product setCost(double cost) {
+        return setCost(BigDecimal.valueOf(cost));
+    }
+
+    /**
+     * Su código de barras, o null.
+     */
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public Product setBarcode(String barcode) {
+        this.barcode = barcode;
+        return this;
+    }
+
+    /**
+     * Su existencia mínima, o null.
+     */
+    public BigDecimal getMinStock() {
+        return minStock;
+    }
+
+    public Product setMinStock(BigDecimal minStock) {
+        this.minStock = minStock;
+        return this;
+    }
+
+    @JsonIgnore
+    public Product setMinStock(double minStock) {
+        return setMinStock(BigDecimal.valueOf(minStock));
     }
 
     /**

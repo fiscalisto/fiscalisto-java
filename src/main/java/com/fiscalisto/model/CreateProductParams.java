@@ -123,6 +123,30 @@ public class CreateProductParams {
     private List<CreateProductParamsLocalTax> localTaxes;
 
     /**
+     * Lleva existencias (Inventario): cada factura que lo vende las saca del almacén de su sucursal, y una cancelada las regresa. Ver GET /v1/products/{id}/stock.
+     */
+    @JsonProperty("track_stock")
+    private Boolean trackStock;
+
+    /**
+     * Su costo por unidad en pesos sin IVA, hasta que sus compras den otro: vale las existencias que entran sin unit_cost.
+     */
+    @JsonProperty("cost")
+    private BigDecimal cost;
+
+    /**
+     * Código de barras (EAN, UPC o el suyo). Una factura cuyo concepto lo trae como NoIdentificacion saca existencias de este producto.
+     */
+    @JsonProperty("barcode")
+    private String barcode;
+
+    /**
+     * Existencia mínima: por debajo, el aviso de existencias bajas lo incluye.
+     */
+    @JsonProperty("min_stock")
+    private BigDecimal minStock;
+
+    /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
      */
     public String getIssuer() {
@@ -342,5 +366,63 @@ public class CreateProductParams {
     public CreateProductParams setLocalTaxes(List<CreateProductParamsLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
         return this;
+    }
+
+    /**
+     * Lleva existencias (Inventario): cada factura que lo vende las saca del almacén de su sucursal, y una cancelada las regresa. Ver GET /v1/products/{id}/stock.
+     */
+    public Boolean getTrackStock() {
+        return trackStock;
+    }
+
+    public CreateProductParams setTrackStock(Boolean trackStock) {
+        this.trackStock = trackStock;
+        return this;
+    }
+
+    /**
+     * Su costo por unidad en pesos sin IVA, hasta que sus compras den otro: vale las existencias que entran sin unit_cost.
+     */
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public CreateProductParams setCost(BigDecimal cost) {
+        this.cost = cost;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateProductParams setCost(double cost) {
+        return setCost(BigDecimal.valueOf(cost));
+    }
+
+    /**
+     * Código de barras (EAN, UPC o el suyo). Una factura cuyo concepto lo trae como NoIdentificacion saca existencias de este producto.
+     */
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public CreateProductParams setBarcode(String barcode) {
+        this.barcode = barcode;
+        return this;
+    }
+
+    /**
+     * Existencia mínima: por debajo, el aviso de existencias bajas lo incluye.
+     */
+    public BigDecimal getMinStock() {
+        return minStock;
+    }
+
+    public CreateProductParams setMinStock(BigDecimal minStock) {
+        this.minStock = minStock;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateProductParams setMinStock(double minStock) {
+        return setMinStock(BigDecimal.valueOf(minStock));
     }
 }

@@ -2,13 +2,16 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.ComplianceOpinion;
 import com.fiscalisto.model.CreateIssuerOnboardingLinkParams;
 import com.fiscalisto.model.CreateIssuerParams;
 import com.fiscalisto.model.Issuer;
 import com.fiscalisto.model.IssuerOnboardingLink;
 import com.fiscalisto.model.ListIssuersParams;
+import com.fiscalisto.model.SatRefresh;
 import com.fiscalisto.model.SelfInvoicing;
 import com.fiscalisto.model.SignEfirmaParams;
+import com.fiscalisto.model.TaxStatusCertificate;
 import com.fiscalisto.model.UpdateIssuerParams;
 import com.fiscalisto.model.UpdateSelfInvoicingParams;
 import com.fiscalisto.model.UploadCertificateParams;
@@ -199,6 +202,125 @@ public final class IssuersService {
 
     public IssuerOnboardingLink createOnboardingLink(String id) {
         return createOnboardingLink(id, null, null);
+    }
+
+    /**
+     * Ver la opinión de cumplimiento (32-D)
+     * <p>
+     * La última opinión que trajo del SAT: positiva, negativa (con sus motivos), sin obligaciones o en suspensión. result es null hasta la primera consulta. No usa timbres.
+     * <p>
+     * GET /v1/issuers/{id}/compliance_opinion
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/get-compliance-opinion
+     */
+    public ComplianceOpinion complianceOpinion(String id, RequestOptions options) {
+        return api.request("GET", "/v1/issuers/" + ApiClient.encode(id) + "/compliance_opinion", null, null, false, ComplianceOpinion.class, options);
+    }
+
+    public ComplianceOpinion complianceOpinion(String id) {
+        return complianceOpinion(id, null);
+    }
+
+    /**
+     * Pedir la opinión de cumplimiento al SAT
+     * <p>
+     * La pide al SAT ahora con la e.firma guardada del emisor (POST /v1/issuers/{id}/efirma con keep_for_downloads: true). 1 timbre en producción, una vez cada 10 minutos; regresa si el SAT no contesta. Si el SAT tarda, contesta status processing y el resultado llega a GET /v1/issuers/{id}/compliance_opinion. En pruebas da una positiva de ejemplo.
+     * <p>
+     * POST /v1/issuers/{id}/compliance_opinion/refresh
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/refresh-compliance-opinion
+     */
+    public SatRefresh refreshComplianceOpinion(String id, RequestOptions options) {
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/compliance_opinion/refresh", null, null, true, SatRefresh.class, options);
+    }
+
+    public SatRefresh refreshComplianceOpinion(String id) {
+        return refreshComplianceOpinion(id, null);
+    }
+
+    /**
+     * Descargar el PDF de la opinión de cumplimiento
+     * <p>
+     * El PDF de la última opinión, como lo da el SAT. No usa timbres.
+     * <p>
+     * GET /v1/issuers/{id}/compliance_opinion/pdf
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/get-compliance-opinion-pdf
+     */
+    public byte[] complianceOpinionPdf(String id, RequestOptions options) {
+        return api.bytes("GET", "/v1/issuers/" + ApiClient.encode(id) + "/compliance_opinion/pdf", null, null, false, options);
+    }
+
+    public byte[] complianceOpinionPdf(String id) {
+        return complianceOpinionPdf(id, null);
+    }
+
+    /**
+     * Ver la constancia de situación fiscal
+     * <p>
+     * Lo que dice la última constancia generada: razón social, regímenes, código postal, estatus en el padrón e idCIF. No usa timbres.
+     * <p>
+     * GET /v1/issuers/{id}/tax_status_certificate
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/get-tax-status-certificate
+     */
+    public TaxStatusCertificate taxStatusCertificate(String id, RequestOptions options) {
+        return api.request("GET", "/v1/issuers/" + ApiClient.encode(id) + "/tax_status_certificate", null, null, false, TaxStatusCertificate.class, options);
+    }
+
+    public TaxStatusCertificate taxStatusCertificate(String id) {
+        return taxStatusCertificate(id, null);
+    }
+
+    /**
+     * Generar la constancia de situación fiscal en el SAT
+     * <p>
+     * Genera una constancia nueva con la e.firma guardada del emisor. 1 timbre en producción, una vez cada 10 minutos; regresa si el SAT no contesta. En pruebas hace una con los datos del emisor.
+     * <p>
+     * POST /v1/issuers/{id}/tax_status_certificate/refresh
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/refresh-tax-status-certificate
+     */
+    public SatRefresh refreshTaxStatusCertificate(String id, RequestOptions options) {
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/tax_status_certificate/refresh", null, null, true, SatRefresh.class, options);
+    }
+
+    public SatRefresh refreshTaxStatusCertificate(String id) {
+        return refreshTaxStatusCertificate(id, null);
+    }
+
+    /**
+     * Descargar el PDF de la constancia
+     * <p>
+     * El PDF de la última constancia, como lo da el SAT. No usa timbres.
+     * <p>
+     * GET /v1/issuers/{id}/tax_status_certificate/pdf
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/get-tax-status-certificate-pdf
+     */
+    public byte[] taxStatusCertificatePdf(String id, RequestOptions options) {
+        return api.bytes("GET", "/v1/issuers/" + ApiClient.encode(id) + "/tax_status_certificate/pdf", null, null, false, options);
+    }
+
+    public byte[] taxStatusCertificatePdf(String id) {
+        return taxStatusCertificatePdf(id, null);
+    }
+
+    /**
+     * Revisar el buzón tributario en el SAT
+     * <p>
+     * Lee los avisos del buzón tributario del emisor ahora, con su e.firma guardada; nunca abre notificaciones (abrirlas firma el acuse y corren los plazos). 1 timbre en producción, una vez cada 10 minutos. En pruebas deja dos avisos de ejemplo.
+     * <p>
+     * POST /v1/issuers/{id}/sat_mailbox/refresh
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/refresh-sat-mailbox
+     */
+    public SatRefresh refreshSatMailbox(String id, RequestOptions options) {
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/sat_mailbox/refresh", null, null, true, SatRefresh.class, options);
+    }
+
+    public SatRefresh refreshSatMailbox(String id) {
+        return refreshSatMailbox(id, null);
     }
 
     /**
