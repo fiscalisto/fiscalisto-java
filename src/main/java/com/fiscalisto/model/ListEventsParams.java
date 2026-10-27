@@ -26,9 +26,9 @@ public class ListEventsParams {
     private String startingAfter;
 
     /**
-     * Solo de este tipo.
+     * Solo de este tipo (invoice.stamped), o todos los de un recurso con un comodín (invoice.*).
      * <p>
-     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, invoice.paid, invoice.partially_paid, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, sat_download.completed, sat_download.failed, sat_declaration.created, sat_declaration.updated, ticket.invoiced, ticket.included_in_global, recurring_invoice.failed, quote.viewed, quote.accepted, quote.changes_requested, quote.rejected, issuer.ready, balance.low, test_clock.ready.
+     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, invoice.paid, invoice.partially_paid, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, sat_download.completed, sat_download.failed, sat_declaration.created, sat_declaration.updated, ticket.invoiced, ticket.included_in_global, recurring_invoice.failed, quote.viewed, quote.accepted, quote.changes_requested, quote.rejected, issuer.ready, balance.low, test_clock.ready, invoice.*, invoice_batch.*, recurring_invoice.*, quote.*, ticket.*, retention.*, customer_data_request.*, sat_download.*, sat_declaration.*, issuer.*, balance.*, test_clock.*.
      */
     @JsonProperty("type")
     private String type;
@@ -38,6 +38,12 @@ public class ListEventsParams {
      */
     @JsonProperty("object")
     private String object;
+
+    /**
+     * false: los que algún webhook no recibió (su último intento falló). true: los que recibieron todos los webhooks a los que se mandaron.
+     */
+    @JsonProperty("delivery_success")
+    private Boolean deliverySuccess;
 
     /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
@@ -69,9 +75,9 @@ public class ListEventsParams {
     }
 
     /**
-     * Solo de este tipo.
+     * Solo de este tipo (invoice.stamped), o todos los de un recurso con un comodín (invoice.*).
      * <p>
-     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, invoice.paid, invoice.partially_paid, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, sat_download.completed, sat_download.failed, sat_declaration.created, sat_declaration.updated, ticket.invoiced, ticket.included_in_global, recurring_invoice.failed, quote.viewed, quote.accepted, quote.changes_requested, quote.rejected, issuer.ready, balance.low, test_clock.ready.
+     * Valores: invoice.stamped, invoice.failed, invoice.canceled, invoice.cancellation_pending, invoice.cancellation_rejected, invoice.paid, invoice.partially_paid, retention.stamped, retention.failed, retention.canceled, invoice_batch.completed, customer_data_request.completed, sat_download.completed, sat_download.failed, sat_declaration.created, sat_declaration.updated, ticket.invoiced, ticket.included_in_global, recurring_invoice.failed, quote.viewed, quote.accepted, quote.changes_requested, quote.rejected, issuer.ready, balance.low, test_clock.ready, invoice.*, invoice_batch.*, recurring_invoice.*, quote.*, ticket.*, retention.*, customer_data_request.*, sat_download.*, sat_declaration.*, issuer.*, balance.*, test_clock.*.
      */
     public String getType() {
         return type;
@@ -91,6 +97,18 @@ public class ListEventsParams {
 
     public ListEventsParams setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * false: los que algún webhook no recibió (su último intento falló). true: los que recibieron todos los webhooks a los que se mandaron.
+     */
+    public Boolean getDeliverySuccess() {
+        return deliverySuccess;
+    }
+
+    public ListEventsParams setDeliverySuccess(Boolean deliverySuccess) {
+        this.deliverySuccess = deliverySuccess;
         return this;
     }
 }
