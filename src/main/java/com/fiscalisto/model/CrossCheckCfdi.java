@@ -63,13 +63,19 @@ public class CrossCheckCfdi {
     private BigDecimal declared;
 
     /**
+     * De declared, lo que la propia declaración dice que no salió de facturas (ingresos nominales adicionales en isr_income, IVA al 16% sobre la precarga del SAT en vat_charged); 0 si no hay.
+     */
+    @JsonProperty("declared_without_cfdi")
+    private BigDecimal declaredWithoutCfdi;
+
+    /**
      * Lo que dicen los CFDI del mes: la suma de cfdi más adjustment.
      */
     @JsonProperty("invoiced")
     private BigDecimal invoiced;
 
     /**
-     * declared menos invoiced; null si declared es null.
+     * declared menos declared_without_cfdi menos invoiced; null si declared es null.
      */
     @JsonProperty("difference")
     private BigDecimal difference;
@@ -186,6 +192,23 @@ public class CrossCheckCfdi {
     }
 
     /**
+     * De declared, lo que la propia declaración dice que no salió de facturas (ingresos nominales adicionales en isr_income, IVA al 16% sobre la precarga del SAT en vat_charged); 0 si no hay.
+     */
+    public BigDecimal getDeclaredWithoutCfdi() {
+        return declaredWithoutCfdi;
+    }
+
+    public CrossCheckCfdi setDeclaredWithoutCfdi(BigDecimal declaredWithoutCfdi) {
+        this.declaredWithoutCfdi = declaredWithoutCfdi;
+        return this;
+    }
+
+    @JsonIgnore
+    public CrossCheckCfdi setDeclaredWithoutCfdi(double declaredWithoutCfdi) {
+        return setDeclaredWithoutCfdi(BigDecimal.valueOf(declaredWithoutCfdi));
+    }
+
+    /**
      * Lo que dicen los CFDI del mes: la suma de cfdi más adjustment.
      */
     public BigDecimal getInvoiced() {
@@ -203,7 +226,7 @@ public class CrossCheckCfdi {
     }
 
     /**
-     * declared menos invoiced; null si declared es null.
+     * declared menos declared_without_cfdi menos invoiced; null si declared es null.
      */
     public BigDecimal getDifference() {
         return difference;

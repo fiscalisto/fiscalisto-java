@@ -38,13 +38,19 @@ public class CrossChecksMonthCheck {
     private BigDecimal declared;
 
     /**
+     * De declared, lo que la propia declaración dice que no salió de facturas: en isr_income los ingresos nominales adicionales (cobrado sin factura, intereses) y en vat_charged el IVA al 16% por encima de la precarga del SAT. Se compara aparte; 0 si no hay.
+     */
+    @JsonProperty("declared_without_cfdi")
+    private BigDecimal declaredWithoutCfdi;
+
+    /**
      * Lo que dicen los CFDI del mes, con los mismos cálculos de Impuestos.
      */
     @JsonProperty("invoiced")
     private BigDecimal invoiced;
 
     /**
-     * declared menos invoiced; null si declared es null.
+     * declared menos declared_without_cfdi menos invoiced; null si declared es null.
      */
     @JsonProperty("difference")
     private BigDecimal difference;
@@ -101,6 +107,23 @@ public class CrossChecksMonthCheck {
     }
 
     /**
+     * De declared, lo que la propia declaración dice que no salió de facturas: en isr_income los ingresos nominales adicionales (cobrado sin factura, intereses) y en vat_charged el IVA al 16% por encima de la precarga del SAT. Se compara aparte; 0 si no hay.
+     */
+    public BigDecimal getDeclaredWithoutCfdi() {
+        return declaredWithoutCfdi;
+    }
+
+    public CrossChecksMonthCheck setDeclaredWithoutCfdi(BigDecimal declaredWithoutCfdi) {
+        this.declaredWithoutCfdi = declaredWithoutCfdi;
+        return this;
+    }
+
+    @JsonIgnore
+    public CrossChecksMonthCheck setDeclaredWithoutCfdi(double declaredWithoutCfdi) {
+        return setDeclaredWithoutCfdi(BigDecimal.valueOf(declaredWithoutCfdi));
+    }
+
+    /**
      * Lo que dicen los CFDI del mes, con los mismos cálculos de Impuestos.
      */
     public BigDecimal getInvoiced() {
@@ -118,7 +141,7 @@ public class CrossChecksMonthCheck {
     }
 
     /**
-     * declared menos invoiced; null si declared es null.
+     * declared menos declared_without_cfdi menos invoiced; null si declared es null.
      */
     public BigDecimal getDifference() {
         return difference;

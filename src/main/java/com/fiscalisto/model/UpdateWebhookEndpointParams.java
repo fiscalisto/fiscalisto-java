@@ -21,7 +21,7 @@ public class UpdateWebhookEndpointParams {
     private String url;
 
     /**
-     * Eventos que quiere recibir, o ["*"] para todos (por omisión). Ver la lista en Webhooks.
+     * Eventos que quiere recibir, o ["*"] para todos (por omisión). La lista con cuándo llega cada uno: [Tipos de evento](https://fiscalisto.com/docs/api/webhooks#tipos-de-evento).
      */
     @JsonProperty("events")
     private List<String> events;
@@ -57,7 +57,7 @@ public class UpdateWebhookEndpointParams {
     }
 
     /**
-     * Eventos que quiere recibir, o ["*"] para todos (por omisión). Ver la lista en Webhooks.
+     * Eventos que quiere recibir, o ["*"] para todos (por omisión). La lista con cuándo llega cada uno: [Tipos de evento](https://fiscalisto.com/docs/api/webhooks#tipos-de-evento).
      */
     public List<String> getEvents() {
         return events;
