@@ -13,19 +13,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TaxStatusCertificateTaxSystem {
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero…
+     * Clave del régimen fiscal (c_RegimenFiscal): 601, 612, 626…
      */
     @JsonProperty("code")
     private String code;
 
     /**
-     * Nombre.
+     * Nombre del régimen fiscal, como lo escribe el SAT.
      */
     @JsonProperty("name")
     private String name;
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero…
+     * Clave del régimen fiscal (c_RegimenFiscal): 601, 612, 626…
      */
     public String getCode() {
         return code;
@@ -37,7 +37,7 @@ public class TaxStatusCertificateTaxSystem {
     }
 
     /**
-     * Nombre.
+     * Nombre del régimen fiscal, como lo escribe el SAT.
      */
     public String getName() {
         return name;

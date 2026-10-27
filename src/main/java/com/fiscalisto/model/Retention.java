@@ -73,7 +73,7 @@ public class Retention {
     private String date;
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero…
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) aún no se puede emitir.
      */
     @JsonProperty("code")
     private String code;
@@ -125,6 +125,48 @@ public class Retention {
      */
     @JsonProperty("foreign_payment")
     private Map<String, Object> foreignPayment;
+
+    /**
+     * Complemento de arrendamiento en fideicomiso (Arrendamientoenfideicomiso 1.0), obligatorio con code 17.
+     */
+    @JsonProperty("trust_lease")
+    private Map<String, Object> trustLease;
+
+    /**
+     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 19.
+     */
+    @JsonProperty("share_sale")
+    private Map<String, Object> shareSale;
+
+    /**
+     * Complemento de premios (Premios 1.0), obligatorio con code 20. Sus montos son los de totals.
+     */
+    @JsonProperty("prize")
+    private Map<String, Object> prize;
+
+    /**
+     * Complemento de fideicomisos que no realizan actividades empresariales (Fideicomisonoempresarial 1.0), obligatorio con code 21.
+     */
+    @JsonProperty("trust")
+    private Map<String, Object> trust;
+
+    /**
+     * Complemento de planes personales de retiro (Planesderetiro 1.1), obligatorio con code 22: lo del año anterior.
+     */
+    @JsonProperty("retirement_plan")
+    private Map<String, Object> retirementPlan;
+
+    /**
+     * Complemento de intereses reales deducibles por créditos hipotecarios (Intereseshipotecarios 1.0), obligatorio con code 23.
+     */
+    @JsonProperty("mortgage_interest")
+    private Map<String, Object> mortgageInterest;
+
+    /**
+     * Complemento de operaciones financieras derivadas de capital (Operacionesconderivados 1.0), obligatorio con code 24.
+     */
+    @JsonProperty("financial_derivatives")
+    private Map<String, Object> financialDerivatives;
 
     /**
      * La cancelación, si se pidió: estado, motivo, sustituto y cuándo.
@@ -284,7 +326,7 @@ public class Retention {
     }
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero…
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) aún no se puede emitir.
      */
     public String getCode() {
         return code;
@@ -388,6 +430,90 @@ public class Retention {
 
     public Retention setForeignPayment(Map<String, Object> foreignPayment) {
         this.foreignPayment = foreignPayment;
+        return this;
+    }
+
+    /**
+     * Complemento de arrendamiento en fideicomiso (Arrendamientoenfideicomiso 1.0), obligatorio con code 17.
+     */
+    public Map<String, Object> getTrustLease() {
+        return trustLease;
+    }
+
+    public Retention setTrustLease(Map<String, Object> trustLease) {
+        this.trustLease = trustLease;
+        return this;
+    }
+
+    /**
+     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 19.
+     */
+    public Map<String, Object> getShareSale() {
+        return shareSale;
+    }
+
+    public Retention setShareSale(Map<String, Object> shareSale) {
+        this.shareSale = shareSale;
+        return this;
+    }
+
+    /**
+     * Complemento de premios (Premios 1.0), obligatorio con code 20. Sus montos son los de totals.
+     */
+    public Map<String, Object> getPrize() {
+        return prize;
+    }
+
+    public Retention setPrize(Map<String, Object> prize) {
+        this.prize = prize;
+        return this;
+    }
+
+    /**
+     * Complemento de fideicomisos que no realizan actividades empresariales (Fideicomisonoempresarial 1.0), obligatorio con code 21.
+     */
+    public Map<String, Object> getTrust() {
+        return trust;
+    }
+
+    public Retention setTrust(Map<String, Object> trust) {
+        this.trust = trust;
+        return this;
+    }
+
+    /**
+     * Complemento de planes personales de retiro (Planesderetiro 1.1), obligatorio con code 22: lo del año anterior.
+     */
+    public Map<String, Object> getRetirementPlan() {
+        return retirementPlan;
+    }
+
+    public Retention setRetirementPlan(Map<String, Object> retirementPlan) {
+        this.retirementPlan = retirementPlan;
+        return this;
+    }
+
+    /**
+     * Complemento de intereses reales deducibles por créditos hipotecarios (Intereseshipotecarios 1.0), obligatorio con code 23.
+     */
+    public Map<String, Object> getMortgageInterest() {
+        return mortgageInterest;
+    }
+
+    public Retention setMortgageInterest(Map<String, Object> mortgageInterest) {
+        this.mortgageInterest = mortgageInterest;
+        return this;
+    }
+
+    /**
+     * Complemento de operaciones financieras derivadas de capital (Operacionesconderivados 1.0), obligatorio con code 24.
+     */
+    public Map<String, Object> getFinancialDerivatives() {
+        return financialDerivatives;
+    }
+
+    public Retention setFinancialDerivatives(Map<String, Object> financialDerivatives) {
+        this.financialDerivatives = financialDerivatives;
         return this;
     }
 
