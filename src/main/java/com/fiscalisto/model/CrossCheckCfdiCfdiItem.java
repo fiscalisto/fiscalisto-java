@@ -24,7 +24,7 @@ public class CrossCheckCfdiCfdiItem {
     /**
      * invoice (factura de ingreso, PUE), credit_note (nota de crédito: resta) o payment (lo pagado en el mes de una factura PPD).
      * <p>
-     * Valores: invoice, credit_note, payment.
+     * Valores: invoice, credit_note, payment, withholding_certificate.
      */
     @JsonProperty("type")
     private String type;
@@ -68,7 +68,7 @@ public class CrossCheckCfdiCfdiItem {
     /**
      * invoice (factura de ingreso, PUE), credit_note (nota de crédito: resta) o payment (lo pagado en el mes de una factura PPD).
      * <p>
-     * Valores: invoice, credit_note, payment.
+     * Valores: invoice, credit_note, payment, withholding_certificate.
      */
     public String getType() {
         return type;
