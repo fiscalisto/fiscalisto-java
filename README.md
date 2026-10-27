@@ -14,7 +14,7 @@ El SDK de la [API de facturación de Fiscalisto](https://fiscalisto.com/docs/api
 <dependency>
   <groupId>com.fiscalisto</groupId>
   <artifactId>fiscalisto</artifactId>
-  <version>0.1.5</version>
+  <version>0.1.6</version>
 </dependency>
 ```
 
@@ -58,6 +58,16 @@ ResponseEntity<Void> webhook(@RequestBody byte[] body, @RequestHeader Map<String
 ```
 
 `Webhooks.verify` lanza `Webhooks.VerificationException` si no es de Fiscalisto. La guía completa está en [fiscalisto.com/docs/api/sdk](https://fiscalisto.com/docs/api/sdk).
+
+## Con agentes de IA
+
+Para que Claude Code, Cursor, Codex u otro agente integre Fiscalisto, conecte el servidor MCP de la documentación (sin llave) y pídale que empiece con `get_started`:
+
+```bash
+claude mcp add --transport http fiscalisto-docs https://fiscalisto.com/docs/api/mcp
+```
+
+La guía de integración en una página está en [fiscalisto.com/docs/api/SKILL.md](https://fiscalisto.com/docs/api/SKILL.md) y el índice de la documentación para agentes en [llms.txt](https://fiscalisto.com/docs/api/llms.txt). Otros clientes y más: [fiscalisto.com/docs/api/agentes](https://fiscalisto.com/docs/api/agentes).
 
 ## Desarrollo
 
