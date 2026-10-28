@@ -18,7 +18,7 @@ public final class TestDataService {
     /**
      * Reiniciar los datos de prueba
      * <p>
-     * Deja el modo de pruebas como nuevo: cada emisor de pruebas conserva su RFC y su CSD de pruebas pero pierde sus facturas, clientes, productos, lotes, ligas y descargas, y se borran los eventos y el registro de solicitudes de pruebas. Las llaves y los webhooks se quedan. Con seed (por omisión) deja 3 clientes y 3 productos de ejemplo. Solo con una llave fk_test_; producción nunca se toca.
+     * Deja el modo de pruebas como nuevo: cada emisor de pruebas conserva su RFC y su CSD de pruebas pero pierde sus facturas, clientes, productos, lotes, ligas y descargas, y se borran los eventos y el registro de solicitudes de pruebas. Las llaves y los webhooks se quedan. Con seed (por omisión) deja 2 clientes y 3 productos de ejemplo. Solo con una llave fk_test_; producción nunca se toca.
      * <p>
      * POST /v1/test_data/reset
      * <p>

@@ -23,6 +23,18 @@ public class PayrollReceiptPreview {
     private String object;
 
     /**
+     * Mándelo en POST /v1/payroll_receipts para timbrar exactamente este recibo: si al timbrar se calcula otro, contesta 409 payroll_calculation_changed sin timbrar.
+     */
+    @JsonProperty("confirmation_token")
+    private String confirmationToken;
+
+    /**
+     * Lo que el recibo no incluye o pronto no se podrá calcular; no impide timbrar.
+     */
+    @JsonProperty("warnings")
+    private List<PayrollReceiptPreviewWarning> warnings;
+
+    /**
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
@@ -91,6 +103,30 @@ public class PayrollReceiptPreview {
 
     public PayrollReceiptPreview setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * Mándelo en POST /v1/payroll_receipts para timbrar exactamente este recibo: si al timbrar se calcula otro, contesta 409 payroll_calculation_changed sin timbrar.
+     */
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public PayrollReceiptPreview setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+        return this;
+    }
+
+    /**
+     * Lo que el recibo no incluye o pronto no se podrá calcular; no impide timbrar.
+     */
+    public List<PayrollReceiptPreviewWarning> getWarnings() {
+        return warnings;
+    }
+
+    public PayrollReceiptPreview setWarnings(List<PayrollReceiptPreviewWarning> warnings) {
+        this.warnings = warnings;
         return this;
     }
 

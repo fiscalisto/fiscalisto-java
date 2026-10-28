@@ -51,6 +51,12 @@ public class CreatePayrollReceiptParams {
     private Map<String, String> metadata;
 
     /**
+     * El confirmation_token de POST /v1/payroll_receipts/preview: timbra solo si el recibo calculado ahora es exactamente el que revisó (si no, 409 payroll_calculation_changed y no timbra). Sin él, timbra el que calcule en ese momento.
+     */
+    @JsonProperty("confirmation_token")
+    private String confirmationToken;
+
+    /**
      * El empleado (emp_…).
      * <p>
      * Obligatorio.
@@ -116,6 +122,18 @@ public class CreatePayrollReceiptParams {
 
     public CreatePayrollReceiptParams setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * El confirmation_token de POST /v1/payroll_receipts/preview: timbra solo si el recibo calculado ahora es exactamente el que revisó (si no, 409 payroll_calculation_changed y no timbra). Sin él, timbra el que calcule en ese momento.
+     */
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public CreatePayrollReceiptParams setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
         return this;
     }
 }

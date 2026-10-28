@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResetTestDataParams {
     /**
-     * true (por omisión) para dejarle a cada emisor de pruebas 3 clientes y 3 productos de ejemplo. false para dejarlo vacío.
+     * true (por omisión) para dejarle a cada emisor de pruebas 2 clientes y 3 productos de ejemplo. false para dejarlo vacío.
      */
     @JsonProperty("seed")
     private Boolean seed;
 
     /**
-     * true (por omisión) para dejarle a cada emisor de pruebas 3 clientes y 3 productos de ejemplo. false para dejarlo vacío.
+     * true (por omisión) para dejarle a cada emisor de pruebas 2 clientes y 3 productos de ejemplo. false para dejarlo vacío.
      */
     public Boolean getSeed() {
         return seed;
