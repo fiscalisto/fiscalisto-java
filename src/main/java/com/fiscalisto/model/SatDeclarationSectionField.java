@@ -20,7 +20,7 @@ public class SatDeclarationSectionField {
     private String label;
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * El valor del renglón como lo trae la declaración (número o texto).
      */
     @JsonProperty("value")
     private JsonNode value;
@@ -38,7 +38,7 @@ public class SatDeclarationSectionField {
     }
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * El valor del renglón como lo trae la declaración (número o texto).
      */
     public JsonNode getValue() {
         return value;

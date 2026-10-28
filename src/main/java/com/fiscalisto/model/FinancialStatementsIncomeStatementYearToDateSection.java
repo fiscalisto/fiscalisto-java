@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FinancialStatementsIncomeStatementYearToDateSection {
     /**
-     * El archivo .key en base64 (puede traer el prefijo data:).
+     * La sección: ingresos, costos, gastos, financiamiento u otros.
      * <p>
      * Valores: ingresos, costos, gastos, financiamiento, otros.
      */
@@ -43,7 +43,7 @@ public class FinancialStatementsIncomeStatementYearToDateSection {
     private List<FinancialStatementsIncomeStatementYearToDateSectionGroup> groups;
 
     /**
-     * El archivo .key en base64 (puede traer el prefijo data:).
+     * La sección: ingresos, costos, gastos, financiamiento u otros.
      * <p>
      * Valores: ingresos, costos, gastos, financiamiento, otros.
      */

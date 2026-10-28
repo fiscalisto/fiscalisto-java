@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SatDeclarationReceiptConcept {
     /**
-     * Concepto del pago (ConceptoPago), c_TipoContribuyenteSujetoRetencion.
+     * El concepto de la línea de captura (ISR, IVA…) como lo da el SAT.
      */
     @JsonProperty("concept")
     private String concept;
@@ -40,7 +40,7 @@ public class SatDeclarationReceiptConcept {
     private BigDecimal amountToPay;
 
     /**
-     * Concepto del pago (ConceptoPago), c_TipoContribuyenteSujetoRetencion.
+     * El concepto de la línea de captura (ISR, IVA…) como lo da el SAT.
      */
     public String getConcept() {
         return concept;

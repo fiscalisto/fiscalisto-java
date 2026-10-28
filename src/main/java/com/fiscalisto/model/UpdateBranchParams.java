@@ -43,7 +43,7 @@ public class UpdateBranchParams {
     private String email;
 
     /**
-     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     * La serie de cada tipo de CFDI que se timbra desde ella (invoice, credit_note, payment, transfer), hasta 25 caracteres cada una; la que no mande usa la del emisor.
      */
     @JsonProperty("series")
     private UpdateBranchParamsSeries series;
@@ -115,7 +115,7 @@ public class UpdateBranchParams {
     }
 
     /**
-     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     * La serie de cada tipo de CFDI que se timbra desde ella (invoice, credit_note, payment, transfer), hasta 25 caracteres cada una; la que no mande usa la del emisor.
      */
     public UpdateBranchParamsSeries getSeries() {
         return series;

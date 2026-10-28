@@ -34,6 +34,18 @@ public class PayrollReceiptPreviewTotals {
     private BigDecimal exempt;
 
     /**
+     * Total de separación e indemnización (TotalSeparacionIndemnizacion).
+     */
+    @JsonProperty("separation")
+    private BigDecimal separation;
+
+    /**
+     * Total de jubilación, pensión o retiro (TotalJubilacionPensionRetiro).
+     */
+    @JsonProperty("retirement")
+    private BigDecimal retirement;
+
+    /**
      * Total de percepciones (TotalPercepciones).
      */
     @JsonProperty("perceptions")
@@ -124,6 +136,40 @@ public class PayrollReceiptPreviewTotals {
     @JsonIgnore
     public PayrollReceiptPreviewTotals setExempt(double exempt) {
         return setExempt(BigDecimal.valueOf(exempt));
+    }
+
+    /**
+     * Total de separación e indemnización (TotalSeparacionIndemnizacion).
+     */
+    public BigDecimal getSeparation() {
+        return separation;
+    }
+
+    public PayrollReceiptPreviewTotals setSeparation(BigDecimal separation) {
+        this.separation = separation;
+        return this;
+    }
+
+    @JsonIgnore
+    public PayrollReceiptPreviewTotals setSeparation(double separation) {
+        return setSeparation(BigDecimal.valueOf(separation));
+    }
+
+    /**
+     * Total de jubilación, pensión o retiro (TotalJubilacionPensionRetiro).
+     */
+    public BigDecimal getRetirement() {
+        return retirement;
+    }
+
+    public PayrollReceiptPreviewTotals setRetirement(BigDecimal retirement) {
+        this.retirement = retirement;
+        return this;
+    }
+
+    @JsonIgnore
+    public PayrollReceiptPreviewTotals setRetirement(double retirement) {
+        return setRetirement(BigDecimal.valueOf(retirement));
     }
 
     /**

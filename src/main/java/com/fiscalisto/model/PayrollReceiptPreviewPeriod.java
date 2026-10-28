@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * PayrollReceiptPreviewPeriod: Periodo (Periodo): mes inicial, mes final y año.
+ * PayrollReceiptPreviewPeriod: El periodo de pago: primer y último día y el día de pago (FechaInicialPago, FechaFinalPago y FechaPago).
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

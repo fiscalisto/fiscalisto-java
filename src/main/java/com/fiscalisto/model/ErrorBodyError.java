@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ErrorBodyError: Por qué el SAT o el PAC no lo aceptaron: mensaje, código del SAT y texto original.
+ * ErrorBodyError: El error: type, code, message (en el idioma pedido), param (el campo a corregir), doc_url y request_id.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -25,7 +25,7 @@ public class PreviewPayrollReceiptParams {
     private String employee;
 
     /**
-     * Periodo (Periodo): mes inicial, mes final y año.
+     * El periodo de pago: primer y último día (FechaInicialPago, FechaFinalPago) y, si no es el último, el día de pago (FechaPago).
      * <p>
      * Obligatorio.
      */
@@ -65,7 +65,7 @@ public class PreviewPayrollReceiptParams {
     }
 
     /**
-     * Periodo (Periodo): mes inicial, mes final y año.
+     * El periodo de pago: primer y último día (FechaInicialPago, FechaFinalPago) y, si no es el último, el día de pago (FechaPago).
      * <p>
      * Obligatorio.
      */

@@ -16,19 +16,19 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PayrollReceiptPreviewIsrAdjustment {
     /**
-     * Subsidio causado antes en el mes que se revierte.
+     * El subsidio para el empleo que se revierte en el ajuste.
      */
     @JsonProperty("reversed")
     private BigDecimal reversed;
 
     /**
-     * El cálculo del ISR del periodo: base, tarifa, subsidio y resultado.
+     * El ISR que se retiene después del ajuste.
      */
     @JsonProperty("isr")
     private BigDecimal isr;
 
     /**
-     * Subsidio causado antes en el mes que se revierte.
+     * El subsidio para el empleo que se revierte en el ajuste.
      */
     public BigDecimal getReversed() {
         return reversed;
@@ -45,7 +45,7 @@ public class PayrollReceiptPreviewIsrAdjustment {
     }
 
     /**
-     * El cálculo del ISR del periodo: base, tarifa, subsidio y resultado.
+     * El ISR que se retiene después del ajuste.
      */
     public BigDecimal getIsr() {
         return isr;

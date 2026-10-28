@@ -13,13 +13,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ErrorBody {
     /**
-     * Por qué el SAT o el PAC no lo aceptaron: mensaje, código del SAT y texto original.
+     * El error: type, code, message (en el idioma pedido), param (el campo a corregir), doc_url y request_id.
      */
     @JsonProperty("error")
     private ErrorBodyError error;
 
     /**
-     * Por qué el SAT o el PAC no lo aceptaron: mensaje, código del SAT y texto original.
+     * El error: type, code, message (en el idioma pedido), param (el campo a corregir), doc_url y request_id.
      */
     public ErrorBodyError getError() {
         return error;

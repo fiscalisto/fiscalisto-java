@@ -35,7 +35,7 @@ public class PayrollReceiptPreview {
     private String periodicity;
 
     /**
-     * Periodo (Periodo): mes inicial, mes final y año.
+     * El periodo de pago: primer y último día y el día de pago (FechaInicialPago, FechaFinalPago y FechaPago).
      */
     @JsonProperty("period")
     private PayrollReceiptPreviewPeriod period;
@@ -119,7 +119,7 @@ public class PayrollReceiptPreview {
     }
 
     /**
-     * Periodo (Periodo): mes inicial, mes final y año.
+     * El periodo de pago: primer y último día y el día de pago (FechaInicialPago, FechaFinalPago y FechaPago).
      */
     public PayrollReceiptPreviewPeriod getPeriod() {
         return period;

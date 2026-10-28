@@ -52,6 +52,12 @@ public class InvoicePayrollOtherPayment {
     private BigDecimal subsidyApplied;
 
     /**
+     * Compensación del saldo a favor (CompensacionSaldosAFavor), con el 004.
+     */
+    @JsonProperty("balance_compensation")
+    private InvoicePayrollOtherPaymentBalanceCompensation balanceCompensation;
+
+    /**
      * Tipo de otro pago (TipoOtroPago), c_TipoOtroPago: 002 subsidio para el empleo.
      */
     public String getType() {
@@ -136,5 +142,17 @@ public class InvoicePayrollOtherPayment {
     @JsonIgnore
     public InvoicePayrollOtherPayment setSubsidyApplied(double subsidyApplied) {
         return setSubsidyApplied(BigDecimal.valueOf(subsidyApplied));
+    }
+
+    /**
+     * Compensación del saldo a favor (CompensacionSaldosAFavor), con el 004.
+     */
+    public InvoicePayrollOtherPaymentBalanceCompensation getBalanceCompensation() {
+        return balanceCompensation;
+    }
+
+    public InvoicePayrollOtherPayment setBalanceCompensation(InvoicePayrollOtherPaymentBalanceCompensation balanceCompensation) {
+        this.balanceCompensation = balanceCompensation;
+        return this;
     }
 }

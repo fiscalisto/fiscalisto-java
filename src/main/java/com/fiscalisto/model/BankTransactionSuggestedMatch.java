@@ -28,7 +28,7 @@ public class BankTransactionSuggestedMatch {
     private Map<String, Object> amounts;
 
     /**
-     * egreso (la factura completa y después una nota de crédito por el anticipo, opción A) o remanente (la factura solo por lo que falta, opción B).
+     * PUE: facturas por cobrar que quedan pagadas al conciliar; PPD: se pagan con su complemento de pago (POST /v1/payments).
      * <p>
      * Valores: PPD, PUE.
      */
@@ -74,7 +74,7 @@ public class BankTransactionSuggestedMatch {
     }
 
     /**
-     * egreso (la factura completa y después una nota de crédito por el anticipo, opción A) o remanente (la factura solo por lo que falta, opción B).
+     * PUE: facturas por cobrar que quedan pagadas al conciliar; PPD: se pagan con su complemento de pago (POST /v1/payments).
      * <p>
      * Valores: PPD, PUE.
      */

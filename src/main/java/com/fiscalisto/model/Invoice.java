@@ -70,13 +70,13 @@ public class Invoice {
     private String uuid;
 
     /**
-     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     * La serie (Serie) con que se timbró, o null.
      */
     @JsonProperty("series")
     private String series;
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * El folio (Folio) que se le asignó, o null.
      */
     @JsonProperty("folio")
     private String folio;
@@ -88,7 +88,7 @@ public class Invoice {
     private String date;
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+     * El cliente (Receptor) como quedó en el CFDI: RFC, nombre, régimen fiscal y código postal (y foreign si es extranjero).
      */
     @JsonProperty("customer")
     private InvoiceCustomer customer;
@@ -142,7 +142,7 @@ public class Invoice {
     private BigDecimal discount;
 
     /**
-     * Impuestos del comprobante, por tipo.
+     * Los impuestos del comprobante sumados por tipo: IVA e IEPS trasladados, IVA e ISR retenidos e impuestos locales; null en un complemento de pago.
      */
     @JsonProperty("taxes")
     private InvoiceTaxes taxes;
@@ -358,7 +358,7 @@ public class Invoice {
     }
 
     /**
-     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     * La serie (Serie) con que se timbró, o null.
      */
     public String getSeries() {
         return series;
@@ -370,7 +370,7 @@ public class Invoice {
     }
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * El folio (Folio) que se le asignó, o null.
      */
     public String getFolio() {
         return folio;
@@ -394,7 +394,7 @@ public class Invoice {
     }
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+     * El cliente (Receptor) como quedó en el CFDI: RFC, nombre, régimen fiscal y código postal (y foreign si es extranjero).
      */
     public InvoiceCustomer getCustomer() {
         return customer;
@@ -517,7 +517,7 @@ public class Invoice {
     }
 
     /**
-     * Impuestos del comprobante, por tipo.
+     * Los impuestos del comprobante sumados por tipo: IVA e IEPS trasladados, IVA e ISR retenidos e impuestos locales; null en un complemento de pago.
      */
     public InvoiceTaxes getTaxes() {
         return taxes;

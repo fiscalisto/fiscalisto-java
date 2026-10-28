@@ -8,9 +8,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
- * InvoicePayrollEmployee: El empleado (emp_…).
+ * InvoicePayrollEmployee: El empleado (Nomina/Receptor), como se timbró.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -44,6 +45,12 @@ public class InvoicePayrollEmployee {
      */
     @JsonProperty("start_date")
     private String startDate;
+
+    /**
+     * Antigüedad (P52W, P1Y2M3D).
+     */
+    @JsonProperty("seniority")
+    private String seniority;
 
     /**
      * Tipo de contrato (TipoContrato), c_TipoContrato. Por omisión 01, por tiempo indeterminado.
@@ -106,6 +113,24 @@ public class InvoicePayrollEmployee {
     private String state;
 
     /**
+     * Banco (Banco), c_Banco.
+     */
+    @JsonProperty("bank")
+    private String bank;
+
+    /**
+     * Cuenta bancaria o CLABE (CuentaBancaria).
+     */
+    @JsonProperty("bank_account")
+    private String bankAccount;
+
+    /**
+     * Subcontratación (SubContratacion).
+     */
+    @JsonProperty("subcontracting")
+    private List<InvoicePayrollEmployeeSubcontractingItem> subcontracting;
+
+    /**
      * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     public String getId() {
@@ -162,6 +187,18 @@ public class InvoicePayrollEmployee {
 
     public InvoicePayrollEmployee setStartDate(String startDate) {
         this.startDate = startDate;
+        return this;
+    }
+
+    /**
+     * Antigüedad (P52W, P1Y2M3D).
+     */
+    public String getSeniority() {
+        return seniority;
+    }
+
+    public InvoicePayrollEmployee setSeniority(String seniority) {
+        this.seniority = seniority;
         return this;
     }
 
@@ -292,6 +329,42 @@ public class InvoicePayrollEmployee {
 
     public InvoicePayrollEmployee setState(String state) {
         this.state = state;
+        return this;
+    }
+
+    /**
+     * Banco (Banco), c_Banco.
+     */
+    public String getBank() {
+        return bank;
+    }
+
+    public InvoicePayrollEmployee setBank(String bank) {
+        this.bank = bank;
+        return this;
+    }
+
+    /**
+     * Cuenta bancaria o CLABE (CuentaBancaria).
+     */
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public InvoicePayrollEmployee setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+        return this;
+    }
+
+    /**
+     * Subcontratación (SubContratacion).
+     */
+    public List<InvoicePayrollEmployeeSubcontractingItem> getSubcontracting() {
+        return subcontracting;
+    }
+
+    public InvoicePayrollEmployee setSubcontracting(List<InvoicePayrollEmployeeSubcontractingItem> subcontracting) {
+        this.subcontracting = subcontracting;
         return this;
     }
 }

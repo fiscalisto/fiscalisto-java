@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * InvoicePayrollPeriod: Periodo (Periodo): mes inicial, mes final y año.
+ * InvoicePayrollPeriod: Periodo pagado: FechaInicialPago, FechaFinalPago y FechaPago.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

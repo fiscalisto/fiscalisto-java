@@ -11,11 +11,27 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * InvoicePayroll: Solo en un recibo de nómina (type N).
+ * InvoicePayroll: El complemento de nómina 1.2 como se timbró: tipo, periodo, patrón, empleado, percepciones, deducciones, otros pagos, sus nodos y los totales.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoicePayroll {
+    /**
+     * TipoNomina: O ordinaria, E extraordinaria.
+     * <p>
+     * Valores: O, E.
+     */
+    @JsonProperty("type")
+    private String type;
+
+    /**
+     * fiscalisto: lo calculó Fiscalisto (POST /v1/payroll_receipts); external: lo calculó su sistema de nómina y se timbró tal cual (POST /v1/payroll_receipts/external).
+     * <p>
+     * Valores: fiscalisto, external.
+     */
+    @JsonProperty("calculation")
+    private String calculation;
+
     /**
      * Periodicidad del pago (PeriodicidadPago): 02 semanal, 03 catorcenal, 04 quincenal (por omisión), 05 mensual.
      */
@@ -23,7 +39,7 @@ public class InvoicePayroll {
     private String periodicity;
 
     /**
-     * Periodo (Periodo): mes inicial, mes final y año.
+     * Periodo pagado: FechaInicialPago, FechaFinalPago y FechaPago.
      */
     @JsonProperty("period")
     private InvoicePayrollPeriod period;
@@ -35,13 +51,19 @@ public class InvoicePayroll {
     private BigDecimal days;
 
     /**
+     * Los ids de su sistema de nómina (solo en recibos external).
+     */
+    @JsonProperty("references")
+    private InvoicePayrollReferences references;
+
+    /**
      * El patrón (Emisor del complemento): registro patronal y CURP si es persona física.
      */
     @JsonProperty("employer")
     private InvoicePayrollEmployer employer;
 
     /**
-     * El empleado (emp_…).
+     * El empleado (Nomina/Receptor), como se timbró.
      */
     @JsonProperty("employee")
     private InvoicePayrollEmployee employee;
@@ -65,6 +87,58 @@ public class InvoicePayroll {
     private List<InvoicePayrollOtherPayment> otherPayments;
 
     /**
+     * SeparacionIndemnizacion (percepciones 022, 023, 025).
+     */
+    @JsonProperty("separation")
+    private InvoicePayrollSeparation separation;
+
+    /**
+     * JubilacionPensionRetiro (percepciones 039, 044).
+     */
+    @JsonProperty("retirement")
+    private InvoicePayrollRetirement retirement;
+
+    /**
+     * Incapacidades (percepción 014 o deducción 006).
+     */
+    @JsonProperty("disabilities")
+    private List<InvoicePayrollDisability> disabilities;
+
+    /**
+     * Totales: percepciones, deducciones, otros pagos y el neto a pagar.
+     */
+    @JsonProperty("totals")
+    private InvoicePayrollTotals totals;
+
+    /**
+     * TipoNomina: O ordinaria, E extraordinaria.
+     * <p>
+     * Valores: O, E.
+     */
+    public String getType() {
+        return type;
+    }
+
+    public InvoicePayroll setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * fiscalisto: lo calculó Fiscalisto (POST /v1/payroll_receipts); external: lo calculó su sistema de nómina y se timbró tal cual (POST /v1/payroll_receipts/external).
+     * <p>
+     * Valores: fiscalisto, external.
+     */
+    public String getCalculation() {
+        return calculation;
+    }
+
+    public InvoicePayroll setCalculation(String calculation) {
+        this.calculation = calculation;
+        return this;
+    }
+
+    /**
      * Periodicidad del pago (PeriodicidadPago): 02 semanal, 03 catorcenal, 04 quincenal (por omisión), 05 mensual.
      */
     public String getPeriodicity() {
@@ -77,7 +151,7 @@ public class InvoicePayroll {
     }
 
     /**
-     * Periodo (Periodo): mes inicial, mes final y año.
+     * Periodo pagado: FechaInicialPago, FechaFinalPago y FechaPago.
      */
     public InvoicePayrollPeriod getPeriod() {
         return period;
@@ -106,6 +180,18 @@ public class InvoicePayroll {
     }
 
     /**
+     * Los ids de su sistema de nómina (solo en recibos external).
+     */
+    public InvoicePayrollReferences getReferences() {
+        return references;
+    }
+
+    public InvoicePayroll setReferences(InvoicePayrollReferences references) {
+        this.references = references;
+        return this;
+    }
+
+    /**
      * El patrón (Emisor del complemento): registro patronal y CURP si es persona física.
      */
     public InvoicePayrollEmployer getEmployer() {
@@ -118,7 +204,7 @@ public class InvoicePayroll {
     }
 
     /**
-     * El empleado (emp_…).
+     * El empleado (Nomina/Receptor), como se timbró.
      */
     public InvoicePayrollEmployee getEmployee() {
         return employee;
@@ -162,6 +248,54 @@ public class InvoicePayroll {
 
     public InvoicePayroll setOtherPayments(List<InvoicePayrollOtherPayment> otherPayments) {
         this.otherPayments = otherPayments;
+        return this;
+    }
+
+    /**
+     * SeparacionIndemnizacion (percepciones 022, 023, 025).
+     */
+    public InvoicePayrollSeparation getSeparation() {
+        return separation;
+    }
+
+    public InvoicePayroll setSeparation(InvoicePayrollSeparation separation) {
+        this.separation = separation;
+        return this;
+    }
+
+    /**
+     * JubilacionPensionRetiro (percepciones 039, 044).
+     */
+    public InvoicePayrollRetirement getRetirement() {
+        return retirement;
+    }
+
+    public InvoicePayroll setRetirement(InvoicePayrollRetirement retirement) {
+        this.retirement = retirement;
+        return this;
+    }
+
+    /**
+     * Incapacidades (percepción 014 o deducción 006).
+     */
+    public List<InvoicePayrollDisability> getDisabilities() {
+        return disabilities;
+    }
+
+    public InvoicePayroll setDisabilities(List<InvoicePayrollDisability> disabilities) {
+        this.disabilities = disabilities;
+        return this;
+    }
+
+    /**
+     * Totales: percepciones, deducciones, otros pagos y el neto a pagar.
+     */
+    public InvoicePayrollTotals getTotals() {
+        return totals;
+    }
+
+    public InvoicePayroll setTotals(InvoicePayrollTotals totals) {
+        this.totals = totals;
         return this;
     }
 }

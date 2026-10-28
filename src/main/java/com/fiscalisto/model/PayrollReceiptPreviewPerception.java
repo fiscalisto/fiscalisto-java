@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * PayrollReceiptPreviewPerception: PayrollReceiptPreviewPerception.
@@ -44,6 +45,18 @@ public class PayrollReceiptPreviewPerception {
      */
     @JsonProperty("exempt")
     private BigDecimal exempt;
+
+    /**
+     * Horas extra (HorasExtra), con la percepción 019.
+     */
+    @JsonProperty("overtime")
+    private List<PayrollReceiptPreviewPerceptionOvertimeItem> overtime;
+
+    /**
+     * Acciones o títulos (AccionesOTitulos), con la percepción 045.
+     */
+    @JsonProperty("stock_options")
+    private PayrollReceiptPreviewPerceptionStockOptions stockOptions;
 
     /**
      * Tipo de percepción (TipoPercepcion), c_TipoPercepcion: 001 sueldos…
@@ -113,5 +126,29 @@ public class PayrollReceiptPreviewPerception {
     @JsonIgnore
     public PayrollReceiptPreviewPerception setExempt(double exempt) {
         return setExempt(BigDecimal.valueOf(exempt));
+    }
+
+    /**
+     * Horas extra (HorasExtra), con la percepción 019.
+     */
+    public List<PayrollReceiptPreviewPerceptionOvertimeItem> getOvertime() {
+        return overtime;
+    }
+
+    public PayrollReceiptPreviewPerception setOvertime(List<PayrollReceiptPreviewPerceptionOvertimeItem> overtime) {
+        this.overtime = overtime;
+        return this;
+    }
+
+    /**
+     * Acciones o títulos (AccionesOTitulos), con la percepción 045.
+     */
+    public PayrollReceiptPreviewPerceptionStockOptions getStockOptions() {
+        return stockOptions;
+    }
+
+    public PayrollReceiptPreviewPerception setStockOptions(PayrollReceiptPreviewPerceptionStockOptions stockOptions) {
+        this.stockOptions = stockOptions;
+        return this;
     }
 }

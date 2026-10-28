@@ -55,7 +55,7 @@ public class Retention {
     private String uuid;
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * El número de la constancia en la serie del emisor (internal_folio es el que se imprime, RET1…).
      */
     @JsonProperty("folio")
     private Long folio;
@@ -285,7 +285,7 @@ public class Retention {
     }
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * El número de la constancia en la serie del emisor (internal_folio es el que se imprime, RET1…).
      */
     public Long getFolio() {
         return folio;

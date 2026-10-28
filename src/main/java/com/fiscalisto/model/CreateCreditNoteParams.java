@@ -47,7 +47,7 @@ public class CreateCreditNoteParams {
     private String paymentForm;
 
     /**
-     * Tipo de relación (TipoRelacion): 01 nota de crédito, 03 devolución, 04 sustitución, 07 anticipo…
+     * Tipo de relación (TipoRelacion) con la factura: 01 nota de crédito (por omisión) o 03 devolución de mercancía.
      * <p>
      * Valores: 01, 03.
      */
@@ -138,7 +138,7 @@ public class CreateCreditNoteParams {
     }
 
     /**
-     * Tipo de relación (TipoRelacion): 01 nota de crédito, 03 devolución, 04 sustitución, 07 anticipo…
+     * Tipo de relación (TipoRelacion) con la factura: 01 nota de crédito (por omisión) o 03 devolución de mercancía.
      * <p>
      * Valores: 01, 03.
      */

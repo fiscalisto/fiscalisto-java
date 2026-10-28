@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * AdvanceCustomer: Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+ * AdvanceCustomer: El cliente del anticipo: RFC y nombre.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

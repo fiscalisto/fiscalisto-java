@@ -25,6 +25,18 @@ public class InvoicePayrollEmployer {
     private String curp;
 
     /**
+     * RFC del patrón de origen (RfcPatronOrigen).
+     */
+    @JsonProperty("origin_tax_id")
+    private String originTaxId;
+
+    /**
+     * Entidad del SNCF (EntidadSNCF).
+     */
+    @JsonProperty("sncf")
+    private InvoicePayrollEmployerSncf sncf;
+
+    /**
      * Registro patronal ante el IMSS (RegistroPatronal), 11 caracteres. Necesario para timbrar nómina.
      */
     public String getEmployerRegistration() {
@@ -45,6 +57,30 @@ public class InvoicePayrollEmployer {
 
     public InvoicePayrollEmployer setCurp(String curp) {
         this.curp = curp;
+        return this;
+    }
+
+    /**
+     * RFC del patrón de origen (RfcPatronOrigen).
+     */
+    public String getOriginTaxId() {
+        return originTaxId;
+    }
+
+    public InvoicePayrollEmployer setOriginTaxId(String originTaxId) {
+        this.originTaxId = originTaxId;
+        return this;
+    }
+
+    /**
+     * Entidad del SNCF (EntidadSNCF).
+     */
+    public InvoicePayrollEmployerSncf getSncf() {
+        return sncf;
+    }
+
+    public InvoicePayrollEmployer setSncf(InvoicePayrollEmployerSncf sncf) {
+        this.sncf = sncf;
         return this;
     }
 }

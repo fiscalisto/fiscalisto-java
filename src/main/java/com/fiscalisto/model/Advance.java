@@ -34,19 +34,19 @@ public class Advance {
     private String date;
 
     /**
-     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     * La serie (Serie) del anticipo, o null.
      */
     @JsonProperty("series")
     private String series;
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * El folio (Folio) del anticipo, o null.
      */
     @JsonProperty("folio")
     private String folio;
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+     * El cliente del anticipo: RFC y nombre.
      */
     @JsonProperty("customer")
     private AdvanceCustomer customer;
@@ -112,7 +112,7 @@ public class Advance {
     }
 
     /**
-     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     * La serie (Serie) del anticipo, o null.
      */
     public String getSeries() {
         return series;
@@ -124,7 +124,7 @@ public class Advance {
     }
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * El folio (Folio) del anticipo, o null.
      */
     public String getFolio() {
         return folio;
@@ -136,7 +136,7 @@ public class Advance {
     }
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+     * El cliente del anticipo: RFC y nombre.
      */
     public AdvanceCustomer getCustomer() {
         return customer;
