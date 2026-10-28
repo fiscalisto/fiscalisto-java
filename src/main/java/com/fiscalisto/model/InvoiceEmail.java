@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * InvoiceEmail: InvoiceEmail.
  */
@@ -29,6 +31,20 @@ public class InvoiceEmail {
      */
     @JsonProperty("sent_at")
     private String sentAt;
+
+    /**
+     * Lo que pasó con el último envío: el peor de sus destinatarios (bounced o complained pesan más que opened o delivered). sent hasta que el servidor del cliente conteste.
+     * <p>
+     * Valores: sent, delayed, delivered, opened, bounced, complained.
+     */
+    @JsonProperty("status")
+    private String status;
+
+    /**
+     * Cada dirección del envío (para y copia), con su entrega.
+     */
+    @JsonProperty("recipients")
+    private List<InvoiceEmailRecipient> recipients;
 
     /**
      * A quién (correos separados por comas).
@@ -63,6 +79,32 @@ public class InvoiceEmail {
 
     public InvoiceEmail setSentAt(String sentAt) {
         this.sentAt = sentAt;
+        return this;
+    }
+
+    /**
+     * Lo que pasó con el último envío: el peor de sus destinatarios (bounced o complained pesan más que opened o delivered). sent hasta que el servidor del cliente conteste.
+     * <p>
+     * Valores: sent, delayed, delivered, opened, bounced, complained.
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    public InvoiceEmail setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Cada dirección del envío (para y copia), con su entrega.
+     */
+    public List<InvoiceEmailRecipient> getRecipients() {
+        return recipients;
+    }
+
+    public InvoiceEmail setRecipients(List<InvoiceEmailRecipient> recipients) {
+        this.recipients = recipients;
         return this;
     }
 }
