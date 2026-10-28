@@ -39,12 +39,18 @@ public class SatListCheck {
     private Boolean listed;
 
     /**
-     * high: 69-B o 69-B Bis como presunto o definitivo (el SAT dice que simula operaciones; sus facturas no se pueden deducir). medium: una lista del art. 69 (no localizado, créditos firmes o exigibles, cancelados, sentencias, CSD sin efectos). none: no aparece, o ya desvirtuó o tiene sentencia favorable.
+     * high: 69-B o 69-B Bis como presunto o definitivo (el SAT dice que simula operaciones; sus facturas no se pueden deducir). medium: una lista del art. 69 (no localizado, créditos firmes o exigibles, cancelados, sentencias, CSD sin efectos). none: no aparece en ninguna, con todas las listas al día, o ya desvirtuó o tiene sentencia favorable. unknown: no aparece, pero alguna lista no se pudo actualizar (vea lists_unavailable): no lo dé por limpio.
      * <p>
-     * Valores: high, medium, none.
+     * Valores: high, medium, none, unknown.
      */
     @JsonProperty("risk")
     private String risk;
+
+    /**
+     * true si todas las listas se leyeron con éxito en los últimos dos días. Con false, que no aparezca no significa que esté limpio.
+     */
+    @JsonProperty("verified")
+    private Boolean verified;
 
     /**
      * Cada lista en que aparece; vacía si no aparece en ninguna.
@@ -57,6 +63,12 @@ public class SatListCheck {
      */
     @JsonProperty("lists_updated_at")
     private String listsUpdatedAt;
+
+    /**
+     * Las listas que no se pudieron confirmar (su última actualización falló, falta o tiene más de dos días). Vacía si todas están al día.
+     */
+    @JsonProperty("lists_unavailable")
+    private List<String> listsUnavailable;
 
     /**
      * Qué tipo de objeto es («invoice», «customer»…).
@@ -107,9 +119,9 @@ public class SatListCheck {
     }
 
     /**
-     * high: 69-B o 69-B Bis como presunto o definitivo (el SAT dice que simula operaciones; sus facturas no se pueden deducir). medium: una lista del art. 69 (no localizado, créditos firmes o exigibles, cancelados, sentencias, CSD sin efectos). none: no aparece, o ya desvirtuó o tiene sentencia favorable.
+     * high: 69-B o 69-B Bis como presunto o definitivo (el SAT dice que simula operaciones; sus facturas no se pueden deducir). medium: una lista del art. 69 (no localizado, créditos firmes o exigibles, cancelados, sentencias, CSD sin efectos). none: no aparece en ninguna, con todas las listas al día, o ya desvirtuó o tiene sentencia favorable. unknown: no aparece, pero alguna lista no se pudo actualizar (vea lists_unavailable): no lo dé por limpio.
      * <p>
-     * Valores: high, medium, none.
+     * Valores: high, medium, none, unknown.
      */
     public String getRisk() {
         return risk;
@@ -117,6 +129,18 @@ public class SatListCheck {
 
     public SatListCheck setRisk(String risk) {
         this.risk = risk;
+        return this;
+    }
+
+    /**
+     * true si todas las listas se leyeron con éxito en los últimos dos días. Con false, que no aparezca no significa que esté limpio.
+     */
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public SatListCheck setVerified(Boolean verified) {
+        this.verified = verified;
         return this;
     }
 
@@ -141,6 +165,18 @@ public class SatListCheck {
 
     public SatListCheck setListsUpdatedAt(String listsUpdatedAt) {
         this.listsUpdatedAt = listsUpdatedAt;
+        return this;
+    }
+
+    /**
+     * Las listas que no se pudieron confirmar (su última actualización falló, falta o tiene más de dos días). Vacía si todas están al día.
+     */
+    public List<String> getListsUnavailable() {
+        return listsUnavailable;
+    }
+
+    public SatListCheck setListsUnavailable(List<String> listsUnavailable) {
+        this.listsUnavailable = listsUnavailable;
         return this;
     }
 }

@@ -35,7 +35,7 @@ public class CreateRecurringInvoiceParams {
     private CreateRecurringInvoiceParamsSchedule schedule;
 
     /**
-     * La factura que se repite: el cuerpo de POST /v1/invoices, sin issuer, folio, date, global ni metadata. En description puede usar {mes}, {mes anterior}, {mes siguiente}, {año}, {año anterior}, {año siguiente} y {periodo}: cada factura los llena con su fecha.
+     * La factura que se repite: el cuerpo de POST /v1/invoices, sin issuer, folio, date, global ni metadata. En description puede usar {mes}, {mes anterior}, {mes siguiente}, {año}, {año anterior}, {año siguiente} y {periodo}: cada factura los llena con su fecha. Como se escriben es como salen: {mes} «noviembre», {Mes} «Noviembre», {MES} «NOVIEMBRE».
      * <p>
      * Obligatorio.
      */
@@ -97,7 +97,7 @@ public class CreateRecurringInvoiceParams {
     }
 
     /**
-     * La factura que se repite: el cuerpo de POST /v1/invoices, sin issuer, folio, date, global ni metadata. En description puede usar {mes}, {mes anterior}, {mes siguiente}, {año}, {año anterior}, {año siguiente} y {periodo}: cada factura los llena con su fecha.
+     * La factura que se repite: el cuerpo de POST /v1/invoices, sin issuer, folio, date, global ni metadata. En description puede usar {mes}, {mes anterior}, {mes siguiente}, {año}, {año anterior}, {año siguiente} y {periodo}: cada factura los llena con su fecha. Como se escriben es como salen: {mes} «noviembre», {Mes} «Noviembre», {MES} «NOVIEMBRE».
      * <p>
      * Obligatorio.
      */
