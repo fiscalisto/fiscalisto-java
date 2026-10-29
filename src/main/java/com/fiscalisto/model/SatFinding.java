@@ -72,10 +72,22 @@ public class SatFinding {
     private Long invoices;
 
     /**
-     * La suma de sus totales.
+     * De cuántos proveedores o clientes son esos CFDI.
+     */
+    @JsonProperty("counterparties")
+    private Long counterparties;
+
+    /**
+     * La suma de sus totales, en pesos (los de otra moneda, a su tipo de cambio).
      */
     @JsonProperty("amount")
     private BigDecimal amount;
+
+    /**
+     * La fecha del CFDI más reciente que lo tiene (AAAA-MM-DD).
+     */
+    @JsonProperty("last_date")
+    private String lastDate;
 
     /**
      * El código del hallazgo (el mismo que code).
@@ -193,7 +205,24 @@ public class SatFinding {
     }
 
     /**
-     * La suma de sus totales.
+     * De cuántos proveedores o clientes son esos CFDI.
+     */
+    public Long getCounterparties() {
+        return counterparties;
+    }
+
+    public SatFinding setCounterparties(Long counterparties) {
+        this.counterparties = counterparties;
+        return this;
+    }
+
+    @JsonIgnore
+    public SatFinding setCounterparties(long counterparties) {
+        return setCounterparties(Long.valueOf(counterparties));
+    }
+
+    /**
+     * La suma de sus totales, en pesos (los de otra moneda, a su tipo de cambio).
      */
     public BigDecimal getAmount() {
         return amount;
@@ -207,5 +236,17 @@ public class SatFinding {
     @JsonIgnore
     public SatFinding setAmount(double amount) {
         return setAmount(BigDecimal.valueOf(amount));
+    }
+
+    /**
+     * La fecha del CFDI más reciente que lo tiene (AAAA-MM-DD).
+     */
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public SatFinding setLastDate(String lastDate) {
+        this.lastDate = lastDate;
+        return this;
     }
 }

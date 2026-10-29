@@ -39,6 +39,20 @@ public class ListSatFindingsParams {
     private String dateLte;
 
     /**
+     * Solo los de esta gravedad: critical, warning o info.
+     * <p>
+     * Valores: critical, warning, info.
+     */
+    @JsonProperty("severity")
+    private String severity;
+
+    /**
+     * Solo los CFDI de este proveedor o cliente (su RFC): qué hallazgos tiene.
+     */
+    @JsonProperty("counterparty")
+    private String counterparty;
+
+    /**
      * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
      */
     public String getIssuer() {
@@ -85,6 +99,32 @@ public class ListSatFindingsParams {
 
     public ListSatFindingsParams setDateLte(String dateLte) {
         this.dateLte = dateLte;
+        return this;
+    }
+
+    /**
+     * Solo los de esta gravedad: critical, warning o info.
+     * <p>
+     * Valores: critical, warning, info.
+     */
+    public String getSeverity() {
+        return severity;
+    }
+
+    public ListSatFindingsParams setSeverity(String severity) {
+        this.severity = severity;
+        return this;
+    }
+
+    /**
+     * Solo los CFDI de este proveedor o cliente (su RFC): qué hallazgos tiene.
+     */
+    public String getCounterparty() {
+        return counterparty;
+    }
+
+    public ListSatFindingsParams setCounterparty(String counterparty) {
+        this.counterparty = counterparty;
         return this;
     }
 }
