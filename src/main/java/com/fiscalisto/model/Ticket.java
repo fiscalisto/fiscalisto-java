@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Ticket: Una venta que su comprador puede facturar él mismo en el portal del emisor (autofactura).
@@ -84,16 +85,22 @@ public class Ticket {
     private String paymentForm;
 
     /**
-     * El concepto de la factura.
+     * El concepto de la factura (el primero, si lleva varios).
      */
     @JsonProperty("description")
     private String description;
 
     /**
-     * c_ClaveProdServ del concepto.
+     * c_ClaveProdServ del concepto (el primero, si lleva varios).
      */
     @JsonProperty("product_key")
     private String productKey;
+
+    /**
+     * Sus conceptos, en orden: uno solo si se registró sin lines. Cada uno con su producto (prd_… o null), descripción, claves del SAT, IVA (null si no es objeto de impuesto), unidades y lo que se cobró por él, impuestos incluidos.
+     */
+    @JsonProperty("lines")
+    private List<TicketLine> lines;
 
     /**
      * Cuándo se vendió.
@@ -276,7 +283,7 @@ public class Ticket {
     }
 
     /**
-     * El concepto de la factura.
+     * El concepto de la factura (el primero, si lleva varios).
      */
     public String getDescription() {
         return description;
@@ -288,7 +295,7 @@ public class Ticket {
     }
 
     /**
-     * c_ClaveProdServ del concepto.
+     * c_ClaveProdServ del concepto (el primero, si lleva varios).
      */
     public String getProductKey() {
         return productKey;
@@ -296,6 +303,18 @@ public class Ticket {
 
     public Ticket setProductKey(String productKey) {
         this.productKey = productKey;
+        return this;
+    }
+
+    /**
+     * Sus conceptos, en orden: uno solo si se registró sin lines. Cada uno con su producto (prd_… o null), descripción, claves del SAT, IVA (null si no es objeto de impuesto), unidades y lo que se cobró por él, impuestos incluidos.
+     */
+    public List<TicketLine> getLines() {
+        return lines;
+    }
+
+    public Ticket setLines(List<TicketLine> lines) {
+        this.lines = lines;
         return this;
     }
 

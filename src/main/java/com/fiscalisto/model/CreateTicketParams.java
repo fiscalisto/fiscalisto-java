@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * CreateTicketParams: los campos de «Registrar un ticket».
@@ -30,9 +31,7 @@ public class CreateTicketParams {
     private String folio;
 
     /**
-     * Lo que se cobró, impuestos incluidos y sin propina.
-     * <p>
-     * Obligatorio.
+     * Lo que se cobró, impuestos incluidos y sin propina. Con `lines` puede omitirlo (es su suma); si lo manda, debe ser igual.
      */
     @JsonProperty("total")
     private BigDecimal total;
@@ -90,6 +89,12 @@ public class CreateTicketParams {
     private String iva;
 
     /**
+     * Una venta de varios conceptos (el folio de un hotel: noches, desayunos, lavandería), cada uno con su producto o sus claves, sus impuestos y lo que se cobró por él; hasta 200. En lugar de `product`, `description`, `product_key`, `unit_key` e `iva`. La factura del cliente lleva un concepto por línea; la factura global, uno por cada combinación de impuestos del ticket.
+     */
+    @JsonProperty("lines")
+    private List<CreateTicketParamsLine> lines;
+
+    /**
      * El emisor (iss_…) que vendió. Por omisión, su único emisor.
      */
     public String getIssuer() {
@@ -116,9 +121,7 @@ public class CreateTicketParams {
     }
 
     /**
-     * Lo que se cobró, impuestos incluidos y sin propina.
-     * <p>
-     * Obligatorio.
+     * Lo que se cobró, impuestos incluidos y sin propina. Con `lines` puede omitirlo (es su suma); si lo manda, debe ser igual.
      */
     public BigDecimal getTotal() {
         return total;
@@ -236,6 +239,18 @@ public class CreateTicketParams {
 
     public CreateTicketParams setIva(String iva) {
         this.iva = iva;
+        return this;
+    }
+
+    /**
+     * Una venta de varios conceptos (el folio de un hotel: noches, desayunos, lavandería), cada uno con su producto o sus claves, sus impuestos y lo que se cobró por él; hasta 200. En lugar de `product`, `description`, `product_key`, `unit_key` e `iva`. La factura del cliente lleva un concepto por línea; la factura global, uno por cada combinación de impuestos del ticket.
+     */
+    public List<CreateTicketParamsLine> getLines() {
+        return lines;
+    }
+
+    public CreateTicketParams setLines(List<CreateTicketParamsLine> lines) {
+        this.lines = lines;
         return this;
     }
 }

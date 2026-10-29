@@ -36,6 +36,30 @@ public class UpdateSelfInvoicingParams {
     private String globalPeriodicity;
 
     /**
+     * `true` (por omisión): el comprador busca su ticket con el código y el total. `false`: solo con el código (sus 4 caracteres al azar; cada ticket se bloquea tras varios intentos fallidos).
+     */
+    @JsonProperty("ask_total")
+    private Boolean askTotal;
+
+    /**
+     * El título del portal, en lugar de «Facture su ticket». `null` lo quita.
+     */
+    @JsonProperty("portal_title")
+    private String portalTitle;
+
+    /**
+     * Un mensaje bajo el título (instrucciones, horario, a quién escribir). `null` lo quita.
+     */
+    @JsonProperty("portal_message")
+    private String portalMessage;
+
+    /**
+     * Dónde encuentra el comprador su código, bajo el campo («Viene en su correo de salida»). `null` pone el de Fiscalisto.
+     */
+    @JsonProperty("code_hint")
+    private String codeHint;
+
+    /**
      * Hasta cuándo se puede facturar un ticket: `month`, hasta el fin del mes de la venta (lo usual ante el SAT); `days`, `window_days` días después.
      * <p>
      * Valores: month, days.
@@ -77,6 +101,54 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setGlobalPeriodicity(String globalPeriodicity) {
         this.globalPeriodicity = globalPeriodicity;
+        return this;
+    }
+
+    /**
+     * `true` (por omisión): el comprador busca su ticket con el código y el total. `false`: solo con el código (sus 4 caracteres al azar; cada ticket se bloquea tras varios intentos fallidos).
+     */
+    public Boolean getAskTotal() {
+        return askTotal;
+    }
+
+    public UpdateSelfInvoicingParams setAskTotal(Boolean askTotal) {
+        this.askTotal = askTotal;
+        return this;
+    }
+
+    /**
+     * El título del portal, en lugar de «Facture su ticket». `null` lo quita.
+     */
+    public String getPortalTitle() {
+        return portalTitle;
+    }
+
+    public UpdateSelfInvoicingParams setPortalTitle(String portalTitle) {
+        this.portalTitle = portalTitle;
+        return this;
+    }
+
+    /**
+     * Un mensaje bajo el título (instrucciones, horario, a quién escribir). `null` lo quita.
+     */
+    public String getPortalMessage() {
+        return portalMessage;
+    }
+
+    public UpdateSelfInvoicingParams setPortalMessage(String portalMessage) {
+        this.portalMessage = portalMessage;
+        return this;
+    }
+
+    /**
+     * Dónde encuentra el comprador su código, bajo el campo («Viene en su correo de salida»). `null` pone el de Fiscalisto.
+     */
+    public String getCodeHint() {
+        return codeHint;
+    }
+
+    public UpdateSelfInvoicingParams setCodeHint(String codeHint) {
+        this.codeHint = codeHint;
         return this;
     }
 }

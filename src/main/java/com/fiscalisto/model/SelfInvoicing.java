@@ -60,6 +60,30 @@ public class SelfInvoicing {
     private String globalPeriodicity;
 
     /**
+     * Si el portal pide el total para encontrar el ticket (true) o solo su código (false).
+     */
+    @JsonProperty("ask_total")
+    private Boolean askTotal;
+
+    /**
+     * El título del portal, o null para «Facture su ticket».
+     */
+    @JsonProperty("portal_title")
+    private String portalTitle;
+
+    /**
+     * El mensaje bajo el título, o null.
+     */
+    @JsonProperty("portal_message")
+    private String portalMessage;
+
+    /**
+     * Dónde encuentra el comprador su código, bajo el campo; null para el texto de Fiscalisto.
+     */
+    @JsonProperty("code_hint")
+    private String codeHint;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -149,6 +173,54 @@ public class SelfInvoicing {
 
     public SelfInvoicing setGlobalPeriodicity(String globalPeriodicity) {
         this.globalPeriodicity = globalPeriodicity;
+        return this;
+    }
+
+    /**
+     * Si el portal pide el total para encontrar el ticket (true) o solo su código (false).
+     */
+    public Boolean getAskTotal() {
+        return askTotal;
+    }
+
+    public SelfInvoicing setAskTotal(Boolean askTotal) {
+        this.askTotal = askTotal;
+        return this;
+    }
+
+    /**
+     * El título del portal, o null para «Facture su ticket».
+     */
+    public String getPortalTitle() {
+        return portalTitle;
+    }
+
+    public SelfInvoicing setPortalTitle(String portalTitle) {
+        this.portalTitle = portalTitle;
+        return this;
+    }
+
+    /**
+     * El mensaje bajo el título, o null.
+     */
+    public String getPortalMessage() {
+        return portalMessage;
+    }
+
+    public SelfInvoicing setPortalMessage(String portalMessage) {
+        this.portalMessage = portalMessage;
+        return this;
+    }
+
+    /**
+     * Dónde encuentra el comprador su código, bajo el campo; null para el texto de Fiscalisto.
+     */
+    public String getCodeHint() {
+        return codeHint;
+    }
+
+    public SelfInvoicing setCodeHint(String codeHint) {
+        this.codeHint = codeHint;
         return this;
     }
 }

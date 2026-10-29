@@ -29,7 +29,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public final class ApiClient {
     /** La versión del SDK, en el User-Agent. */
-    public static final String VERSION = "0.1.14";
+    public static final String VERSION = "0.1.15";
     /** La versión de la API para la que se hizo este SDK (cabecera Fiscalisto-Version). */
     public static final String API_VERSION = "2026-10-24";
 
