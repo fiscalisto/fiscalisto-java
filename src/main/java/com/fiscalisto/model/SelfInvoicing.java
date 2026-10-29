@@ -60,6 +60,14 @@ public class SelfInvoicing {
     private String globalPeriodicity;
 
     /**
+     * auto: los tickets que nadie facturó van solos a la factura global de su periodo. off: Fiscalisto no hace factura global de estos tickets (la hace usted en otro lado).
+     * <p>
+     * Valores: auto, off.
+     */
+    @JsonProperty("global_invoice")
+    private String globalInvoice;
+
+    /**
      * Si el portal pide el total para encontrar el ticket (true) o solo su código (false).
      */
     @JsonProperty("ask_total")
@@ -173,6 +181,20 @@ public class SelfInvoicing {
 
     public SelfInvoicing setGlobalPeriodicity(String globalPeriodicity) {
         this.globalPeriodicity = globalPeriodicity;
+        return this;
+    }
+
+    /**
+     * auto: los tickets que nadie facturó van solos a la factura global de su periodo. off: Fiscalisto no hace factura global de estos tickets (la hace usted en otro lado).
+     * <p>
+     * Valores: auto, off.
+     */
+    public String getGlobalInvoice() {
+        return globalInvoice;
+    }
+
+    public SelfInvoicing setGlobalInvoice(String globalInvoice) {
+        this.globalInvoice = globalInvoice;
         return this;
     }
 

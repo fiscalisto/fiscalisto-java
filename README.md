@@ -14,7 +14,7 @@ El SDK de la [API de facturación de Fiscalisto](https://fiscalisto.com/docs/api
 <dependency>
   <groupId>com.fiscalisto</groupId>
   <artifactId>fiscalisto</artifactId>
-  <version>0.1.16</version>
+  <version>0.1.17</version>
 </dependency>
 ```
 

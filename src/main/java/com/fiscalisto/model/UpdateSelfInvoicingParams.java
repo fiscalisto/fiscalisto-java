@@ -36,6 +36,14 @@ public class UpdateSelfInvoicingParams {
     private String globalPeriodicity;
 
     /**
+     * `auto` (por omisión): los tickets que nadie facturó van solos a la factura global al terminar su periodo. `off`: Fiscalisto no hace factura global de los tickets (por ejemplo, porque su punto de venta ya la hace); quedan pendientes y usted responde por ellos ante el SAT.
+     * <p>
+     * Valores: auto, off.
+     */
+    @JsonProperty("global_invoice")
+    private String globalInvoice;
+
+    /**
      * `true` (por omisión): el comprador busca su ticket con el código y el total. `false`: solo con el código (sus 4 caracteres al azar; cada ticket se bloquea tras varios intentos fallidos).
      */
     @JsonProperty("ask_total")
@@ -101,6 +109,20 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setGlobalPeriodicity(String globalPeriodicity) {
         this.globalPeriodicity = globalPeriodicity;
+        return this;
+    }
+
+    /**
+     * `auto` (por omisión): los tickets que nadie facturó van solos a la factura global al terminar su periodo. `off`: Fiscalisto no hace factura global de los tickets (por ejemplo, porque su punto de venta ya la hace); quedan pendientes y usted responde por ellos ante el SAT.
+     * <p>
+     * Valores: auto, off.
+     */
+    public String getGlobalInvoice() {
+        return globalInvoice;
+    }
+
+    public UpdateSelfInvoicingParams setGlobalInvoice(String globalInvoice) {
+        this.globalInvoice = globalInvoice;
         return this;
     }
 
