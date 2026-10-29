@@ -53,9 +53,9 @@ public class Quote {
     private Long version;
 
     /**
-     * draft, sent, viewed (el cliente abrió la liga), accepted, rejected, expired (pasó valid_until) o invoiced.
+     * draft, sent, viewed (el cliente abrió la liga), accepted, rejected, withdrawn (usted la retiró), expired (pasó valid_until) o invoiced.
      * <p>
-     * Valores: draft, sent, viewed, accepted, rejected, expired, invoiced.
+     * Valores: draft, sent, viewed, accepted, rejected, withdrawn, expired, invoiced.
      */
     @JsonProperty("status")
     private String status;
@@ -115,7 +115,19 @@ public class Quote {
     private Boolean autoInvoice;
 
     /**
-     * Lo que escribió el cliente al pedir cambios o al rechazarla, o null.
+     * Si se le manda un recordatorio por correo 3 días antes de su último día mientras no responda (remind en POST /v1/quotes/{id}/send).
+     */
+    @JsonProperty("remind")
+    private Boolean remind;
+
+    /**
+     * Cuándo se mandó el recordatorio, o null.
+     */
+    @JsonProperty("reminded_at")
+    private String remindedAt;
+
+    /**
+     * Lo que escribió el cliente al pedir cambios o al rechazarla, la nota de usted al retirarla o marcarla rechazada, o null.
      */
     @JsonProperty("customer_comment")
     private String customerComment;
@@ -133,13 +145,13 @@ public class Quote {
     private String viewedAt;
 
     /**
-     * Cuándo se aceptó o rechazó.
+     * Cuándo se aceptó, se rechazó o se retiró.
      */
     @JsonProperty("decided_at")
     private String decidedAt;
 
     /**
-     * customer (en su liga) o user (usted, con POST /v1/quotes/{id}/accept o desde la app).
+     * customer (en su liga) o user (usted: POST /v1/quotes/{id}/accept, /reject o /withdraw, o desde la app).
      * <p>
      * Valores: customer, user.
      */
@@ -236,9 +248,9 @@ public class Quote {
     }
 
     /**
-     * draft, sent, viewed (el cliente abrió la liga), accepted, rejected, expired (pasó valid_until) o invoiced.
+     * draft, sent, viewed (el cliente abrió la liga), accepted, rejected, withdrawn (usted la retiró), expired (pasó valid_until) o invoiced.
      * <p>
-     * Valores: draft, sent, viewed, accepted, rejected, expired, invoiced.
+     * Valores: draft, sent, viewed, accepted, rejected, withdrawn, expired, invoiced.
      */
     public String getStatus() {
         return status;
@@ -363,7 +375,31 @@ public class Quote {
     }
 
     /**
-     * Lo que escribió el cliente al pedir cambios o al rechazarla, o null.
+     * Si se le manda un recordatorio por correo 3 días antes de su último día mientras no responda (remind en POST /v1/quotes/{id}/send).
+     */
+    public Boolean getRemind() {
+        return remind;
+    }
+
+    public Quote setRemind(Boolean remind) {
+        this.remind = remind;
+        return this;
+    }
+
+    /**
+     * Cuándo se mandó el recordatorio, o null.
+     */
+    public String getRemindedAt() {
+        return remindedAt;
+    }
+
+    public Quote setRemindedAt(String remindedAt) {
+        this.remindedAt = remindedAt;
+        return this;
+    }
+
+    /**
+     * Lo que escribió el cliente al pedir cambios o al rechazarla, la nota de usted al retirarla o marcarla rechazada, o null.
      */
     public String getCustomerComment() {
         return customerComment;
@@ -399,7 +435,7 @@ public class Quote {
     }
 
     /**
-     * Cuándo se aceptó o rechazó.
+     * Cuándo se aceptó, se rechazó o se retiró.
      */
     public String getDecidedAt() {
         return decidedAt;
@@ -411,7 +447,7 @@ public class Quote {
     }
 
     /**
-     * customer (en su liga) o user (usted, con POST /v1/quotes/{id}/accept o desde la app).
+     * customer (en su liga) o user (usted: POST /v1/quotes/{id}/accept, /reject o /withdraw, o desde la app).
      * <p>
      * Valores: customer, user.
      */

@@ -37,6 +37,12 @@ public class SendQuoteParams {
     private Boolean autoInvoice;
 
     /**
+     * Recordarle por correo, a los mismos destinatarios, 3 días antes de su último día si no ha respondido (una vez). Solo al mandarla por correo; por omisión false.
+     */
+    @JsonProperty("remind")
+    private Boolean remind;
+
+    /**
      * Mandarla por correo, con su PDF y la liga (por omisión true). Con false solo se marca enviada y contesta url, para que usted la mande.
      */
     public Boolean getSendEmail() {
@@ -81,6 +87,18 @@ public class SendQuoteParams {
 
     public SendQuoteParams setAutoInvoice(Boolean autoInvoice) {
         this.autoInvoice = autoInvoice;
+        return this;
+    }
+
+    /**
+     * Recordarle por correo, a los mismos destinatarios, 3 días antes de su último día si no ha respondido (una vez). Solo al mandarla por correo; por omisión false.
+     */
+    public Boolean getRemind() {
+        return remind;
+    }
+
+    public SendQuoteParams setRemind(Boolean remind) {
+        this.remind = remind;
         return this;
     }
 }

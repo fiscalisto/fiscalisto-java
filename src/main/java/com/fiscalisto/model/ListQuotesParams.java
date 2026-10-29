@@ -34,7 +34,7 @@ public class ListQuotesParams {
     /**
      * Solo las que estén en este estado.
      * <p>
-     * Valores: draft, sent, viewed, accepted, rejected, expired, invoiced.
+     * Valores: draft, sent, viewed, accepted, rejected, withdrawn, expired, invoiced.
      */
     @JsonProperty("status")
     private String status;
@@ -83,7 +83,7 @@ public class ListQuotesParams {
     /**
      * Solo las que estén en este estado.
      * <p>
-     * Valores: draft, sent, viewed, accepted, rejected, expired, invoiced.
+     * Valores: draft, sent, viewed, accepted, rejected, withdrawn, expired, invoiced.
      */
     public String getStatus() {
         return status;

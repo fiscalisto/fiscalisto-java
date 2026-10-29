@@ -7,8 +7,10 @@ import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.Invoice;
 import com.fiscalisto.model.ListQuotesParams;
 import com.fiscalisto.model.Quote;
+import com.fiscalisto.model.RejectQuoteParams;
 import com.fiscalisto.model.SendQuoteParams;
 import com.fiscalisto.model.UpdateQuoteParams;
+import com.fiscalisto.model.WithdrawQuoteParams;
 
 /**
  * Cotizaciones: client.quotes().
@@ -91,7 +93,7 @@ public final class QuotesService {
     /**
      * Cambiar una cotización
      * <p>
-     * Solo lo que mande cambia. Un borrador cambia ahí mismo; una que ya se envió se vuelve una versión nueva en borrador (mismo número, version + 1) que el cliente ve al mandarla; mientras, su liga muestra la anterior. Una aceptada, rechazada o facturada ya no cambia.
+     * Solo lo que mande cambia. Un borrador cambia ahí mismo; una que ya se envió (también si venció, se rechazó o se retiró) se vuelve una versión nueva en borrador (mismo número, version + 1) que el cliente ve al mandarla; mientras, su liga muestra la anterior. Una aceptada o facturada ya no cambia.
      * <p>
      * POST /v1/quotes/{id}
      * <p>
@@ -112,7 +114,7 @@ public final class QuotesService {
     /**
      * Borrar una cotización
      * <p>
-     * Solo una que nunca se envió; si no, 400 quote_not_draft.
+     * Borra la cotización con todas sus versiones; si ya se envió, su url deja de funcionar. Una aceptada o facturada no se borra: 400 quote_not_deletable. Para cerrarla sin borrarla, POST /v1/quotes/{id}/withdraw.
      * <p>
      * DELETE /v1/quotes/{id}
      * <p>
@@ -162,6 +164,48 @@ public final class QuotesService {
 
     public Quote accept(String id) {
         return accept(id, null);
+    }
+
+    /**
+     * Retirar una cotización
+     * <p>
+     * Usted ya no la ofrece: su liga dice que se retiró y el cliente ya no la puede aceptar (status withdrawn, decided_by user). Llega quote.withdrawn. Para ofrecerla de nuevo, cámbiela con POST /v1/quotes/{id} (una versión nueva) y mándela. Una que nunca se envió se borra: 400 quote_not_sent.
+     * <p>
+     * POST /v1/quotes/{id}/withdraw
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cotizaciones/withdraw-quote
+     */
+    public Quote withdraw(String id, WithdrawQuoteParams params, RequestOptions options) {
+        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id) + "/withdraw", params, null, true, Quote.class, options);
+    }
+
+    public Quote withdraw(String id, WithdrawQuoteParams params) {
+        return withdraw(id, params, null);
+    }
+
+    public Quote withdraw(String id) {
+        return withdraw(id, null, null);
+    }
+
+    /**
+     * Marcar rechazada
+     * <p>
+     * El cliente le dijo que no por teléfono, en persona… (status rejected, decided_by user; su nota en customer_comment). Llega quote.rejected. También para una vencida que ya no va a seguir.
+     * <p>
+     * POST /v1/quotes/{id}/reject
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cotizaciones/reject-quote
+     */
+    public Quote reject(String id, RejectQuoteParams params, RequestOptions options) {
+        return api.request("POST", "/v1/quotes/" + ApiClient.encode(id) + "/reject", params, null, true, Quote.class, options);
+    }
+
+    public Quote reject(String id, RejectQuoteParams params) {
+        return reject(id, params, null);
+    }
+
+    public Quote reject(String id) {
+        return reject(id, null, null);
     }
 
     /**

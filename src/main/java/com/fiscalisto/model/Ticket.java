@@ -61,7 +61,7 @@ public class Ticket {
     private String status;
 
     /**
-     * La página del portal con el código ya escrito: el comprador pone el total y sus datos. Puede incrustarla con fiscalisto.js. null si ya no está pendiente.
+     * La página del portal con el código (c) y el total (t) del ticket: el portal lo encuentra solo y el comprador solo da sus datos. Quien tenga la liga puede facturar el ticket: désela solo al comprador (como el ticket impreso). Puede incrustarla con fiscalisto.js. null si ya no está pendiente.
      */
     @JsonProperty("url")
     private String url;
@@ -225,7 +225,7 @@ public class Ticket {
     }
 
     /**
-     * La página del portal con el código ya escrito: el comprador pone el total y sus datos. Puede incrustarla con fiscalisto.js. null si ya no está pendiente.
+     * La página del portal con el código (c) y el total (t) del ticket: el portal lo encuentra solo y el comprador solo da sus datos. Quien tenga la liga puede facturar el ticket: désela solo al comprador (como el ticket impreso). Puede incrustarla con fiscalisto.js. null si ya no está pendiente.
      */
     public String getUrl() {
         return url;
