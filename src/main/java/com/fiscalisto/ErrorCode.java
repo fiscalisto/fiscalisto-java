@@ -180,6 +180,9 @@ public final class ErrorCode {
     /** replaces no es un recibo de nómina vigente del mismo emisor y del mismo empleado. */
     public static final String PAYROLL_REPLACEMENT_INVALID = "payroll_replacement_invalid";
 
+    /** No se pudo dibujar el PDF de ese CFDI (su XML trae algo que el generador no lee). Descargue el XML: es el documento válido ante el SAT. */
+    public static final String PDF_UNAVAILABLE = "pdf_unavailable";
+
     /** La cotización no tiene los datos fiscales del cliente: agrégueselos con POST /v1/quotes/{id} (customer) o mándela con auto_invoice para que los dé al aceptarla. */
     public static final String QUOTE_CUSTOMER_MISSING = "quote_customer_missing";
 
