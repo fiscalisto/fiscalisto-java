@@ -65,6 +65,12 @@ public class CreateStoreConnectionParamsSettings {
     private Boolean autoInvoice;
 
     /**
+     * WooCommerce y Tiendanube: mandar al comprador el enlace para facturar (WooCommerce, como nota al cliente del pedido; Tiendanube, por correo). Por omisión true.
+     */
+    @JsonProperty("notify_buyer")
+    private Boolean notifyBuyer;
+
+    /**
      * c_ClaveProdServ de lo que vende (8 dígitos).
      */
     public String getProductKey() {
@@ -159,6 +165,18 @@ public class CreateStoreConnectionParamsSettings {
 
     public CreateStoreConnectionParamsSettings setAutoInvoice(Boolean autoInvoice) {
         this.autoInvoice = autoInvoice;
+        return this;
+    }
+
+    /**
+     * WooCommerce y Tiendanube: mandar al comprador el enlace para facturar (WooCommerce, como nota al cliente del pedido; Tiendanube, por correo). Por omisión true.
+     */
+    public Boolean getNotifyBuyer() {
+        return notifyBuyer;
+    }
+
+    public CreateStoreConnectionParamsSettings setNotifyBuyer(Boolean notifyBuyer) {
+        this.notifyBuyer = notifyBuyer;
         return this;
     }
 }

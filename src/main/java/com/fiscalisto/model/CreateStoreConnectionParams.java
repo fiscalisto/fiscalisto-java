@@ -19,9 +19,9 @@ public class CreateStoreConnectionParams {
     private String issuer;
 
     /**
-     * shopify o mercadolibre.
+     * shopify, woocommerce, mercadolibre, tiendanube o amazon.
      * <p>
-     * Valores: shopify, mercadolibre.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
      * <p>
      * Obligatorio.
      */
@@ -53,7 +53,25 @@ public class CreateStoreConnectionParams {
     private String accessToken;
 
     /**
-     * Mercado Libre: a dónde volver después de autorizar (se agregan store_connection y status).
+     * WooCommerce: la dirección de la tienda (https://mitienda.com).
+     */
+    @JsonProperty("site")
+    private String site;
+
+    /**
+     * WooCommerce: la Clave de cliente (ck_…) de una llave de la API REST con permisos de Lectura/Escritura.
+     */
+    @JsonProperty("consumer_key")
+    private String consumerKey;
+
+    /**
+     * WooCommerce: la Clave secreta de cliente (cs_…) de esa llave. Se guarda cifrada y nunca se muestra.
+     */
+    @JsonProperty("consumer_secret")
+    private String consumerSecret;
+
+    /**
+     * Mercado Libre, Tiendanube y Amazon: a dónde volver después de autorizar (se agregan store_connection y status).
      */
     @JsonProperty("return_url")
     private String returnUrl;
@@ -77,9 +95,9 @@ public class CreateStoreConnectionParams {
     }
 
     /**
-     * shopify o mercadolibre.
+     * shopify, woocommerce, mercadolibre, tiendanube o amazon.
      * <p>
-     * Valores: shopify, mercadolibre.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
      * <p>
      * Obligatorio.
      */
@@ -141,7 +159,43 @@ public class CreateStoreConnectionParams {
     }
 
     /**
-     * Mercado Libre: a dónde volver después de autorizar (se agregan store_connection y status).
+     * WooCommerce: la dirección de la tienda (https://mitienda.com).
+     */
+    public String getSite() {
+        return site;
+    }
+
+    public CreateStoreConnectionParams setSite(String site) {
+        this.site = site;
+        return this;
+    }
+
+    /**
+     * WooCommerce: la Clave de cliente (ck_…) de una llave de la API REST con permisos de Lectura/Escritura.
+     */
+    public String getConsumerKey() {
+        return consumerKey;
+    }
+
+    public CreateStoreConnectionParams setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
+        return this;
+    }
+
+    /**
+     * WooCommerce: la Clave secreta de cliente (cs_…) de esa llave. Se guarda cifrada y nunca se muestra.
+     */
+    public String getConsumerSecret() {
+        return consumerSecret;
+    }
+
+    public CreateStoreConnectionParams setConsumerSecret(String consumerSecret) {
+        this.consumerSecret = consumerSecret;
+        return this;
+    }
+
+    /**
+     * Mercado Libre, Tiendanube y Amazon: a dónde volver después de autorizar (se agregan store_connection y status).
      */
     public String getReturnUrl() {
         return returnUrl;

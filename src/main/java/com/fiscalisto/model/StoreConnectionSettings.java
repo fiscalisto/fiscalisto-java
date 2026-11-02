@@ -59,10 +59,16 @@ public class StoreConnectionSettings {
     private Map<String, String> paymentForms;
 
     /**
-     * Mercado Libre: si se timbra al momento con los datos fiscales del comprador; null en Shopify.
+     * Mercado Libre: si se timbra al momento con los datos fiscales del comprador; null en las demás plataformas.
      */
     @JsonProperty("auto_invoice")
     private Boolean autoInvoice;
+
+    /**
+     * WooCommerce y Tiendanube: si el comprador recibe su enlace para facturar (nota del pedido o correo); null en las demás plataformas.
+     */
+    @JsonProperty("notify_buyer")
+    private Boolean notifyBuyer;
 
     /**
      * c_ClaveProdServ de lo que vende, o null.
@@ -151,7 +157,7 @@ public class StoreConnectionSettings {
     }
 
     /**
-     * Mercado Libre: si se timbra al momento con los datos fiscales del comprador; null en Shopify.
+     * Mercado Libre: si se timbra al momento con los datos fiscales del comprador; null en las demás plataformas.
      */
     public Boolean getAutoInvoice() {
         return autoInvoice;
@@ -159,6 +165,18 @@ public class StoreConnectionSettings {
 
     public StoreConnectionSettings setAutoInvoice(Boolean autoInvoice) {
         this.autoInvoice = autoInvoice;
+        return this;
+    }
+
+    /**
+     * WooCommerce y Tiendanube: si el comprador recibe su enlace para facturar (nota del pedido o correo); null en las demás plataformas.
+     */
+    public Boolean getNotifyBuyer() {
+        return notifyBuyer;
+    }
+
+    public StoreConnectionSettings setNotifyBuyer(Boolean notifyBuyer) {
+        this.notifyBuyer = notifyBuyer;
         return this;
     }
 }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * StoreConnection: Una tienda de Shopify o Mercado Libre cuyos pedidos pagados se vuelven tickets de autofactura del emisor.
+ * StoreConnection: Una tienda de Shopify, WooCommerce, Tiendanube, Mercado Libre o Amazon cuyos pedidos pagados se vuelven tickets de autofactura del emisor.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -38,21 +38,27 @@ public class StoreConnection {
     private String issuer;
 
     /**
-     * shopify o mercadolibre.
+     * shopify, woocommerce, tiendanube, mercadolibre o amazon.
      * <p>
-     * Valores: shopify, mercadolibre.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
      */
     @JsonProperty("platform")
     private String platform;
 
     /**
-     * El dominio de la tienda de Shopify, o el id del vendedor en Mercado Libre (al autorizar).
+     * El dominio de la tienda (Shopify, WooCommerce), o el id de la tienda en Tiendanube o del vendedor en Mercado Libre y Amazon (al autorizar).
      */
     @JsonProperty("shop")
     private String shop;
 
     /**
-     * pending (Mercado Libre espera que el vendedor autorice en authorize_url), active o disconnected.
+     * El nombre de la tienda según su plataforma, o null.
+     */
+    @JsonProperty("name")
+    private String name;
+
+    /**
+     * pending (Mercado Libre, Tiendanube o Amazon esperan que se autorice en authorize_url), active o disconnected.
      * <p>
      * Valores: pending, active, disconnected.
      */
@@ -60,7 +66,7 @@ public class StoreConnection {
     private String status;
 
     /**
-     * Si está pending: la página de Mercado Libre donde el vendedor autoriza (vale un día; cada consulta da una nueva). Si no, null.
+     * Si está pending: la página de la plataforma donde el vendedor autoriza (vale un día; cada consulta da una nueva). Si no, null.
      */
     @JsonProperty("authorize_url")
     private String authorizeUrl;
@@ -144,9 +150,9 @@ public class StoreConnection {
     }
 
     /**
-     * shopify o mercadolibre.
+     * shopify, woocommerce, tiendanube, mercadolibre o amazon.
      * <p>
-     * Valores: shopify, mercadolibre.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
      */
     public String getPlatform() {
         return platform;
@@ -158,7 +164,7 @@ public class StoreConnection {
     }
 
     /**
-     * El dominio de la tienda de Shopify, o el id del vendedor en Mercado Libre (al autorizar).
+     * El dominio de la tienda (Shopify, WooCommerce), o el id de la tienda en Tiendanube o del vendedor en Mercado Libre y Amazon (al autorizar).
      */
     public String getShop() {
         return shop;
@@ -170,7 +176,19 @@ public class StoreConnection {
     }
 
     /**
-     * pending (Mercado Libre espera que el vendedor autorice en authorize_url), active o disconnected.
+     * El nombre de la tienda según su plataforma, o null.
+     */
+    public String getName() {
+        return name;
+    }
+
+    public StoreConnection setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * pending (Mercado Libre, Tiendanube o Amazon esperan que se autorice en authorize_url), active o disconnected.
      * <p>
      * Valores: pending, active, disconnected.
      */
@@ -184,7 +202,7 @@ public class StoreConnection {
     }
 
     /**
-     * Si está pending: la página de Mercado Libre donde el vendedor autoriza (vale un día; cada consulta da una nueva). Si no, null.
+     * Si está pending: la página de la plataforma donde el vendedor autoriza (vale un día; cada consulta da una nueva). Si no, null.
      */
     public String getAuthorizeUrl() {
         return authorizeUrl;

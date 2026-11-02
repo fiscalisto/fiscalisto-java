@@ -19,6 +19,7 @@ public final class FiscalistoClient {
     private final InvoicesService invoices;
     private final ReceivablesService receivables;
     private final BankTransactionsService bankTransactions;
+    private final PurchaseReceiptsService purchaseReceipts;
     private final PaymentsService payments;
     private final CreditNotesService creditNotes;
     private final AdvancesService advances;
@@ -73,6 +74,7 @@ public final class FiscalistoClient {
         this.invoices = new InvoicesService(api);
         this.receivables = new ReceivablesService(api);
         this.bankTransactions = new BankTransactionsService(api);
+        this.purchaseReceipts = new PurchaseReceiptsService(api);
         this.payments = new PaymentsService(api);
         this.creditNotes = new CreditNotesService(api);
         this.advances = new AdvancesService(api);
@@ -154,6 +156,11 @@ public final class FiscalistoClient {
     /** Conciliación bancaria. */
     public BankTransactionsService bankTransactions() {
         return bankTransactions;
+    }
+
+    /** Tickets de compra. */
+    public PurchaseReceiptsService purchaseReceipts() {
+        return purchaseReceipts;
     }
 
     /** Pagos y notas de crédito. */
