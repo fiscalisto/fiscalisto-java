@@ -27,6 +27,9 @@ public final class FiscalistoClient {
     private final EmployeesService employees;
     private final PayrollReceiptsService payrollReceipts;
     private final PayrollBatchesService payrollBatches;
+    private final PayrollBankFilesService payrollBankFiles;
+    private final ImssMovementsService imssMovements;
+    private final ImssFilesService imssFiles;
     private final InvoiceBatchesService invoiceBatches;
     private final TaxIdsService taxIds;
     private final BranchesService branches;
@@ -82,6 +85,9 @@ public final class FiscalistoClient {
         this.employees = new EmployeesService(api);
         this.payrollReceipts = new PayrollReceiptsService(api);
         this.payrollBatches = new PayrollBatchesService(api);
+        this.payrollBankFiles = new PayrollBankFilesService(api);
+        this.imssMovements = new ImssMovementsService(api);
+        this.imssFiles = new ImssFilesService(api);
         this.invoiceBatches = new InvoiceBatchesService(api);
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
@@ -196,6 +202,21 @@ public final class FiscalistoClient {
     /** Nómina. */
     public PayrollBatchesService payrollBatches() {
         return payrollBatches;
+    }
+
+    /** Nómina. */
+    public PayrollBankFilesService payrollBankFiles() {
+        return payrollBankFiles;
+    }
+
+    /** Nómina. */
+    public ImssMovementsService imssMovements() {
+        return imssMovements;
+    }
+
+    /** Nómina. */
+    public ImssFilesService imssFiles() {
+        return imssFiles;
     }
 
     /** Lotes. */

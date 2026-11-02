@@ -138,6 +138,68 @@ public class UpdateEmployeeParams {
     private String position;
 
     /**
+     * CLABE de 18 dígitos de la cuenta del empleado: a donde le paga el archivo para el banco (POST /v1/payroll_bank_files).
+     */
+    @JsonProperty("clabe")
+    private String clabe;
+
+    /**
+     * Nombre(s), como en su CURP. Con first_surname y second_surname, los archivos del IMSS (IDSE y SUA) escriben el nombre en sus tres partes; sin ellos, Fiscalisto lo separa con la CURP.
+     */
+    @JsonProperty("given_names")
+    private String givenNames;
+
+    /**
+     * Primer apellido, como en su CURP.
+     */
+    @JsonProperty("first_surname")
+    private String firstSurname;
+
+    /**
+     * Segundo apellido (vacío si tiene uno).
+     */
+    @JsonProperty("second_surname")
+    private String secondSurname;
+
+    /**
+     * Tipo de trabajador del IMSS: 1 permanente, 2 eventual de la ciudad, 3 eventual de la construcción, 4 eventual del campo. Por omisión 1.
+     * <p>
+     * Valores: 1, 2, 3, 4.
+     */
+    @JsonProperty("imss_worker_type")
+    private String imssWorkerType;
+
+    /**
+     * Tipo de salario del IMSS: 0 fijo, 1 variable, 2 mixto. Por omisión 0.
+     * <p>
+     * Valores: 0, 1, 2.
+     */
+    @JsonProperty("imss_salary_type")
+    private String imssSalaryType;
+
+    /**
+     * Semana o jornada reducida: 0 normal, 1 a 5 los días que trabaja a la semana, 6 jornada de menos de 8 horas. Por omisión 0.
+     * <p>
+     * Valores: 0, 1, 2, 3, 4, 5, 6.
+     */
+    @JsonProperty("imss_reduced_week")
+    private String imssReducedWeek;
+
+    /**
+     * Unidad de medicina familiar (UMF) del IMSS, opcional.
+     */
+    @JsonProperty("family_medicine_unit")
+    private String familyMedicineUnit;
+
+    /**
+     * Causa de la baja ante el IMSS, con end_date: 1 término de contrato, 2 separación voluntaria (la usual), 3 abandono, 4 defunción, 5 clausura, 6 otras, 7 ausentismo, 8 rescisión, 9 jubilación, A pensión.
+     * <p>
+     * Valores: 1, 2, 3, 4, 5, 6, 7, 8, 9, A.
+     */
+    @JsonProperty("exit_reason")
+    private String exitReason;
+
+    /**
      * Número de empleado (NumEmpleado).
      */
     public String getNumber() {
@@ -386,6 +448,122 @@ public class UpdateEmployeeParams {
 
     public UpdateEmployeeParams setPosition(String position) {
         this.position = position;
+        return this;
+    }
+
+    /**
+     * CLABE de 18 dígitos de la cuenta del empleado: a donde le paga el archivo para el banco (POST /v1/payroll_bank_files).
+     */
+    public String getClabe() {
+        return clabe;
+    }
+
+    public UpdateEmployeeParams setClabe(String clabe) {
+        this.clabe = clabe;
+        return this;
+    }
+
+    /**
+     * Nombre(s), como en su CURP. Con first_surname y second_surname, los archivos del IMSS (IDSE y SUA) escriben el nombre en sus tres partes; sin ellos, Fiscalisto lo separa con la CURP.
+     */
+    public String getGivenNames() {
+        return givenNames;
+    }
+
+    public UpdateEmployeeParams setGivenNames(String givenNames) {
+        this.givenNames = givenNames;
+        return this;
+    }
+
+    /**
+     * Primer apellido, como en su CURP.
+     */
+    public String getFirstSurname() {
+        return firstSurname;
+    }
+
+    public UpdateEmployeeParams setFirstSurname(String firstSurname) {
+        this.firstSurname = firstSurname;
+        return this;
+    }
+
+    /**
+     * Segundo apellido (vacío si tiene uno).
+     */
+    public String getSecondSurname() {
+        return secondSurname;
+    }
+
+    public UpdateEmployeeParams setSecondSurname(String secondSurname) {
+        this.secondSurname = secondSurname;
+        return this;
+    }
+
+    /**
+     * Tipo de trabajador del IMSS: 1 permanente, 2 eventual de la ciudad, 3 eventual de la construcción, 4 eventual del campo. Por omisión 1.
+     * <p>
+     * Valores: 1, 2, 3, 4.
+     */
+    public String getImssWorkerType() {
+        return imssWorkerType;
+    }
+
+    public UpdateEmployeeParams setImssWorkerType(String imssWorkerType) {
+        this.imssWorkerType = imssWorkerType;
+        return this;
+    }
+
+    /**
+     * Tipo de salario del IMSS: 0 fijo, 1 variable, 2 mixto. Por omisión 0.
+     * <p>
+     * Valores: 0, 1, 2.
+     */
+    public String getImssSalaryType() {
+        return imssSalaryType;
+    }
+
+    public UpdateEmployeeParams setImssSalaryType(String imssSalaryType) {
+        this.imssSalaryType = imssSalaryType;
+        return this;
+    }
+
+    /**
+     * Semana o jornada reducida: 0 normal, 1 a 5 los días que trabaja a la semana, 6 jornada de menos de 8 horas. Por omisión 0.
+     * <p>
+     * Valores: 0, 1, 2, 3, 4, 5, 6.
+     */
+    public String getImssReducedWeek() {
+        return imssReducedWeek;
+    }
+
+    public UpdateEmployeeParams setImssReducedWeek(String imssReducedWeek) {
+        this.imssReducedWeek = imssReducedWeek;
+        return this;
+    }
+
+    /**
+     * Unidad de medicina familiar (UMF) del IMSS, opcional.
+     */
+    public String getFamilyMedicineUnit() {
+        return familyMedicineUnit;
+    }
+
+    public UpdateEmployeeParams setFamilyMedicineUnit(String familyMedicineUnit) {
+        this.familyMedicineUnit = familyMedicineUnit;
+        return this;
+    }
+
+    /**
+     * Causa de la baja ante el IMSS, con end_date: 1 término de contrato, 2 separación voluntaria (la usual), 3 abandono, 4 defunción, 5 clausura, 6 otras, 7 ausentismo, 8 rescisión, 9 jubilación, A pensión.
+     * <p>
+     * Valores: 1, 2, 3, 4, 5, 6, 7, 8, 9, A.
+     */
+    public String getExitReason() {
+        return exitReason;
+    }
+
+    public UpdateEmployeeParams setExitReason(String exitReason) {
+        this.exitReason = exitReason;
         return this;
     }
 }

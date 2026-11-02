@@ -167,6 +167,60 @@ public class Employee {
     private String position;
 
     /**
+     * CLABE de su cuenta, a donde le paga el archivo para el banco, o null.
+     */
+    @JsonProperty("clabe")
+    private String clabe;
+
+    /**
+     * Nombre(s) como en su CURP, o null (los archivos del IMSS lo separan con la CURP).
+     */
+    @JsonProperty("given_names")
+    private String givenNames;
+
+    /**
+     * Primer apellido como en su CURP, o null.
+     */
+    @JsonProperty("first_surname")
+    private String firstSurname;
+
+    /**
+     * Segundo apellido, o null.
+     */
+    @JsonProperty("second_surname")
+    private String secondSurname;
+
+    /**
+     * Tipo de trabajador del IMSS: 1 permanente, 2 eventual de la ciudad, 3 eventual de la construcción, 4 eventual del campo.
+     */
+    @JsonProperty("imss_worker_type")
+    private String imssWorkerType;
+
+    /**
+     * Tipo de salario del IMSS: 0 fijo, 1 variable, 2 mixto.
+     */
+    @JsonProperty("imss_salary_type")
+    private String imssSalaryType;
+
+    /**
+     * Semana o jornada reducida: 0 normal, 1 a 5 días a la semana, 6 jornada de menos de 8 horas.
+     */
+    @JsonProperty("imss_reduced_week")
+    private String imssReducedWeek;
+
+    /**
+     * Unidad de medicina familiar del IMSS, o null.
+     */
+    @JsonProperty("family_medicine_unit")
+    private String familyMedicineUnit;
+
+    /**
+     * Causa de la baja ante el IMSS cuando tiene end_date (2 separación voluntaria por omisión), o null.
+     */
+    @JsonProperty("exit_reason")
+    private String exitReason;
+
+    /**
      * Lo que el SAT podría observar de sus datos, antes de timbrar.
      */
     @JsonProperty("warnings")
@@ -485,6 +539,114 @@ public class Employee {
 
     public Employee setPosition(String position) {
         this.position = position;
+        return this;
+    }
+
+    /**
+     * CLABE de su cuenta, a donde le paga el archivo para el banco, o null.
+     */
+    public String getClabe() {
+        return clabe;
+    }
+
+    public Employee setClabe(String clabe) {
+        this.clabe = clabe;
+        return this;
+    }
+
+    /**
+     * Nombre(s) como en su CURP, o null (los archivos del IMSS lo separan con la CURP).
+     */
+    public String getGivenNames() {
+        return givenNames;
+    }
+
+    public Employee setGivenNames(String givenNames) {
+        this.givenNames = givenNames;
+        return this;
+    }
+
+    /**
+     * Primer apellido como en su CURP, o null.
+     */
+    public String getFirstSurname() {
+        return firstSurname;
+    }
+
+    public Employee setFirstSurname(String firstSurname) {
+        this.firstSurname = firstSurname;
+        return this;
+    }
+
+    /**
+     * Segundo apellido, o null.
+     */
+    public String getSecondSurname() {
+        return secondSurname;
+    }
+
+    public Employee setSecondSurname(String secondSurname) {
+        this.secondSurname = secondSurname;
+        return this;
+    }
+
+    /**
+     * Tipo de trabajador del IMSS: 1 permanente, 2 eventual de la ciudad, 3 eventual de la construcción, 4 eventual del campo.
+     */
+    public String getImssWorkerType() {
+        return imssWorkerType;
+    }
+
+    public Employee setImssWorkerType(String imssWorkerType) {
+        this.imssWorkerType = imssWorkerType;
+        return this;
+    }
+
+    /**
+     * Tipo de salario del IMSS: 0 fijo, 1 variable, 2 mixto.
+     */
+    public String getImssSalaryType() {
+        return imssSalaryType;
+    }
+
+    public Employee setImssSalaryType(String imssSalaryType) {
+        this.imssSalaryType = imssSalaryType;
+        return this;
+    }
+
+    /**
+     * Semana o jornada reducida: 0 normal, 1 a 5 días a la semana, 6 jornada de menos de 8 horas.
+     */
+    public String getImssReducedWeek() {
+        return imssReducedWeek;
+    }
+
+    public Employee setImssReducedWeek(String imssReducedWeek) {
+        this.imssReducedWeek = imssReducedWeek;
+        return this;
+    }
+
+    /**
+     * Unidad de medicina familiar del IMSS, o null.
+     */
+    public String getFamilyMedicineUnit() {
+        return familyMedicineUnit;
+    }
+
+    public Employee setFamilyMedicineUnit(String familyMedicineUnit) {
+        this.familyMedicineUnit = familyMedicineUnit;
+        return this;
+    }
+
+    /**
+     * Causa de la baja ante el IMSS cuando tiene end_date (2 separación voluntaria por omisión), o null.
+     */
+    public String getExitReason() {
+        return exitReason;
+    }
+
+    public Employee setExitReason(String exitReason) {
+        this.exitReason = exitReason;
         return this;
     }
 
