@@ -22,7 +22,7 @@ public class CreateRetentionParams {
     private String issuer;
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) aún no se puede emitir.
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones.
      * <p>
      * Obligatorio.
      */
@@ -53,19 +53,21 @@ public class CreateRetentionParams {
 
     /**
      * Totales (Totales).
-     * <p>
-     * Obligatorio.
      */
     @JsonProperty("totals")
     private CreateRetentionParamsTotals totals;
 
     /**
      * Impuestos del comprobante, por tipo.
-     * <p>
-     * Obligatorio.
      */
     @JsonProperty("taxes")
     private List<CreateRetentionParamsTax> taxes;
+
+    /**
+     * Complemento de servicios de plataformas tecnológicas (ServiciosPlataformasTecnologicas 1.0), obligatorio con code 26: una constancia por mes, receptor y tipo de servicio. totals y taxes se calculan de services con las tasas del SAT (ISR de LISR 113-A y LIF 2026 art. 25; IVA 50% o 100%; IEPS en apuestas); si los manda, deben coincidir.
+     */
+    @JsonProperty("platform")
+    private CreateRetentionParamsPlatform platform;
 
     /**
      * Complemento de dividendos.
@@ -158,7 +160,7 @@ public class CreateRetentionParams {
     }
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) aún no se puede emitir.
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones.
      * <p>
      * Obligatorio.
      */
@@ -213,8 +215,6 @@ public class CreateRetentionParams {
 
     /**
      * Totales (Totales).
-     * <p>
-     * Obligatorio.
      */
     public CreateRetentionParamsTotals getTotals() {
         return totals;
@@ -227,8 +227,6 @@ public class CreateRetentionParams {
 
     /**
      * Impuestos del comprobante, por tipo.
-     * <p>
-     * Obligatorio.
      */
     public List<CreateRetentionParamsTax> getTaxes() {
         return taxes;
@@ -236,6 +234,18 @@ public class CreateRetentionParams {
 
     public CreateRetentionParams setTaxes(List<CreateRetentionParamsTax> taxes) {
         this.taxes = taxes;
+        return this;
+    }
+
+    /**
+     * Complemento de servicios de plataformas tecnológicas (ServiciosPlataformasTecnologicas 1.0), obligatorio con code 26: una constancia por mes, receptor y tipo de servicio. totals y taxes se calculan de services con las tasas del SAT (ISR de LISR 113-A y LIF 2026 art. 25; IVA 50% o 100%; IEPS en apuestas); si los manda, deben coincidir.
+     */
+    public CreateRetentionParamsPlatform getPlatform() {
+        return platform;
+    }
+
+    public CreateRetentionParams setPlatform(CreateRetentionParamsPlatform platform) {
+        this.platform = platform;
         return this;
     }
 
