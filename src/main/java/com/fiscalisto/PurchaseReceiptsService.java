@@ -23,7 +23,7 @@ public final class PurchaseReceiptsService {
     /**
      * Guardar un ticket de compra
      * <p>
-     * La foto o el PDF de un ticket que el emisor pagó sin factura, en base64. La IA lee la tienda, su RFC, la fecha, el total, la forma de pago, el folio, los datos que pide su portal y la liga de facturación; lo que usted mande gana a lo que se lea. El mismo archivo dos veces devuelve el ticket que ya estaba, sin leerlo otra vez. Si llega una factura de esa tienda por el mismo total con las descargas del SAT, el ticket queda invoiced solo.
+     * La foto o el PDF de un ticket que el emisor pagó sin factura, en base64, con los datos que usted tenga: la tienda, su RFC, la fecha, el total, la forma de pago, el folio, los datos que pide su portal y la liga de facturación. Si qr_text es la liga de una tienda que factura con Fiscalisto, el folio y el total se llenan solos. El mismo archivo dos veces devuelve el ticket que ya estaba. Si llega una factura de esa tienda por el mismo total con las descargas del SAT, el ticket queda invoiced solo.
      * <p>
      * POST /v1/purchase_receipts
      * <p>
@@ -124,23 +124,6 @@ public final class PurchaseReceiptsService {
 
     public Deleted delete(String id) {
         return delete(id, null);
-    }
-
-    /**
-     * Leer el ticket de nuevo
-     * <p>
-     * La IA vuelve a leer el archivo y llena solo los datos que siguen vacíos. Cuenta en el límite diario de tickets de compra.
-     * <p>
-     * POST /v1/purchase_receipts/{id}/read
-     * <p>
-     * Vea https://fiscalisto.com/docs/api/referencia/tickets-de-compra/read-purchase-receipt
-     */
-    public PurchaseReceipt read(String id, RequestOptions options) {
-        return api.request("POST", "/v1/purchase_receipts/" + ApiClient.encode(id) + "/read", null, null, true, PurchaseReceipt.class, options);
-    }
-
-    public PurchaseReceipt read(String id) {
-        return read(id, null);
     }
 
     /**

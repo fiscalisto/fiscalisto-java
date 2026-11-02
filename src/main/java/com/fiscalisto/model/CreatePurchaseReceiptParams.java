@@ -47,12 +47,6 @@ public class CreatePurchaseReceiptParams {
     private String qrText;
 
     /**
-     * false para no leerlo con IA y mandar los datos usted. Por omisión se lee y se llena lo que no mandó.
-     */
-    @JsonProperty("read")
-    private Boolean read;
-
-    /**
      * El nombre de la tienda.
      */
     @JsonProperty("store_name")
@@ -171,18 +165,6 @@ public class CreatePurchaseReceiptParams {
 
     public CreatePurchaseReceiptParams setQrText(String qrText) {
         this.qrText = qrText;
-        return this;
-    }
-
-    /**
-     * false para no leerlo con IA y mandar los datos usted. Por omisión se lee y se llena lo que no mandó.
-     */
-    public Boolean getRead() {
-        return read;
-    }
-
-    public CreatePurchaseReceiptParams setRead(Boolean read) {
-        this.read = read;
         return this;
     }
 

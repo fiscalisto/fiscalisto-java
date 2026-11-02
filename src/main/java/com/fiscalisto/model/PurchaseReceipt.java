@@ -99,20 +99,6 @@ public class PurchaseReceipt {
     private String note;
 
     /**
-     * ai (lo leyó la IA), manual (se mandaron los datos) o null.
-     * <p>
-     * Valores: ai, manual.
-     */
-    @JsonProperty("read_by")
-    private String readBy;
-
-    /**
-     * Por qué no se leyó o qué revisar (foto borrosa, no parece un ticket…), o null.
-     */
-    @JsonProperty("read_note")
-    private String readNote;
-
-    /**
      * El tipo del archivo guardado (image/jpeg, application/pdf…).
      */
     @JsonProperty("file_type")
@@ -328,32 +314,6 @@ public class PurchaseReceipt {
 
     public PurchaseReceipt setNote(String note) {
         this.note = note;
-        return this;
-    }
-
-    /**
-     * ai (lo leyó la IA), manual (se mandaron los datos) o null.
-     * <p>
-     * Valores: ai, manual.
-     */
-    public String getReadBy() {
-        return readBy;
-    }
-
-    public PurchaseReceipt setReadBy(String readBy) {
-        this.readBy = readBy;
-        return this;
-    }
-
-    /**
-     * Por qué no se leyó o qué revisar (foto borrosa, no parece un ticket…), o null.
-     */
-    public String getReadNote() {
-        return readNote;
-    }
-
-    public PurchaseReceipt setReadNote(String readNote) {
-        this.readNote = readNote;
         return this;
     }
 
