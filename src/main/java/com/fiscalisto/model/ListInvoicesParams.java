@@ -74,6 +74,12 @@ public class ListInvoicesParams {
     private String createdLte;
 
     /**
+     * Solo las de este centro de costo (ccn_…), o none para las que no tienen.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
      */
     public Long getLimit() {
@@ -189,6 +195,18 @@ public class ListInvoicesParams {
 
     public ListInvoicesParams setCreatedLte(String createdLte) {
         this.createdLte = createdLte;
+        return this;
+    }
+
+    /**
+     * Solo las de este centro de costo (ccn_…), o none para las que no tienen.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public ListInvoicesParams setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
         return this;
     }
 }

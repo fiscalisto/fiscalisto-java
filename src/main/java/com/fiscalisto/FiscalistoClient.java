@@ -33,6 +33,7 @@ public final class FiscalistoClient {
     private final InvoiceBatchesService invoiceBatches;
     private final TaxIdsService taxIds;
     private final BranchesService branches;
+    private final CostCentersService costCenters;
     private final CustomersService customers;
     private final CustomerDataRequestsService customerDataRequests;
     private final ProductsService products;
@@ -91,6 +92,7 @@ public final class FiscalistoClient {
         this.invoiceBatches = new InvoiceBatchesService(api);
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
+        this.costCenters = new CostCentersService(api);
         this.customers = new CustomersService(api);
         this.customerDataRequests = new CustomerDataRequestsService(api);
         this.products = new ProductsService(api);
@@ -232,6 +234,11 @@ public final class FiscalistoClient {
     /** Sucursales. */
     public BranchesService branches() {
         return branches;
+    }
+
+    /** Centros de costo. */
+    public CostCentersService costCenters() {
+        return costCenters;
     }
 
     /** Clientes. */

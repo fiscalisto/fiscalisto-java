@@ -148,6 +148,12 @@ public class SatInvoice {
     private String satStatus;
 
     /**
+     * Su centro de costo (ccn_…), o null. Póngalo o cámbielo con POST /v1/sat_invoices/{id}.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * La descarga (sdl_…) que la trajo, o null.
      */
     @JsonProperty("sat_download")
@@ -429,6 +435,18 @@ public class SatInvoice {
 
     public SatInvoice setSatStatus(String satStatus) {
         this.satStatus = satStatus;
+        return this;
+    }
+
+    /**
+     * Su centro de costo (ccn_…), o null. Póngalo o cámbielo con POST /v1/sat_invoices/{id}.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public SatInvoice setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
         return this;
     }
 

@@ -10,6 +10,7 @@ import com.fiscalisto.model.Invoice;
 import com.fiscalisto.model.InvoiceCreate;
 import com.fiscalisto.model.ListInvoicesParams;
 import com.fiscalisto.model.SendInvoiceParams;
+import com.fiscalisto.model.UpdateInvoiceParams;
 
 /**
  * Facturas: client.invoices().
@@ -91,6 +92,27 @@ public final class InvoicesService {
 
     public Invoice get(String id) {
         return get(id, null, null);
+    }
+
+    /**
+     * Actualizar una factura
+     * <p>
+     * Lo que se puede cambiar de una factura timbrada sin tocar el CFDI: su centro de costo (cost_center, o null para quitárselo). Los complementos de pago y los traslados no llevan.
+     * <p>
+     * POST /v1/invoices/{id}
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/facturas/update-invoice
+     */
+    public Invoice update(String id, UpdateInvoiceParams params, RequestOptions options) {
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id), params, null, true, Invoice.class, options);
+    }
+
+    public Invoice update(String id, UpdateInvoiceParams params) {
+        return update(id, params, null);
+    }
+
+    public Invoice update(String id) {
+        return update(id, null, null);
     }
 
     /**

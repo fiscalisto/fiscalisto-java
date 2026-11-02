@@ -45,6 +45,12 @@ public class ApplyAdvanceParams {
     private String branch;
 
     /**
+     * Su centro de costo (ccn_…): la obra, proyecto, sucursal o área a la que pertenece, para ver ingresos y gastos por centro en Reportes. No cambia el CFDI. Sus notas de crédito lo toman solas.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * Almacén (whs_…) de donde salen sus productos con track_stock. Por omisión, el de su sucursal (o el de la Matriz).
      */
     @JsonProperty("warehouse")
@@ -277,6 +283,18 @@ public class ApplyAdvanceParams {
 
     public ApplyAdvanceParams setBranch(String branch) {
         this.branch = branch;
+        return this;
+    }
+
+    /**
+     * Su centro de costo (ccn_…): la obra, proyecto, sucursal o área a la que pertenece, para ver ingresos y gastos por centro en Reportes. No cambia el CFDI. Sus notas de crédito lo toman solas.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public ApplyAdvanceParams setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
         return this;
     }
 

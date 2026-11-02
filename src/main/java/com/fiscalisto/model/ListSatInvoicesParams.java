@@ -66,6 +66,12 @@ public class ListSatInvoicesParams {
     private String dateLte;
 
     /**
+     * Solo las de este centro de costo (ccn_…), o none para las que no tienen.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
      */
     public Long getLimit() {
@@ -167,6 +173,18 @@ public class ListSatInvoicesParams {
 
     public ListSatInvoicesParams setDateLte(String dateLte) {
         this.dateLte = dateLte;
+        return this;
+    }
+
+    /**
+     * Solo las de este centro de costo (ccn_…), o none para las que no tienen.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public ListSatInvoicesParams setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
         return this;
     }
 }

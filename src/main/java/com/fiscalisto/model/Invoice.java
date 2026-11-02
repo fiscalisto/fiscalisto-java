@@ -48,6 +48,12 @@ public class Invoice {
     private String branch;
 
     /**
+     * Su centro de costo (ccn_…), o null. El que mandó al crearla, o el que le puso o cambió después con POST /v1/invoices/{id}.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
      * Valores: I, E, P, T, N.
@@ -314,6 +320,18 @@ public class Invoice {
 
     public Invoice setBranch(String branch) {
         this.branch = branch;
+        return this;
+    }
+
+    /**
+     * Su centro de costo (ccn_…), o null. El que mandó al crearla, o el que le puso o cambió después con POST /v1/invoices/{id}.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public Invoice setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
         return this;
     }
 

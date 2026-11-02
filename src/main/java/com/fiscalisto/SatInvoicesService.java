@@ -4,6 +4,7 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.ListSatInvoicesParams;
 import com.fiscalisto.model.SatInvoice;
+import com.fiscalisto.model.UpdateSatInvoiceParams;
 
 /**
  * Descargas del SAT: client.satInvoices().
@@ -64,6 +65,27 @@ public final class SatInvoicesService {
 
     public SatInvoice get(String id) {
         return get(id, null);
+    }
+
+    /**
+     * Actualizar una factura del SAT
+     * <p>
+     * Lo que se puede cambiar de un CFDI del SAT sin tocarlo: su centro de costo (cost_center, o null para quitárselo), para ver sus gastos por obra, proyecto o área.
+     * <p>
+     * POST /v1/sat_invoices/{id}
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/update-sat-invoice
+     */
+    public SatInvoice update(String id, UpdateSatInvoiceParams params, RequestOptions options) {
+        return api.request("POST", "/v1/sat_invoices/" + ApiClient.encode(id), params, null, true, SatInvoice.class, options);
+    }
+
+    public SatInvoice update(String id, UpdateSatInvoiceParams params) {
+        return update(id, params, null);
+    }
+
+    public SatInvoice update(String id) {
+        return update(id, null, null);
     }
 
     /**
