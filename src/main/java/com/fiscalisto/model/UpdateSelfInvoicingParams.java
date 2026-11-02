@@ -68,6 +68,26 @@ public class UpdateSelfInvoicingParams {
     private String codeHint;
 
     /**
+     * El tema del portal: `auto` (por omisión), el del dispositivo del comprador, que puede cambiarlo; `light` o `dark`, siempre ese. Vale en su página, sus QR y dentro de su sitio (salvo que el código para incrustarlo elija otro).
+     * <p>
+     * Valores: auto, light, dark.
+     */
+    @JsonProperty("portal_theme")
+    private String portalTheme;
+
+    /**
+     * El color de los botones del portal, como `#0b7c77`. `null` pone el de Fiscalisto.
+     */
+    @JsonProperty("portal_accent")
+    private String portalAccent;
+
+    /**
+     * Lo redondo de las esquinas del portal, en píxeles (0 a 24). `null` pone el de Fiscalisto (10).
+     */
+    @JsonProperty("portal_radius")
+    private Long portalRadius;
+
+    /**
      * Hasta cuándo se puede facturar un ticket: `month`, hasta el fin del mes de la venta (lo usual ante el SAT); `days`, `window_days` días después.
      * <p>
      * Valores: month, days.
@@ -172,5 +192,48 @@ public class UpdateSelfInvoicingParams {
     public UpdateSelfInvoicingParams setCodeHint(String codeHint) {
         this.codeHint = codeHint;
         return this;
+    }
+
+    /**
+     * El tema del portal: `auto` (por omisión), el del dispositivo del comprador, que puede cambiarlo; `light` o `dark`, siempre ese. Vale en su página, sus QR y dentro de su sitio (salvo que el código para incrustarlo elija otro).
+     * <p>
+     * Valores: auto, light, dark.
+     */
+    public String getPortalTheme() {
+        return portalTheme;
+    }
+
+    public UpdateSelfInvoicingParams setPortalTheme(String portalTheme) {
+        this.portalTheme = portalTheme;
+        return this;
+    }
+
+    /**
+     * El color de los botones del portal, como `#0b7c77`. `null` pone el de Fiscalisto.
+     */
+    public String getPortalAccent() {
+        return portalAccent;
+    }
+
+    public UpdateSelfInvoicingParams setPortalAccent(String portalAccent) {
+        this.portalAccent = portalAccent;
+        return this;
+    }
+
+    /**
+     * Lo redondo de las esquinas del portal, en píxeles (0 a 24). `null` pone el de Fiscalisto (10).
+     */
+    public Long getPortalRadius() {
+        return portalRadius;
+    }
+
+    public UpdateSelfInvoicingParams setPortalRadius(Long portalRadius) {
+        this.portalRadius = portalRadius;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateSelfInvoicingParams setPortalRadius(long portalRadius) {
+        return setPortalRadius(Long.valueOf(portalRadius));
     }
 }

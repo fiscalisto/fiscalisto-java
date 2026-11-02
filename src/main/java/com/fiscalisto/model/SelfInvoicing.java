@@ -92,6 +92,26 @@ public class SelfInvoicing {
     private String codeHint;
 
     /**
+     * auto: el tema del dispositivo del comprador, que puede cambiarlo. light o dark: siempre ese, en la página del portal, sus QR y dentro de su sitio.
+     * <p>
+     * Valores: auto, light, dark.
+     */
+    @JsonProperty("portal_theme")
+    private String portalTheme;
+
+    /**
+     * El color de los botones del portal («#rrggbb»), o null para el de Fiscalisto.
+     */
+    @JsonProperty("portal_accent")
+    private String portalAccent;
+
+    /**
+     * Las esquinas del portal en píxeles (0 a 24), o null para las de Fiscalisto.
+     */
+    @JsonProperty("portal_radius")
+    private Long portalRadius;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -244,5 +264,48 @@ public class SelfInvoicing {
     public SelfInvoicing setCodeHint(String codeHint) {
         this.codeHint = codeHint;
         return this;
+    }
+
+    /**
+     * auto: el tema del dispositivo del comprador, que puede cambiarlo. light o dark: siempre ese, en la página del portal, sus QR y dentro de su sitio.
+     * <p>
+     * Valores: auto, light, dark.
+     */
+    public String getPortalTheme() {
+        return portalTheme;
+    }
+
+    public SelfInvoicing setPortalTheme(String portalTheme) {
+        this.portalTheme = portalTheme;
+        return this;
+    }
+
+    /**
+     * El color de los botones del portal («#rrggbb»), o null para el de Fiscalisto.
+     */
+    public String getPortalAccent() {
+        return portalAccent;
+    }
+
+    public SelfInvoicing setPortalAccent(String portalAccent) {
+        this.portalAccent = portalAccent;
+        return this;
+    }
+
+    /**
+     * Las esquinas del portal en píxeles (0 a 24), o null para las de Fiscalisto.
+     */
+    public Long getPortalRadius() {
+        return portalRadius;
+    }
+
+    public SelfInvoicing setPortalRadius(Long portalRadius) {
+        this.portalRadius = portalRadius;
+        return this;
+    }
+
+    @JsonIgnore
+    public SelfInvoicing setPortalRadius(long portalRadius) {
+        return setPortalRadius(Long.valueOf(portalRadius));
     }
 }
