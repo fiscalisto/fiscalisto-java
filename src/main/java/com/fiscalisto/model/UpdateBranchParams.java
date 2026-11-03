@@ -19,7 +19,7 @@ public class UpdateBranchParams {
     private String name;
 
     /**
-     * Su código postal (LugarExpedicion de sus CFDI): uno por sucursal, distinto del domicilio fiscal del emisor.
+     * Su código postal (LugarExpedicion de sus CFDI). Varias sucursales pueden compartirlo, y también el del domicilio fiscal del emisor.
      */
     @JsonProperty("zip")
     private String zip;
@@ -87,7 +87,7 @@ public class UpdateBranchParams {
     }
 
     /**
-     * Su código postal (LugarExpedicion de sus CFDI): uno por sucursal, distinto del domicilio fiscal del emisor.
+     * Su código postal (LugarExpedicion de sus CFDI). Varias sucursales pueden compartirlo, y también el del domicilio fiscal del emisor.
      */
     public String getZip() {
         return zip;

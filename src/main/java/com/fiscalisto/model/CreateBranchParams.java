@@ -27,7 +27,7 @@ public class CreateBranchParams {
     private String name;
 
     /**
-     * Su código postal (LugarExpedicion de sus CFDI): uno por sucursal, distinto del domicilio fiscal del emisor.
+     * Su código postal (LugarExpedicion de sus CFDI). Varias sucursales pueden compartirlo, y también el del domicilio fiscal del emisor.
      * <p>
      * Obligatorio.
      */
@@ -105,7 +105,7 @@ public class CreateBranchParams {
     }
 
     /**
-     * Su código postal (LugarExpedicion de sus CFDI): uno por sucursal, distinto del domicilio fiscal del emisor.
+     * Su código postal (LugarExpedicion de sus CFDI). Varias sucursales pueden compartirlo, y también el del domicilio fiscal del emisor.
      * <p>
      * Obligatorio.
      */

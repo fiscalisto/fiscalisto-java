@@ -21,9 +21,6 @@ public final class ErrorCode {
     /** El cuerpo pasa de 10 MB. Divida el trabajo en varios lotes. */
     public static final String BODY_TOO_LARGE = "body_too_large";
 
-    /** El emisor ya tiene una sucursal con ese código postal (cada una lleva el suyo); el mensaje dice cuál. Si está archivada, restáurela con archived: false. */
-    public static final String BRANCH_EXISTS = "branch_exists";
-
     /** La sucursal ya facturó, así que no se borra: archívela con archived: true y sus facturas la siguen nombrando. */
     public static final String BRANCH_HAS_INVOICES = "branch_has_invoices";
 
