@@ -49,6 +49,26 @@ public class UpdateBranchParams {
     private UpdateBranchParamsSeries series;
 
     /**
+     * Su nombre comercial, si se presenta con otra marca: va en grande en el PDF de lo que se factura desde ella, en el correo y en la página de la factura. null toma el del emisor.
+     */
+    @JsonProperty("trade_name")
+    private String tradeName;
+
+    /**
+     * Color del PDF de sus facturas, como #2563EB. null toma el del emisor.
+     */
+    @JsonProperty("pdf_color")
+    private String pdfColor;
+
+    /**
+     * Estilo del PDF de sus facturas: clasico, moderno, compacto o minimalista. null toma el del emisor.
+     * <p>
+     * Valores: clasico, moderno, compacto, minimalista.
+     */
+    @JsonProperty("pdf_style")
+    private String pdfStyle;
+
+    /**
      * true la archiva: ya no se puede facturar desde ella, y sus facturas la siguen nombrando. false la restaura.
      */
     @JsonProperty("archived")
@@ -123,6 +143,44 @@ public class UpdateBranchParams {
 
     public UpdateBranchParams setSeries(UpdateBranchParamsSeries series) {
         this.series = series;
+        return this;
+    }
+
+    /**
+     * Su nombre comercial, si se presenta con otra marca: va en grande en el PDF de lo que se factura desde ella, en el correo y en la página de la factura. null toma el del emisor.
+     */
+    public String getTradeName() {
+        return tradeName;
+    }
+
+    public UpdateBranchParams setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+        return this;
+    }
+
+    /**
+     * Color del PDF de sus facturas, como #2563EB. null toma el del emisor.
+     */
+    public String getPdfColor() {
+        return pdfColor;
+    }
+
+    public UpdateBranchParams setPdfColor(String pdfColor) {
+        this.pdfColor = pdfColor;
+        return this;
+    }
+
+    /**
+     * Estilo del PDF de sus facturas: clasico, moderno, compacto o minimalista. null toma el del emisor.
+     * <p>
+     * Valores: clasico, moderno, compacto, minimalista.
+     */
+    public String getPdfStyle() {
+        return pdfStyle;
+    }
+
+    public UpdateBranchParams setPdfStyle(String pdfStyle) {
+        this.pdfStyle = pdfStyle;
         return this;
     }
 

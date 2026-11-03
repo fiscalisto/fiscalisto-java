@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Branch: Una sucursal del emisor: otro lugar desde donde factura, con su código postal (LugarExpedicion), su dirección en el PDF y sus series.
+ * Branch: Una sucursal del emisor: otro lugar desde donde factura, con su código postal (LugarExpedicion), su dirección en el PDF, sus series y, si quiere, su propia marca (nombre comercial, logo, color y estilo del PDF).
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -71,6 +71,32 @@ public class Branch {
      */
     @JsonProperty("series")
     private BranchSeries series;
+
+    /**
+     * Su nombre comercial propio (PDF, correo y página de la factura); null: el del emisor.
+     */
+    @JsonProperty("trade_name")
+    private String tradeName;
+
+    /**
+     * Su logo propio, para el PDF (se sube en Ajustes › Sucursales); null: el del emisor.
+     */
+    @JsonProperty("logo_url")
+    private String logoUrl;
+
+    /**
+     * Color de su PDF, como #2563EB; null: el del emisor.
+     */
+    @JsonProperty("pdf_color")
+    private String pdfColor;
+
+    /**
+     * Estilo de su PDF; null: el del emisor.
+     * <p>
+     * Valores: clasico, moderno, compacto, minimalista.
+     */
+    @JsonProperty("pdf_style")
+    private String pdfStyle;
 
     /**
      * true si está archivada: ya no se factura desde ella.
@@ -207,6 +233,56 @@ public class Branch {
 
     public Branch setSeries(BranchSeries series) {
         this.series = series;
+        return this;
+    }
+
+    /**
+     * Su nombre comercial propio (PDF, correo y página de la factura); null: el del emisor.
+     */
+    public String getTradeName() {
+        return tradeName;
+    }
+
+    public Branch setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+        return this;
+    }
+
+    /**
+     * Su logo propio, para el PDF (se sube en Ajustes › Sucursales); null: el del emisor.
+     */
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public Branch setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+        return this;
+    }
+
+    /**
+     * Color de su PDF, como #2563EB; null: el del emisor.
+     */
+    public String getPdfColor() {
+        return pdfColor;
+    }
+
+    public Branch setPdfColor(String pdfColor) {
+        this.pdfColor = pdfColor;
+        return this;
+    }
+
+    /**
+     * Estilo de su PDF; null: el del emisor.
+     * <p>
+     * Valores: clasico, moderno, compacto, minimalista.
+     */
+    public String getPdfStyle() {
+        return pdfStyle;
+    }
+
+    public Branch setPdfStyle(String pdfStyle) {
+        this.pdfStyle = pdfStyle;
         return this;
     }
 
