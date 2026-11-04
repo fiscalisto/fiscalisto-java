@@ -22,15 +22,13 @@ public class InvoiceCreateComercioExteriorGood {
     private String id;
 
     /**
-     * Fracción arancelaria (FraccionArancelaria), 10 dígitos. Transporte internacional.
+     * Fracción arancelaria (FraccionArancelaria), 10 dígitos con el NICO, vigente en c_FraccionArancelaria (búsquela en `GET /v1/sat_catalogs/customs_tariffs`); una que no lo esté se rechaza antes de timbrar.
      */
     @JsonProperty("tariff")
     private String tariff;
 
     /**
-     * Unidad aduana (UnidadAduana), c_UnidadAduana.
-     * <p>
-     * Obligatorio.
+     * Unidad aduana (UnidadAduana), c_UnidadAduana; 99 en un servicio. Con `tariff` puede omitirse: va la UMT de la fracción en el catálogo del SAT (otra la rechaza el SAT con CCE161).
      */
     @JsonProperty("unit")
     private String unit;
@@ -60,7 +58,7 @@ public class InvoiceCreateComercioExteriorGood {
     }
 
     /**
-     * Fracción arancelaria (FraccionArancelaria), 10 dígitos. Transporte internacional.
+     * Fracción arancelaria (FraccionArancelaria), 10 dígitos con el NICO, vigente en c_FraccionArancelaria (búsquela en `GET /v1/sat_catalogs/customs_tariffs`); una que no lo esté se rechaza antes de timbrar.
      */
     public String getTariff() {
         return tariff;
@@ -72,9 +70,7 @@ public class InvoiceCreateComercioExteriorGood {
     }
 
     /**
-     * Unidad aduana (UnidadAduana), c_UnidadAduana.
-     * <p>
-     * Obligatorio.
+     * Unidad aduana (UnidadAduana), c_UnidadAduana; 99 en un servicio. Con `tariff` puede omitirse: va la UMT de la fracción en el catálogo del SAT (otra la rechaza el SAT con CCE161).
      */
     public String getUnit() {
         return unit;
