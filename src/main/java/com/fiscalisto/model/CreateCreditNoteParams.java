@@ -17,6 +17,12 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateCreditNoteParams {
     /**
+     * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
+     */
+    @JsonProperty("issuer")
+    private String issuer;
+
+    /**
      * La factura (inv_… o su UUID).
      * <p>
      * Obligatorio.
@@ -77,6 +83,18 @@ public class CreateCreditNoteParams {
      */
     @JsonProperty("metadata")
     private Map<String, String> metadata;
+
+    /**
+     * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
+     */
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public CreateCreditNoteParams setIssuer(String issuer) {
+        this.issuer = issuer;
+        return this;
+    }
 
     /**
      * La factura (inv_… o su UUID).
