@@ -13,11 +13,13 @@ import com.fiscalisto.model.GetDiotParams;
 import com.fiscalisto.model.GetElectronicAccountingParams;
 import com.fiscalisto.model.GetFinancialStatementsParams;
 import com.fiscalisto.model.GetTrialBalanceParams;
+import com.fiscalisto.model.GetVatRefundParams;
 import com.fiscalisto.model.JournalEntry;
 import com.fiscalisto.model.LedgerAccountList;
 import com.fiscalisto.model.ListJournalEntriesParams;
 import com.fiscalisto.model.ListLedgerAccountsParams;
 import com.fiscalisto.model.TrialBalance;
+import com.fiscalisto.model.VatRefund;
 
 /**
  * Contabilidad: client.accounting().
@@ -108,6 +110,27 @@ public final class AccountingService {
 
     public CrossChecks crossChecks() {
         return crossChecks(null, null);
+    }
+
+    /**
+     * Ver el IVA a favor y preparar su devolución
+     * <p>
+     * El IVA a favor de cada mes de los últimos cinco años (de las declaraciones leídas con POST /v1/sat_declarations/refresh o, sin ellas, de sus CFDI, con estimated en true), cuánto se acreditó después (del saldo más antiguo primero), cuánto queda, qué está en devolución y cuándo prescribe. Con `month`, la revisión de ese mes antes de pedirlo en el SAT: declaración, cruce con CFDI, DIOT, opinión de cumplimiento, Buzón Tributario, e.firma, listas del SAT, CFDI de proveedores con hallazgos y CLABE, con el monto a pedir. No presenta nada en el SAT. Gratis.
+     * <p>
+     * GET /v1/accounting/vat_refund
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-vat-refund
+     */
+    public VatRefund vatRefund(GetVatRefundParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/vat_refund", null, params, false, VatRefund.class, options);
+    }
+
+    public VatRefund vatRefund(GetVatRefundParams params) {
+        return vatRefund(params, null);
+    }
+
+    public VatRefund vatRefund() {
+        return vatRefund(null, null);
     }
 
     /**

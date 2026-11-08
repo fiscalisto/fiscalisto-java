@@ -4,18 +4,36 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.CreateCustomerParams;
 import com.fiscalisto.model.Customer;
+import com.fiscalisto.model.CustomerPaymentBehavior;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListCustomersParams;
 import com.fiscalisto.model.UpdateCustomerParams;
 
 /**
- * Clientes: client.customers().
+ * Cuentas por cobrar: client.customers().
  */
 public final class CustomersService {
     private final ApiClient api;
 
     CustomersService(ApiClient api) {
         this.api = api;
+    }
+
+    /**
+     * Ver cómo paga un cliente
+     * <p>
+     * Cuántos días tarda en pagar, qué parte llega a tiempo con sus días de crédito, si paga más lento que antes, cómo le paga y cuándo le llegaría lo que debe. De sus facturas a crédito (PPD) de los últimos 12 meses y sus complementos de pago, como «Cómo paga» en la app. No aplica a XAXX010101000 ni XEXX010101000.
+     * <p>
+     * GET /v1/customers/{id}/payment_behavior
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/cuentas-por-cobrar/get-customer-payment-behavior
+     */
+    public CustomerPaymentBehavior paymentBehavior(String id, RequestOptions options) {
+        return api.request("GET", "/v1/customers/" + ApiClient.encode(id) + "/payment_behavior", null, null, false, CustomerPaymentBehavior.class, options);
+    }
+
+    public CustomerPaymentBehavior paymentBehavior(String id) {
+        return paymentBehavior(id, null);
     }
 
     /**

@@ -41,9 +41,9 @@ public class JournalEntry {
     private String issuer;
 
     /**
-     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina) o depreciation (la depreciación del mes de los activos fijos).
+     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina), employee_expenses (un anticipo, reembolso, devolución o comprobación de viáticos, contra 107.01 «Funcionarios y empleados») o depreciation (la depreciación del mes de los activos fijos).
      * <p>
-     * Valores: invoice, payment_received, payment_made, payroll, depreciation.
+     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation.
      */
     @JsonProperty("type")
     private String type;
@@ -151,9 +151,9 @@ public class JournalEntry {
     }
 
     /**
-     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina) o depreciation (la depreciación del mes de los activos fijos).
+     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina), employee_expenses (un anticipo, reembolso, devolución o comprobación de viáticos, contra 107.01 «Funcionarios y empleados») o depreciation (la depreciación del mes de los activos fijos).
      * <p>
-     * Valores: invoice, payment_received, payment_made, payroll, depreciation.
+     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation.
      */
     public String getType() {
         return type;

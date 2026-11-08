@@ -18,6 +18,7 @@ public final class FiscalistoClient {
     private final IssuersService issuers;
     private final InvoicesService invoices;
     private final ReceivablesService receivables;
+    private final CustomersService customers;
     private final BankTransactionsService bankTransactions;
     private final PurchaseReceiptsService purchaseReceipts;
     private final PaymentsService payments;
@@ -34,7 +35,9 @@ public final class FiscalistoClient {
     private final TaxIdsService taxIds;
     private final BranchesService branches;
     private final CostCentersService costCenters;
-    private final CustomersService customers;
+    private final ExpensePeopleService expensePeople;
+    private final ExpenseReportsService expenseReports;
+    private final ExpensePolicyService expensePolicy;
     private final CustomerDataRequestsService customerDataRequests;
     private final ProductsService products;
     private final SatMailboxMessagesService satMailboxMessages;
@@ -77,6 +80,7 @@ public final class FiscalistoClient {
         this.issuers = new IssuersService(api);
         this.invoices = new InvoicesService(api);
         this.receivables = new ReceivablesService(api);
+        this.customers = new CustomersService(api);
         this.bankTransactions = new BankTransactionsService(api);
         this.purchaseReceipts = new PurchaseReceiptsService(api);
         this.payments = new PaymentsService(api);
@@ -93,7 +97,9 @@ public final class FiscalistoClient {
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
         this.costCenters = new CostCentersService(api);
-        this.customers = new CustomersService(api);
+        this.expensePeople = new ExpensePeopleService(api);
+        this.expenseReports = new ExpenseReportsService(api);
+        this.expensePolicy = new ExpensePolicyService(api);
         this.customerDataRequests = new CustomerDataRequestsService(api);
         this.products = new ProductsService(api);
         this.satMailboxMessages = new SatMailboxMessagesService(api);
@@ -159,6 +165,11 @@ public final class FiscalistoClient {
     /** Cuentas por cobrar. */
     public ReceivablesService receivables() {
         return receivables;
+    }
+
+    /** Cuentas por cobrar. */
+    public CustomersService customers() {
+        return customers;
     }
 
     /** Conciliación bancaria. */
@@ -241,9 +252,19 @@ public final class FiscalistoClient {
         return costCenters;
     }
 
-    /** Clientes. */
-    public CustomersService customers() {
-        return customers;
+    /** Viáticos y gastos. */
+    public ExpensePeopleService expensePeople() {
+        return expensePeople;
+    }
+
+    /** Viáticos y gastos. */
+    public ExpenseReportsService expenseReports() {
+        return expenseReports;
+    }
+
+    /** Viáticos y gastos. */
+    public ExpensePolicyService expensePolicy() {
+        return expensePolicy;
     }
 
     /** Clientes. */
