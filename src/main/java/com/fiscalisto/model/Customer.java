@@ -2,9 +2,12 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
 
 /**
  * Customer: Un cliente del catálogo de un emisor.
@@ -83,6 +86,24 @@ public class Customer {
      */
     @JsonProperty("ieps_taxpayer")
     private Boolean iepsTaxpayer;
+
+    /**
+     * Su grupo de clientes (cgr_…), o null si no está en ninguno.
+     */
+    @JsonProperty("group")
+    private String group;
+
+    /**
+     * Lista de precios (prl_…). En un cliente, la suya propia, que gana a la de su grupo; null para usar la de su grupo o la de todos.
+     */
+    @JsonProperty("price_list")
+    private String priceList;
+
+    /**
+     * Porcentaje de descuento sobre el precio, de 0 a 100; en el CFDI va como Descuento de cada concepto.
+     */
+    @JsonProperty("discount_percent")
+    private BigDecimal discountPercent;
 
     /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
@@ -238,6 +259,47 @@ public class Customer {
     public Customer setIepsTaxpayer(Boolean iepsTaxpayer) {
         this.iepsTaxpayer = iepsTaxpayer;
         return this;
+    }
+
+    /**
+     * Su grupo de clientes (cgr_…), o null si no está en ninguno.
+     */
+    public String getGroup() {
+        return group;
+    }
+
+    public Customer setGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    /**
+     * Lista de precios (prl_…). En un cliente, la suya propia, que gana a la de su grupo; null para usar la de su grupo o la de todos.
+     */
+    public String getPriceList() {
+        return priceList;
+    }
+
+    public Customer setPriceList(String priceList) {
+        this.priceList = priceList;
+        return this;
+    }
+
+    /**
+     * Porcentaje de descuento sobre el precio, de 0 a 100; en el CFDI va como Descuento de cada concepto.
+     */
+    public BigDecimal getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public Customer setDiscountPercent(BigDecimal discountPercent) {
+        this.discountPercent = discountPercent;
+        return this;
+    }
+
+    @JsonIgnore
+    public Customer setDiscountPercent(double discountPercent) {
+        return setDiscountPercent(BigDecimal.valueOf(discountPercent));
     }
 
     /**

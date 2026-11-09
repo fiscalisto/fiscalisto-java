@@ -155,6 +155,24 @@ public class Product {
     private BigDecimal minStock;
 
     /**
+     * true si se ofrece en el Portal del cliente para hacer pedidos.
+     */
+    @JsonProperty("portal_visible")
+    private Boolean portalVisible;
+
+    /**
+     * Lo mínimo que se pide de él en el Portal del cliente, o null sin mínimo.
+     */
+    @JsonProperty("min_order_qty")
+    private BigDecimal minOrderQty;
+
+    /**
+     * De cuántos en cuántos se pide en el Portal del cliente (6 para pedir 6, 12, 18…), o null de uno en uno.
+     */
+    @JsonProperty("order_step")
+    private BigDecimal orderStep;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -470,6 +488,52 @@ public class Product {
     @JsonIgnore
     public Product setMinStock(double minStock) {
         return setMinStock(BigDecimal.valueOf(minStock));
+    }
+
+    /**
+     * true si se ofrece en el Portal del cliente para hacer pedidos.
+     */
+    public Boolean getPortalVisible() {
+        return portalVisible;
+    }
+
+    public Product setPortalVisible(Boolean portalVisible) {
+        this.portalVisible = portalVisible;
+        return this;
+    }
+
+    /**
+     * Lo mínimo que se pide de él en el Portal del cliente, o null sin mínimo.
+     */
+    public BigDecimal getMinOrderQty() {
+        return minOrderQty;
+    }
+
+    public Product setMinOrderQty(BigDecimal minOrderQty) {
+        this.minOrderQty = minOrderQty;
+        return this;
+    }
+
+    @JsonIgnore
+    public Product setMinOrderQty(double minOrderQty) {
+        return setMinOrderQty(BigDecimal.valueOf(minOrderQty));
+    }
+
+    /**
+     * De cuántos en cuántos se pide en el Portal del cliente (6 para pedir 6, 12, 18…), o null de uno en uno.
+     */
+    public BigDecimal getOrderStep() {
+        return orderStep;
+    }
+
+    public Product setOrderStep(BigDecimal orderStep) {
+        this.orderStep = orderStep;
+        return this;
+    }
+
+    @JsonIgnore
+    public Product setOrderStep(double orderStep) {
+        return setOrderStep(BigDecimal.valueOf(orderStep));
     }
 
     /**

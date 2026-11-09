@@ -2,9 +2,12 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
 
 /**
  * UpdateCustomerParams: los campos de «Actualizar un cliente».
@@ -53,6 +56,24 @@ public class UpdateCustomerParams {
      */
     @JsonProperty("foreign")
     private UpdateCustomerParamsForeign foreign;
+
+    /**
+     * Su grupo de clientes (cgr_…), o null para ninguno.
+     */
+    @JsonProperty("group")
+    private String group;
+
+    /**
+     * Su propia lista de precios (prl_…), que gana sobre la de su grupo; null: la de su grupo o la de todos.
+     */
+    @JsonProperty("price_list")
+    private String priceList;
+
+    /**
+     * Su propio descuento en cada concepto, en %; null: el de su grupo.
+     */
+    @JsonProperty("discount_percent")
+    private BigDecimal discountPercent;
 
     /**
      * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio.
@@ -142,6 +163,47 @@ public class UpdateCustomerParams {
     public UpdateCustomerParams setForeign(UpdateCustomerParamsForeign foreign) {
         this.foreign = foreign;
         return this;
+    }
+
+    /**
+     * Su grupo de clientes (cgr_…), o null para ninguno.
+     */
+    public String getGroup() {
+        return group;
+    }
+
+    public UpdateCustomerParams setGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    /**
+     * Su propia lista de precios (prl_…), que gana sobre la de su grupo; null: la de su grupo o la de todos.
+     */
+    public String getPriceList() {
+        return priceList;
+    }
+
+    public UpdateCustomerParams setPriceList(String priceList) {
+        this.priceList = priceList;
+        return this;
+    }
+
+    /**
+     * Su propio descuento en cada concepto, en %; null: el de su grupo.
+     */
+    public BigDecimal getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public UpdateCustomerParams setDiscountPercent(BigDecimal discountPercent) {
+        this.discountPercent = discountPercent;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateCustomerParams setDiscountPercent(double discountPercent) {
+        return setDiscountPercent(BigDecimal.valueOf(discountPercent));
     }
 
     /**

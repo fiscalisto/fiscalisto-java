@@ -137,6 +137,24 @@ public class UpdateProductParams {
     private BigDecimal minStock;
 
     /**
+     * Se vende en el Portal del cliente: sus clientes lo piden desde ahí, a sus precios (listas de precios), y el pedido llega por confirmar.
+     */
+    @JsonProperty("portal_visible")
+    private Boolean portalVisible;
+
+    /**
+     * Lo menos que se le pide desde el portal, en su unidad.
+     */
+    @JsonProperty("min_order_qty")
+    private BigDecimal minOrderQty;
+
+    /**
+     * Se pide de tantos en tantos desde el portal (12: de 12 en 12).
+     */
+    @JsonProperty("order_step")
+    private BigDecimal orderStep;
+
+    /**
      * Nombre corto para encontrarlo, solo para usted; en el CFDI va description.
      */
     public String getName() {
@@ -398,5 +416,51 @@ public class UpdateProductParams {
     @JsonIgnore
     public UpdateProductParams setMinStock(double minStock) {
         return setMinStock(BigDecimal.valueOf(minStock));
+    }
+
+    /**
+     * Se vende en el Portal del cliente: sus clientes lo piden desde ahí, a sus precios (listas de precios), y el pedido llega por confirmar.
+     */
+    public Boolean getPortalVisible() {
+        return portalVisible;
+    }
+
+    public UpdateProductParams setPortalVisible(Boolean portalVisible) {
+        this.portalVisible = portalVisible;
+        return this;
+    }
+
+    /**
+     * Lo menos que se le pide desde el portal, en su unidad.
+     */
+    public BigDecimal getMinOrderQty() {
+        return minOrderQty;
+    }
+
+    public UpdateProductParams setMinOrderQty(BigDecimal minOrderQty) {
+        this.minOrderQty = minOrderQty;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateProductParams setMinOrderQty(double minOrderQty) {
+        return setMinOrderQty(BigDecimal.valueOf(minOrderQty));
+    }
+
+    /**
+     * Se pide de tantos en tantos desde el portal (12: de 12 en 12).
+     */
+    public BigDecimal getOrderStep() {
+        return orderStep;
+    }
+
+    public UpdateProductParams setOrderStep(BigDecimal orderStep) {
+        this.orderStep = orderStep;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateProductParams setOrderStep(double orderStep) {
+        return setOrderStep(BigDecimal.valueOf(orderStep));
     }
 }
