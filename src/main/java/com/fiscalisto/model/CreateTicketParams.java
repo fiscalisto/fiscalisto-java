@@ -89,6 +89,12 @@ public class CreateTicketParams {
     private String iva;
 
     /**
+     * Quién pagó, para reconocer la venta en Tickets. No es el receptor de la factura (eso lo escribe el comprador en el portal) y no se le manda nada.
+     */
+    @JsonProperty("buyer")
+    private CreateTicketParamsBuyer buyer;
+
+    /**
      * Una venta de varios conceptos (el folio de un hotel: noches, desayunos, lavandería), cada uno con su producto o sus claves, sus impuestos y lo que se cobró por él; hasta 200. En lugar de `product`, `description`, `product_key`, `unit_key` e `iva`. La factura del cliente lleva un concepto por línea; la factura global, uno por cada combinación de impuestos del ticket.
      */
     @JsonProperty("lines")
@@ -239,6 +245,18 @@ public class CreateTicketParams {
 
     public CreateTicketParams setIva(String iva) {
         this.iva = iva;
+        return this;
+    }
+
+    /**
+     * Quién pagó, para reconocer la venta en Tickets. No es el receptor de la factura (eso lo escribe el comprador en el portal) y no se le manda nada.
+     */
+    public CreateTicketParamsBuyer getBuyer() {
+        return buyer;
+    }
+
+    public CreateTicketParams setBuyer(CreateTicketParamsBuyer buyer) {
+        this.buyer = buyer;
         return this;
     }
 

@@ -133,6 +133,12 @@ public class Ticket {
     private TicketCustomer customer;
 
     /**
+     * Quién pagó, como lo conoce el origen de la venta (el `buyer` que mandó, o el cliente de un pago de Stripe). No es el receptor de la factura (`customer`).
+     */
+    @JsonProperty("buyer")
+    private TicketBuyer buyer;
+
+    /**
      * Cuándo se registró.
      */
     @JsonProperty("created_at")
@@ -375,6 +381,18 @@ public class Ticket {
 
     public Ticket setCustomer(TicketCustomer customer) {
         this.customer = customer;
+        return this;
+    }
+
+    /**
+     * Quién pagó, como lo conoce el origen de la venta (el `buyer` que mandó, o el cliente de un pago de Stripe). No es el receptor de la factura (`customer`).
+     */
+    public TicketBuyer getBuyer() {
+        return buyer;
+    }
+
+    public Ticket setBuyer(TicketBuyer buyer) {
+        this.buyer = buyer;
         return this;
     }
 
