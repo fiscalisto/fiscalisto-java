@@ -41,6 +41,14 @@ public class Issuer {
     private String source;
 
     /**
+     * own: un RFC de la empresa de esta API (lo da de alta la empresa en la app; no se archiva por la API). connected: un emisor conectado, que su plataforma agregó con POST /v1/issuers. portal: otra empresa de Fiscalisto conectada por su Portal de proveedores.
+     * <p>
+     * Valores: own, connected, portal.
+     */
+    @JsonProperty("type")
+    private String type;
+
+    /**
      * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
      */
     @JsonProperty("tax_id")
@@ -185,6 +193,20 @@ public class Issuer {
 
     public Issuer setSource(String source) {
         this.source = source;
+        return this;
+    }
+
+    /**
+     * own: un RFC de la empresa de esta API (lo da de alta la empresa en la app; no se archiva por la API). connected: un emisor conectado, que su plataforma agregó con POST /v1/issuers. portal: otra empresa de Fiscalisto conectada por su Portal de proveedores.
+     * <p>
+     * Valores: own, connected, portal.
+     */
+    public String getType() {
+        return type;
+    }
+
+    public Issuer setType(String type) {
+        this.type = type;
         return this;
     }
 
