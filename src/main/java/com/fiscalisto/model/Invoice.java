@@ -180,6 +180,12 @@ public class Invoice {
     private BigDecimal amountPaid;
 
     /**
+     * Una PUE que estuvo por cobrar (paid_later o mark_unpaid): el día en que el cliente pagó (AAAA-MM-DD), el que dijo POST /v1/invoices/{id}/mark_paid o el del depósito conciliado con ella. null si no hay fecha de pago registrada (una PUE pagada al timbrarse), si no se ha pagado o si es PPD (sus pagos están en sus complementos).
+     */
+    @JsonProperty("paid_on")
+    private String paidOn;
+
+    /**
      * CFDI relacionados (CfdiRelacionados): tipo de relación de c_TipoRelacion y los UUID.
      */
     @JsonProperty("related")
@@ -609,6 +615,18 @@ public class Invoice {
     @JsonIgnore
     public Invoice setAmountPaid(double amountPaid) {
         return setAmountPaid(BigDecimal.valueOf(amountPaid));
+    }
+
+    /**
+     * Una PUE que estuvo por cobrar (paid_later o mark_unpaid): el día en que el cliente pagó (AAAA-MM-DD), el que dijo POST /v1/invoices/{id}/mark_paid o el del depósito conciliado con ella. null si no hay fecha de pago registrada (una PUE pagada al timbrarse), si no se ha pagado o si es PPD (sus pagos están en sus complementos).
+     */
+    public String getPaidOn() {
+        return paidOn;
+    }
+
+    public Invoice setPaidOn(String paidOn) {
+        this.paidOn = paidOn;
+        return this;
     }
 
     /**

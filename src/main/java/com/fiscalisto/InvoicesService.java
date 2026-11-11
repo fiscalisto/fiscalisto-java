@@ -9,6 +9,7 @@ import com.fiscalisto.model.GetInvoiceXmlParams;
 import com.fiscalisto.model.Invoice;
 import com.fiscalisto.model.InvoiceCreate;
 import com.fiscalisto.model.ListInvoicesParams;
+import com.fiscalisto.model.MarkInvoicePaidParams;
 import com.fiscalisto.model.SendInvoiceParams;
 import com.fiscalisto.model.UpdateInvoiceParams;
 
@@ -219,18 +220,22 @@ public final class InvoicesService {
     /**
      * Marcar pagada
      * <p>
-     * Una factura PUE timbrada con paid_later (o marcada por cobrar) ya se pagó: queda paid y llega invoice.paid. Una PPD se paga con su complemento de pago (POST /v1/payments).
+     * Una factura PUE timbrada con paid_later (o marcada por cobrar) ya se pagó: queda paid, con paid_on el día que indique (hoy si no), y llega invoice.paid. Una PPD se paga con su complemento de pago (POST /v1/payments).
      * <p>
      * POST /v1/invoices/{id}/mark_paid
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/cuentas-por-cobrar/mark-invoice-paid
      */
-    public Invoice markPaid(String id, RequestOptions options) {
-        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_paid", null, null, true, Invoice.class, options);
+    public Invoice markPaid(String id, MarkInvoicePaidParams params, RequestOptions options) {
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/mark_paid", params, null, true, Invoice.class, options);
+    }
+
+    public Invoice markPaid(String id, MarkInvoicePaidParams params) {
+        return markPaid(id, params, null);
     }
 
     public Invoice markPaid(String id) {
-        return markPaid(id, null);
+        return markPaid(id, null, null);
     }
 
     /**
