@@ -294,6 +294,9 @@ public final class ErrorCode {
     /** Los complementos de pago y las notas de crédito no se sustituyen: se cancelan y se emite otro. Un recibo de nómina se sustituye con POST /v1/payroll_receipts/external y replaces. */
     public static final String SUBSTITUTION_UNSUPPORTED = "substitution_unsupported";
 
+    /** La factura del proveedor no admite eso en su estado (por ejemplo, programar una que no está aprobada, una fecha de pago pasada o marcar pagada una ya pagada), o el SAT la reporta cancelada. El mensaje dice por qué. */
+    public static final String SUPPLIER_INVOICE_INVALID = "supplier_invoice_invalid";
+
     /** El reloj se está adelantando en otra solicitud (409, con Retry-After). Espere a test_clock.ready y repita. */
     public static final String TEST_CLOCK_ADVANCING = "test_clock_advancing";
 

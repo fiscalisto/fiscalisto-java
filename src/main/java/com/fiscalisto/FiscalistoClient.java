@@ -54,6 +54,8 @@ public final class FiscalistoClient {
     private final SatDownloadsService satDownloads;
     private final SatInvoicesService satInvoices;
     private final SatRetentionsService satRetentions;
+    private final PortalSuppliersService portalSuppliers;
+    private final SupplierInvoicesService supplierInvoices;
     private final SatDeclarationsService satDeclarations;
     private final TicketsService tickets;
     private final AccountingService accounting;
@@ -121,6 +123,8 @@ public final class FiscalistoClient {
         this.satDownloads = new SatDownloadsService(api);
         this.satInvoices = new SatInvoicesService(api);
         this.satRetentions = new SatRetentionsService(api);
+        this.portalSuppliers = new PortalSuppliersService(api);
+        this.supplierInvoices = new SupplierInvoicesService(api);
         this.satDeclarations = new SatDeclarationsService(api);
         this.tickets = new TicketsService(api);
         this.accounting = new AccountingService(api);
@@ -355,6 +359,16 @@ public final class FiscalistoClient {
     /** Descargas del SAT. */
     public SatRetentionsService satRetentions() {
         return satRetentions;
+    }
+
+    /** Portal de proveedores. */
+    public PortalSuppliersService portalSuppliers() {
+        return portalSuppliers;
+    }
+
+    /** Portal de proveedores. */
+    public SupplierInvoicesService supplierInvoices() {
+        return supplierInvoices;
     }
 
     /** Declaraciones del SAT. */
