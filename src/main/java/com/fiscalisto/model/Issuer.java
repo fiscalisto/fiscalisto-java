@@ -33,6 +33,14 @@ public class Issuer {
     private String object;
 
     /**
+     * api si lo creó con la API o en Desarrolladores; empresa si es una empresa de la app conectada a su cuenta (Desarrolladores › Emisores › Conectar una empresa): con ella solo se usa su Portal de proveedores, y status siempre es active.
+     * <p>
+     * Valores: api, empresa.
+     */
+    @JsonProperty("source")
+    private String source;
+
+    /**
      * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
      */
     @JsonProperty("tax_id")
@@ -163,6 +171,20 @@ public class Issuer {
 
     public Issuer setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * api si lo creó con la API o en Desarrolladores; empresa si es una empresa de la app conectada a su cuenta (Desarrolladores › Emisores › Conectar una empresa): con ella solo se usa su Portal de proveedores, y status siempre es active.
+     * <p>
+     * Valores: api, empresa.
+     */
+    public String getSource() {
+        return source;
+    }
+
+    public Issuer setSource(String source) {
+        this.source = source;
         return this;
     }
 
