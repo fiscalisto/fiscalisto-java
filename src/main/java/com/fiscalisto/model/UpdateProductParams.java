@@ -155,6 +155,12 @@ public class UpdateProductParams {
     private BigDecimal orderStep;
 
     /**
+     * Su categoría, con las de arriba separadas por › (también &gt; o /): «Ferretería › Tornillos». Si no existe, se crea. null la quita.
+     */
+    @JsonProperty("category")
+    private String category;
+
+    /**
      * Nombre corto para encontrarlo, solo para usted; en el CFDI va description.
      */
     public String getName() {
@@ -462,5 +468,17 @@ public class UpdateProductParams {
     @JsonIgnore
     public UpdateProductParams setOrderStep(double orderStep) {
         return setOrderStep(BigDecimal.valueOf(orderStep));
+    }
+
+    /**
+     * Su categoría, con las de arriba separadas por › (también &gt; o /): «Ferretería › Tornillos». Si no existe, se crea. null la quita.
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    public UpdateProductParams setCategory(String category) {
+        this.category = category;
+        return this;
     }
 }

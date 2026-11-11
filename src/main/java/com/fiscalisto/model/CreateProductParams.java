@@ -165,6 +165,12 @@ public class CreateProductParams {
     private BigDecimal orderStep;
 
     /**
+     * Su categoría, con las de arriba separadas por › (también &gt; o /): «Ferretería › Tornillos». Si no existe, se crea. null la quita.
+     */
+    @JsonProperty("category")
+    private String category;
+
+    /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
      */
     public String getIssuer() {
@@ -488,5 +494,17 @@ public class CreateProductParams {
     @JsonIgnore
     public CreateProductParams setOrderStep(double orderStep) {
         return setOrderStep(BigDecimal.valueOf(orderStep));
+    }
+
+    /**
+     * Su categoría, con las de arriba separadas por › (también &gt; o /): «Ferretería › Tornillos». Si no existe, se crea. null la quita.
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    public CreateProductParams setCategory(String category) {
+        this.category = category;
+        return this;
     }
 }

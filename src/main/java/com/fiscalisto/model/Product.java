@@ -77,6 +77,12 @@ public class Product {
     private String sku;
 
     /**
+     * Su categoría, con las de arriba separadas por › («Ferretería › Tornillos»), o null si no tiene.
+     */
+    @JsonProperty("category")
+    private String category;
+
+    /**
      * Precio unitario antes de impuestos (ValorUnitario).
      */
     @JsonProperty("unit_price")
@@ -301,6 +307,18 @@ public class Product {
 
     public Product setSku(String sku) {
         this.sku = sku;
+        return this;
+    }
+
+    /**
+     * Su categoría, con las de arriba separadas por › («Ferretería › Tornillos»), o null si no tiene.
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    public Product setCategory(String category) {
+        this.category = category;
         return this;
     }
 

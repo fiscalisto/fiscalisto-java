@@ -44,6 +44,12 @@ public class ListProductsParams {
     private String productKey;
 
     /**
+     * Solo los de esta categoría y sus subcategorías: «Ferretería» o «Ferretería › Tornillos».
+     */
+    @JsonProperty("category")
+    private String category;
+
+    /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
      */
     public Long getLimit() {
@@ -105,6 +111,18 @@ public class ListProductsParams {
 
     public ListProductsParams setProductKey(String productKey) {
         this.productKey = productKey;
+        return this;
+    }
+
+    /**
+     * Solo los de esta categoría y sus subcategorías: «Ferretería» o «Ferretería › Tornillos».
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    public ListProductsParams setCategory(String category) {
+        this.category = category;
         return this;
     }
 }

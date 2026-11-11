@@ -39,7 +39,7 @@ public final class ProductsService {
     /**
      * Listar productos
      * <p>
-     * Los productos del emisor, los más recientes primero. Filtre por sku o product_key.
+     * Los productos del emisor, los más recientes primero. Filtre por sku, product_key o category.
      * <p>
      * GET /v1/products
      * <p>
