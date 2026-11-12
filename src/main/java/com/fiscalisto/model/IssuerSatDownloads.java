@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * IssuerSatDownloads: Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at).
+ * IssuerSatDownloads: Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at); un RFC de su empresa (type own) usa la que la empresa guardó en la app.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IssuerSatDownloads {
     /**
-     * true si puede pedir descargas al SAT ahora: siempre en pruebas; en producción con su e.firma guardada y vigente.
+     * true si puede pedir descargas al SAT ahora: siempre en pruebas; en producción con su e.firma guardada y vigente (la de la app, en un RFC de su empresa).
      */
     @JsonProperty("available")
     private Boolean available;
@@ -25,7 +25,7 @@ public class IssuerSatDownloads {
     private String efirmaExpiresAt;
 
     /**
-     * true si puede pedir descargas al SAT ahora: siempre en pruebas; en producción con su e.firma guardada y vigente.
+     * true si puede pedir descargas al SAT ahora: siempre en pruebas; en producción con su e.firma guardada y vigente (la de la app, en un RFC de su empresa).
      */
     public Boolean getAvailable() {
         return available;
