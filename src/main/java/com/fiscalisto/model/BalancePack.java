@@ -14,6 +14,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BalancePack {
     /**
+     * welcome: los timbres de bienvenida (no vencen); purchase: un paquete comprado o una recarga automática; referral: los de una recomendación.
+     * <p>
+     * Valores: welcome, purchase, referral.
+     */
+    @JsonProperty("type")
+    private String type;
+
+    /**
      * Timbres del paquete.
      */
     @JsonProperty("timbres")
@@ -36,6 +44,20 @@ public class BalancePack {
      */
     @JsonProperty("expires_at")
     private String expiresAt;
+
+    /**
+     * welcome: los timbres de bienvenida (no vencen); purchase: un paquete comprado o una recarga automática; referral: los de una recomendación.
+     * <p>
+     * Valores: welcome, purchase, referral.
+     */
+    public String getType() {
+        return type;
+    }
+
+    public BalancePack setType(String type) {
+        this.type = type;
+        return this;
+    }
 
     /**
      * Timbres del paquete.

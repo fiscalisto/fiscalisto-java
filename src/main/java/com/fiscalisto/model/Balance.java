@@ -52,6 +52,12 @@ public class Balance {
     private BalanceAutoRecharge autoRecharge;
 
     /**
+     * true si, al acabarse `available`, la API sigue timbrando con los timbres del plan de la empresa (Desarrolladores › Timbres › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
+     */
+    @JsonProperty("use_plan_timbres")
+    private Boolean usePlanTimbres;
+
+    /**
      * Los paquetes con timbres, el que vence antes primero (en ese orden se usan).
      */
     @JsonProperty("packs")
@@ -136,6 +142,18 @@ public class Balance {
 
     public Balance setAutoRecharge(BalanceAutoRecharge autoRecharge) {
         this.autoRecharge = autoRecharge;
+        return this;
+    }
+
+    /**
+     * true si, al acabarse `available`, la API sigue timbrando con los timbres del plan de la empresa (Desarrolladores › Timbres › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
+     */
+    public Boolean getUsePlanTimbres() {
+        return usePlanTimbres;
+    }
+
+    public Balance setUsePlanTimbres(Boolean usePlanTimbres) {
+        this.usePlanTimbres = usePlanTimbres;
         return this;
     }
 
