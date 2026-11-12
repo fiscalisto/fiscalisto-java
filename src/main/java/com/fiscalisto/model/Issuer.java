@@ -117,7 +117,7 @@ public class Issuer {
     private IssuerDonationAuthorization donationAuthorization;
 
     /**
-     * RFC con el que se timbra: el del emisor en producción y el de pruebas del SAT (EKU9003173C9) en pruebas, con régimen 601 o, si el emisor es donataria (tax_system 603), 603.
+     * RFC con el que se timbra: el del emisor en producción y, en pruebas, el contribuyente de pruebas del SAT de su tipo: EKU9003173C9 para una persona moral, CACX7605101P8 para una persona física (con su CURP en la nómina). Se timbra con el régimen y el código postal del emisor.
      */
     @JsonProperty("stamps_as")
     private String stampsAs;
@@ -351,7 +351,7 @@ public class Issuer {
     }
 
     /**
-     * RFC con el que se timbra: el del emisor en producción y el de pruebas del SAT (EKU9003173C9) en pruebas, con régimen 601 o, si el emisor es donataria (tax_system 603), 603.
+     * RFC con el que se timbra: el del emisor en producción y, en pruebas, el contribuyente de pruebas del SAT de su tipo: EKU9003173C9 para una persona moral, CACX7605101P8 para una persona física (con su CURP en la nómina). Se timbra con el régimen y el código postal del emisor.
      */
     public String getStampsAs() {
         return stampsAs;

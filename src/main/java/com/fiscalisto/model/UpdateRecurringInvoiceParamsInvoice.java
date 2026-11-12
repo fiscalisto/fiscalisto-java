@@ -43,9 +43,7 @@ public class UpdateRecurringInvoiceParamsInvoice {
     private String warehouse;
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
-     * <p>
-     * Obligatorio.
+     * El cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos. Obligatorio salvo en un traslado (type T), cuyo receptor es el propio emisor.
      */
     @JsonProperty("customer")
     private StringOr<InvoiceCreateCustomer> customer;
@@ -271,9 +269,7 @@ public class UpdateRecurringInvoiceParamsInvoice {
     }
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
-     * <p>
-     * Obligatorio.
+     * El cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos. Obligatorio salvo en un traslado (type T), cuyo receptor es el propio emisor.
      */
     public StringOr<InvoiceCreateCustomer> getCustomer() {
         return customer;

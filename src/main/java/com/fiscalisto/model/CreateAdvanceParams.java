@@ -24,7 +24,7 @@ public class CreateAdvanceParams {
     private String issuer;
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+     * El cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos. Obligatorio salvo en un traslado (type T), cuyo receptor es el propio emisor.
      * <p>
      * Obligatorio.
      */
@@ -116,7 +116,7 @@ public class CreateAdvanceParams {
     }
 
     /**
-     * Cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos en un objeto.
+     * El cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos. Obligatorio salvo en un traslado (type T), cuyo receptor es el propio emisor.
      * <p>
      * Obligatorio.
      */
