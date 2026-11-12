@@ -103,7 +103,7 @@ public class CreatePurchaseReceiptParams {
     private String storeEmail;
 
     /**
-     * El uso de la factura (G03, I01…). Por omisión G03 si el régimen del emisor lo permite.
+     * El uso del CFDI (G03, I01…). Por omisión G03 si el régimen del emisor lo permite.
      */
     @JsonProperty("use")
     private String use;
@@ -284,7 +284,7 @@ public class CreatePurchaseReceiptParams {
     }
 
     /**
-     * El uso de la factura (G03, I01…). Por omisión G03 si el régimen del emisor lo permite.
+     * El uso del CFDI (G03, I01…). Por omisión G03 si el régimen del emisor lo permite.
      */
     public String getUse() {
         return use;

@@ -111,7 +111,13 @@ public class Issuer {
     private String curp;
 
     /**
-     * RFC con el que se timbra: el del emisor en producción y el de pruebas del SAT (EKU9003173C9) en pruebas.
+     * Donataria autorizada (régimen 603): el oficio del SAT que la autoriza a recibir donativos deducibles (o su renovación). Va en cada recibo de donativo (`donation` de POST /v1/invoices); null lo quita. El emisor debe tener tax_system 603. En pruebas sirve cualquier número y una fecha pasada.
+     */
+    @JsonProperty("donation_authorization")
+    private IssuerDonationAuthorization donationAuthorization;
+
+    /**
+     * RFC con el que se timbra: el del emisor en producción y el de pruebas del SAT (EKU9003173C9) en pruebas, con régimen 601 o, si el emisor es donataria (tax_system 603), 603.
      */
     @JsonProperty("stamps_as")
     private String stampsAs;
@@ -333,7 +339,19 @@ public class Issuer {
     }
 
     /**
-     * RFC con el que se timbra: el del emisor en producción y el de pruebas del SAT (EKU9003173C9) en pruebas.
+     * Donataria autorizada (régimen 603): el oficio del SAT que la autoriza a recibir donativos deducibles (o su renovación). Va en cada recibo de donativo (`donation` de POST /v1/invoices); null lo quita. El emisor debe tener tax_system 603. En pruebas sirve cualquier número y una fecha pasada.
+     */
+    public IssuerDonationAuthorization getDonationAuthorization() {
+        return donationAuthorization;
+    }
+
+    public Issuer setDonationAuthorization(IssuerDonationAuthorization donationAuthorization) {
+        this.donationAuthorization = donationAuthorization;
+        return this;
+    }
+
+    /**
+     * RFC con el que se timbra: el del emisor en producción y el de pruebas del SAT (EKU9003173C9) en pruebas, con régimen 601 o, si el emisor es donataria (tax_system 603), 603.
      */
     public String getStampsAs() {
         return stampsAs;

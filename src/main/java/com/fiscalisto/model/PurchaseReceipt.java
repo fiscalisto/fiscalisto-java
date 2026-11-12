@@ -87,7 +87,7 @@ public class PurchaseReceipt {
     private List<PurchaseReceiptField> fields;
 
     /**
-     * El uso de la factura que se pide, o null: G03 si el régimen del emisor lo permite, si no S01.
+     * El uso del CFDI que se pide, o null: G03 si el régimen del emisor lo permite, si no S01.
      */
     @JsonProperty("use")
     private String use;
@@ -294,7 +294,7 @@ public class PurchaseReceipt {
     }
 
     /**
-     * El uso de la factura que se pide, o null: G03 si el régimen del emisor lo permite, si no S01.
+     * El uso del CFDI que se pide, o null: G03 si el régimen del emisor lo permite, si no S01.
      */
     public String getUse() {
         return use;

@@ -85,7 +85,7 @@ public class CreateRecurringInvoiceParamsInvoice {
     private List<InvoiceCreateLeyenda> leyendas;
 
     /**
-     * Complemento de donatarias.
+     * Complemento de donatarias: un recibo de donativo. El emisor debe ser donataria (tax_system 603) con su oficio en donation_authorization (POST /v1/issuers/{id}).
      */
     @JsonProperty("donation")
     private InvoiceCreateDonation donation;
@@ -358,7 +358,7 @@ public class CreateRecurringInvoiceParamsInvoice {
     }
 
     /**
-     * Complemento de donatarias.
+     * Complemento de donatarias: un recibo de donativo. El emisor debe ser donataria (tax_system 603) con su oficio en donation_authorization (POST /v1/issuers/{id}).
      */
     public InvoiceCreateDonation getDonation() {
         return donation;

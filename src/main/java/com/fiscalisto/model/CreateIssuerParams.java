@@ -59,6 +59,12 @@ public class CreateIssuerParams {
     private String curp;
 
     /**
+     * Donataria autorizada (régimen 603): el oficio del SAT que la autoriza a recibir donativos deducibles (o su renovación). Va en cada recibo de donativo (`donation` de POST /v1/invoices); null lo quita. El emisor debe tener tax_system 603. En pruebas sirve cualquier número y una fecha pasada.
+     */
+    @JsonProperty("donation_authorization")
+    private CreateIssuerParamsDonationAuthorization donationAuthorization;
+
+    /**
      * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
      */
     @JsonProperty("metadata")
@@ -141,6 +147,18 @@ public class CreateIssuerParams {
 
     public CreateIssuerParams setCurp(String curp) {
         this.curp = curp;
+        return this;
+    }
+
+    /**
+     * Donataria autorizada (régimen 603): el oficio del SAT que la autoriza a recibir donativos deducibles (o su renovación). Va en cada recibo de donativo (`donation` de POST /v1/invoices); null lo quita. El emisor debe tener tax_system 603. En pruebas sirve cualquier número y una fecha pasada.
+     */
+    public CreateIssuerParamsDonationAuthorization getDonationAuthorization() {
+        return donationAuthorization;
+    }
+
+    public CreateIssuerParams setDonationAuthorization(CreateIssuerParamsDonationAuthorization donationAuthorization) {
+        this.donationAuthorization = donationAuthorization;
         return this;
     }
 
