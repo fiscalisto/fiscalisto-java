@@ -93,7 +93,7 @@ public final class ErrorCode {
     /** Viáticos y gastos no lo permite en ese momento: el mensaje dice por qué (un gasto con errores al enviarla, un reembolso antes de aprobarla, aprobar lo que usted mismo envió). */
     public static final String EXPENSE_REPORT_INVALID = "expense_report_invalid";
 
-    /** En producción, inventario avanzado, portal de proveedores, pedidos de venta y comprobación de gastos siguen el plan de la empresa, como en la app: vienen del plan Negocio en adelante. En modo de pruebas están todos. */
+    /** En producción, inventario avanzado, portal de proveedores, pedidos de venta y comprobación de gastos siguen el plan de la empresa, como en la app: vienen con Operaciones (se agrega a Negocio; incluida en Corporativo). En modo de pruebas están todos. */
     public static final String FEATURE_NOT_IN_PLAN = "feature_not_in_plan";
 
     /** Idempotency-Key es de 1 a 255 caracteres ASCII, sin acentos ni ñ: el id de su pedido o un UUID. */
