@@ -93,7 +93,7 @@ public class Issuer {
     private IssuerCertificate certificate;
 
     /**
-     * Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at); un RFC de su empresa (type own) usa la que la empresa guardó en la app.
+     * Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at); un RFC de su empresa (type own) usa la que la empresa guardó en la app. En pruebas, efirma_expires_at muestra la del mismo RFC en producción, o la que mande en pruebas.
      */
     @JsonProperty("sat_downloads")
     private IssuerSatDownloads satDownloads;
@@ -303,7 +303,7 @@ public class Issuer {
     }
 
     /**
-     * Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at); un RFC de su empresa (type own) usa la que la empresa guardó en la app.
+     * Si puede pedirle al SAT sus facturas (POST /v1/sat_downloads): available es true en pruebas, y en producción mientras su e.firma guardada esté vigente (efirma_expires_at); un RFC de su empresa (type own) usa la que la empresa guardó en la app. En pruebas, efirma_expires_at muestra la del mismo RFC en producción, o la que mande en pruebas.
      */
     public IssuerSatDownloads getSatDownloads() {
         return satDownloads;
