@@ -40,7 +40,7 @@ public class Balance {
     private Boolean unlimited;
 
     /**
-     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres.
+     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres y pagos.
      */
     @JsonProperty("low_balance_at")
     private Long lowBalanceAt;
@@ -52,7 +52,7 @@ public class Balance {
     private BalanceAutoRecharge autoRecharge;
 
     /**
-     * true si, al acabarse `available`, la API sigue timbrando con los timbres del plan de la empresa (Desarrolladores › Timbres › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
+     * true si, al acabarse `available`, la API sigue timbrando con los timbres del plan de la empresa (Desarrolladores › Timbres y pagos › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
      */
     @JsonProperty("use_plan_timbres")
     private Boolean usePlanTimbres;
@@ -117,7 +117,7 @@ public class Balance {
     }
 
     /**
-     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres.
+     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres y pagos.
      */
     public Long getLowBalanceAt() {
         return lowBalanceAt;
@@ -146,7 +146,7 @@ public class Balance {
     }
 
     /**
-     * true si, al acabarse `available`, la API sigue timbrando con los timbres del plan de la empresa (Desarrolladores › Timbres › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
+     * true si, al acabarse `available`, la API sigue timbrando con los timbres del plan de la empresa (Desarrolladores › Timbres y pagos › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
      */
     public Boolean getUsePlanTimbres() {
         return usePlanTimbres;

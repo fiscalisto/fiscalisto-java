@@ -52,6 +52,11 @@ public final class FiscalistoClient {
     private final SatCatalogsService satCatalogs;
     private final SatListsService satLists;
     private final CfdiVerificationsService cfdiVerifications;
+    private final MembersService members;
+    private final InvitationsService invitations;
+    private final RolesService roles;
+    private final PermissionsService permissions;
+    private final ExportsService exports;
     private final SatDownloadsService satDownloads;
     private final SatInvoicesService satInvoices;
     private final SatRetentionsService satRetentions;
@@ -122,6 +127,11 @@ public final class FiscalistoClient {
         this.satCatalogs = new SatCatalogsService(api);
         this.satLists = new SatListsService(api);
         this.cfdiVerifications = new CfdiVerificationsService(api);
+        this.members = new MembersService(api);
+        this.invitations = new InvitationsService(api);
+        this.roles = new RolesService(api);
+        this.permissions = new PermissionsService(api);
+        this.exports = new ExportsService(api);
         this.satDownloads = new SatDownloadsService(api);
         this.satInvoices = new SatInvoicesService(api);
         this.satRetentions = new SatRetentionsService(api);
@@ -351,6 +361,31 @@ public final class FiscalistoClient {
     /** Verificar comprobantes. */
     public CfdiVerificationsService cfdiVerifications() {
         return cfdiVerifications;
+    }
+
+    /** Equipo. */
+    public MembersService members() {
+        return members;
+    }
+
+    /** Equipo. */
+    public InvitationsService invitations() {
+        return invitations;
+    }
+
+    /** Equipo. */
+    public RolesService roles() {
+        return roles;
+    }
+
+    /** Equipo. */
+    public PermissionsService permissions() {
+        return permissions;
+    }
+
+    /** Exportaciones. */
+    public ExportsService exports() {
+        return exports;
     }
 
     /** Descargas del SAT. */

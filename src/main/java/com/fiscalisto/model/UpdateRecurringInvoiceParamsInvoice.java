@@ -221,6 +221,12 @@ public class UpdateRecurringInvoiceParamsInvoice {
     private Map<String, String> metadata;
 
     /**
+     * Solo en POST /v1/invoices. true: responde 202 en cuanto la factura queda guardada con su folio (status processing) y la timbra después de responder; invoice.stamped o invoice.failed dicen cómo terminó. En las demás rutas que reciben una factura no cambia nada.
+     */
+    @JsonProperty("async")
+    private Boolean async;
+
+    /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
      */
     public String getIssuer() {
@@ -630,6 +636,18 @@ public class UpdateRecurringInvoiceParamsInvoice {
 
     public UpdateRecurringInvoiceParamsInvoice setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Solo en POST /v1/invoices. true: responde 202 en cuanto la factura queda guardada con su folio (status processing) y la timbra después de responder; invoice.stamped o invoice.failed dicen cómo terminó. En las demás rutas que reciben una factura no cambia nada.
+     */
+    public Boolean getAsync() {
+        return async;
+    }
+
+    public UpdateRecurringInvoiceParamsInvoice setAsync(Boolean async) {
+        this.async = async;
         return this;
     }
 }
