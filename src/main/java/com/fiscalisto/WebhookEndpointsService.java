@@ -4,10 +4,12 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.CreateWebhookEndpointParams;
 import com.fiscalisto.model.Deleted;
+import com.fiscalisto.model.ListWebhookDeliveriesParams;
 import com.fiscalisto.model.ListWebhookEndpointsParams;
 import com.fiscalisto.model.RollWebhookSecretParams;
 import com.fiscalisto.model.TestWebhookEndpointParams;
 import com.fiscalisto.model.UpdateWebhookEndpointParams;
+import com.fiscalisto.model.WebhookDelivery;
 import com.fiscalisto.model.WebhookEndpoint;
 import com.fiscalisto.model.WebhookTest;
 
@@ -167,5 +169,39 @@ public final class WebhookEndpointsService {
 
     public WebhookTest test(String id) {
         return test(id, null, null);
+    }
+
+    /**
+     * Listar entregas
+     * <p>
+     * Qué pasó con cada evento en este webhook, el más reciente primero: una fila por evento con su último intento, cuántos lleva y cuándo va el siguiente reintento. Con succeeded=false ve los que su servidor no recibió, para reenviarlos con POST /v1/events/{id}/resend.
+     * <p>
+     * GET /v1/webhook_endpoints/{id}/deliveries
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/webhooks/list-webhook-deliveries
+     */
+    public Page<WebhookDelivery> listDeliveries(String id, ListWebhookDeliveriesParams params, RequestOptions options) {
+        return api.list("/v1/webhook_endpoints/" + ApiClient.encode(id) + "/deliveries", params, WebhookDelivery.class, options);
+    }
+
+    public Page<WebhookDelivery> listDeliveries(String id, ListWebhookDeliveriesParams params) {
+        return listDeliveries(id, params, null);
+    }
+
+    public Page<WebhookDelivery> listDeliveries(String id) {
+        return listDeliveries(id, null, null);
+    }
+
+    /** Listar entregas: todos, página por página ({@code for (var x : …AutoPaging(…))}). */
+    public Iterable<WebhookDelivery> listDeliveriesAutoPaging(String id, ListWebhookDeliveriesParams params, RequestOptions options) {
+        return listDeliveries(id, params, options).autoPagingIterable();
+    }
+
+    public Iterable<WebhookDelivery> listDeliveriesAutoPaging(String id, ListWebhookDeliveriesParams params) {
+        return listDeliveriesAutoPaging(id, params, null);
+    }
+
+    public Iterable<WebhookDelivery> listDeliveriesAutoPaging() {
+        return listDeliveriesAutoPaging(null, null);
     }
 }

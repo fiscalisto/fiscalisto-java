@@ -102,6 +102,12 @@ public class CfdiVerification {
     private CfdiVerificationXml xml;
 
     /**
+     * Los sellos del XML, si mandó xml de un CFDI 4.0: si el comprobante no se modificó después de sellarse y si el timbre es del SAT. null con qr o fields, o con un CFDI 3.3.
+     */
+    @JsonProperty("seals")
+    private CfdiSeals seals;
+
+    /**
      * El emisor en las listas del SAT (69-B, 69-B Bis y art. 69), como GET /v1/sat_lists/{tax_id}, sin costo. Solo cuando el SAT tiene el comprobante (active o canceled); null si no, o si las listas no se pudieron leer.
      */
     @JsonProperty("issuer_sat_lists")
@@ -285,6 +291,18 @@ public class CfdiVerification {
 
     public CfdiVerification setXml(CfdiVerificationXml xml) {
         this.xml = xml;
+        return this;
+    }
+
+    /**
+     * Los sellos del XML, si mandó xml de un CFDI 4.0: si el comprobante no se modificó después de sellarse y si el timbre es del SAT. null con qr o fields, o con un CFDI 3.3.
+     */
+    public CfdiSeals getSeals() {
+        return seals;
+    }
+
+    public CfdiVerification setSeals(CfdiSeals seals) {
+        this.seals = seals;
         return this;
     }
 

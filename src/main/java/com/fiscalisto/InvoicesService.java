@@ -3,11 +3,13 @@
 package com.fiscalisto;
 
 import com.fiscalisto.model.CancelInvoiceParams;
+import com.fiscalisto.model.GetInvoiceCancellationReceiptParams;
 import com.fiscalisto.model.GetInvoiceParams;
 import com.fiscalisto.model.GetInvoicePdfParams;
 import com.fiscalisto.model.GetInvoiceXmlParams;
 import com.fiscalisto.model.Invoice;
 import com.fiscalisto.model.InvoiceCreate;
+import com.fiscalisto.model.InvoicePreview;
 import com.fiscalisto.model.ListInvoicesParams;
 import com.fiscalisto.model.MarkInvoicePaidParams;
 import com.fiscalisto.model.SendInvoiceParams;
@@ -72,6 +74,23 @@ public final class InvoicesService {
 
     public Iterable<Invoice> listAutoPaging() {
         return listAutoPaging(null, null);
+    }
+
+    /**
+     * Revisar una factura sin timbrar
+     * <p>
+     * El mismo cuerpo y las mismas revisiones que POST /v1/invoices, sin timbrar ni usar timbres: devuelve la factura como se timbraría ahora (con los datos fiscales del emisor, el siguiente folio, el subtotal, los impuestos y el total que calcula Fiscalisto), los avisos (un cliente en las listas del SAT, un duplicado) y el XML sin sellar (unsigned_xml). Úsela para mostrar el total antes de cobrar o para validar en su sistema; si algo falla, invoice_invalid como al timbrar. No pide Idempotency-Key y sirve con una llave de solo lectura.
+     * <p>
+     * POST /v1/invoices/preview
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/facturas/preview-invoice
+     */
+    public InvoicePreview preview(InvoiceCreate params, RequestOptions options) {
+        return api.request("POST", "/v1/invoices/preview", params, null, true, InvoicePreview.class, options);
+    }
+
+    public InvoicePreview preview(InvoiceCreate params) {
+        return preview(params, null);
     }
 
     /**
@@ -156,6 +175,27 @@ public final class InvoicesService {
 
     public String xml(String id) {
         return xml(id, null, null);
+    }
+
+    /**
+     * Descargar el acuse de cancelación
+     * <p>
+     * El acuse de cancelación del SAT (XML firmado por el SAT) de una factura cancelada: la prueba de que el SAT la canceló y cuándo. Antes de que el SAT la cancele (status valid o pending), 409 invoice_not_canceled.
+     * <p>
+     * GET /v1/invoices/{id}/cancellation_receipt
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/facturas/get-invoice-cancellation-receipt
+     */
+    public String cancellationReceipt(String id, GetInvoiceCancellationReceiptParams params, RequestOptions options) {
+        return new String(api.bytes("GET", "/v1/invoices/" + ApiClient.encode(id) + "/cancellation_receipt", null, params, false, options), java.nio.charset.StandardCharsets.UTF_8);
+    }
+
+    public String cancellationReceipt(String id, GetInvoiceCancellationReceiptParams params) {
+        return cancellationReceipt(id, params, null);
+    }
+
+    public String cancellationReceipt(String id) {
+        return cancellationReceipt(id, null, null);
     }
 
     /**

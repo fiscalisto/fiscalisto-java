@@ -6,15 +6,18 @@ import com.fiscalisto.model.ComplianceOpinion;
 import com.fiscalisto.model.CreateIssuerOnboardingLinkParams;
 import com.fiscalisto.model.CreateIssuerParams;
 import com.fiscalisto.model.Issuer;
+import com.fiscalisto.model.IssuerBranding;
 import com.fiscalisto.model.IssuerOnboardingLink;
 import com.fiscalisto.model.ListIssuersParams;
 import com.fiscalisto.model.SatRefresh;
 import com.fiscalisto.model.SelfInvoicing;
 import com.fiscalisto.model.SignEfirmaParams;
 import com.fiscalisto.model.TaxStatusCertificate;
+import com.fiscalisto.model.UpdateIssuerBrandingParams;
 import com.fiscalisto.model.UpdateIssuerParams;
 import com.fiscalisto.model.UpdateSelfInvoicingParams;
 import com.fiscalisto.model.UploadCertificateParams;
+import com.fiscalisto.model.UploadIssuerLogoParams;
 
 /**
  * Emisores: client.issuers().
@@ -147,6 +150,78 @@ public final class IssuersService {
 
     public Issuer uploadCertificate(String id, UploadCertificateParams params) {
         return uploadCertificate(id, params, null);
+    }
+
+    /**
+     * Ver el diseño del PDF
+     * <p>
+     * Cómo se ven los documentos del emisor: su nombre comercial, el estilo y el color del PDF y su logo. Es lo mismo que Ajustes › Marca y documentos en la app.
+     * <p>
+     * GET /v1/issuers/{id}/branding
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/emisores/get-issuer-branding
+     */
+    public IssuerBranding getBranding(String id, RequestOptions options) {
+        return api.request("GET", "/v1/issuers/" + ApiClient.encode(id) + "/branding", null, null, false, IssuerBranding.class, options);
+    }
+
+    public IssuerBranding getBranding(String id) {
+        return getBranding(id, null);
+    }
+
+    /**
+     * Cambiar el diseño del PDF
+     * <p>
+     * Cambia el nombre comercial, el estilo (clasico, moderno, compacto o minimalista) y el color del PDF de las facturas, notas, pagos, recibos y cotizaciones del emisor, y de sus correos. Lo que no mande se queda como está; null vuelve al de omisión. Se ve en el siguiente PDF que pida, también de lo ya timbrado. Una sucursal puede tener el suyo (POST /v1/branches/{id}).
+     * <p>
+     * POST /v1/issuers/{id}/branding
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/emisores/update-issuer-branding
+     */
+    public IssuerBranding updateBranding(String id, UpdateIssuerBrandingParams params, RequestOptions options) {
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/branding", params, null, true, IssuerBranding.class, options);
+    }
+
+    public IssuerBranding updateBranding(String id, UpdateIssuerBrandingParams params) {
+        return updateBranding(id, params, null);
+    }
+
+    public IssuerBranding updateBranding(String id) {
+        return updateBranding(id, null, null);
+    }
+
+    /**
+     * Subir el logo
+     * <p>
+     * El logo del emisor (PNG o JPG de hasta 1 MB, en base64): va en sus PDF, sus correos y la página de la factura que ve su cliente. Reemplaza el anterior.
+     * <p>
+     * POST /v1/issuers/{id}/logo
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/emisores/upload-issuer-logo
+     */
+    public IssuerBranding uploadLogo(String id, UploadIssuerLogoParams params, RequestOptions options) {
+        return api.request("POST", "/v1/issuers/" + ApiClient.encode(id) + "/logo", params, null, true, IssuerBranding.class, options);
+    }
+
+    public IssuerBranding uploadLogo(String id, UploadIssuerLogoParams params) {
+        return uploadLogo(id, params, null);
+    }
+
+    /**
+     * Quitar el logo
+     * <p>
+     * Sus PDF y correos van sin logo, con su nombre.
+     * <p>
+     * DELETE /v1/issuers/{id}/logo
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/emisores/delete-issuer-logo
+     */
+    public IssuerBranding deleteLogo(String id, RequestOptions options) {
+        return api.request("DELETE", "/v1/issuers/" + ApiClient.encode(id) + "/logo", null, null, false, IssuerBranding.class, options);
+    }
+
+    public IssuerBranding deleteLogo(String id) {
+        return deleteLogo(id, null);
     }
 
     /**
