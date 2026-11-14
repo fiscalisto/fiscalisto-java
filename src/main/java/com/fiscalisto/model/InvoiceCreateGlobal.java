@@ -30,7 +30,7 @@ public class InvoiceCreateGlobal {
     private String months;
 
     /**
-     * Año (Año).
+     * Año (Año): el de la fecha de la factura o hasta cinco años antes (CFDI40136).
      * <p>
      * Obligatorio.
      */
@@ -72,7 +72,7 @@ public class InvoiceCreateGlobal {
     }
 
     /**
-     * Año (Año).
+     * Año (Año): el de la fecha de la factura o hasta cinco años antes (CFDI40136).
      * <p>
      * Obligatorio.
      */

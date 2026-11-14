@@ -3,7 +3,9 @@
 package com.fiscalisto;
 
 import com.fiscalisto.model.Event;
+import com.fiscalisto.model.EventResend;
 import com.fiscalisto.model.ListEventsParams;
+import com.fiscalisto.model.ResendEventParams;
 
 /**
  * Eventos: client.events().
@@ -64,5 +66,26 @@ public final class EventsService {
 
     public Event get(String id) {
         return get(id, null);
+    }
+
+    /**
+     * Reenviar un evento
+     * <p>
+     * Manda otra vez, ahora, un evento de los últimos 30 días: a un webhook (endpoint) o a todos los encendidos que escuchan ese tipo. Es un intento aparte, firmado con el mismo webhook-id: no cambia los reintentos automáticos, y si llega, ya no se reintenta. Úselo después de arreglar su servidor, con GET /v1/events?delivery_success=false.
+     * <p>
+     * POST /v1/events/{id}/resend
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/eventos/resend-event
+     */
+    public EventResend resend(String id, ResendEventParams params, RequestOptions options) {
+        return api.request("POST", "/v1/events/" + ApiClient.encode(id) + "/resend", params, null, true, EventResend.class, options);
+    }
+
+    public EventResend resend(String id, ResendEventParams params) {
+        return resend(id, params, null);
+    }
+
+    public EventResend resend(String id) {
+        return resend(id, null, null);
     }
 }

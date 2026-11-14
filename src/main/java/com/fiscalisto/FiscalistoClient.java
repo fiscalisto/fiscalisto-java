@@ -51,6 +51,7 @@ public final class FiscalistoClient {
     private final StockAdjustmentsService stockAdjustments;
     private final SatCatalogsService satCatalogs;
     private final SatListsService satLists;
+    private final CfdiVerificationsService cfdiVerifications;
     private final SatDownloadsService satDownloads;
     private final SatInvoicesService satInvoices;
     private final SatRetentionsService satRetentions;
@@ -120,6 +121,7 @@ public final class FiscalistoClient {
         this.stockAdjustments = new StockAdjustmentsService(api);
         this.satCatalogs = new SatCatalogsService(api);
         this.satLists = new SatListsService(api);
+        this.cfdiVerifications = new CfdiVerificationsService(api);
         this.satDownloads = new SatDownloadsService(api);
         this.satInvoices = new SatInvoicesService(api);
         this.satRetentions = new SatRetentionsService(api);
@@ -344,6 +346,11 @@ public final class FiscalistoClient {
     /** Listas del SAT. */
     public SatListsService satLists() {
         return satLists;
+    }
+
+    /** Verificar comprobantes. */
+    public CfdiVerificationsService cfdiVerifications() {
+        return cfdiVerifications;
     }
 
     /** Descargas del SAT. */

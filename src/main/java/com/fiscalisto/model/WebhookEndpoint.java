@@ -65,7 +65,7 @@ public class WebhookEndpoint {
     private String status;
 
     /**
-     * Por qué se apagó (sus entregas fallaron 5 días seguidos, o usted lo apagó).
+     * Por qué se apagó: failing (sus entregas fallaron 5 días seguidos), gone (su servidor contestó 410 Gone) o manual (usted lo apagó).
      */
     @JsonProperty("disabled_reason")
     private String disabledReason;
@@ -199,7 +199,7 @@ public class WebhookEndpoint {
     }
 
     /**
-     * Por qué se apagó (sus entregas fallaron 5 días seguidos, o usted lo apagó).
+     * Por qué se apagó: failing (sus entregas fallaron 5 días seguidos), gone (su servidor contestó 410 Gone) o manual (usted lo apagó).
      */
     public String getDisabledReason() {
         return disabledReason;
