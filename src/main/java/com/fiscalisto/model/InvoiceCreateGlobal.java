@@ -38,6 +38,12 @@ public class InvoiceCreateGlobal {
     private Long year;
 
     /**
+     * Solo emisores con régimen 603 (donatarias y asociaciones): true conserva la descripción, claves, unidad y cantidad de cada concepto en vez de «Venta», 01010101, ACT.
+     */
+    @JsonProperty("keep_concepts")
+    private Boolean keepConcepts;
+
+    /**
      * Periodicidad (Periodicidad), c_Periodicidad: 01 diario, 02 semanal, 03 quincenal, 04 mensual, 05 bimestral.
      * <p>
      * Obligatorio.
@@ -82,5 +88,17 @@ public class InvoiceCreateGlobal {
     @JsonIgnore
     public InvoiceCreateGlobal setYear(long year) {
         return setYear(Long.valueOf(year));
+    }
+
+    /**
+     * Solo emisores con régimen 603 (donatarias y asociaciones): true conserva la descripción, claves, unidad y cantidad de cada concepto en vez de «Venta», 01010101, ACT.
+     */
+    public Boolean getKeepConcepts() {
+        return keepConcepts;
+    }
+
+    public InvoiceCreateGlobal setKeepConcepts(Boolean keepConcepts) {
+        this.keepConcepts = keepConcepts;
+        return this;
     }
 }
