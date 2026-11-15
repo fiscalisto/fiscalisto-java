@@ -39,6 +39,12 @@ public class CreatePayrollReceiptParams {
     private BigDecimal days;
 
     /**
+     * El recibo vigente (inv_… o UUID) que este corrige, calculado por Fiscalisto para el mismo empleado: el nuevo se calcula con los datos del empleado como están ahora, va relacionado con 04 y el anterior se cancela con motivo 01. Para un recibo que calculó su sistema use POST /v1/payroll_receipts/external con replaces.
+     */
+    @JsonProperty("replaces")
+    private String replaces;
+
+    /**
      * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
      */
     @JsonProperty("send_email")
@@ -99,6 +105,18 @@ public class CreatePayrollReceiptParams {
     @JsonIgnore
     public CreatePayrollReceiptParams setDays(double days) {
         return setDays(BigDecimal.valueOf(days));
+    }
+
+    /**
+     * El recibo vigente (inv_… o UUID) que este corrige, calculado por Fiscalisto para el mismo empleado: el nuevo se calcula con los datos del empleado como están ahora, va relacionado con 04 y el anterior se cancela con motivo 01. Para un recibo que calculó su sistema use POST /v1/payroll_receipts/external con replaces.
+     */
+    public String getReplaces() {
+        return replaces;
+    }
+
+    public CreatePayrollReceiptParams setReplaces(String replaces) {
+        this.replaces = replaces;
+        return this;
     }
 
     /**
