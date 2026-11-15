@@ -150,6 +150,12 @@ public class InvoiceCreateItem {
     private InvoiceCreateItemUsedVehicle usedVehicle;
 
     /**
+     * Complemento de Hidrocarburos y Petrolíferos: obligatorio en cada concepto de diésel (15101505) o gasolina (15101514, 15101515) de una factura o nota de crédito, en litros (LTR).
+     */
+    @JsonProperty("hydrocarbon")
+    private InvoiceCreateItemHydrocarbon hydrocarbon;
+
+    /**
      * Addenda del receptor (Walmart, Soriana…), con sus propios campos.
      */
     @JsonProperty("addenda")
@@ -445,6 +451,18 @@ public class InvoiceCreateItem {
 
     public InvoiceCreateItem setUsedVehicle(InvoiceCreateItemUsedVehicle usedVehicle) {
         this.usedVehicle = usedVehicle;
+        return this;
+    }
+
+    /**
+     * Complemento de Hidrocarburos y Petrolíferos: obligatorio en cada concepto de diésel (15101505) o gasolina (15101514, 15101515) de una factura o nota de crédito, en litros (LTR).
+     */
+    public InvoiceCreateItemHydrocarbon getHydrocarbon() {
+        return hydrocarbon;
+    }
+
+    public InvoiceCreateItem setHydrocarbon(InvoiceCreateItemHydrocarbon hydrocarbon) {
+        this.hydrocarbon = hydrocarbon;
         return this;
     }
 

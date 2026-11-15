@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoiceCancellation {
     /**
-     * pending (espera la respuesta del cliente), accepted (cancelada), rejected (el cliente la rechazó) o lapsed (venció; puede pedirla otra vez).
+     * `pending`: el SAT tiene la solicitud (la termina en minutos, o espera la respuesta del receptor). `accepted`: cancelada. `rejected`: el receptor la rechazó. `lapsed`: el SAT nunca la registró; puede pedirse otra vez. `scheduled`: el SAT aún no la acepta (no registra el CFDI que la sustituye, o rechazó la firma un momento) y Fiscalisto la vuelve a pedir sola. `failed`: Fiscalisto dejó de intentarlo; pídala de nuevo con POST /v1/invoices/{id}/cancel.
      */
     @JsonProperty("status")
     private String status;
@@ -37,7 +37,19 @@ public class InvoiceCancellation {
     private String canceledAt;
 
     /**
-     * pending (espera la respuesta del cliente), accepted (cancelada), rejected (el cliente la rechazó) o lapsed (venció; puede pedirla otra vez).
+     * Con `scheduled`: cuándo la vuelve a pedir Fiscalisto (null: en los próximos 15 minutos).
+     */
+    @JsonProperty("next_attempt_at")
+    private String nextAttemptAt;
+
+    /**
+     * Con `scheduled` o `failed`: por qué no ha pasado.
+     */
+    @JsonProperty("error")
+    private String error;
+
+    /**
+     * `pending`: el SAT tiene la solicitud (la termina en minutos, o espera la respuesta del receptor). `accepted`: cancelada. `rejected`: el receptor la rechazó. `lapsed`: el SAT nunca la registró; puede pedirse otra vez. `scheduled`: el SAT aún no la acepta (no registra el CFDI que la sustituye, o rechazó la firma un momento) y Fiscalisto la vuelve a pedir sola. `failed`: Fiscalisto dejó de intentarlo; pídala de nuevo con POST /v1/invoices/{id}/cancel.
      */
     public String getStatus() {
         return status;
@@ -81,6 +93,30 @@ public class InvoiceCancellation {
 
     public InvoiceCancellation setCanceledAt(String canceledAt) {
         this.canceledAt = canceledAt;
+        return this;
+    }
+
+    /**
+     * Con `scheduled`: cuándo la vuelve a pedir Fiscalisto (null: en los próximos 15 minutos).
+     */
+    public String getNextAttemptAt() {
+        return nextAttemptAt;
+    }
+
+    public InvoiceCancellation setNextAttemptAt(String nextAttemptAt) {
+        this.nextAttemptAt = nextAttemptAt;
+        return this;
+    }
+
+    /**
+     * Con `scheduled` o `failed`: por qué no ha pasado.
+     */
+    public String getError() {
+        return error;
+    }
+
+    public InvoiceCancellation setError(String error) {
+        this.error = error;
         return this;
     }
 }

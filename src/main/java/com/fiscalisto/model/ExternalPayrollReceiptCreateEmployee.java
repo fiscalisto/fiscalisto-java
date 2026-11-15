@@ -75,7 +75,7 @@ public class ExternalPayrollReceiptCreateEmployee {
     private String startDate;
 
     /**
-     * Antigüedad (P52W o P1Y2M3D). Sin el campo y con registro patronal: semanas desde start_date hasta el fin del periodo.
+     * Antigüedad (P52W o P1Y2M3D). Sin el campo y con registro patronal: semanas desde start_date hasta el fin del periodo (días si es menos de una semana, P3D).
      */
     @JsonProperty("seniority")
     private String seniority;
@@ -271,7 +271,7 @@ public class ExternalPayrollReceiptCreateEmployee {
     }
 
     /**
-     * Antigüedad (P52W o P1Y2M3D). Sin el campo y con registro patronal: semanas desde start_date hasta el fin del periodo.
+     * Antigüedad (P52W o P1Y2M3D). Sin el campo y con registro patronal: semanas desde start_date hasta el fin del periodo (días si es menos de una semana, P3D).
      */
     public String getSeniority() {
         return seniority;

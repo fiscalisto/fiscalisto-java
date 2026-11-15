@@ -19,7 +19,7 @@ public class InvoiceSubstitutes {
     private String invoice;
 
     /**
-     * true si la sustituida ya quedó cancelada.
+     * true si la sustituida ya quedó cancelada. false no es definitivo: vea substitutes.cancellation.
      */
     @JsonProperty("canceled")
     private Boolean canceled;
@@ -29,6 +29,12 @@ public class InvoiceSubstitutes {
      */
     @JsonProperty("cancel_error")
     private String cancelError;
+
+    /**
+     * La cancelación de la anterior, igual que su `cancellation` en GET /v1/invoices/{id}: `accepted` si ya quedó cancelada, `pending` si el SAT la está terminando (o espera al receptor), `scheduled` si Fiscalisto la vuelve a pedir sola, `failed` si hay que pedirla de nuevo. El webhook de la anterior dice cuando cambia.
+     */
+    @JsonProperty("cancellation")
+    private InvoiceSubstitutesCancellation cancellation;
 
     /**
      * La factura sustituida (inv_…).
@@ -43,7 +49,7 @@ public class InvoiceSubstitutes {
     }
 
     /**
-     * true si la sustituida ya quedó cancelada.
+     * true si la sustituida ya quedó cancelada. false no es definitivo: vea substitutes.cancellation.
      */
     public Boolean getCanceled() {
         return canceled;
@@ -63,6 +69,18 @@ public class InvoiceSubstitutes {
 
     public InvoiceSubstitutes setCancelError(String cancelError) {
         this.cancelError = cancelError;
+        return this;
+    }
+
+    /**
+     * La cancelación de la anterior, igual que su `cancellation` en GET /v1/invoices/{id}: `accepted` si ya quedó cancelada, `pending` si el SAT la está terminando (o espera al receptor), `scheduled` si Fiscalisto la vuelve a pedir sola, `failed` si hay que pedirla de nuevo. El webhook de la anterior dice cuando cambia.
+     */
+    public InvoiceSubstitutesCancellation getCancellation() {
+        return cancellation;
+    }
+
+    public InvoiceSubstitutes setCancellation(InvoiceSubstitutesCancellation cancellation) {
+        this.cancellation = cancellation;
         return this;
     }
 }

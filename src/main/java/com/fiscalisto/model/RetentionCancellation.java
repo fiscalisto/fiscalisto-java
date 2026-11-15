@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RetentionCancellation {
     /**
-     * pending (espera la respuesta del cliente), accepted (cancelada), rejected (el cliente la rechazó) o lapsed (venció; puede pedirla otra vez).
+     * pending (el SAT la tiene: la termina en minutos o espera la respuesta del cliente), accepted (cancelada), rejected (el cliente la rechazó), lapsed (venció; puede pedirla otra vez), scheduled (Fiscalisto la vuelve a pedir sola) o failed (Fiscalisto dejó de intentarlo; pídala de nuevo).
      */
     @JsonProperty("status")
     private String status;
@@ -31,7 +31,7 @@ public class RetentionCancellation {
     private String canceledAt;
 
     /**
-     * pending (espera la respuesta del cliente), accepted (cancelada), rejected (el cliente la rechazó) o lapsed (venció; puede pedirla otra vez).
+     * pending (el SAT la tiene: la termina en minutos o espera la respuesta del cliente), accepted (cancelada), rejected (el cliente la rechazó), lapsed (venció; puede pedirla otra vez), scheduled (Fiscalisto la vuelve a pedir sola) o failed (Fiscalisto dejó de intentarlo; pídala de nuevo).
      */
     public String getStatus() {
         return status;
