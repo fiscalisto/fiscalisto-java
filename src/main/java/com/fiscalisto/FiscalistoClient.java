@@ -19,6 +19,7 @@ public final class FiscalistoClient {
     private final InvoicesService invoices;
     private final ReceivablesService receivables;
     private final CustomersService customers;
+    private final CashForecastService cashForecast;
     private final BankTransactionsService bankTransactions;
     private final PurchaseReceiptsService purchaseReceipts;
     private final PaymentsService payments;
@@ -96,6 +97,7 @@ public final class FiscalistoClient {
         this.invoices = new InvoicesService(api);
         this.receivables = new ReceivablesService(api);
         this.customers = new CustomersService(api);
+        this.cashForecast = new CashForecastService(api);
         this.bankTransactions = new BankTransactionsService(api);
         this.purchaseReceipts = new PurchaseReceiptsService(api);
         this.payments = new PaymentsService(api);
@@ -200,6 +202,11 @@ public final class FiscalistoClient {
     /** Cuentas por cobrar. */
     public CustomersService customers() {
         return customers;
+    }
+
+    /** Flujo de efectivo. */
+    public CashForecastService cashForecast() {
+        return cashForecast;
     }
 
     /** Conciliación bancaria. */
