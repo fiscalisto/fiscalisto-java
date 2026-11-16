@@ -186,6 +186,12 @@ public class Invoice {
     private String paidOn;
 
     /**
+     * Mientras falta cobrarla (unpaid o partial): el día en que vence (AAAA-MM-DD), su fecha más los días de crédito de la ficha del cliente o, sin ellos, los de la empresa (30 si no los cambió); una PUE con paid_later, el último día de su mes. Son los días que usan Cuentas por cobrar y los recordatorios de cobranza. null si ya se pagó o no aplica.
+     */
+    @JsonProperty("due_date")
+    private String dueDate;
+
+    /**
      * CFDI relacionados (CfdiRelacionados): tipo de relación de c_TipoRelacion y los UUID.
      */
     @JsonProperty("related")
@@ -626,6 +632,18 @@ public class Invoice {
 
     public Invoice setPaidOn(String paidOn) {
         this.paidOn = paidOn;
+        return this;
+    }
+
+    /**
+     * Mientras falta cobrarla (unpaid o partial): el día en que vence (AAAA-MM-DD), su fecha más los días de crédito de la ficha del cliente o, sin ellos, los de la empresa (30 si no los cambió); una PUE con paid_later, el último día de su mes. Son los días que usan Cuentas por cobrar y los recordatorios de cobranza. null si ya se pagó o no aplica.
+     */
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public Invoice setDueDate(String dueDate) {
+        this.dueDate = dueDate;
         return this;
     }
 

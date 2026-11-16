@@ -58,6 +58,12 @@ public class Receivable {
     private BigDecimal amountDue;
 
     /**
+     * De eso, lo que ya pasó de su vencimiento (el due_date de cada factura), en esa moneda.
+     */
+    @JsonProperty("amount_overdue")
+    private BigDecimal amountOverdue;
+
+    /**
      * Cuántas facturas tiene abiertas.
      */
     @JsonProperty("open_invoices")
@@ -156,6 +162,23 @@ public class Receivable {
     @JsonIgnore
     public Receivable setAmountDue(double amountDue) {
         return setAmountDue(BigDecimal.valueOf(amountDue));
+    }
+
+    /**
+     * De eso, lo que ya pasó de su vencimiento (el due_date de cada factura), en esa moneda.
+     */
+    public BigDecimal getAmountOverdue() {
+        return amountOverdue;
+    }
+
+    public Receivable setAmountOverdue(BigDecimal amountOverdue) {
+        this.amountOverdue = amountOverdue;
+        return this;
+    }
+
+    @JsonIgnore
+    public Receivable setAmountOverdue(double amountOverdue) {
+        return setAmountOverdue(BigDecimal.valueOf(amountOverdue));
     }
 
     /**
