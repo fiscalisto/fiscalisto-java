@@ -39,6 +39,7 @@ public final class FiscalistoClient {
     private final PriceListsService priceLists;
     private final CustomerGroupsService customerGroups;
     private final PricesService prices;
+    private final AttendanceService attendance;
     private final ExpensePeopleService expensePeople;
     private final ExpenseReportsService expenseReports;
     private final ExpensePolicyService expensePolicy;
@@ -117,6 +118,7 @@ public final class FiscalistoClient {
         this.priceLists = new PriceListsService(api);
         this.customerGroups = new CustomerGroupsService(api);
         this.prices = new PricesService(api);
+        this.attendance = new AttendanceService(api);
         this.expensePeople = new ExpensePeopleService(api);
         this.expenseReports = new ExpenseReportsService(api);
         this.expensePolicy = new ExpensePolicyService(api);
@@ -302,6 +304,11 @@ public final class FiscalistoClient {
     /** Listas de precios. */
     public PricesService prices() {
         return prices;
+    }
+
+    /** Asistencia. */
+    public AttendanceService attendance() {
+        return attendance;
     }
 
     /** Viáticos y gastos. */
