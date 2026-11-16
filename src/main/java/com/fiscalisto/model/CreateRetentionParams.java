@@ -22,7 +22,7 @@ public class CreateRetentionParams {
     private String issuer;
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones.
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 06, 14 a 24 llevan su complemento, como lo pide el catálogo del SAT (share_sale con 06 y 19, dividends con 14, distributable_remainder con 15, interest, trust_lease, foreign_payment, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); 01, 02, 04 y 05 llevan foreign_payment cuando el receptor es extranjero; la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones. 27 y 28 no se pueden emitir aquí.
      * <p>
      * Obligatorio.
      */
@@ -82,10 +82,16 @@ public class CreateRetentionParams {
     private CreateRetentionParamsInterest interest;
 
     /**
-     * Complemento de pagos a extranjeros.
+     * Complemento de pagos a extranjeros: obligatorio con code 18, y con 01, 02, 04 y 05 cuando el receptor es extranjero.
      */
     @JsonProperty("foreign_payment")
     private CreateRetentionParamsForeignPayment foreignPayment;
+
+    /**
+     * Complemento de dividendos con su nodo Remanente (remanente distribuible), obligatorio con code 15. Si no lo manda, va sin proporción.
+     */
+    @JsonProperty("distributable_remainder")
+    private CreateRetentionParamsDistributableRemainder distributableRemainder;
 
     /**
      * Complemento de arrendamiento en fideicomiso (Arrendamientoenfideicomiso 1.0), obligatorio con code 17.
@@ -94,7 +100,7 @@ public class CreateRetentionParams {
     private CreateRetentionParamsTrustLease trustLease;
 
     /**
-     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 19.
+     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 06 y 19.
      */
     @JsonProperty("share_sale")
     private CreateRetentionParamsShareSale shareSale;
@@ -160,7 +166,7 @@ public class CreateRetentionParams {
     }
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones.
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 06, 14 a 24 llevan su complemento, como lo pide el catálogo del SAT (share_sale con 06 y 19, dividends con 14, distributable_remainder con 15, interest, trust_lease, foreign_payment, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); 01, 02, 04 y 05 llevan foreign_payment cuando el receptor es extranjero; la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones. 27 y 28 no se pueden emitir aquí.
      * <p>
      * Obligatorio.
      */
@@ -274,7 +280,7 @@ public class CreateRetentionParams {
     }
 
     /**
-     * Complemento de pagos a extranjeros.
+     * Complemento de pagos a extranjeros: obligatorio con code 18, y con 01, 02, 04 y 05 cuando el receptor es extranjero.
      */
     public CreateRetentionParamsForeignPayment getForeignPayment() {
         return foreignPayment;
@@ -282,6 +288,18 @@ public class CreateRetentionParams {
 
     public CreateRetentionParams setForeignPayment(CreateRetentionParamsForeignPayment foreignPayment) {
         this.foreignPayment = foreignPayment;
+        return this;
+    }
+
+    /**
+     * Complemento de dividendos con su nodo Remanente (remanente distribuible), obligatorio con code 15. Si no lo manda, va sin proporción.
+     */
+    public CreateRetentionParamsDistributableRemainder getDistributableRemainder() {
+        return distributableRemainder;
+    }
+
+    public CreateRetentionParams setDistributableRemainder(CreateRetentionParamsDistributableRemainder distributableRemainder) {
+        this.distributableRemainder = distributableRemainder;
         return this;
     }
 
@@ -298,7 +316,7 @@ public class CreateRetentionParams {
     }
 
     /**
-     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 19.
+     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 06 y 19.
      */
     public CreateRetentionParamsShareSale getShareSale() {
         return shareSale;

@@ -15,7 +15,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoiceCreateIneEntity {
     /**
-     * Clave de la entidad (ClaveEntidad), 3 letras.
+     * Clave de la entidad (ClaveEntidad): la del estado (JAL, QUE…), NAC (nacional) o la circunscripción CR1 a CR5; estas seis no van con ámbito Local.
      * <p>
      * Obligatorio.
      */
@@ -37,7 +37,7 @@ public class InvoiceCreateIneEntity {
     private List<String> accountingIds;
 
     /**
-     * Clave de la entidad (ClaveEntidad), 3 letras.
+     * Clave de la entidad (ClaveEntidad): la del estado (JAL, QUE…), NAC (nacional) o la circunscripción CR1 a CR5; estas seis no van con ámbito Local.
      * <p>
      * Obligatorio.
      */

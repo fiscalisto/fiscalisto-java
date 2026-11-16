@@ -85,6 +85,14 @@ public class ApplyAdvanceParams {
     private InvoiceCreateCartaPorte cartaPorte;
 
     /**
+     * Solo en un traslado (type T) sin carta_porte: la regla de la RMF 2026 que lo permite. 2.7.7.2.1 mercancías propias en un traslado local (no medicamentos, hidrocarburos ni mercancías para despacho aduanero); 2.7.7.2.2 paquetería o mensajería en primera o última milla, un concepto por paquete con su número de guía en sku; 2.7.7.2.3 grúa de arrastre o salvamento local, relacionando con related (05) la factura de ingreso del servicio. Mandarlo es declarar que el traslado no transita por ningún tramo de jurisdicción federal. Los conceptos van con unit_price 0 y taxability 01 (por omisión en un traslado).
+     * <p>
+     * Valores: 2.7.7.2.1, 2.7.7.2.2, 2.7.7.2.3.
+     */
+    @JsonProperty("carta_porte_exemption")
+    private String cartaPorteExemption;
+
+    /**
      * Complemento INE (procesos electorales).
      */
     @JsonProperty("ine")
@@ -109,7 +117,7 @@ public class ApplyAdvanceParams {
     private List<InvoiceCreateLocalTax> localTaxes;
 
     /**
-     * Exportación (Exportacion), c_Exportacion: 01 no aplica (por omisión), 02 definitiva…
+     * Exportación (Exportacion), c_Exportacion: 01 no aplica (por omisión), 02 definitiva con clave A1 (lleva comercio_exterior), 03 temporal (sin él), 04 definitiva con clave distinta a A1 o sin enajenación (con o sin comercio_exterior; con él, incoterm opcional).
      * <p>
      * Valores: 01, 02, 03, 04.
      */
@@ -376,6 +384,20 @@ public class ApplyAdvanceParams {
     }
 
     /**
+     * Solo en un traslado (type T) sin carta_porte: la regla de la RMF 2026 que lo permite. 2.7.7.2.1 mercancías propias en un traslado local (no medicamentos, hidrocarburos ni mercancías para despacho aduanero); 2.7.7.2.2 paquetería o mensajería en primera o última milla, un concepto por paquete con su número de guía en sku; 2.7.7.2.3 grúa de arrastre o salvamento local, relacionando con related (05) la factura de ingreso del servicio. Mandarlo es declarar que el traslado no transita por ningún tramo de jurisdicción federal. Los conceptos van con unit_price 0 y taxability 01 (por omisión en un traslado).
+     * <p>
+     * Valores: 2.7.7.2.1, 2.7.7.2.2, 2.7.7.2.3.
+     */
+    public String getCartaPorteExemption() {
+        return cartaPorteExemption;
+    }
+
+    public ApplyAdvanceParams setCartaPorteExemption(String cartaPorteExemption) {
+        this.cartaPorteExemption = cartaPorteExemption;
+        return this;
+    }
+
+    /**
      * Complemento INE (procesos electorales).
      */
     public InvoiceCreateIne getIne() {
@@ -424,7 +446,7 @@ public class ApplyAdvanceParams {
     }
 
     /**
-     * Exportación (Exportacion), c_Exportacion: 01 no aplica (por omisión), 02 definitiva…
+     * Exportación (Exportacion), c_Exportacion: 01 no aplica (por omisión), 02 definitiva con clave A1 (lleva comercio_exterior), 03 temporal (sin él), 04 definitiva con clave distinta a A1 o sin enajenación (con o sin comercio_exterior; con él, incoterm opcional).
      * <p>
      * Valores: 01, 02, 03, 04.
      */

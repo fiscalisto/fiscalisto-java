@@ -66,6 +66,12 @@ public class SatFinding {
     private String explanation;
 
     /**
+     * Qué hacer con este hallazgo, en una frase o dos.
+     */
+    @JsonProperty("next_step")
+    private String nextStep;
+
+    /**
      * Cuántos CFDI lo tienen, sin revisar.
      */
     @JsonProperty("invoices")
@@ -184,6 +190,18 @@ public class SatFinding {
 
     public SatFinding setExplanation(String explanation) {
         this.explanation = explanation;
+        return this;
+    }
+
+    /**
+     * Qué hacer con este hallazgo, en una frase o dos.
+     */
+    public String getNextStep() {
+        return nextStep;
+    }
+
+    public SatFinding setNextStep(String nextStep) {
+        this.nextStep = nextStep;
         return this;
     }
 

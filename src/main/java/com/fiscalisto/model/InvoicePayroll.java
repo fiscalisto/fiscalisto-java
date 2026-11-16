@@ -105,6 +105,12 @@ public class InvoicePayroll {
     private List<InvoicePayrollDisability> disabilities;
 
     /**
+     * En un recibo que calculó Fiscalisto: los días del IMSS.
+     */
+    @JsonProperty("imss_days")
+    private InvoicePayrollImssDays imssDays;
+
+    /**
      * Totales: percepciones, deducciones, otros pagos y el neto a pagar.
      */
     @JsonProperty("totals")
@@ -284,6 +290,18 @@ public class InvoicePayroll {
 
     public InvoicePayroll setDisabilities(List<InvoicePayrollDisability> disabilities) {
         this.disabilities = disabilities;
+        return this;
+    }
+
+    /**
+     * En un recibo que calculó Fiscalisto: los días del IMSS.
+     */
+    public InvoicePayrollImssDays getImssDays() {
+        return imssDays;
+    }
+
+    public InvoicePayroll setImssDays(InvoicePayrollImssDays imssDays) {
+        this.imssDays = imssDays;
         return this;
     }
 

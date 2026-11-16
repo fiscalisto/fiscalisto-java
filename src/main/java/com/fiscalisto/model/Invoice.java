@@ -82,7 +82,7 @@ public class Invoice {
     private String series;
 
     /**
-     * El folio (Folio) que se le asignó, o null.
+     * Folio interno. En una rechazada es el que se intentó: no se gasta, y el siguiente CFDI de la serie lo usa.
      */
     @JsonProperty("folio")
     private String folio;
@@ -246,7 +246,7 @@ public class Invoice {
     private Map<String, String> metadata;
 
     /**
-     * Avisos que no impidieron timbrar (por ejemplo, el XML se guardará después).
+     * Avisos sobre la factura (solo en la respuesta que la timbra o, con 202, la que la deja en proceso): se timbra como se mandó.
      */
     @JsonProperty("warnings")
     private List<String> warnings;
@@ -394,7 +394,7 @@ public class Invoice {
     }
 
     /**
-     * El folio (Folio) que se le asignó, o null.
+     * Folio interno. En una rechazada es el que se intentó: no se gasta, y el siguiente CFDI de la serie lo usa.
      */
     public String getFolio() {
         return folio;
@@ -750,7 +750,7 @@ public class Invoice {
     }
 
     /**
-     * Avisos que no impidieron timbrar (por ejemplo, el XML se guardará después).
+     * Avisos sobre la factura (solo en la respuesta que la timbra o, con 202, la que la deja en proceso): se timbra como se mandó.
      */
     public List<String> getWarnings() {
         return warnings;

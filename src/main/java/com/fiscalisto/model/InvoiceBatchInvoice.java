@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * InvoiceBatchInvoice: InvoiceBatchInvoice.
@@ -58,6 +59,12 @@ public class InvoiceBatchInvoice {
      */
     @JsonProperty("error")
     private String error;
+
+    /**
+     * Solo en la respuesta de POST /v1/invoice_batches: los avisos de esta factura antes de timbrarla, los mismos que daría POST /v1/invoices. Se timbra como se mandó.
+     */
+    @JsonProperty("warnings")
+    private List<String> warnings;
 
     /**
      * Su posición en invoices, desde 0.
@@ -152,6 +159,18 @@ public class InvoiceBatchInvoice {
 
     public InvoiceBatchInvoice setError(String error) {
         this.error = error;
+        return this;
+    }
+
+    /**
+     * Solo en la respuesta de POST /v1/invoice_batches: los avisos de esta factura antes de timbrarla, los mismos que daría POST /v1/invoices. Se timbra como se mandó.
+     */
+    public List<String> getWarnings() {
+        return warnings;
+    }
+
+    public InvoiceBatchInvoice setWarnings(List<String> warnings) {
+        this.warnings = warnings;
         return this;
     }
 }

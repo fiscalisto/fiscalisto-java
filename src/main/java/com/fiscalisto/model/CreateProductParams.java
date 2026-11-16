@@ -45,7 +45,7 @@ public class CreateProductParams {
     private String productKey;
 
     /**
-     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio (por omisión), H87 pieza, ACT actividad…
+     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio, H87 pieza, ACT actividad… Por omisión H87 si la clave del producto es de un bien (segmentos 10 a 60) y E48 si es de un servicio.
      */
     @JsonProperty("unit_key")
     private String unitKey;
@@ -121,6 +121,12 @@ public class CreateProductParams {
      */
     @JsonProperty("local_taxes")
     private List<CreateProductParamsLocalTax> localTaxes;
+
+    /**
+     * Diésel (15101505) y gasolinas (15101514, 15101515): el permiso de la CNE que lleva cada factura con él en el complemento de Hidrocarburos y Petrolíferos. Una factura cuyo concepto trae su propio hydrocarbon usa ese. null lo quita.
+     */
+    @JsonProperty("hydrocarbon")
+    private CreateProductParamsHydrocarbon hydrocarbon;
 
     /**
      * Lleva existencias (Inventario): cada factura que lo vende las saca del almacén de su sucursal, y una cancelada las regresa. Ver GET /v1/products/{id}/stock.
@@ -223,7 +229,7 @@ public class CreateProductParams {
     }
 
     /**
-     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio (por omisión), H87 pieza, ACT actividad…
+     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio, H87 pieza, ACT actividad… Por omisión H87 si la clave del producto es de un bien (segmentos 10 a 60) y E48 si es de un servicio.
      */
     public String getUnitKey() {
         return unitKey;
@@ -389,6 +395,18 @@ public class CreateProductParams {
 
     public CreateProductParams setLocalTaxes(List<CreateProductParamsLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * Diésel (15101505) y gasolinas (15101514, 15101515): el permiso de la CNE que lleva cada factura con él en el complemento de Hidrocarburos y Petrolíferos. Una factura cuyo concepto trae su propio hydrocarbon usa ese. null lo quita.
+     */
+    public CreateProductParamsHydrocarbon getHydrocarbon() {
+        return hydrocarbon;
+    }
+
+    public CreateProductParams setHydrocarbon(CreateProductParamsHydrocarbon hydrocarbon) {
+        this.hydrocarbon = hydrocarbon;
         return this;
     }
 

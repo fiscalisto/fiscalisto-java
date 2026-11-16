@@ -112,6 +112,22 @@ public class SelfInvoicing {
     private Long portalRadius;
 
     /**
+     * Cuando se factura una persona moral que retiene (1.25% de ISR en RESICO, o lo del producto). keep_total: la base crece y la factura suma lo que se pagó. subtract: la base es la del ticket y el total es lo pagado menos la retención.
+     * <p>
+     * Valores: keep_total, subtract.
+     */
+    @JsonProperty("retention_mode")
+    private String retentionMode;
+
+    /**
+     * ticket: la factura global lleva un concepto «Venta» por ticket, con su folio. summary: solo el monto total del periodo, uno por combinación de impuestos (NoIdentificacion «Resumen»), para una persona física en RESICO (regla 2.7.1.21 de la RMF 2026).
+     * <p>
+     * Valores: ticket, summary.
+     */
+    @JsonProperty("global_concepts")
+    private String globalConcepts;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -307,5 +323,33 @@ public class SelfInvoicing {
     @JsonIgnore
     public SelfInvoicing setPortalRadius(long portalRadius) {
         return setPortalRadius(Long.valueOf(portalRadius));
+    }
+
+    /**
+     * Cuando se factura una persona moral que retiene (1.25% de ISR en RESICO, o lo del producto). keep_total: la base crece y la factura suma lo que se pagó. subtract: la base es la del ticket y el total es lo pagado menos la retención.
+     * <p>
+     * Valores: keep_total, subtract.
+     */
+    public String getRetentionMode() {
+        return retentionMode;
+    }
+
+    public SelfInvoicing setRetentionMode(String retentionMode) {
+        this.retentionMode = retentionMode;
+        return this;
+    }
+
+    /**
+     * ticket: la factura global lleva un concepto «Venta» por ticket, con su folio. summary: solo el monto total del periodo, uno por combinación de impuestos (NoIdentificacion «Resumen»), para una persona física en RESICO (regla 2.7.1.21 de la RMF 2026).
+     * <p>
+     * Valores: ticket, summary.
+     */
+    public String getGlobalConcepts() {
+        return globalConcepts;
+    }
+
+    public SelfInvoicing setGlobalConcepts(String globalConcepts) {
+        this.globalConcepts = globalConcepts;
+        return this;
     }
 }

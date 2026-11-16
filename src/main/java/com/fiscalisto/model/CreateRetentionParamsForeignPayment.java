@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * CreateRetentionParamsForeignPayment: Complemento de pagos a extranjeros.
+ * CreateRetentionParamsForeignPayment: Complemento de pagos a extranjeros: obligatorio con code 18, y con 01, 02, 04 y 05 cuando el receptor es extranjero.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)

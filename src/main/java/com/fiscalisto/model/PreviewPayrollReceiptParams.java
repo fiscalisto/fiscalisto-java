@@ -39,6 +39,18 @@ public class PreviewPayrollReceiptParams {
     private BigDecimal days;
 
     /**
+     * Faltas del periodo (días sin goce de sueldo), de 0 a 31: no se pagan (salen de days) y cotizan al IMSS solo en enfermedades y maternidad, hasta 7 por mes (LSS art. 31 fr. I).
+     */
+    @JsonProperty("absences")
+    private Long absences;
+
+    /**
+     * Días de incapacidad que expidió el IMSS en el periodo, de 0 a 31: no se pagan (salen de days) y no causan cuotas obreras del IMSS (LSS art. 31 fr. IV).
+     */
+    @JsonProperty("disability_days")
+    private Long disabilityDays;
+
+    /**
      * El recibo vigente (inv_… o UUID) que este corrige, calculado por Fiscalisto para el mismo empleado: el nuevo se calcula con los datos del empleado como están ahora, va relacionado con 04 y el anterior se cancela con motivo 01. Para un recibo que calculó su sistema use POST /v1/payroll_receipts/external con replaces.
      */
     @JsonProperty("replaces")
@@ -99,6 +111,40 @@ public class PreviewPayrollReceiptParams {
     @JsonIgnore
     public PreviewPayrollReceiptParams setDays(double days) {
         return setDays(BigDecimal.valueOf(days));
+    }
+
+    /**
+     * Faltas del periodo (días sin goce de sueldo), de 0 a 31: no se pagan (salen de days) y cotizan al IMSS solo en enfermedades y maternidad, hasta 7 por mes (LSS art. 31 fr. I).
+     */
+    public Long getAbsences() {
+        return absences;
+    }
+
+    public PreviewPayrollReceiptParams setAbsences(Long absences) {
+        this.absences = absences;
+        return this;
+    }
+
+    @JsonIgnore
+    public PreviewPayrollReceiptParams setAbsences(long absences) {
+        return setAbsences(Long.valueOf(absences));
+    }
+
+    /**
+     * Días de incapacidad que expidió el IMSS en el periodo, de 0 a 31: no se pagan (salen de days) y no causan cuotas obreras del IMSS (LSS art. 31 fr. IV).
+     */
+    public Long getDisabilityDays() {
+        return disabilityDays;
+    }
+
+    public PreviewPayrollReceiptParams setDisabilityDays(Long disabilityDays) {
+        this.disabilityDays = disabilityDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public PreviewPayrollReceiptParams setDisabilityDays(long disabilityDays) {
+        return setDisabilityDays(Long.valueOf(disabilityDays));
     }
 
     /**

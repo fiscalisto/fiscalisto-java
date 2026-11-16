@@ -88,6 +88,22 @@ public class UpdateSelfInvoicingParams {
     private Long portalRadius;
 
     /**
+     * Cuando se factura una persona moral y retiene (1.25% de ISR a un emisor en RESICO, artículo 113-J de la LISR, o lo que diga el producto): `keep_total` (por omisión), la base crece para que la factura sume lo que se pagó; `subtract`, la base es la del ticket y la retención se resta, así que el total de la factura es menor a lo pagado.
+     * <p>
+     * Valores: keep_total, subtract.
+     */
+    @JsonProperty("retention_mode")
+    private String retentionMode;
+
+    /**
+     * Los conceptos de la factura global: `ticket` (por omisión), uno «Venta» por ticket con su folio como `NoIdentificacion`; `summary`, solo el monto total del periodo, uno por combinación de impuestos con `NoIdentificacion` «Resumen» (regla 2.7.1.21 de la RMF 2026). `summary` es solo para un emisor persona física en RESICO (626); otro contesta `invalid_request`.
+     * <p>
+     * Valores: ticket, summary.
+     */
+    @JsonProperty("global_concepts")
+    private String globalConcepts;
+
+    /**
      * Hasta cuándo se puede facturar un ticket: `month`, hasta el fin del mes de la venta (lo usual ante el SAT); `days`, `window_days` días después.
      * <p>
      * Valores: month, days.
@@ -235,5 +251,33 @@ public class UpdateSelfInvoicingParams {
     @JsonIgnore
     public UpdateSelfInvoicingParams setPortalRadius(long portalRadius) {
         return setPortalRadius(Long.valueOf(portalRadius));
+    }
+
+    /**
+     * Cuando se factura una persona moral y retiene (1.25% de ISR a un emisor en RESICO, artículo 113-J de la LISR, o lo que diga el producto): `keep_total` (por omisión), la base crece para que la factura sume lo que se pagó; `subtract`, la base es la del ticket y la retención se resta, así que el total de la factura es menor a lo pagado.
+     * <p>
+     * Valores: keep_total, subtract.
+     */
+    public String getRetentionMode() {
+        return retentionMode;
+    }
+
+    public UpdateSelfInvoicingParams setRetentionMode(String retentionMode) {
+        this.retentionMode = retentionMode;
+        return this;
+    }
+
+    /**
+     * Los conceptos de la factura global: `ticket` (por omisión), uno «Venta» por ticket con su folio como `NoIdentificacion`; `summary`, solo el monto total del periodo, uno por combinación de impuestos con `NoIdentificacion` «Resumen» (regla 2.7.1.21 de la RMF 2026). `summary` es solo para un emisor persona física en RESICO (626); otro contesta `invalid_request`.
+     * <p>
+     * Valores: ticket, summary.
+     */
+    public String getGlobalConcepts() {
+        return globalConcepts;
+    }
+
+    public UpdateSelfInvoicingParams setGlobalConcepts(String globalConcepts) {
+        this.globalConcepts = globalConcepts;
+        return this;
     }
 }

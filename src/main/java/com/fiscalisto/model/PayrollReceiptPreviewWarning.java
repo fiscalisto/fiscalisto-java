@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PayrollReceiptPreviewWarning {
     /**
-     * finiquito_not_included: el empleado se fue en el periodo y el recibo no trae su finiquito; payroll_rates_pending: aún no se cargan los valores (ISR, subsidio, salario mínimo, UMA) de una fecha próxima.
+     * finiquito_not_included: el empleado se fue en el periodo y el recibo no trae su finiquito; absences_over_monthly_limit: con este recibo pasa de 7 faltas en el mes y las de más cotizan como días trabajados (para dejar de cotizar, presente su aviso de baja); payroll_rates_pending: aún no se cargan los valores (ISR, subsidio, salario mínimo, UMA) de una fecha próxima.
      */
     @JsonProperty("code")
     private String code;
@@ -25,7 +25,7 @@ public class PayrollReceiptPreviewWarning {
     private String message;
 
     /**
-     * finiquito_not_included: el empleado se fue en el periodo y el recibo no trae su finiquito; payroll_rates_pending: aún no se cargan los valores (ISR, subsidio, salario mínimo, UMA) de una fecha próxima.
+     * finiquito_not_included: el empleado se fue en el periodo y el recibo no trae su finiquito; absences_over_monthly_limit: con este recibo pasa de 7 faltas en el mes y las de más cotizan como días trabajados (para dejar de cotizar, presente su aviso de baja); payroll_rates_pending: aún no se cargan los valores (ISR, subsidio, salario mínimo, UMA) de una fecha próxima.
      */
     public String getCode() {
         return code;

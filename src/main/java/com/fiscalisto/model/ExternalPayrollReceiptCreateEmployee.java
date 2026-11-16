@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExternalPayrollReceiptCreateEmployee {
     /**
-     * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
+     * RFC del empleado. XAXX010101000 si falleció: con su nombre y su CURP.
      * <p>
      * Obligatorio.
      */
@@ -165,7 +165,7 @@ public class ExternalPayrollReceiptCreateEmployee {
     private List<ExternalPayrollReceiptCreateEmployeeSubcontractingItem> subcontracting;
 
     /**
-     * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
+     * RFC del empleado. XAXX010101000 si falleció: con su nombre y su CURP.
      * <p>
      * Obligatorio.
      */

@@ -30,10 +30,22 @@ public class CreatePayrollBatchParamsReceipt {
     private CreatePayrollBatchParamsReceiptPeriod period;
 
     /**
-     * Días pagados; sin él, todos los días que le tocan del periodo.
+     * Días pagados; sin él, todos los días que le tocan del periodo menos absences y disability_days.
      */
     @JsonProperty("days")
     private BigDecimal days;
+
+    /**
+     * Faltas del periodo (días sin goce de sueldo), de 0 a 31: no se pagan (salen de days) y cotizan al IMSS solo en enfermedades y maternidad, hasta 7 por mes (LSS art. 31 fr. I).
+     */
+    @JsonProperty("absences")
+    private Long absences;
+
+    /**
+     * Días de incapacidad que expidió el IMSS en el periodo, de 0 a 31: no se pagan (salen de days) y no causan cuotas obreras del IMSS (LSS art. 31 fr. IV).
+     */
+    @JsonProperty("disability_days")
+    private Long disabilityDays;
 
     /**
      * Mandarle su recibo por correo; sin él, lo que diga send_email del lote. Con true el empleado debe tener correo.
@@ -74,7 +86,7 @@ public class CreatePayrollBatchParamsReceipt {
     }
 
     /**
-     * Días pagados; sin él, todos los días que le tocan del periodo.
+     * Días pagados; sin él, todos los días que le tocan del periodo menos absences y disability_days.
      */
     public BigDecimal getDays() {
         return days;
@@ -88,6 +100,40 @@ public class CreatePayrollBatchParamsReceipt {
     @JsonIgnore
     public CreatePayrollBatchParamsReceipt setDays(double days) {
         return setDays(BigDecimal.valueOf(days));
+    }
+
+    /**
+     * Faltas del periodo (días sin goce de sueldo), de 0 a 31: no se pagan (salen de days) y cotizan al IMSS solo en enfermedades y maternidad, hasta 7 por mes (LSS art. 31 fr. I).
+     */
+    public Long getAbsences() {
+        return absences;
+    }
+
+    public CreatePayrollBatchParamsReceipt setAbsences(Long absences) {
+        this.absences = absences;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreatePayrollBatchParamsReceipt setAbsences(long absences) {
+        return setAbsences(Long.valueOf(absences));
+    }
+
+    /**
+     * Días de incapacidad que expidió el IMSS en el periodo, de 0 a 31: no se pagan (salen de days) y no causan cuotas obreras del IMSS (LSS art. 31 fr. IV).
+     */
+    public Long getDisabilityDays() {
+        return disabilityDays;
+    }
+
+    public CreatePayrollBatchParamsReceipt setDisabilityDays(Long disabilityDays) {
+        this.disabilityDays = disabilityDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreatePayrollBatchParamsReceipt setDisabilityDays(long disabilityDays) {
+        return setDisabilityDays(Long.valueOf(disabilityDays));
     }
 
     /**

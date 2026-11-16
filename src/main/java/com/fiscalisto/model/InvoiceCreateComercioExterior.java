@@ -17,7 +17,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoiceCreateComercioExterior {
     /**
-     * Motivo de traslado (MotivoTraslado): 05 envío de mercancías propias.
+     * Motivo de traslado (MotivoTraslado), c_MotivoTraslado, solo en un traslado: 01 mercancías facturadas con anterioridad (relacione la factura de venta en related), 02 reubicación de mercancías propias, 03 consignación, 04 para posterior enajenación, 05 propiedad de terceros (con owners), 99 otros.
+     * <p>
+     * Valores: 99, 01, 02, 03, 04, 05.
      */
     @JsonProperty("motive")
     private String motive;
@@ -87,7 +89,9 @@ public class InvoiceCreateComercioExterior {
     private String notes;
 
     /**
-     * Motivo de traslado (MotivoTraslado): 05 envío de mercancías propias.
+     * Motivo de traslado (MotivoTraslado), c_MotivoTraslado, solo en un traslado: 01 mercancías facturadas con anterioridad (relacione la factura de venta en related), 02 reubicación de mercancías propias, 03 consignación, 04 para posterior enajenación, 05 propiedad de terceros (con owners), 99 otros.
+     * <p>
+     * Valores: 99, 01, 02, 03, 04, 05.
      */
     public String getMotive() {
         return motive;

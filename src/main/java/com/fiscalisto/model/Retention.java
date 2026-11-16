@@ -73,7 +73,7 @@ public class Retention {
     private String date;
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones.
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 06, 14 a 24 llevan su complemento, como lo pide el catálogo del SAT (share_sale con 06 y 19, dividends con 14, distributable_remainder con 15, interest, trust_lease, foreign_payment, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); 01, 02, 04 y 05 llevan foreign_payment cuando el receptor es extranjero; la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones. 27 y 28 no se pueden emitir aquí.
      */
     @JsonProperty("code")
     private String code;
@@ -121,10 +121,16 @@ public class Retention {
     private Map<String, Object> interest;
 
     /**
-     * Complemento de pagos a extranjeros.
+     * Complemento de pagos a extranjeros: obligatorio con code 18, y con 01, 02, 04 y 05 cuando el receptor es extranjero.
      */
     @JsonProperty("foreign_payment")
     private Map<String, Object> foreignPayment;
+
+    /**
+     * Complemento de dividendos con su nodo Remanente (remanente distribuible), obligatorio con code 15. Si no lo manda, va sin proporción.
+     */
+    @JsonProperty("distributable_remainder")
+    private Map<String, Object> distributableRemainder;
 
     /**
      * Complemento de arrendamiento en fideicomiso (Arrendamientoenfideicomiso 1.0), obligatorio con code 17.
@@ -133,7 +139,7 @@ public class Retention {
     private Map<String, Object> trustLease;
 
     /**
-     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 19.
+     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 06 y 19.
      */
     @JsonProperty("share_sale")
     private Map<String, Object> shareSale;
@@ -332,7 +338,7 @@ public class Retention {
     }
 
     /**
-     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 14, 16, 17 y 18 a 24 llevan su complemento (dividends, interest, trust_lease, foreign_payment, share_sale, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones.
+     * Clave de la retención (CveRetenc), c_CveRetenc: 01 servicios profesionales, 05 arrendamiento, 14 dividendos, 16 intereses, 18 pagos al extranjero… Las claves 06, 14 a 24 llevan su complemento, como lo pide el catálogo del SAT (share_sale con 06 y 19, dividends con 14, distributable_remainder con 15, interest, trust_lease, foreign_payment, prize, trust, retirement_plan, mortgage_interest, financial_derivatives); 01, 02, 04 y 05 llevan foreign_payment cuando el receptor es extranjero; la 26 (plataformas tecnológicas) lleva platform, y sus totals y taxes se calculan de las operaciones. 27 y 28 no se pueden emitir aquí.
      */
     public String getCode() {
         return code;
@@ -428,7 +434,7 @@ public class Retention {
     }
 
     /**
-     * Complemento de pagos a extranjeros.
+     * Complemento de pagos a extranjeros: obligatorio con code 18, y con 01, 02, 04 y 05 cuando el receptor es extranjero.
      */
     public Map<String, Object> getForeignPayment() {
         return foreignPayment;
@@ -436,6 +442,18 @@ public class Retention {
 
     public Retention setForeignPayment(Map<String, Object> foreignPayment) {
         this.foreignPayment = foreignPayment;
+        return this;
+    }
+
+    /**
+     * Complemento de dividendos con su nodo Remanente (remanente distribuible), obligatorio con code 15. Si no lo manda, va sin proporción.
+     */
+    public Map<String, Object> getDistributableRemainder() {
+        return distributableRemainder;
+    }
+
+    public Retention setDistributableRemainder(Map<String, Object> distributableRemainder) {
+        this.distributableRemainder = distributableRemainder;
         return this;
     }
 
@@ -452,7 +470,7 @@ public class Retention {
     }
 
     /**
-     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 19.
+     * Complemento de enajenación de acciones u operaciones de valores (EnajenaciondeAcciones 1.0), obligatorio con code 06 y 19.
      */
     public Map<String, Object> getShareSale() {
         return shareSale;

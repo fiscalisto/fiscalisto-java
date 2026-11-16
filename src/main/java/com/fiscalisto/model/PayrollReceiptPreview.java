@@ -59,6 +59,12 @@ public class PayrollReceiptPreview {
     private BigDecimal days;
 
     /**
+     * Los días por los que se calcularon las cuotas obreras del IMSS.
+     */
+    @JsonProperty("imss_days")
+    private PayrollReceiptPreviewImssDays imssDays;
+
+    /**
      * Salario base de cotización (SalarioBaseCotApor).
      */
     @JsonProperty("contribution_base_salary")
@@ -181,6 +187,18 @@ public class PayrollReceiptPreview {
     @JsonIgnore
     public PayrollReceiptPreview setDays(double days) {
         return setDays(BigDecimal.valueOf(days));
+    }
+
+    /**
+     * Los días por los que se calcularon las cuotas obreras del IMSS.
+     */
+    public PayrollReceiptPreviewImssDays getImssDays() {
+        return imssDays;
+    }
+
+    public PayrollReceiptPreview setImssDays(PayrollReceiptPreviewImssDays imssDays) {
+        this.imssDays = imssDays;
+        return this;
     }
 
     /**

@@ -59,7 +59,7 @@ public class Product {
     private String productKey;
 
     /**
-     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio (por omisión), H87 pieza, ACT actividad…
+     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio, H87 pieza, ACT actividad… Por omisión H87 si la clave del producto es de un bien (segmentos 10 a 60) y E48 si es de un servicio.
      */
     @JsonProperty("unit_key")
     private String unitKey;
@@ -135,6 +135,12 @@ public class Product {
      */
     @JsonProperty("local_taxes")
     private List<ProductLocalTax> localTaxes;
+
+    /**
+     * Complemento de Hidrocarburos y Petrolíferos: obligatorio en cada concepto de diésel (15101505) o gasolina (15101514, 15101515) de una factura o nota de crédito, en litros (LTR).
+     */
+    @JsonProperty("hydrocarbon")
+    private ProductHydrocarbon hydrocarbon;
 
     /**
      * true si lleva existencias (Inventario).
@@ -275,7 +281,7 @@ public class Product {
     }
 
     /**
-     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio (por omisión), H87 pieza, ACT actividad…
+     * Clave de unidad (ClaveUnidad) de c_ClaveUnidad: E48 unidad de servicio, H87 pieza, ACT actividad… Por omisión H87 si la clave del producto es de un bien (segmentos 10 a 60) y E48 si es de un servicio.
      */
     public String getUnitKey() {
         return unitKey;
@@ -447,6 +453,18 @@ public class Product {
 
     public Product setLocalTaxes(List<ProductLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * Complemento de Hidrocarburos y Petrolíferos: obligatorio en cada concepto de diésel (15101505) o gasolina (15101514, 15101515) de una factura o nota de crédito, en litros (LTR).
+     */
+    public ProductHydrocarbon getHydrocarbon() {
+        return hydrocarbon;
+    }
+
+    public Product setHydrocarbon(ProductHydrocarbon hydrocarbon) {
+        this.hydrocarbon = hydrocarbon;
         return this;
     }
 

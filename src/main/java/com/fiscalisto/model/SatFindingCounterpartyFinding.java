@@ -40,6 +40,12 @@ public class SatFindingCounterpartyFinding {
     private Long invoices;
 
     /**
+     * Qué hacer con este hallazgo, en una frase o dos.
+     */
+    @JsonProperty("next_step")
+    private String nextStep;
+
+    /**
      * El código del hallazgo (el code de GET /v1/sat_findings).
      */
     public String getCode() {
@@ -92,5 +98,17 @@ public class SatFindingCounterpartyFinding {
     @JsonIgnore
     public SatFindingCounterpartyFinding setInvoices(long invoices) {
         return setInvoices(Long.valueOf(invoices));
+    }
+
+    /**
+     * Qué hacer con este hallazgo, en una frase o dos.
+     */
+    public String getNextStep() {
+        return nextStep;
+    }
+
+    public SatFindingCounterpartyFinding setNextStep(String nextStep) {
+        this.nextStep = nextStep;
+        return this;
     }
 }
