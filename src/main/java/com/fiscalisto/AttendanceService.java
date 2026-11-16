@@ -72,9 +72,9 @@ public final class AttendanceService {
     }
 
     /**
-     * Autorizar horas extra
+     * Autorizar o rechazar horas extra
      * <p>
-     * Hasta cuántos minutos de horas extra de un día de un empleado cuentan para la nómina, antes o después de ese día (minutes null quita la autorización). Con la regla «Las horas extra necesitan autorización» encendida, lo demás queda en el registro como sin autorizar.
+     * Hasta cuántos minutos de horas extra de un día de un empleado cuentan para la nómina, antes o después de ese día, o rechazarlas todas (rejected: true, con comment). minutes null quita la decisión. Con la regla de horas extra «Necesitan autorización», lo que nadie autorizó queda en el registro como sin autorizar.
      * <p>
      * POST /v1/attendance/overtime
      * <p>

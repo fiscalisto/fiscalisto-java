@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * AttendanceOvertime: Las horas extra que la empresa autorizó para un día de un empleado, antes o después de ese día.
+ * AttendanceOvertime: Las horas extra que la empresa autorizó o rechazó para un día de un empleado, antes o después de ese día.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -38,10 +38,16 @@ public class AttendanceOvertime {
     private String date;
 
     /**
-     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina; null: sin autorización.
+     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina (0 si se rechazaron); null: sin decisión.
      */
     @JsonProperty("minutes")
     private Long minutes;
+
+    /**
+     * true: la empresa rechazó las horas extra de ese día.
+     */
+    @JsonProperty("rejected")
+    private Boolean rejected;
 
     /**
      * Por qué, o null.
@@ -98,7 +104,7 @@ public class AttendanceOvertime {
     }
 
     /**
-     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina; null: sin autorización.
+     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina (0 si se rechazaron); null: sin decisión.
      */
     public Long getMinutes() {
         return minutes;
@@ -112,6 +118,18 @@ public class AttendanceOvertime {
     @JsonIgnore
     public AttendanceOvertime setMinutes(long minutes) {
         return setMinutes(Long.valueOf(minutes));
+    }
+
+    /**
+     * true: la empresa rechazó las horas extra de ese día.
+     */
+    public Boolean getRejected() {
+        return rejected;
+    }
+
+    public AttendanceOvertime setRejected(Boolean rejected) {
+        this.rejected = rejected;
+        return this;
     }
 
     /**

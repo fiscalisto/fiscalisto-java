@@ -51,6 +51,14 @@ public class AttendanceReport {
     private Boolean overtimeApproval;
 
     /**
+     * Cómo llegan las horas extra a la nómina: approval (necesitan autorización), all (cuentan todas) o none (no hay horas extra: quedan en el registro y nunca cuentan).
+     * <p>
+     * Valores: approval, all, none.
+     */
+    @JsonProperty("overtime_policy")
+    private String overtimePolicy;
+
+    /**
      * Cada empleado del emisor en el periodo.
      */
     @JsonProperty("employees")
@@ -125,6 +133,20 @@ public class AttendanceReport {
 
     public AttendanceReport setOvertimeApproval(Boolean overtimeApproval) {
         this.overtimeApproval = overtimeApproval;
+        return this;
+    }
+
+    /**
+     * Cómo llegan las horas extra a la nómina: approval (necesitan autorización), all (cuentan todas) o none (no hay horas extra: quedan en el registro y nunca cuentan).
+     * <p>
+     * Valores: approval, all, none.
+     */
+    public String getOvertimePolicy() {
+        return overtimePolicy;
+    }
+
+    public AttendanceReport setOvertimePolicy(String overtimePolicy) {
+        this.overtimePolicy = overtimePolicy;
         return this;
     }
 

@@ -118,6 +118,12 @@ public class AttendanceReportEmployee {
     private Long unapprovedOvertimeMinutes;
 
     /**
+     * Minutos de más que la empresa rechazó: quedan en el registro, no cuentan para la nómina y ya no están por autorizar.
+     */
+    @JsonProperty("rejected_overtime_minutes")
+    private Long rejectedOvertimeMinutes;
+
+    /**
      * Días de descanso en que trabajó.
      */
     @JsonProperty("rest_days_worked")
@@ -420,6 +426,23 @@ public class AttendanceReportEmployee {
     @JsonIgnore
     public AttendanceReportEmployee setUnapprovedOvertimeMinutes(long unapprovedOvertimeMinutes) {
         return setUnapprovedOvertimeMinutes(Long.valueOf(unapprovedOvertimeMinutes));
+    }
+
+    /**
+     * Minutos de más que la empresa rechazó: quedan en el registro, no cuentan para la nómina y ya no están por autorizar.
+     */
+    public Long getRejectedOvertimeMinutes() {
+        return rejectedOvertimeMinutes;
+    }
+
+    public AttendanceReportEmployee setRejectedOvertimeMinutes(Long rejectedOvertimeMinutes) {
+        this.rejectedOvertimeMinutes = rejectedOvertimeMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployee setRejectedOvertimeMinutes(long rejectedOvertimeMinutes) {
+        return setRejectedOvertimeMinutes(Long.valueOf(rejectedOvertimeMinutes));
     }
 
     /**

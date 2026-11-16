@@ -52,10 +52,16 @@ public class AttendanceReportEmployeeDay {
     private Long overtimeMinutes;
 
     /**
-     * De esos, los que cuentan para la nómina: hasta lo autorizado ese día cuando las horas extra necesitan autorización; si no, todos.
+     * De esos, los que cuentan para la nómina: con overtime_policy approval, hasta lo autorizado ese día; con all, todos; con none, ninguno.
      */
     @JsonProperty("approved_overtime_minutes")
     private Long approvedOvertimeMinutes;
+
+    /**
+     * De esos, los que la empresa rechazó ese día: no cuentan para la nómina.
+     */
+    @JsonProperty("rejected_overtime_minutes")
+    private Long rejectedOvertimeMinutes;
 
     /**
      * La nota del día que puso la empresa, o null.
@@ -161,7 +167,7 @@ public class AttendanceReportEmployeeDay {
     }
 
     /**
-     * De esos, los que cuentan para la nómina: hasta lo autorizado ese día cuando las horas extra necesitan autorización; si no, todos.
+     * De esos, los que cuentan para la nómina: con overtime_policy approval, hasta lo autorizado ese día; con all, todos; con none, ninguno.
      */
     public Long getApprovedOvertimeMinutes() {
         return approvedOvertimeMinutes;
@@ -175,6 +181,23 @@ public class AttendanceReportEmployeeDay {
     @JsonIgnore
     public AttendanceReportEmployeeDay setApprovedOvertimeMinutes(long approvedOvertimeMinutes) {
         return setApprovedOvertimeMinutes(Long.valueOf(approvedOvertimeMinutes));
+    }
+
+    /**
+     * De esos, los que la empresa rechazó ese día: no cuentan para la nómina.
+     */
+    public Long getRejectedOvertimeMinutes() {
+        return rejectedOvertimeMinutes;
+    }
+
+    public AttendanceReportEmployeeDay setRejectedOvertimeMinutes(Long rejectedOvertimeMinutes) {
+        this.rejectedOvertimeMinutes = rejectedOvertimeMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployeeDay setRejectedOvertimeMinutes(long rejectedOvertimeMinutes) {
+        return setRejectedOvertimeMinutes(Long.valueOf(rejectedOvertimeMinutes));
     }
 
     /**

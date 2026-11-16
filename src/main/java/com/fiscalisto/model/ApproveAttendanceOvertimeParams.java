@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * ApproveAttendanceOvertimeParams: los campos de «Autorizar horas extra».
+ * ApproveAttendanceOvertimeParams: los campos de «Autorizar o rechazar horas extra».
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -30,7 +30,7 @@ public class ApproveAttendanceOvertimeParams {
     private String date;
 
     /**
-     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina (0 a 960); null quita la autorización.
+     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina (0 a 960); null quita la decisión. Con rejected: true se ignora.
      * <p>
      * Obligatorio.
      */
@@ -38,7 +38,13 @@ public class ApproveAttendanceOvertimeParams {
     private Long minutes;
 
     /**
-     * Por qué (opcional).
+     * true rechaza todas las horas extra de ese día: quedan en el registro, no cuentan para la nómina y dejan de estar por autorizar. Pide comment.
+     */
+    @JsonProperty("rejected")
+    private Boolean rejected;
+
+    /**
+     * Por qué (obligatorio al rechazar; el empleado lo ve).
      */
     @JsonProperty("comment")
     private String comment;
@@ -72,7 +78,7 @@ public class ApproveAttendanceOvertimeParams {
     }
 
     /**
-     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina (0 a 960); null quita la autorización.
+     * Hasta cuántos minutos de horas extra de ese día cuentan para la nómina (0 a 960); null quita la decisión. Con rejected: true se ignora.
      * <p>
      * Obligatorio.
      */
@@ -91,7 +97,19 @@ public class ApproveAttendanceOvertimeParams {
     }
 
     /**
-     * Por qué (opcional).
+     * true rechaza todas las horas extra de ese día: quedan en el registro, no cuentan para la nómina y dejan de estar por autorizar. Pide comment.
+     */
+    public Boolean getRejected() {
+        return rejected;
+    }
+
+    public ApproveAttendanceOvertimeParams setRejected(Boolean rejected) {
+        this.rejected = rejected;
+        return this;
+    }
+
+    /**
+     * Por qué (obligatorio al rechazar; el empleado lo ve).
      */
     public String getComment() {
         return comment;
