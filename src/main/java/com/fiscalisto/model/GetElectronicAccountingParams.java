@@ -13,12 +13,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetElectronicAccountingParams {
     /**
-     * El mes (AAAA-MM).
+     * El mes (AAAA-MM), o AAAA-13 para la balanza de cierre de un ejercicio ya terminado.
      * <p>
      * Obligatorio.
      */
     @JsonProperty("month")
     private String month;
+
+    /**
+     * Solo con AAAA-13: true (por omisión) incluye la póliza de cierre, que cancela ingresos, costos y gastos contra el resultado del ejercicio (305.01 utilidad o 305.02 pérdida); false manda los saldos de diciembre sin movimientos.
+     * <p>
+     * Valores: true, false.
+     */
+    @JsonProperty("closing_entry")
+    private String closingEntry;
 
     /**
      * normal (BN, por omisión) o complementary (BC, con modified_on).
@@ -61,7 +69,7 @@ public class GetElectronicAccountingParams {
     private String issuer;
 
     /**
-     * El mes (AAAA-MM).
+     * El mes (AAAA-MM), o AAAA-13 para la balanza de cierre de un ejercicio ya terminado.
      * <p>
      * Obligatorio.
      */
@@ -71,6 +79,20 @@ public class GetElectronicAccountingParams {
 
     public GetElectronicAccountingParams setMonth(String month) {
         this.month = month;
+        return this;
+    }
+
+    /**
+     * Solo con AAAA-13: true (por omisión) incluye la póliza de cierre, que cancela ingresos, costos y gastos contra el resultado del ejercicio (305.01 utilidad o 305.02 pérdida); false manda los saldos de diciembre sin movimientos.
+     * <p>
+     * Valores: true, false.
+     */
+    public String getClosingEntry() {
+        return closingEntry;
+    }
+
+    public GetElectronicAccountingParams setClosingEntry(String closingEntry) {
+        this.closingEntry = closingEntry;
         return this;
     }
 

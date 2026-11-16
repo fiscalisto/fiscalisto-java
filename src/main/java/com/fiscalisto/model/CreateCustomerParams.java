@@ -90,7 +90,7 @@ public class CreateCustomerParams {
     private BigDecimal discountPercent;
 
     /**
-     * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio.
+     * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio, salvo el del alcohol y los tabacos (tasas 0.5, 1.6 y 0.304), que va en el precio siempre (LIEPS art. 19 fr. II).
      */
     @JsonProperty("ieps_taxpayer")
     private Boolean iepsTaxpayer;
@@ -241,7 +241,7 @@ public class CreateCustomerParams {
     }
 
     /**
-     * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio.
+     * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio, salvo el del alcohol y los tabacos (tasas 0.5, 1.6 y 0.304), que va en el precio siempre (LIEPS art. 19 fr. II).
      */
     public Boolean getIepsTaxpayer() {
         return iepsTaxpayer;
