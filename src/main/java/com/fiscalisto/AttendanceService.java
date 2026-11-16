@@ -2,7 +2,9 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.ApproveAttendanceOvertimeParams;
 import com.fiscalisto.model.AttendanceMark;
+import com.fiscalisto.model.AttendanceOvertime;
 import com.fiscalisto.model.AttendanceReport;
 import com.fiscalisto.model.CreateAttendanceMarkParams;
 import com.fiscalisto.model.GetAttendanceParams;
@@ -67,5 +69,22 @@ public final class AttendanceService {
 
     public AttendanceMark voidMark(String id, VoidAttendanceMarkParams params) {
         return voidMark(id, params, null);
+    }
+
+    /**
+     * Autorizar horas extra
+     * <p>
+     * Hasta cuántos minutos de horas extra de un día de un empleado cuentan para la nómina, antes o después de ese día (minutes null quita la autorización). Con la regla «Las horas extra necesitan autorización» encendida, lo demás queda en el registro como sin autorizar.
+     * <p>
+     * POST /v1/attendance/overtime
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/asistencia/approve-attendance-overtime
+     */
+    public AttendanceOvertime approveOvertime(ApproveAttendanceOvertimeParams params, RequestOptions options) {
+        return api.request("POST", "/v1/attendance/overtime", params, null, true, AttendanceOvertime.class, options);
+    }
+
+    public AttendanceOvertime approveOvertime(ApproveAttendanceOvertimeParams params) {
+        return approveOvertime(params, null);
     }
 }

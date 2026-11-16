@@ -106,6 +106,18 @@ public class AttendanceReportEmployee {
     private Long overtimeTripleMinutes;
 
     /**
+     * Todos los minutos de más en el registro, autorizados o no.
+     */
+    @JsonProperty("overtime_minutes")
+    private Long overtimeMinutes;
+
+    /**
+     * Minutos de más que nadie autorizó: quedan en el registro y no cuentan para la nómina.
+     */
+    @JsonProperty("unapproved_overtime_minutes")
+    private Long unapprovedOvertimeMinutes;
+
+    /**
      * Días de descanso en que trabajó.
      */
     @JsonProperty("rest_days_worked")
@@ -374,6 +386,40 @@ public class AttendanceReportEmployee {
     @JsonIgnore
     public AttendanceReportEmployee setOvertimeTripleMinutes(long overtimeTripleMinutes) {
         return setOvertimeTripleMinutes(Long.valueOf(overtimeTripleMinutes));
+    }
+
+    /**
+     * Todos los minutos de más en el registro, autorizados o no.
+     */
+    public Long getOvertimeMinutes() {
+        return overtimeMinutes;
+    }
+
+    public AttendanceReportEmployee setOvertimeMinutes(Long overtimeMinutes) {
+        this.overtimeMinutes = overtimeMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployee setOvertimeMinutes(long overtimeMinutes) {
+        return setOvertimeMinutes(Long.valueOf(overtimeMinutes));
+    }
+
+    /**
+     * Minutos de más que nadie autorizó: quedan en el registro y no cuentan para la nómina.
+     */
+    public Long getUnapprovedOvertimeMinutes() {
+        return unapprovedOvertimeMinutes;
+    }
+
+    public AttendanceReportEmployee setUnapprovedOvertimeMinutes(Long unapprovedOvertimeMinutes) {
+        this.unapprovedOvertimeMinutes = unapprovedOvertimeMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployee setUnapprovedOvertimeMinutes(long unapprovedOvertimeMinutes) {
+        return setUnapprovedOvertimeMinutes(Long.valueOf(unapprovedOvertimeMinutes));
     }
 
     /**

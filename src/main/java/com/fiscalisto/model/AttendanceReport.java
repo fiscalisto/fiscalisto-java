@@ -45,6 +45,12 @@ public class AttendanceReport {
     private String to;
 
     /**
+     * true: las horas extra cuentan solo hasta lo que la empresa autorizó cada día.
+     */
+    @JsonProperty("overtime_approval")
+    private Boolean overtimeApproval;
+
+    /**
      * Cada empleado del emisor en el periodo.
      */
     @JsonProperty("employees")
@@ -107,6 +113,18 @@ public class AttendanceReport {
 
     public AttendanceReport setTo(String to) {
         this.to = to;
+        return this;
+    }
+
+    /**
+     * true: las horas extra cuentan solo hasta lo que la empresa autorizó cada día.
+     */
+    public Boolean getOvertimeApproval() {
+        return overtimeApproval;
+    }
+
+    public AttendanceReport setOvertimeApproval(Boolean overtimeApproval) {
+        this.overtimeApproval = overtimeApproval;
         return this;
     }
 

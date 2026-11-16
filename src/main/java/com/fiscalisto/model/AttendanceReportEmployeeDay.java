@@ -52,6 +52,12 @@ public class AttendanceReportEmployeeDay {
     private Long overtimeMinutes;
 
     /**
+     * De esos, los que cuentan para la nómina: hasta lo autorizado ese día cuando las horas extra necesitan autorización; si no, todos.
+     */
+    @JsonProperty("approved_overtime_minutes")
+    private Long approvedOvertimeMinutes;
+
+    /**
      * La nota del día que puso la empresa, o null.
      * <p>
      * Valores: vacaciones, incapacidad, permiso_con_goce, permiso_sin_goce, descanso, festivo, falta.
@@ -152,6 +158,23 @@ public class AttendanceReportEmployeeDay {
     @JsonIgnore
     public AttendanceReportEmployeeDay setOvertimeMinutes(long overtimeMinutes) {
         return setOvertimeMinutes(Long.valueOf(overtimeMinutes));
+    }
+
+    /**
+     * De esos, los que cuentan para la nómina: hasta lo autorizado ese día cuando las horas extra necesitan autorización; si no, todos.
+     */
+    public Long getApprovedOvertimeMinutes() {
+        return approvedOvertimeMinutes;
+    }
+
+    public AttendanceReportEmployeeDay setApprovedOvertimeMinutes(Long approvedOvertimeMinutes) {
+        this.approvedOvertimeMinutes = approvedOvertimeMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployeeDay setApprovedOvertimeMinutes(long approvedOvertimeMinutes) {
+        return setApprovedOvertimeMinutes(Long.valueOf(approvedOvertimeMinutes));
     }
 
     /**
