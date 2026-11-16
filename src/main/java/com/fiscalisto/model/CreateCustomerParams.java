@@ -96,6 +96,18 @@ public class CreateCustomerParams {
     private Boolean iepsTaxpayer;
 
     /**
+     * Sus días de crédito: sus facturas vencen estos días después de su fecha (due_date, cobranza); null: los de su grupo o los de la empresa.
+     */
+    @JsonProperty("credit_days")
+    private Long creditDays;
+
+    /**
+     * Sus condiciones de pago («Crédito a 30 días»): las facturas nuevas en la app empiezan con ellas; null: las de la empresa. POST /v1/invoices no las pone solas: mándelas en payment_terms.
+     */
+    @JsonProperty("payment_terms")
+    private String paymentTerms;
+
+    /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
      */
     public String getIssuer() {
@@ -249,6 +261,35 @@ public class CreateCustomerParams {
 
     public CreateCustomerParams setIepsTaxpayer(Boolean iepsTaxpayer) {
         this.iepsTaxpayer = iepsTaxpayer;
+        return this;
+    }
+
+    /**
+     * Sus días de crédito: sus facturas vencen estos días después de su fecha (due_date, cobranza); null: los de su grupo o los de la empresa.
+     */
+    public Long getCreditDays() {
+        return creditDays;
+    }
+
+    public CreateCustomerParams setCreditDays(Long creditDays) {
+        this.creditDays = creditDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateCustomerParams setCreditDays(long creditDays) {
+        return setCreditDays(Long.valueOf(creditDays));
+    }
+
+    /**
+     * Sus condiciones de pago («Crédito a 30 días»): las facturas nuevas en la app empiezan con ellas; null: las de la empresa. POST /v1/invoices no las pone solas: mándelas en payment_terms.
+     */
+    public String getPaymentTerms() {
+        return paymentTerms;
+    }
+
+    public CreateCustomerParams setPaymentTerms(String paymentTerms) {
+        this.paymentTerms = paymentTerms;
         return this;
     }
 }

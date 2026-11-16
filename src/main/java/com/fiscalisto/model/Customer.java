@@ -88,6 +88,18 @@ public class Customer {
     private Boolean iepsTaxpayer;
 
     /**
+     * Días de crédito que se le dan, de 0 a 365, o null para no cambiar los del cliente.
+     */
+    @JsonProperty("credit_days")
+    private Long creditDays;
+
+    /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    @JsonProperty("payment_terms")
+    private String paymentTerms;
+
+    /**
      * Su grupo de clientes (cgr_…), o null si no está en ninguno.
      */
     @JsonProperty("group")
@@ -258,6 +270,35 @@ public class Customer {
 
     public Customer setIepsTaxpayer(Boolean iepsTaxpayer) {
         this.iepsTaxpayer = iepsTaxpayer;
+        return this;
+    }
+
+    /**
+     * Días de crédito que se le dan, de 0 a 365, o null para no cambiar los del cliente.
+     */
+    public Long getCreditDays() {
+        return creditDays;
+    }
+
+    public Customer setCreditDays(Long creditDays) {
+        this.creditDays = creditDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public Customer setCreditDays(long creditDays) {
+        return setCreditDays(Long.valueOf(creditDays));
+    }
+
+    /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    public String getPaymentTerms() {
+        return paymentTerms;
+    }
+
+    public Customer setPaymentTerms(String paymentTerms) {
+        this.paymentTerms = paymentTerms;
         return this;
     }
 
