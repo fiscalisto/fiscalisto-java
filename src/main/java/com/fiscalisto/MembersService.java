@@ -2,6 +2,7 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.DeleteMemberParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListMembersParams;
 import com.fiscalisto.model.Member;
@@ -80,17 +81,21 @@ public final class MembersService {
     /**
      * Quitar a un miembro
      * <p>
-     * La persona deja de entrar a la empresa y sus invitaciones se cancelan. Siempre queda al menos un propietario; quitar a alguien con permisos delicados se hace en la app.
+     * La persona deja de entrar a la empresa y sus invitaciones se cancelan; lo que hizo se queda con su nombre. Lo que le esperaba (pasos de aprobación que la nombran, aprobaciones pendientes, avisos, ausencias, viáticos que aprueba) pasa a `transfer_to` o, sin él, a cualquiera con el permiso. Siempre queda al menos un propietario; quitar a alguien con permisos delicados se hace en la app.
      * <p>
      * DELETE /v1/members/{id}
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/equipo/delete-member
      */
-    public Deleted delete(String id, RequestOptions options) {
-        return api.request("DELETE", "/v1/members/" + ApiClient.encode(id), null, null, false, Deleted.class, options);
+    public Deleted delete(String id, DeleteMemberParams params, RequestOptions options) {
+        return api.request("DELETE", "/v1/members/" + ApiClient.encode(id), null, params, false, Deleted.class, options);
+    }
+
+    public Deleted delete(String id, DeleteMemberParams params) {
+        return delete(id, params, null);
     }
 
     public Deleted delete(String id) {
-        return delete(id, null);
+        return delete(id, null, null);
     }
 }
