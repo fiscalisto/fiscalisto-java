@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,6 +58,12 @@ public class UpdateExpensePolicyParams {
      */
     @JsonProperty("notify_people")
     private Boolean notifyPeople;
+
+    /**
+     * Cómo se suben los tickets y recibos: image (foto), pdf o los dos. Un archivo de otro tipo se rechaza con invalid_request_error. El XML de una factura siempre se acepta.
+     */
+    @JsonProperty("receipt_formats")
+    private List<String> receiptFormats;
 
     /**
      * El emisor (iss_…). Por omisión, su único emisor.
@@ -149,6 +156,18 @@ public class UpdateExpensePolicyParams {
 
     public UpdateExpensePolicyParams setNotifyPeople(Boolean notifyPeople) {
         this.notifyPeople = notifyPeople;
+        return this;
+    }
+
+    /**
+     * Cómo se suben los tickets y recibos: image (foto), pdf o los dos. Un archivo de otro tipo se rechaza con invalid_request_error. El XML de una factura siempre se acepta.
+     */
+    public List<String> getReceiptFormats() {
+        return receiptFormats;
+    }
+
+    public UpdateExpensePolicyParams setReceiptFormats(List<String> receiptFormats) {
+        this.receiptFormats = receiptFormats;
         return this;
     }
 }
