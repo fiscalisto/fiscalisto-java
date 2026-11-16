@@ -167,6 +167,12 @@ public class CreateRecurringInvoiceParamsInvoice {
     private String notes;
 
     /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    @JsonProperty("payment_terms")
+    private String paymentTerms;
+
+    /**
      * Idioma del PDF: es (por omisión) o en.
      * <p>
      * Valores: es, en, bi.
@@ -526,6 +532,18 @@ public class CreateRecurringInvoiceParamsInvoice {
 
     public CreateRecurringInvoiceParamsInvoice setNotes(String notes) {
         this.notes = notes;
+        return this;
+    }
+
+    /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    public String getPaymentTerms() {
+        return paymentTerms;
+    }
+
+    public CreateRecurringInvoiceParamsInvoice setPaymentTerms(String paymentTerms) {
+        this.paymentTerms = paymentTerms;
         return this;
     }
 

@@ -118,6 +118,12 @@ public class Invoice {
     private String paymentMethod;
 
     /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    @JsonProperty("payment_terms")
+    private String paymentTerms;
+
+    /**
      * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
      */
     @JsonProperty("currency")
@@ -186,7 +192,7 @@ public class Invoice {
     private String paidOn;
 
     /**
-     * Mientras falta cobrarla (unpaid o partial): el día en que vence (AAAA-MM-DD), su fecha más los días de crédito de la ficha del cliente o, sin ellos, los de la empresa (30 si no los cambió); una PUE con paid_later, el último día de su mes. Son los días que usan Cuentas por cobrar y los recordatorios de cobranza. null si ya se pagó o no aplica.
+     * Mientras falta cobrarla (unpaid o partial): el día en que vence (AAAA-MM-DD), su fecha más los días de crédito de la ficha del cliente (o de su grupo de clientes) o, sin ellos, los de la empresa (30 si no los cambió); una PUE con paid_later, el último día de su mes. Son los días que usan Cuentas por cobrar y los recordatorios de cobranza. null si ya se pagó o no aplica.
      */
     @JsonProperty("due_date")
     private String dueDate;
@@ -472,6 +478,18 @@ public class Invoice {
     }
 
     /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    public String getPaymentTerms() {
+        return paymentTerms;
+    }
+
+    public Invoice setPaymentTerms(String paymentTerms) {
+        this.paymentTerms = paymentTerms;
+        return this;
+    }
+
+    /**
      * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
      */
     public String getCurrency() {
@@ -636,7 +654,7 @@ public class Invoice {
     }
 
     /**
-     * Mientras falta cobrarla (unpaid o partial): el día en que vence (AAAA-MM-DD), su fecha más los días de crédito de la ficha del cliente o, sin ellos, los de la empresa (30 si no los cambió); una PUE con paid_later, el último día de su mes. Son los días que usan Cuentas por cobrar y los recordatorios de cobranza. null si ya se pagó o no aplica.
+     * Mientras falta cobrarla (unpaid o partial): el día en que vence (AAAA-MM-DD), su fecha más los días de crédito de la ficha del cliente (o de su grupo de clientes) o, sin ellos, los de la empresa (30 si no los cambió); una PUE con paid_later, el último día de su mes. Son los días que usan Cuentas por cobrar y los recordatorios de cobranza. null si ya se pagó o no aplica.
      */
     public String getDueDate() {
         return dueDate;

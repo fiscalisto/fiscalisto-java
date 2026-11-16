@@ -47,7 +47,7 @@ public class CustomerPaymentBehavior {
     private String taxId;
 
     /**
-     * Sus días de crédito: los suyos (Clientes) o los de la empresa (Ajustes › Cobranza automática). Contra ellos se mide el atraso.
+     * Sus días de crédito: los suyos (Clientes, o los de su grupo) o los de la empresa (Ajustes › Cobranza automática). Contra ellos se mide el atraso.
      */
     @JsonProperty("credit_days")
     private Long creditDays;
@@ -205,7 +205,7 @@ public class CustomerPaymentBehavior {
     }
 
     /**
-     * Sus días de crédito: los suyos (Clientes) o los de la empresa (Ajustes › Cobranza automática). Contra ellos se mide el atraso.
+     * Sus días de crédito: los suyos (Clientes, o los de su grupo) o los de la empresa (Ajustes › Cobranza automática). Contra ellos se mide el atraso.
      */
     public Long getCreditDays() {
         return creditDays;

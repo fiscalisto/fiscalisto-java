@@ -39,7 +39,7 @@ public class PortalSupplier {
     private String issuer;
 
     /**
-     * El RFC del proveedor.
+     * El RFC del proveedor; uno del extranjero, sin RFC, trae su clave `EXT-&lt;país&gt;-&lt;tax ID&gt;` (país en c_Pais del SAT, «EXT-USA-123456789»).
      */
     @JsonProperty("tax_id")
     private String taxId;
@@ -161,7 +161,7 @@ public class PortalSupplier {
     }
 
     /**
-     * El RFC del proveedor.
+     * El RFC del proveedor; uno del extranjero, sin RFC, trae su clave `EXT-&lt;país&gt;-&lt;tax ID&gt;` (país en c_Pais del SAT, «EXT-USA-123456789»).
      */
     public String getTaxId() {
         return taxId;

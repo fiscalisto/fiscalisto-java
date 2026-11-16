@@ -47,13 +47,13 @@ public class SupplierInvoice {
     private String supplier;
 
     /**
-     * El RFC del proveedor.
+     * El RFC del proveedor, o la clave `EXT-&lt;país&gt;-&lt;tax ID&gt;` de uno del extranjero.
      */
     @JsonProperty("supplier_tax_id")
     private String supplierTaxId;
 
     /**
-     * El folio fiscal (UUID del timbre).
+     * El folio fiscal (UUID del timbre); la factura de un proveedor del extranjero, que no lleva CFDI, trae `EXT-…` y sat_invoice null.
      */
     @JsonProperty("uuid")
     private String uuid;
@@ -255,7 +255,7 @@ public class SupplierInvoice {
     }
 
     /**
-     * El RFC del proveedor.
+     * El RFC del proveedor, o la clave `EXT-&lt;país&gt;-&lt;tax ID&gt;` de uno del extranjero.
      */
     public String getSupplierTaxId() {
         return supplierTaxId;
@@ -267,7 +267,7 @@ public class SupplierInvoice {
     }
 
     /**
-     * El folio fiscal (UUID del timbre).
+     * El folio fiscal (UUID del timbre); la factura de un proveedor del extranjero, que no lleva CFDI, trae `EXT-…` y sat_invoice null.
      */
     public String getUuid() {
         return uuid;
