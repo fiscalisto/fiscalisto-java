@@ -48,6 +48,7 @@ public final class FiscalistoClient {
     private final SatMailboxMessagesService satMailboxMessages;
     private final SatFindingsService satFindings;
     private final SatFindingCounterpartiesService satFindingCounterparties;
+    private final CompanyReportService companyReport;
     private final MaterialitySuppliersService materialitySuppliers;
     private final MaterialityInvoicesService materialityInvoices;
     private final WarehousesService warehouses;
@@ -127,6 +128,7 @@ public final class FiscalistoClient {
         this.satMailboxMessages = new SatMailboxMessagesService(api);
         this.satFindings = new SatFindingsService(api);
         this.satFindingCounterparties = new SatFindingCounterpartiesService(api);
+        this.companyReport = new CompanyReportService(api);
         this.materialitySuppliers = new MaterialitySuppliersService(api);
         this.materialityInvoices = new MaterialityInvoicesService(api);
         this.warehouses = new WarehousesService(api);
@@ -349,6 +351,11 @@ public final class FiscalistoClient {
     /** Cumplimiento SAT. */
     public SatFindingCounterpartiesService satFindingCounterparties() {
         return satFindingCounterparties;
+    }
+
+    /** Cumplimiento SAT. */
+    public CompanyReportService companyReport() {
+        return companyReport;
     }
 
     /** Cumplimiento SAT. */
