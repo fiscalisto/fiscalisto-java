@@ -49,6 +49,12 @@ public class SatDeclarationSummaryObligation {
     private BigDecimal amountToPay;
 
     /**
+     * El saldo a favor, de la declaración o del acuse; null si no hay o no se pudo leer.
+     */
+    @JsonProperty("in_favor")
+    private BigDecimal inFavor;
+
+    /**
      * Sus cifras con nombres fijos. ISR: income, invoiced_income, income_ytd, deductions, profit_coefficient, taxable_profit, losses_applied, tax_base, tax_caused, prior_payments, withheld. IVA: taxable_16, taxable_0, exempt, charged, paid_16, creditable, withheld, balance_applied. Salarios: workers, payments, exempt, withheld. Todas: surcharges, inflation, paid_before, due, in_favor, to_pay. null si no viene o no se pudo leer.
      */
     @JsonProperty("figures")
@@ -124,6 +130,23 @@ public class SatDeclarationSummaryObligation {
     @JsonIgnore
     public SatDeclarationSummaryObligation setAmountToPay(double amountToPay) {
         return setAmountToPay(BigDecimal.valueOf(amountToPay));
+    }
+
+    /**
+     * El saldo a favor, de la declaración o del acuse; null si no hay o no se pudo leer.
+     */
+    public BigDecimal getInFavor() {
+        return inFavor;
+    }
+
+    public SatDeclarationSummaryObligation setInFavor(BigDecimal inFavor) {
+        this.inFavor = inFavor;
+        return this;
+    }
+
+    @JsonIgnore
+    public SatDeclarationSummaryObligation setInFavor(double inFavor) {
+        return setInFavor(BigDecimal.valueOf(inFavor));
     }
 
     /**

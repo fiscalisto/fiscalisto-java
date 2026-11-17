@@ -40,6 +40,12 @@ public class SatDeclarationReceiptConcept {
     private BigDecimal amountToPay;
 
     /**
+     * El saldo a favor que dice el acuse (la anual de personas físicas); null si no lo trae.
+     */
+    @JsonProperty("in_favor")
+    private BigDecimal inFavor;
+
+    /**
      * El concepto de la línea de captura (ISR, IVA…) como lo da el SAT.
      */
     public String getConcept() {
@@ -100,5 +106,22 @@ public class SatDeclarationReceiptConcept {
     @JsonIgnore
     public SatDeclarationReceiptConcept setAmountToPay(double amountToPay) {
         return setAmountToPay(BigDecimal.valueOf(amountToPay));
+    }
+
+    /**
+     * El saldo a favor que dice el acuse (la anual de personas físicas); null si no lo trae.
+     */
+    public BigDecimal getInFavor() {
+        return inFavor;
+    }
+
+    public SatDeclarationReceiptConcept setInFavor(BigDecimal inFavor) {
+        this.inFavor = inFavor;
+        return this;
+    }
+
+    @JsonIgnore
+    public SatDeclarationReceiptConcept setInFavor(double inFavor) {
+        return setInFavor(BigDecimal.valueOf(inFavor));
     }
 }
