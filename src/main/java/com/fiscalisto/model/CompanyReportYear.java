@@ -100,6 +100,12 @@ public class CompanyReportYear {
     private BigDecimal payrollReceived;
 
     /**
+     * Lo que de verdad recibió de esos sueldos: el total de los recibos, después del ISR retenido y las deducciones.
+     */
+    @JsonProperty("payroll_received_net")
+    private BigDecimal payrollReceivedNet;
+
+    /**
      * Ingresos menos gastos y nómina.
      */
     @JsonProperty("profit")
@@ -342,6 +348,23 @@ public class CompanyReportYear {
     @JsonIgnore
     public CompanyReportYear setPayrollReceived(double payrollReceived) {
         return setPayrollReceived(BigDecimal.valueOf(payrollReceived));
+    }
+
+    /**
+     * Lo que de verdad recibió de esos sueldos: el total de los recibos, después del ISR retenido y las deducciones.
+     */
+    public BigDecimal getPayrollReceivedNet() {
+        return payrollReceivedNet;
+    }
+
+    public CompanyReportYear setPayrollReceivedNet(BigDecimal payrollReceivedNet) {
+        this.payrollReceivedNet = payrollReceivedNet;
+        return this;
+    }
+
+    @JsonIgnore
+    public CompanyReportYear setPayrollReceivedNet(double payrollReceivedNet) {
+        return setPayrollReceivedNet(BigDecimal.valueOf(payrollReceivedNet));
     }
 
     /**
