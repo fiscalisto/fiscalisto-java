@@ -58,6 +58,12 @@ public class Balance {
     private Boolean usePlanTimbres;
 
     /**
+     * Los timbres del mes del plan de su empresa, que los RFC de la empresa (type own) usan antes que `available`; no se suman a `available`. null si la empresa no tiene un plan de paga con timbres al mes (Gratis o una prueba sin pagar) o en modo de prueba.
+     */
+    @JsonProperty("plan_timbres")
+    private BalancePlanTimbres planTimbres;
+
+    /**
      * Los paquetes con timbres, el que vence antes primero (en ese orden se usan).
      */
     @JsonProperty("packs")
@@ -154,6 +160,18 @@ public class Balance {
 
     public Balance setUsePlanTimbres(Boolean usePlanTimbres) {
         this.usePlanTimbres = usePlanTimbres;
+        return this;
+    }
+
+    /**
+     * Los timbres del mes del plan de su empresa, que los RFC de la empresa (type own) usan antes que `available`; no se suman a `available`. null si la empresa no tiene un plan de paga con timbres al mes (Gratis o una prueba sin pagar) o en modo de prueba.
+     */
+    public BalancePlanTimbres getPlanTimbres() {
+        return planTimbres;
+    }
+
+    public Balance setPlanTimbres(BalancePlanTimbres planTimbres) {
+        this.planTimbres = planTimbres;
         return this;
     }
 
