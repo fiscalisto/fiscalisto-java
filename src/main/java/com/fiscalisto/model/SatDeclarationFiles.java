@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * SatDeclarationFiles: Qué archivos ya tiene: pdf (GET …/pdf), receipt (GET …/receipt) y financial_statements (GET …/financial_statements, solo en la anual de persona moral).
+ * SatDeclarationFiles: Qué archivos ya tiene: pdf (GET …/pdf), receipt (GET …/receipt), payment_record (GET …/payment_record, cuando el SAT la tiene como pagada) y financial_statements (GET …/financial_statements, solo en la anual de persona moral).
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -23,6 +23,12 @@ public class SatDeclarationFiles {
      */
     @JsonProperty("receipt")
     private Boolean receipt;
+
+    /**
+     * Si ya tiene el registro del pago (GET …/payment_record).
+     */
+    @JsonProperty("payment_record")
+    private Boolean paymentRecord;
 
     /**
      * Si ya tiene el Excel de estados financieros (GET …/financial_statements), solo en la anual de persona moral.
@@ -51,6 +57,18 @@ public class SatDeclarationFiles {
 
     public SatDeclarationFiles setReceipt(Boolean receipt) {
         this.receipt = receipt;
+        return this;
+    }
+
+    /**
+     * Si ya tiene el registro del pago (GET …/payment_record).
+     */
+    public Boolean getPaymentRecord() {
+        return paymentRecord;
+    }
+
+    public SatDeclarationFiles setPaymentRecord(Boolean paymentRecord) {
+        this.paymentRecord = paymentRecord;
         return this;
     }
 

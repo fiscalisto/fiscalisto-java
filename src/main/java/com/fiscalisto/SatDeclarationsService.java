@@ -147,6 +147,23 @@ public final class SatDeclarationsService {
     }
 
     /**
+     * Descargar el registro del pago de una declaración
+     * <p>
+     * La «Información registrada de pagos de contribuciones federales» de una declaración mensual pagada, como la da el SAT: el banco, el día, el importe, el número de operación del banco y la llave de pago. Existe cuando payment.status es paid. No usa timbres.
+     * <p>
+     * GET /v1/sat_declarations/{id}/payment_record
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/declaraciones-del-sat/get-sat-declaration-payment-record
+     */
+    public byte[] paymentRecord(String id, RequestOptions options) {
+        return api.bytes("GET", "/v1/sat_declarations/" + ApiClient.encode(id) + "/payment_record", null, null, false, options);
+    }
+
+    public byte[] paymentRecord(String id) {
+        return paymentRecord(id, null);
+    }
+
+    /**
      * Descargar los estados financieros de una anual
      * <p>
      * El Excel de estados financieros de la anual de persona moral, como lo da el SAT. No usa timbres.

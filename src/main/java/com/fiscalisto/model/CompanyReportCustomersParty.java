@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyReportCustomersParty {
     /**
-     * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
+     * Su RFC. XAXX010101000 y XEXX010101000 son una sola fila cada uno («Público en general», «Residentes en el extranjero») con todas las personas que facturaron con ese RFC.
      */
     @JsonProperty("tax_id")
     private String taxId;
@@ -52,7 +52,7 @@ public class CompanyReportCustomersParty {
     private BigDecimal balance;
 
     /**
-     * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
+     * Su RFC. XAXX010101000 y XEXX010101000 son una sola fila cada uno («Público en general», «Residentes en el extranjero») con todas las personas que facturaron con ese RFC.
      */
     public String getTaxId() {
         return taxId;

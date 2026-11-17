@@ -23,13 +23,13 @@ public class CompanyReportCustomers {
     private Long count;
 
     /**
-     * Su concentración (índice Herfindahl-Hirschman, 0 a 10,000; más de 1,500 es concentrado).
+     * Su concentración (índice Herfindahl-Hirschman, 0 a 10,000; más de 1,500 es concentrado), sin el público en general.
      */
     @JsonProperty("hhi")
     private BigDecimal hhi;
 
     /**
-     * Por ciento del total que suman los 10 principales.
+     * Por ciento del total que suman los 10 principales, sin el público en general.
      */
     @JsonProperty("top10_share")
     private BigDecimal top10Share;
@@ -58,7 +58,7 @@ public class CompanyReportCustomers {
     }
 
     /**
-     * Su concentración (índice Herfindahl-Hirschman, 0 a 10,000; más de 1,500 es concentrado).
+     * Su concentración (índice Herfindahl-Hirschman, 0 a 10,000; más de 1,500 es concentrado), sin el público en general.
      */
     public BigDecimal getHhi() {
         return hhi;
@@ -75,7 +75,7 @@ public class CompanyReportCustomers {
     }
 
     /**
-     * Por ciento del total que suman los 10 principales.
+     * Por ciento del total que suman los 10 principales, sin el público en general.
      */
     public BigDecimal getTop10Share() {
         return top10Share;
