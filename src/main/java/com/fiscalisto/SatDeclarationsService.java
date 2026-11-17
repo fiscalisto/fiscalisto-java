@@ -2,9 +2,11 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.GetSatAnnualPreloadParams;
 import com.fiscalisto.model.GetSatDeclarationCalendarParams;
 import com.fiscalisto.model.ListSatDeclarationsParams;
 import com.fiscalisto.model.RefreshSatDeclarationsParams;
+import com.fiscalisto.model.SatAnnualPreload;
 import com.fiscalisto.model.SatDeclaration;
 import com.fiscalisto.model.SatDeclarationCalendar;
 import com.fiscalisto.model.SatDeclarationsRefresh;
@@ -93,6 +95,27 @@ public final class SatDeclarationsService {
 
     public SatDeclarationCalendar calendar() {
         return calendar(null, null);
+    }
+
+    /**
+     * Ver la precarga de la anual de una persona física
+     * <p>
+     * Lo que el SAT precargará en la declaración anual de un emisor persona física, de sus visores: los sueldos o asimilados y el ISR que le retuvieron, por patrón, y las deducciones personales que toma de sus facturas, con las que podrían deducirse y no toma, y por qué. Se lee con la e.firma en cada consulta (POST /v1/sat_declarations/refresh), del ejercicio anterior y del actual; no usa timbres. Un emisor persona moral recibe parameter_invalid.
+     * <p>
+     * GET /v1/sat_declarations/annual_preload
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/declaraciones-del-sat/get-sat-annual-preload
+     */
+    public SatAnnualPreload annualPreload(GetSatAnnualPreloadParams params, RequestOptions options) {
+        return api.request("GET", "/v1/sat_declarations/annual_preload", null, params, false, SatAnnualPreload.class, options);
+    }
+
+    public SatAnnualPreload annualPreload(GetSatAnnualPreloadParams params) {
+        return annualPreload(params, null);
+    }
+
+    public SatAnnualPreload annualPreload() {
+        return annualPreload(null, null);
     }
 
     /**
