@@ -88,10 +88,16 @@ public class CompanyReportYear {
     private BigDecimal daysToPay;
 
     /**
-     * Nómina que timbró.
+     * Nómina que timbró: lo que percibieron sus trabajadores, antes de deducciones.
      */
     @JsonProperty("payroll_paid")
     private BigDecimal payrollPaid;
+
+    /**
+     * Sueldos que recibió de sus patrones (recibos de nómina a su RFC), antes de deducciones: lo que gana una persona física asalariada.
+     */
+    @JsonProperty("payroll_received")
+    private BigDecimal payrollReceived;
 
     /**
      * Ingresos menos gastos y nómina.
@@ -305,7 +311,7 @@ public class CompanyReportYear {
     }
 
     /**
-     * Nómina que timbró.
+     * Nómina que timbró: lo que percibieron sus trabajadores, antes de deducciones.
      */
     public BigDecimal getPayrollPaid() {
         return payrollPaid;
@@ -319,6 +325,23 @@ public class CompanyReportYear {
     @JsonIgnore
     public CompanyReportYear setPayrollPaid(double payrollPaid) {
         return setPayrollPaid(BigDecimal.valueOf(payrollPaid));
+    }
+
+    /**
+     * Sueldos que recibió de sus patrones (recibos de nómina a su RFC), antes de deducciones: lo que gana una persona física asalariada.
+     */
+    public BigDecimal getPayrollReceived() {
+        return payrollReceived;
+    }
+
+    public CompanyReportYear setPayrollReceived(BigDecimal payrollReceived) {
+        this.payrollReceived = payrollReceived;
+        return this;
+    }
+
+    @JsonIgnore
+    public CompanyReportYear setPayrollReceived(double payrollReceived) {
+        return setPayrollReceived(BigDecimal.valueOf(payrollReceived));
     }
 
     /**
