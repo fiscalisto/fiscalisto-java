@@ -75,7 +75,7 @@ public class SatDeclaration {
     private String type;
 
     /**
-     * El tipo de complementaria como lo dice el SAT («Modificación de obligaciones»…), o null.
+     * En una complementaria, su tipo como lo dice el SAT («Modificación de Obligaciones», «Obligación no presentada», «Dejar sin efecto obligación»). Se liga con la que corrige por source, year, month y period.
      */
     @JsonProperty("complementary_type")
     private String complementaryType;
@@ -293,7 +293,7 @@ public class SatDeclaration {
     }
 
     /**
-     * El tipo de complementaria como lo dice el SAT («Modificación de obligaciones»…), o null.
+     * En una complementaria, su tipo como lo dice el SAT («Modificación de Obligaciones», «Obligación no presentada», «Dejar sin efecto obligación»). Se liga con la que corrige por source, year, month y period.
      */
     public String getComplementaryType() {
         return complementaryType;
