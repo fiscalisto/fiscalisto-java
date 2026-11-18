@@ -96,6 +96,12 @@ public class UpdateSelfInvoicingParams {
     private String retentionMode;
 
     /**
+     * La serie de las facturas que los compradores se hacen en el portal (y las que se emiten desde un ticket), como `AF`: hasta 25 caracteres, sin `|`. `null` o una vacía usa la serie de facturas del emisor. La factura global sigue con la serie de siempre.
+     */
+    @JsonProperty("invoice_series")
+    private String invoiceSeries;
+
+    /**
      * Los conceptos de la factura global: `ticket` (por omisión), uno «Venta» por ticket con su folio como `NoIdentificacion`; `summary`, solo el monto total del periodo, uno por combinación de impuestos con `NoIdentificacion` «Resumen» (regla 2.7.1.21 de la RMF 2026). `summary` es solo para un emisor persona física en RESICO (626); otro contesta `invalid_request`.
      * <p>
      * Valores: ticket, summary.
@@ -264,6 +270,18 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setRetentionMode(String retentionMode) {
         this.retentionMode = retentionMode;
+        return this;
+    }
+
+    /**
+     * La serie de las facturas que los compradores se hacen en el portal (y las que se emiten desde un ticket), como `AF`: hasta 25 caracteres, sin `|`. `null` o una vacía usa la serie de facturas del emisor. La factura global sigue con la serie de siempre.
+     */
+    public String getInvoiceSeries() {
+        return invoiceSeries;
+    }
+
+    public UpdateSelfInvoicingParams setInvoiceSeries(String invoiceSeries) {
+        this.invoiceSeries = invoiceSeries;
         return this;
     }
 

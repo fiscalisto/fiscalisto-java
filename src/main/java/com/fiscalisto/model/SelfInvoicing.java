@@ -120,6 +120,12 @@ public class SelfInvoicing {
     private String retentionMode;
 
     /**
+     * La serie de las facturas que se emiten desde el portal y desde un ticket, como AF, o null para la serie de facturas del emisor. La factura global no la usa.
+     */
+    @JsonProperty("invoice_series")
+    private String invoiceSeries;
+
+    /**
      * ticket: la factura global lleva un concepto «Venta» por ticket, con su folio. summary: solo el monto total del periodo, uno por combinación de impuestos (NoIdentificacion «Resumen»), para una persona física en RESICO (regla 2.7.1.21 de la RMF 2026).
      * <p>
      * Valores: ticket, summary.
@@ -336,6 +342,18 @@ public class SelfInvoicing {
 
     public SelfInvoicing setRetentionMode(String retentionMode) {
         this.retentionMode = retentionMode;
+        return this;
+    }
+
+    /**
+     * La serie de las facturas que se emiten desde el portal y desde un ticket, como AF, o null para la serie de facturas del emisor. La factura global no la usa.
+     */
+    public String getInvoiceSeries() {
+        return invoiceSeries;
+    }
+
+    public SelfInvoicing setInvoiceSeries(String invoiceSeries) {
+        this.invoiceSeries = invoiceSeries;
         return this;
     }
 
