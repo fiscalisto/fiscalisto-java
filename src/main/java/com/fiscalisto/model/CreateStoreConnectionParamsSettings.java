@@ -53,7 +53,7 @@ public class CreateStoreConnectionParamsSettings {
     private String paymentForm;
 
     /**
-     * c_FormaPago por pasarela de Shopify (shopify_payments, paypal, manual…) o tipo de pago de Mercado Libre (credit_card, debit_card, account_money, ticket, bank_transfer).
+     * c_FormaPago por pasarela de Shopify (shopify_payments, paypal, manual…) o tipo de pago de Mercado Libre y Mercado Pago (credit_card, debit_card, account_money, ticket, bank_transfer), o de Conekta y Openpay (credit_card, debit_card, cash, spei).
      */
     @JsonProperty("payment_forms")
     private Map<String, String> paymentForms;
@@ -65,7 +65,7 @@ public class CreateStoreConnectionParamsSettings {
     private Boolean autoInvoice;
 
     /**
-     * WooCommerce y Tiendanube: mandar al comprador el enlace para facturar (WooCommerce, como nota al cliente del pedido; Tiendanube, por correo). Por omisión true.
+     * WooCommerce, Tiendanube, Mercado Pago, Conekta y Openpay: mandar al comprador el enlace para facturar (WooCommerce, como nota al cliente del pedido; los demás, por correo, cuando la plataforma da su correo). Por omisión true.
      */
     @JsonProperty("notify_buyer")
     private Boolean notifyBuyer;
@@ -145,7 +145,7 @@ public class CreateStoreConnectionParamsSettings {
     }
 
     /**
-     * c_FormaPago por pasarela de Shopify (shopify_payments, paypal, manual…) o tipo de pago de Mercado Libre (credit_card, debit_card, account_money, ticket, bank_transfer).
+     * c_FormaPago por pasarela de Shopify (shopify_payments, paypal, manual…) o tipo de pago de Mercado Libre y Mercado Pago (credit_card, debit_card, account_money, ticket, bank_transfer), o de Conekta y Openpay (credit_card, debit_card, cash, spei).
      */
     public Map<String, String> getPaymentForms() {
         return paymentForms;
@@ -169,7 +169,7 @@ public class CreateStoreConnectionParamsSettings {
     }
 
     /**
-     * WooCommerce y Tiendanube: mandar al comprador el enlace para facturar (WooCommerce, como nota al cliente del pedido; Tiendanube, por correo). Por omisión true.
+     * WooCommerce, Tiendanube, Mercado Pago, Conekta y Openpay: mandar al comprador el enlace para facturar (WooCommerce, como nota al cliente del pedido; los demás, por correo, cuando la plataforma da su correo). Por omisión true.
      */
     public Boolean getNotifyBuyer() {
         return notifyBuyer;

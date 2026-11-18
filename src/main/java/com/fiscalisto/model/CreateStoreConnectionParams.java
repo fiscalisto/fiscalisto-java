@@ -19,9 +19,9 @@ public class CreateStoreConnectionParams {
     private String issuer;
 
     /**
-     * shopify, woocommerce, mercadolibre, tiendanube o amazon.
+     * shopify, woocommerce, mercadolibre, tiendanube, amazon, mercadopago, conekta u openpay.
      * <p>
-     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce, mercadopago, conekta, openpay.
      * <p>
      * Obligatorio.
      */
@@ -47,10 +47,28 @@ public class CreateStoreConnectionParams {
     private String clientSecret;
 
     /**
-     * Shopify, solo apps personalizadas antiguas: su token de la Admin API (shpat_…); client_secret es entonces su API secret key.
+     * Mercado Pago: el Access Token de producción (APP_USR-…), en Tus integraciones › su aplicación › Credenciales de producción. Shopify, solo apps personalizadas antiguas: su token de la Admin API (shpat_…); client_secret es entonces su API secret key. Se guarda cifrado y nunca se muestra.
      */
     @JsonProperty("access_token")
     private String accessToken;
+
+    /**
+     * Conekta: la llave privada (key_…). Openpay: la llave privada (sk_…). Se guarda cifrada y nunca se muestra.
+     */
+    @JsonProperty("private_key")
+    private String privateKey;
+
+    /**
+     * Openpay: el ID de comercio (m…).
+     */
+    @JsonProperty("merchant_id")
+    private String merchantId;
+
+    /**
+     * Openpay: true para conectar su comercio de pruebas (sandbox).
+     */
+    @JsonProperty("sandbox")
+    private Boolean sandbox;
 
     /**
      * WooCommerce: la dirección de la tienda (https://mitienda.com).
@@ -95,9 +113,9 @@ public class CreateStoreConnectionParams {
     }
 
     /**
-     * shopify, woocommerce, mercadolibre, tiendanube o amazon.
+     * shopify, woocommerce, mercadolibre, tiendanube, amazon, mercadopago, conekta u openpay.
      * <p>
-     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce, mercadopago, conekta, openpay.
      * <p>
      * Obligatorio.
      */
@@ -147,7 +165,7 @@ public class CreateStoreConnectionParams {
     }
 
     /**
-     * Shopify, solo apps personalizadas antiguas: su token de la Admin API (shpat_…); client_secret es entonces su API secret key.
+     * Mercado Pago: el Access Token de producción (APP_USR-…), en Tus integraciones › su aplicación › Credenciales de producción. Shopify, solo apps personalizadas antiguas: su token de la Admin API (shpat_…); client_secret es entonces su API secret key. Se guarda cifrado y nunca se muestra.
      */
     public String getAccessToken() {
         return accessToken;
@@ -155,6 +173,42 @@ public class CreateStoreConnectionParams {
 
     public CreateStoreConnectionParams setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+        return this;
+    }
+
+    /**
+     * Conekta: la llave privada (key_…). Openpay: la llave privada (sk_…). Se guarda cifrada y nunca se muestra.
+     */
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public CreateStoreConnectionParams setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+        return this;
+    }
+
+    /**
+     * Openpay: el ID de comercio (m…).
+     */
+    public String getMerchantId() {
+        return merchantId;
+    }
+
+    public CreateStoreConnectionParams setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+        return this;
+    }
+
+    /**
+     * Openpay: true para conectar su comercio de pruebas (sandbox).
+     */
+    public Boolean getSandbox() {
+        return sandbox;
+    }
+
+    public CreateStoreConnectionParams setSandbox(Boolean sandbox) {
+        this.sandbox = sandbox;
         return this;
     }
 

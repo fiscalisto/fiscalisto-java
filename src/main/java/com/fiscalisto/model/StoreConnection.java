@@ -38,15 +38,15 @@ public class StoreConnection {
     private String issuer;
 
     /**
-     * shopify, woocommerce, tiendanube, mercadolibre o amazon.
+     * shopify, woocommerce, tiendanube, mercadolibre, amazon, mercadopago, conekta u openpay.
      * <p>
-     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce, mercadopago, conekta, openpay.
      */
     @JsonProperty("platform")
     private String platform;
 
     /**
-     * El dominio de la tienda (Shopify, WooCommerce), o el id de la tienda en Tiendanube o del vendedor en Mercado Libre y Amazon (al autorizar).
+     * El dominio de la tienda (Shopify, WooCommerce), el id de la tienda en Tiendanube o del vendedor en Mercado Libre y Amazon (al autorizar), el id de la cuenta de Mercado Pago, el ID de comercio de Openpay, o una referencia de la cuenta de Conekta.
      */
     @JsonProperty("shop")
     private String shop;
@@ -150,9 +150,9 @@ public class StoreConnection {
     }
 
     /**
-     * shopify, woocommerce, tiendanube, mercadolibre o amazon.
+     * shopify, woocommerce, tiendanube, mercadolibre, amazon, mercadopago, conekta u openpay.
      * <p>
-     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce.
+     * Valores: shopify, mercadolibre, amazon, tiendanube, woocommerce, mercadopago, conekta, openpay.
      */
     public String getPlatform() {
         return platform;
@@ -164,7 +164,7 @@ public class StoreConnection {
     }
 
     /**
-     * El dominio de la tienda (Shopify, WooCommerce), o el id de la tienda en Tiendanube o del vendedor en Mercado Libre y Amazon (al autorizar).
+     * El dominio de la tienda (Shopify, WooCommerce), el id de la tienda en Tiendanube o del vendedor en Mercado Libre y Amazon (al autorizar), el id de la cuenta de Mercado Pago, el ID de comercio de Openpay, o una referencia de la cuenta de Conekta.
      */
     public String getShop() {
         return shop;
