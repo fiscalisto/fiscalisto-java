@@ -88,6 +88,12 @@ public class UpdateSelfInvoicingParams {
     private Long portalRadius;
 
     /**
+     * Todo lo demás de cómo se ve el portal (Autofactura › Cómo se ve el portal): acomodo, encabezado, colores, letra, bordes, textos en español e inglés, las formas de dar los datos, el botón para volver a su sitio y CSS propio. Mande solo lo que cambia: `colors`, `ways` y `texts` se combinan por llave (un texto en `null` lo quita); lo demás se reemplaza. `null` regresa todo al diseño de Fiscalisto. La leyenda «Facturado con Fiscalisto» no se puede ocultar.
+     */
+    @JsonProperty("portal_style")
+    private UpdateSelfInvoicingParamsPortalStyle portalStyle;
+
+    /**
      * Cuando se factura una persona moral y retiene (1.25% de ISR a un emisor en RESICO, artículo 113-J de la LISR, o lo que diga el producto): `keep_total` (por omisión), la base crece para que la factura sume lo que se pagó; `subtract`, la base es la del ticket y la retención se resta, así que el total de la factura es menor a lo pagado.
      * <p>
      * Valores: keep_total, subtract.
@@ -257,6 +263,18 @@ public class UpdateSelfInvoicingParams {
     @JsonIgnore
     public UpdateSelfInvoicingParams setPortalRadius(long portalRadius) {
         return setPortalRadius(Long.valueOf(portalRadius));
+    }
+
+    /**
+     * Todo lo demás de cómo se ve el portal (Autofactura › Cómo se ve el portal): acomodo, encabezado, colores, letra, bordes, textos en español e inglés, las formas de dar los datos, el botón para volver a su sitio y CSS propio. Mande solo lo que cambia: `colors`, `ways` y `texts` se combinan por llave (un texto en `null` lo quita); lo demás se reemplaza. `null` regresa todo al diseño de Fiscalisto. La leyenda «Facturado con Fiscalisto» no se puede ocultar.
+     */
+    public UpdateSelfInvoicingParamsPortalStyle getPortalStyle() {
+        return portalStyle;
+    }
+
+    public UpdateSelfInvoicingParams setPortalStyle(UpdateSelfInvoicingParamsPortalStyle portalStyle) {
+        this.portalStyle = portalStyle;
+        return this;
     }
 
     /**

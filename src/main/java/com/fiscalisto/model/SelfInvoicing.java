@@ -112,6 +112,12 @@ public class SelfInvoicing {
     private Long portalRadius;
 
     /**
+     * Cómo se ve el portal además de su tema, color y esquinas: acomodo, encabezado, colores, letra, textos, formas de dar los datos, botón para volver y CSS.
+     */
+    @JsonProperty("portal_style")
+    private PortalStyle portalStyle;
+
+    /**
      * Cuando se factura una persona moral que retiene (1.25% de ISR en RESICO, o lo del producto). keep_total: la base crece y la factura suma lo que se pagó. subtract: la base es la del ticket y el total es lo pagado menos la retención.
      * <p>
      * Valores: keep_total, subtract.
@@ -329,6 +335,18 @@ public class SelfInvoicing {
     @JsonIgnore
     public SelfInvoicing setPortalRadius(long portalRadius) {
         return setPortalRadius(Long.valueOf(portalRadius));
+    }
+
+    /**
+     * Cómo se ve el portal además de su tema, color y esquinas: acomodo, encabezado, colores, letra, textos, formas de dar los datos, botón para volver y CSS.
+     */
+    public PortalStyle getPortalStyle() {
+        return portalStyle;
+    }
+
+    public SelfInvoicing setPortalStyle(PortalStyle portalStyle) {
+        this.portalStyle = portalStyle;
+        return this;
     }
 
     /**
