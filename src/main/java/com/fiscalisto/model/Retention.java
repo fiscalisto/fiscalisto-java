@@ -223,6 +223,12 @@ public class Retention {
     private String emailError;
 
     /**
+     * Solo al timbrar con `replaces`: la constancia que corrige y si se canceló (motivo 01). Si no, `error` dice por qué y se cancela con POST /v1/sat_retentions/{id}/cancel.
+     */
+    @JsonProperty("replaced")
+    private RetentionReplaced replaced;
+
+    /**
      * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
      */
     public String getId() {
@@ -634,6 +640,18 @@ public class Retention {
 
     public Retention setEmailError(String emailError) {
         this.emailError = emailError;
+        return this;
+    }
+
+    /**
+     * Solo al timbrar con `replaces`: la constancia que corrige y si se canceló (motivo 01). Si no, `error` dice por qué y se cancela con POST /v1/sat_retentions/{id}/cancel.
+     */
+    public RetentionReplaced getReplaced() {
+        return replaced;
+    }
+
+    public Retention setReplaced(RetentionReplaced replaced) {
+        this.replaced = replaced;
         return this;
     }
 }

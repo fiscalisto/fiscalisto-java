@@ -136,6 +136,12 @@ public class CreateRetentionParams {
     private CreateRetentionParamsFinancialDerivatives financialDerivatives;
 
     /**
+     * Folio fiscal (UUID) de la constancia que esta corrige: vigente, del mismo emisor y al mismo receptor (emitida aquí o en otro sistema). Va en CfdiRetenRelacionados (04) y, timbrada esta, la anterior se cancela con el motivo 01; `replaced` dice si se canceló.
+     */
+    @JsonProperty("replaces")
+    private String replaces;
+
+    /**
      * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
      */
     @JsonProperty("send_email")
@@ -384,6 +390,18 @@ public class CreateRetentionParams {
 
     public CreateRetentionParams setFinancialDerivatives(CreateRetentionParamsFinancialDerivatives financialDerivatives) {
         this.financialDerivatives = financialDerivatives;
+        return this;
+    }
+
+    /**
+     * Folio fiscal (UUID) de la constancia que esta corrige: vigente, del mismo emisor y al mismo receptor (emitida aquí o en otro sistema). Va en CfdiRetenRelacionados (04) y, timbrada esta, la anterior se cancela con el motivo 01; `replaced` dice si se canceló.
+     */
+    public String getReplaces() {
+        return replaces;
+    }
+
+    public CreateRetentionParams setReplaces(String replaces) {
+        this.replaces = replaces;
         return this;
     }
 
