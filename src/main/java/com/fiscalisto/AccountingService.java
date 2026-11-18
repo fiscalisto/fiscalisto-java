@@ -136,7 +136,7 @@ public final class AccountingService {
     /**
      * Ver los CFDI de una cifra del cruce
      * <p>
-     * Los CFDI que forman lo facturado (invoiced) de una cifra del cruce de un mes, con los mismos cálculos de Impuestos: cada factura PUE o nota de crédito en su mes y cada factura PPD por lo que se pagó en el mes, con lo que aporta. La suma de cfdi más adjustment es invoiced. Sirve para ver por qué una cifra differs. Gratis: no consulta al SAT.
+     * Los CFDI que forman lo facturado (invoiced) de una cifra del cruce de un mes, con los mismos cálculos de Impuestos: cada factura PUE o nota de crédito en su mes y cada factura PPD por lo que se pagó en el mes, con lo que aporta. La suma de cfdi más adjustment es invoiced. Sirve para ver por qué una cifra differs: con una diferencia, explanation trae los CFDI cuya combinación la suma (cancelados después, PPD sin cobro en el mes, de los días vecinos de otro mes, notas de crédito, cobros de PPD, repetidos o no declarados) y las posibles causas. Gratis: no consulta al SAT.
      * <p>
      * GET /v1/accounting/cross_checks/cfdi
      * <p>

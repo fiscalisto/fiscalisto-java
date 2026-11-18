@@ -279,6 +279,9 @@ public final class ErrorCode {
     /** La constancia de retenciones no cumple una regla del SAT. No se usó ningún timbre. */
     public static final String RETENTION_INVALID = "retention_invalid";
 
+    /** Solo quien emitió la constancia puede cancelarla; esta la recibió el emisor. */
+    public static final String RETENTION_NOT_ISSUED = "retention_not_issued";
+
     /** La acción es para constancias timbradas. */
     public static final String RETENTION_NOT_STAMPED = "retention_not_stamped";
 

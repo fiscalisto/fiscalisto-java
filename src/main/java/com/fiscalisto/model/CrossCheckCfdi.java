@@ -99,6 +99,12 @@ public class CrossCheckCfdi {
     private BigDecimal adjustment;
 
     /**
+     * Qué CFDI explicarían la diferencia; null si coincide.
+     */
+    @JsonProperty("explanation")
+    private CrossCheckCfdiExplanation explanation;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -281,5 +287,17 @@ public class CrossCheckCfdi {
     @JsonIgnore
     public CrossCheckCfdi setAdjustment(double adjustment) {
         return setAdjustment(BigDecimal.valueOf(adjustment));
+    }
+
+    /**
+     * Qué CFDI explicarían la diferencia; null si coincide.
+     */
+    public CrossCheckCfdiExplanation getExplanation() {
+        return explanation;
+    }
+
+    public CrossCheckCfdi setExplanation(CrossCheckCfdiExplanation explanation) {
+        this.explanation = explanation;
+        return this;
     }
 }

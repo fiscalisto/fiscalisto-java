@@ -2,6 +2,7 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.CancelSatRetentionParams;
 import com.fiscalisto.model.ListSatRetentionsParams;
 import com.fiscalisto.model.SatRetention;
 
@@ -98,5 +99,26 @@ public final class SatRetentionsService {
 
     public byte[] pdf(String id) {
         return pdf(id, null);
+    }
+
+    /**
+     * Cancelar una constancia de retenciones emitida
+     * <p>
+     * Una que el emisor emitió (direction issued), también si la timbró desde otro sistema con el mismo PAC y solo llegó del SAT. Se cancela en el momento (no espera aceptación) y no usa timbres. Una que timbró otro PAC se cancela en el portal del SAT: contesta cancellation_failed y lo explica. Con motive 01, substitution es la constancia que la sustituye (su srt_… o su UUID).
+     * <p>
+     * POST /v1/sat_retentions/{id}/cancel
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/cancel-sat-retention
+     */
+    public SatRetention cancel(String id, CancelSatRetentionParams params, RequestOptions options) {
+        return api.request("POST", "/v1/sat_retentions/" + ApiClient.encode(id) + "/cancel", params, null, true, SatRetention.class, options);
+    }
+
+    public SatRetention cancel(String id, CancelSatRetentionParams params) {
+        return cancel(id, params, null);
+    }
+
+    public SatRetention cancel(String id) {
+        return cancel(id, null, null);
     }
 }
