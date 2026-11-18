@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * CreateTicketParamsLine: CreateTicketParamsLine.
@@ -46,6 +47,12 @@ public class CreateTicketParamsLine {
      */
     @JsonProperty("iva")
     private String iva;
+
+    /**
+     * Impuestos locales incluidos en su total, como el ISH 3.5% de hospedaje, con `product_key` (un producto lleva los suyos). Cada uno se calcula sobre la base de este concepto y la factura los suma por nombre y tasa en el complemento de impuestos locales.
+     */
+    @JsonProperty("local_taxes")
+    private List<CreateTicketParamsLineLocalTax> localTaxes;
 
     /**
      * Unidades (noches, piezas). Por omisión 1.
@@ -120,6 +127,18 @@ public class CreateTicketParamsLine {
 
     public CreateTicketParamsLine setIva(String iva) {
         this.iva = iva;
+        return this;
+    }
+
+    /**
+     * Impuestos locales incluidos en su total, como el ISH 3.5% de hospedaje, con `product_key` (un producto lleva los suyos). Cada uno se calcula sobre la base de este concepto y la factura los suma por nombre y tasa en el complemento de impuestos locales.
+     */
+    public List<CreateTicketParamsLineLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public CreateTicketParamsLine setLocalTaxes(List<CreateTicketParamsLineLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
         return this;
     }
 

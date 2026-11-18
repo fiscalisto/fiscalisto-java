@@ -28,7 +28,7 @@ public class Balance {
     private Boolean livemode;
 
     /**
-     * Timbres disponibles en total.
+     * Timbres de sus paquetes, en total: un solo saldo para la API y la app, comprados en Desarrolladores o en Plan y pagos.
      */
     @JsonProperty("available")
     private Long available;
@@ -52,7 +52,7 @@ public class Balance {
     private BalanceAutoRecharge autoRecharge;
 
     /**
-     * Los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`. true si, al acabarse `available`, la API sigue timbrando esos RFC con los paquetes de la app de la empresa; los emisores conectados no (Desarrolladores › Timbres y pagos › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
+     * Siempre true: los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`, los paquetes de su único saldo (comprados en Desarrolladores o en Plan y pagos). Los emisores conectados usan solo `available`. Se conserva por compatibilidad.
      */
     @JsonProperty("use_plan_timbres")
     private Boolean usePlanTimbres;
@@ -94,7 +94,7 @@ public class Balance {
     }
 
     /**
-     * Timbres disponibles en total.
+     * Timbres de sus paquetes, en total: un solo saldo para la API y la app, comprados en Desarrolladores o en Plan y pagos.
      */
     public Long getAvailable() {
         return available;
@@ -152,7 +152,7 @@ public class Balance {
     }
 
     /**
-     * Los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`. true si, al acabarse `available`, la API sigue timbrando esos RFC con los paquetes de la app de la empresa; los emisores conectados no (Desarrolladores › Timbres y pagos › Si se acaban, usar los timbres de la empresa). false: responde 402 insufficient_balance.
+     * Siempre true: los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`, los paquetes de su único saldo (comprados en Desarrolladores o en Plan y pagos). Los emisores conectados usan solo `available`. Se conserva por compatibilidad.
      */
     public Boolean getUsePlanTimbres() {
         return usePlanTimbres;

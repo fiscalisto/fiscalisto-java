@@ -89,6 +89,12 @@ public class CreateTicketParams {
     private String iva;
 
     /**
+     * Impuestos locales incluidos en su total, como el ISH 3.5% de hospedaje, con `product_key` (un producto lleva los suyos). Cada uno se calcula sobre la base de este concepto y la factura los suma por nombre y tasa en el complemento de impuestos locales.
+     */
+    @JsonProperty("local_taxes")
+    private List<CreateTicketParamsLocalTax> localTaxes;
+
+    /**
      * Quién pagó, para reconocer la venta en Tickets. No es el receptor de la factura (eso lo escribe el comprador en el portal) y no se le manda nada.
      */
     @JsonProperty("buyer")
@@ -245,6 +251,18 @@ public class CreateTicketParams {
 
     public CreateTicketParams setIva(String iva) {
         this.iva = iva;
+        return this;
+    }
+
+    /**
+     * Impuestos locales incluidos en su total, como el ISH 3.5% de hospedaje, con `product_key` (un producto lleva los suyos). Cada uno se calcula sobre la base de este concepto y la factura los suma por nombre y tasa en el complemento de impuestos locales.
+     */
+    public List<CreateTicketParamsLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public CreateTicketParams setLocalTaxes(List<CreateTicketParamsLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
         return this;
     }
 

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * TicketLine: TicketLine.
@@ -44,6 +45,12 @@ public class TicketLine {
      */
     @JsonProperty("iva")
     private String iva;
+
+    /**
+     * Sus impuestos locales (los de su producto o los que mandó), incluidos en su total.
+     */
+    @JsonProperty("local_taxes")
+    private List<TicketLineLocalTax> localTaxes;
 
     /**
      * Cantidad (Cantidad). Por omisión 1.
@@ -114,6 +121,18 @@ public class TicketLine {
 
     public TicketLine setIva(String iva) {
         this.iva = iva;
+        return this;
+    }
+
+    /**
+     * Sus impuestos locales (los de su producto o los que mandó), incluidos en su total.
+     */
+    public List<TicketLineLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public TicketLine setLocalTaxes(List<TicketLineLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
         return this;
     }
 
