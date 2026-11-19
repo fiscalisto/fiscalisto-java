@@ -73,6 +73,7 @@ public final class FiscalistoClient {
     private final AccountingService accounting;
     private final ManualEntriesService manualEntries;
     private final FixedAssetsService fixedAssets;
+    private final BankMovementsService bankMovements;
     private final StoreConnectionsService storeConnections;
     private final RecurringInvoicesService recurringInvoices;
     private final QuotesService quotes;
@@ -156,6 +157,7 @@ public final class FiscalistoClient {
         this.accounting = new AccountingService(api);
         this.manualEntries = new ManualEntriesService(api);
         this.fixedAssets = new FixedAssetsService(api);
+        this.bankMovements = new BankMovementsService(api);
         this.storeConnections = new StoreConnectionsService(api);
         this.recurringInvoices = new RecurringInvoicesService(api);
         this.quotes = new QuotesService(api);
@@ -482,6 +484,11 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public FixedAssetsService fixedAssets() {
         return fixedAssets;
+    }
+
+    /** Contabilidad. */
+    public BankMovementsService bankMovements() {
+        return bankMovements;
     }
 
     /** Tiendas en línea. */
