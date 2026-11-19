@@ -41,12 +41,18 @@ public class JournalEntry {
     private String issuer;
 
     /**
-     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina), employee_expenses (un anticipo, reembolso, devolución o comprobación de viáticos, contra 107.01 «Funcionarios y empleados») o depreciation (la depreciación del mes de los activos fijos).
+     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina), employee_expenses (un anticipo, reembolso, devolución o comprobación de viáticos, contra 107.01 «Funcionarios y empleados»), depreciation (la depreciación del mes de los activos fijos), manual (una póliza capturada a mano, o la reversión de una provisión) o asset_disposal (la venta o baja de un activo fijo).
      * <p>
-     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation.
+     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation, manual, asset_disposal.
      */
     @JsonProperty("type")
     private String type;
+
+    /**
+     * Con type manual: la póliza capturada (mje_…), también en su reversión; null en las demás.
+     */
+    @JsonProperty("manual_entry")
+    private String manualEntry;
 
     /**
      * La fecha del CFDI o del pago; en la depreciación, el último día del mes.
@@ -151,9 +157,9 @@ public class JournalEntry {
     }
 
     /**
-     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina), employee_expenses (un anticipo, reembolso, devolución o comprobación de viáticos, contra 107.01 «Funcionarios y empleados») o depreciation (la depreciación del mes de los activos fijos).
+     * De qué es: invoice (un CFDI de ingreso o egreso), payment_received o payment_made (un pago de un complemento), payroll (un recibo de nómina), employee_expenses (un anticipo, reembolso, devolución o comprobación de viáticos, contra 107.01 «Funcionarios y empleados»), depreciation (la depreciación del mes de los activos fijos), manual (una póliza capturada a mano, o la reversión de una provisión) o asset_disposal (la venta o baja de un activo fijo).
      * <p>
-     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation.
+     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation, manual, asset_disposal.
      */
     public String getType() {
         return type;
@@ -161,6 +167,18 @@ public class JournalEntry {
 
     public JournalEntry setType(String type) {
         this.type = type;
+        return this;
+    }
+
+    /**
+     * Con type manual: la póliza capturada (mje_…), también en su reversión; null en las demás.
+     */
+    public String getManualEntry() {
+        return manualEntry;
+    }
+
+    public JournalEntry setManualEntry(String manualEntry) {
+        this.manualEntry = manualEntry;
         return this;
     }
 

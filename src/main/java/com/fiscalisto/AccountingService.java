@@ -2,6 +2,7 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.CreateLedgerAccountParams;
 import com.fiscalisto.model.CrossCheckCfdi;
 import com.fiscalisto.model.CrossChecks;
 import com.fiscalisto.model.Diot;
@@ -15,6 +16,7 @@ import com.fiscalisto.model.GetFinancialStatementsParams;
 import com.fiscalisto.model.GetTrialBalanceParams;
 import com.fiscalisto.model.GetVatRefundParams;
 import com.fiscalisto.model.JournalEntry;
+import com.fiscalisto.model.LedgerAccount;
 import com.fiscalisto.model.LedgerAccountList;
 import com.fiscalisto.model.ListJournalEntriesParams;
 import com.fiscalisto.model.ListLedgerAccountsParams;
@@ -34,7 +36,7 @@ public final class AccountingService {
     /**
      * Listar las pólizas de un mes
      * <p>
-     * Las pólizas de diario del mes, con sus cuentas y código agrupador del SAT: una por cada CFDI de ingreso o egreso vigente, emitido o recibido (los recibidos con la categoría de su gasto); una por cada pago de un complemento; una por cada recibo de nómina, y una con la depreciación de los activos fijos. Un PUE se registra cobrado o pagado según su forma de pago. En pesos; un CFDI en otra moneda sin tipo de cambio no se registra. No incluye movimientos de banco sin CFDI ni provisiones.
+     * Las pólizas de diario del mes, con sus cuentas y código agrupador del SAT: una por cada CFDI de ingreso o egreso vigente, emitido o recibido (los recibidos con la categoría de su gasto); una por cada pago de un complemento; una por cada recibo de nómina; una con la depreciación de los activos fijos; una por cada venta o baja de un activo, y las capturadas a mano (POST /v1/accounting/manual_entries) con las reversiones de sus provisiones. Un PUE se registra cobrado o pagado según su forma de pago. En pesos; un CFDI en otra moneda sin tipo de cambio no se registra. No incluye movimientos de banco sin CFDI.
      * <p>
      * GET /v1/accounting/journal_entries
      * <p>
@@ -169,6 +171,23 @@ public final class AccountingService {
 
     public LedgerAccountList accounts() {
         return accounts(null, null);
+    }
+
+    /**
+     * Agregar una cuenta al catálogo
+     * <p>
+     * Una cuenta propia del emisor, para sus pólizas a mano: su número (que no se repite), su nombre y una subcuenta del código agrupador del SAT. Entra al catálogo de la contabilidad electrónica.
+     * <p>
+     * POST /v1/accounting/accounts
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/create-ledger-account
+     */
+    public LedgerAccount createAccount(CreateLedgerAccountParams params, RequestOptions options) {
+        return api.request("POST", "/v1/accounting/accounts", params, null, true, LedgerAccount.class, options);
+    }
+
+    public LedgerAccount createAccount(CreateLedgerAccountParams params) {
+        return createAccount(params, null);
     }
 
     /**

@@ -1,0 +1,117 @@
+// Generado por `bun run openapi` desde la especificación OpenAPI de la API: no lo edite.
+
+package com.fiscalisto.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
+
+/**
+ * ManualJournalEntryLine: ManualJournalEntryLine.
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ManualJournalEntryLine {
+    /**
+     * El número de cuenta.
+     */
+    @JsonProperty("account")
+    private String account;
+
+    /**
+     * El nombre de la cuenta.
+     */
+    @JsonProperty("account_name")
+    private String accountName;
+
+    /**
+     * Su código agrupador del SAT.
+     */
+    @JsonProperty("grouping_code")
+    private String groupingCode;
+
+    /**
+     * El cargo, en pesos.
+     */
+    @JsonProperty("debit")
+    private BigDecimal debit;
+
+    /**
+     * El abono, en pesos.
+     */
+    @JsonProperty("credit")
+    private BigDecimal credit;
+
+    /**
+     * El número de cuenta.
+     */
+    public String getAccount() {
+        return account;
+    }
+
+    public ManualJournalEntryLine setAccount(String account) {
+        this.account = account;
+        return this;
+    }
+
+    /**
+     * El nombre de la cuenta.
+     */
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public ManualJournalEntryLine setAccountName(String accountName) {
+        this.accountName = accountName;
+        return this;
+    }
+
+    /**
+     * Su código agrupador del SAT.
+     */
+    public String getGroupingCode() {
+        return groupingCode;
+    }
+
+    public ManualJournalEntryLine setGroupingCode(String groupingCode) {
+        this.groupingCode = groupingCode;
+        return this;
+    }
+
+    /**
+     * El cargo, en pesos.
+     */
+    public BigDecimal getDebit() {
+        return debit;
+    }
+
+    public ManualJournalEntryLine setDebit(BigDecimal debit) {
+        this.debit = debit;
+        return this;
+    }
+
+    @JsonIgnore
+    public ManualJournalEntryLine setDebit(double debit) {
+        return setDebit(BigDecimal.valueOf(debit));
+    }
+
+    /**
+     * El abono, en pesos.
+     */
+    public BigDecimal getCredit() {
+        return credit;
+    }
+
+    public ManualJournalEntryLine setCredit(BigDecimal credit) {
+        this.credit = credit;
+        return this;
+    }
+
+    @JsonIgnore
+    public ManualJournalEntryLine setCredit(double credit) {
+        return setCredit(BigDecimal.valueOf(credit));
+    }
+}
