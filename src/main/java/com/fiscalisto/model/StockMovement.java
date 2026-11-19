@@ -52,9 +52,9 @@ public class StockMovement {
     private String warehouse;
 
     /**
-     * sale (una factura), purchase (una compra), customer_return, supplier_return, adjustment, count (conteo físico), transfer_out, transfer_in, initial, cost (un ajuste de costo) o reversal (deshace otro, como una factura cancelada).
+     * sale (una factura), purchase (una compra), customer_return, supplier_return, adjustment, count (conteo físico), transfer_out, transfer_in, production_consumption (un componente que salió a producción), production_output (lo producido), initial, cost (un ajuste de costo) o reversal (deshace otro, como una factura cancelada).
      * <p>
-     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, initial, cost, reversal.
+     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, production_consumption, production_output, initial, cost, reversal.
      */
     @JsonProperty("type")
     private String type;
@@ -84,7 +84,7 @@ public class StockMovement {
     private String lot;
 
     /**
-     * Lo que lo causó: type invoice (id es el UUID del CFDI), adjustment (adj_…), receipt, transfer, count o ticket.
+     * Lo que lo causó: type invoice (id es el UUID del CFDI), adjustment (adj_…), production (mfo_…), receipt, transfer, count o ticket.
      */
     @JsonProperty("source")
     private StockMovementSource source;
@@ -186,9 +186,9 @@ public class StockMovement {
     }
 
     /**
-     * sale (una factura), purchase (una compra), customer_return, supplier_return, adjustment, count (conteo físico), transfer_out, transfer_in, initial, cost (un ajuste de costo) o reversal (deshace otro, como una factura cancelada).
+     * sale (una factura), purchase (una compra), customer_return, supplier_return, adjustment, count (conteo físico), transfer_out, transfer_in, production_consumption (un componente que salió a producción), production_output (lo producido), initial, cost (un ajuste de costo) o reversal (deshace otro, como una factura cancelada).
      * <p>
-     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, initial, cost, reversal.
+     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, production_consumption, production_output, initial, cost, reversal.
      */
     public String getType() {
         return type;
@@ -263,7 +263,7 @@ public class StockMovement {
     }
 
     /**
-     * Lo que lo causó: type invoice (id es el UUID del CFDI), adjustment (adj_…), receipt, transfer, count o ticket.
+     * Lo que lo causó: type invoice (id es el UUID del CFDI), adjustment (adj_…), production (mfo_…), receipt, transfer, count o ticket.
      */
     public StockMovementSource getSource() {
         return source;

@@ -54,6 +54,7 @@ public final class FiscalistoClient {
     private final WarehousesService warehouses;
     private final StockMovementsService stockMovements;
     private final StockAdjustmentsService stockAdjustments;
+    private final ProductionOrdersService productionOrders;
     private final SatCatalogsService satCatalogs;
     private final SatListsService satLists;
     private final CfdiVerificationsService cfdiVerifications;
@@ -136,6 +137,7 @@ public final class FiscalistoClient {
         this.warehouses = new WarehousesService(api);
         this.stockMovements = new StockMovementsService(api);
         this.stockAdjustments = new StockAdjustmentsService(api);
+        this.productionOrders = new ProductionOrdersService(api);
         this.satCatalogs = new SatCatalogsService(api);
         this.satLists = new SatListsService(api);
         this.cfdiVerifications = new CfdiVerificationsService(api);
@@ -385,6 +387,11 @@ public final class FiscalistoClient {
     /** Inventario. */
     public StockAdjustmentsService stockAdjustments() {
         return stockAdjustments;
+    }
+
+    /** Inventario. */
+    public ProductionOrdersService productionOrders() {
+        return productionOrders;
     }
 
     /** Catálogos del SAT. */

@@ -46,7 +46,7 @@ public class ListStockMovementsParams {
     /**
      * Solo los de este tipo.
      * <p>
-     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, initial, cost, reversal.
+     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, production_consumption, production_output, initial, cost, reversal.
      */
     @JsonProperty("type")
     private String type;
@@ -131,7 +131,7 @@ public class ListStockMovementsParams {
     /**
      * Solo los de este tipo.
      * <p>
-     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, initial, cost, reversal.
+     * Valores: sale, purchase, customer_return, supplier_return, adjustment, count, transfer_out, transfer_in, production_consumption, production_output, initial, cost, reversal.
      */
     public String getType() {
         return type;

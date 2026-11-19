@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * StockMovementSource: Lo que lo causó: type invoice (id es el UUID del CFDI), adjustment (adj_…), receipt, transfer, count o ticket.
+ * StockMovementSource: Lo que lo causó: type invoice (id es el UUID del CFDI), adjustment (adj_…), production (mfo_…), receipt, transfer, count o ticket.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StockMovementSource {
     /**
-     * Qué lo movió: invoice (una factura; id es su UUID), adjustment (un ajuste, adj_…), count (un conteo) u otro origen.
+     * Qué lo movió: invoice (una factura; id es su UUID), adjustment (un ajuste, adj_…), production (una orden de producción, mfo_…), count (un conteo) u otro origen.
      */
     @JsonProperty("type")
     private String type;
@@ -25,7 +25,7 @@ public class StockMovementSource {
     private String id;
 
     /**
-     * Qué lo movió: invoice (una factura; id es su UUID), adjustment (un ajuste, adj_…), count (un conteo) u otro origen.
+     * Qué lo movió: invoice (una factura; id es su UUID), adjustment (un ajuste, adj_…), production (una orden de producción, mfo_…), count (un conteo) u otro origen.
      */
     public String getType() {
         return type;
