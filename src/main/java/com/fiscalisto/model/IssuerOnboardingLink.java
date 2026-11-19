@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * IssuerOnboardingLink: Una liga para que el dueño de un emisor suba su CSD y firme con su e.firma.
+ * IssuerOnboardingLink: Una liga para que el dueño de un emisor suba su CSD y firme con su e.firma (y, con keep_efirma, la guarde para consultar el SAT).
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -41,6 +41,12 @@ public class IssuerOnboardingLink {
      */
     @JsonProperty("return_url")
     private String returnUrl;
+
+    /**
+     * La página también guarda la e.firma (cifrada) para las consultas al SAT del emisor.
+     */
+    @JsonProperty("keep_efirma")
+    private Boolean keepEfirma;
 
     /**
      * Cuándo deja de servir la liga. Pida otra cuando quiera.
@@ -111,6 +117,18 @@ public class IssuerOnboardingLink {
 
     public IssuerOnboardingLink setReturnUrl(String returnUrl) {
         this.returnUrl = returnUrl;
+        return this;
+    }
+
+    /**
+     * La página también guarda la e.firma (cifrada) para las consultas al SAT del emisor.
+     */
+    public Boolean getKeepEfirma() {
+        return keepEfirma;
+    }
+
+    public IssuerOnboardingLink setKeepEfirma(Boolean keepEfirma) {
+        this.keepEfirma = keepEfirma;
         return this;
     }
 

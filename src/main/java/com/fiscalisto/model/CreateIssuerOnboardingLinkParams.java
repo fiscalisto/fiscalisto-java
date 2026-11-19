@@ -26,6 +26,12 @@ public class CreateIssuerOnboardingLinkParams {
     private Long expiresInHours;
 
     /**
+     * true para que la página también guarde (cifrada) la e.firma de su cliente, con su autorización, y pueda pedir al SAT sus facturas (POST /v1/sat_downloads), sus declaraciones (/v1/sat_declarations), su opinión de cumplimiento, constancia y buzón tributario. Sin esto la e.firma solo firma el contrato con el PAC y no se guarda.
+     */
+    @JsonProperty("keep_efirma")
+    private Boolean keepEfirma;
+
+    /**
      * A dónde regresa el botón al terminar, por ejemplo la página de su plataforma donde su cliente sigue. Sin ella, la página solo dice que ya terminó.
      */
     public String getReturnUrl() {
@@ -52,5 +58,17 @@ public class CreateIssuerOnboardingLinkParams {
     @JsonIgnore
     public CreateIssuerOnboardingLinkParams setExpiresInHours(long expiresInHours) {
         return setExpiresInHours(Long.valueOf(expiresInHours));
+    }
+
+    /**
+     * true para que la página también guarde (cifrada) la e.firma de su cliente, con su autorización, y pueda pedir al SAT sus facturas (POST /v1/sat_downloads), sus declaraciones (/v1/sat_declarations), su opinión de cumplimiento, constancia y buzón tributario. Sin esto la e.firma solo firma el contrato con el PAC y no se guarda.
+     */
+    public Boolean getKeepEfirma() {
+        return keepEfirma;
+    }
+
+    public CreateIssuerOnboardingLinkParams setKeepEfirma(Boolean keepEfirma) {
+        this.keepEfirma = keepEfirma;
+        return this;
     }
 }
