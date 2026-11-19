@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * CustomerGroup: Un grupo de clientes: su lista de precios, descuento, días de crédito, pedido mínimo y si piden desde su Portal del cliente.
@@ -80,6 +81,32 @@ public class CustomerGroup {
      */
     @JsonProperty("portal_ordering")
     private Boolean portalOrdering;
+
+    /**
+     * Hasta cuándo sus clientes cambian o cancelan desde su portal un pedido que mandaron ahí: none, until_confirmed (hasta que usted lo confirme) o until_delivered (hasta que se entregue o facture algo).
+     * <p>
+     * Valores: none, until_confirmed, until_delivered.
+     */
+    @JsonProperty("portal_changes")
+    private String portalChanges;
+
+    /**
+     * Días de la semana en que les entrega (0 domingo a 6 sábado), o null si cualquier día. El Portal del cliente solo ofrece esos días.
+     */
+    @JsonProperty("delivery_days")
+    private List<Long> deliveryDays;
+
+    /**
+     * Hora de corte (0 a 23, Ciudad de México): un pedido del portal después de ella cuenta desde el día siguiente; null sin hora de corte.
+     */
+    @JsonProperty("cutoff_hour")
+    private Long cutoffHour;
+
+    /**
+     * Días para preparar un pedido antes de poder entregarlo.
+     */
+    @JsonProperty("prep_days")
+    private Long prepDays;
 
     /**
      * Cuántos clientes hay en el grupo.
@@ -238,6 +265,66 @@ public class CustomerGroup {
     public CustomerGroup setPortalOrdering(Boolean portalOrdering) {
         this.portalOrdering = portalOrdering;
         return this;
+    }
+
+    /**
+     * Hasta cuándo sus clientes cambian o cancelan desde su portal un pedido que mandaron ahí: none, until_confirmed (hasta que usted lo confirme) o until_delivered (hasta que se entregue o facture algo).
+     * <p>
+     * Valores: none, until_confirmed, until_delivered.
+     */
+    public String getPortalChanges() {
+        return portalChanges;
+    }
+
+    public CustomerGroup setPortalChanges(String portalChanges) {
+        this.portalChanges = portalChanges;
+        return this;
+    }
+
+    /**
+     * Días de la semana en que les entrega (0 domingo a 6 sábado), o null si cualquier día. El Portal del cliente solo ofrece esos días.
+     */
+    public List<Long> getDeliveryDays() {
+        return deliveryDays;
+    }
+
+    public CustomerGroup setDeliveryDays(List<Long> deliveryDays) {
+        this.deliveryDays = deliveryDays;
+        return this;
+    }
+
+    /**
+     * Hora de corte (0 a 23, Ciudad de México): un pedido del portal después de ella cuenta desde el día siguiente; null sin hora de corte.
+     */
+    public Long getCutoffHour() {
+        return cutoffHour;
+    }
+
+    public CustomerGroup setCutoffHour(Long cutoffHour) {
+        this.cutoffHour = cutoffHour;
+        return this;
+    }
+
+    @JsonIgnore
+    public CustomerGroup setCutoffHour(long cutoffHour) {
+        return setCutoffHour(Long.valueOf(cutoffHour));
+    }
+
+    /**
+     * Días para preparar un pedido antes de poder entregarlo.
+     */
+    public Long getPrepDays() {
+        return prepDays;
+    }
+
+    public CustomerGroup setPrepDays(Long prepDays) {
+        this.prepDays = prepDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public CustomerGroup setPrepDays(long prepDays) {
+        return setPrepDays(Long.valueOf(prepDays));
     }
 
     /**

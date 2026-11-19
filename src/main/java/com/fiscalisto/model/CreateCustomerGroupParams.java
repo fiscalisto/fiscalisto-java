@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * CreateCustomerGroupParams: los campos de «Crear un grupo de clientes».
@@ -66,6 +67,32 @@ public class CreateCustomerGroupParams {
      */
     @JsonProperty("portal_ordering")
     private Boolean portalOrdering;
+
+    /**
+     * Hasta cuándo sus clientes cambian o cancelan desde su portal un pedido que mandaron ahí: none, until_confirmed (hasta que usted lo confirme; por omisión) o until_delivered (hasta que se entregue o facture algo).
+     * <p>
+     * Valores: none, until_confirmed, until_delivered.
+     */
+    @JsonProperty("portal_changes")
+    private String portalChanges;
+
+    /**
+     * Días de la semana en que les entrega (0 domingo a 6 sábado); null: cualquier día. El portal solo ofrece esos días.
+     */
+    @JsonProperty("delivery_days")
+    private List<Long> deliveryDays;
+
+    /**
+     * Hora de corte (0 a 23, Ciudad de México): un pedido del portal después de ella cuenta desde el día siguiente; null: sin hora de corte.
+     */
+    @JsonProperty("cutoff_hour")
+    private Long cutoffHour;
+
+    /**
+     * Días para preparar un pedido antes de poder entregarlo (0 por omisión).
+     */
+    @JsonProperty("prep_days")
+    private Long prepDays;
 
     /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
@@ -180,5 +207,65 @@ public class CreateCustomerGroupParams {
     public CreateCustomerGroupParams setPortalOrdering(Boolean portalOrdering) {
         this.portalOrdering = portalOrdering;
         return this;
+    }
+
+    /**
+     * Hasta cuándo sus clientes cambian o cancelan desde su portal un pedido que mandaron ahí: none, until_confirmed (hasta que usted lo confirme; por omisión) o until_delivered (hasta que se entregue o facture algo).
+     * <p>
+     * Valores: none, until_confirmed, until_delivered.
+     */
+    public String getPortalChanges() {
+        return portalChanges;
+    }
+
+    public CreateCustomerGroupParams setPortalChanges(String portalChanges) {
+        this.portalChanges = portalChanges;
+        return this;
+    }
+
+    /**
+     * Días de la semana en que les entrega (0 domingo a 6 sábado); null: cualquier día. El portal solo ofrece esos días.
+     */
+    public List<Long> getDeliveryDays() {
+        return deliveryDays;
+    }
+
+    public CreateCustomerGroupParams setDeliveryDays(List<Long> deliveryDays) {
+        this.deliveryDays = deliveryDays;
+        return this;
+    }
+
+    /**
+     * Hora de corte (0 a 23, Ciudad de México): un pedido del portal después de ella cuenta desde el día siguiente; null: sin hora de corte.
+     */
+    public Long getCutoffHour() {
+        return cutoffHour;
+    }
+
+    public CreateCustomerGroupParams setCutoffHour(Long cutoffHour) {
+        this.cutoffHour = cutoffHour;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateCustomerGroupParams setCutoffHour(long cutoffHour) {
+        return setCutoffHour(Long.valueOf(cutoffHour));
+    }
+
+    /**
+     * Días para preparar un pedido antes de poder entregarlo (0 por omisión).
+     */
+    public Long getPrepDays() {
+        return prepDays;
+    }
+
+    public CreateCustomerGroupParams setPrepDays(Long prepDays) {
+        this.prepDays = prepDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateCustomerGroupParams setPrepDays(long prepDays) {
+        return setPrepDays(Long.valueOf(prepDays));
     }
 }
