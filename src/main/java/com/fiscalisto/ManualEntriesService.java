@@ -4,7 +4,9 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.CreateManualEntryParams;
 import com.fiscalisto.model.Deleted;
+import com.fiscalisto.model.ImportManualEntriesParams;
 import com.fiscalisto.model.ListManualEntriesParams;
+import com.fiscalisto.model.ManualEntryImport;
 import com.fiscalisto.model.ManualJournalEntry;
 import com.fiscalisto.model.UpdateManualEntryParams;
 
@@ -118,5 +120,39 @@ public final class ManualEntriesService {
 
     public Deleted delete(String id) {
         return delete(id, null);
+    }
+
+    /**
+     * Importar pólizas de otro sistema
+     * <p>
+     * Hasta 3,000 pólizas de una vez (las de CONTPAQi, COI o una hoja de cálculo), todas o ninguna: cada una con las reglas de POST /v1/accounting/manual_entries, y el error dice cuál (param entries[i].…). Entran como kind other. Una con el mismo number, fecha, tipo y total que una ya importada se salta (duplicates). DELETE /v1/accounting/manual_entry_imports/{id} quita las de una importación.
+     * <p>
+     * POST /v1/accounting/manual_entry_imports
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/import-manual-entries
+     */
+    public ManualEntryImport importEntries(ImportManualEntriesParams params, RequestOptions options) {
+        return api.request("POST", "/v1/accounting/manual_entry_imports", params, null, true, ManualEntryImport.class, options);
+    }
+
+    public ManualEntryImport importEntries(ImportManualEntriesParams params) {
+        return importEntries(params, null);
+    }
+
+    /**
+     * Deshacer una importación de pólizas
+     * <p>
+     * Borra todas las pólizas que trajo esa importación (mji_…). No se puede si alguna es de un mes cerrado (period_closed).
+     * <p>
+     * DELETE /v1/accounting/manual_entry_imports/{id}
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/undo-manual-entries-import
+     */
+    public Deleted undoImport(String id, RequestOptions options) {
+        return api.request("DELETE", "/v1/accounting/manual_entry_imports/" + ApiClient.encode(id), null, null, false, Deleted.class, options);
+    }
+
+    public Deleted undoImport(String id) {
+        return undoImport(id, null);
     }
 }
