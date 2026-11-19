@@ -214,11 +214,11 @@ public class FixedAsset {
     /**
      * El nombre de su tipo, por ejemplo «Equipo de cómputo».
      */
-    public String getClass() {
+    public String getClassName() {
         return class_;
     }
 
-    public FixedAsset setClass(String class_) {
+    public FixedAsset setClassName(String class_) {
         this.class_ = class_;
         return this;
     }
