@@ -138,6 +138,12 @@ public class SelfInvoicing {
     private String invoiceSeries;
 
     /**
+     * true: el portal le pide al comprador una nota para el PDF de su factura (hasta 500 caracteres). Solo sale en el PDF, nunca en el XML.
+     */
+    @JsonProperty("customer_notes")
+    private Boolean customerNotes;
+
+    /**
      * ticket: la factura global lleva un concepto «Venta» por ticket, con su folio. summary: solo el monto total del periodo, uno por combinación de impuestos (NoIdentificacion «Resumen»), para una persona física en RESICO (regla 2.7.1.21 de la RMF 2026).
      * <p>
      * Valores: ticket, summary.
@@ -390,6 +396,18 @@ public class SelfInvoicing {
 
     public SelfInvoicing setInvoiceSeries(String invoiceSeries) {
         this.invoiceSeries = invoiceSeries;
+        return this;
+    }
+
+    /**
+     * true: el portal le pide al comprador una nota para el PDF de su factura (hasta 500 caracteres). Solo sale en el PDF, nunca en el XML.
+     */
+    public Boolean getCustomerNotes() {
+        return customerNotes;
+    }
+
+    public SelfInvoicing setCustomerNotes(Boolean customerNotes) {
+        this.customerNotes = customerNotes;
         return this;
     }
 

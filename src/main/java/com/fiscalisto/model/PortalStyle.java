@@ -127,6 +127,14 @@ public class PortalStyle {
     private PortalStyleColors colors;
 
     /**
+     * Cómo llama el portal a lo que se factura («reservacion» en un hotel).
+     * <p>
+     * Valores: ticket, nota, cuenta, compra, pedido, orden, reservacion, estancia, boleto.
+     */
+    @JsonProperty("noun")
+    private String noun;
+
+    /**
      * Los textos propios por llave (step_ticket, submit, success_title, concepts_title…), cada uno con es y en. Uno que falta lleva el de Fiscalisto.
      */
     @JsonProperty("texts")
@@ -337,6 +345,20 @@ public class PortalStyle {
 
     public PortalStyle setColors(PortalStyleColors colors) {
         this.colors = colors;
+        return this;
+    }
+
+    /**
+     * Cómo llama el portal a lo que se factura («reservacion» en un hotel).
+     * <p>
+     * Valores: ticket, nota, cuenta, compra, pedido, orden, reservacion, estancia, boleto.
+     */
+    public String getNoun() {
+        return noun;
+    }
+
+    public PortalStyle setNoun(String noun) {
+        this.noun = noun;
         return this;
     }
 

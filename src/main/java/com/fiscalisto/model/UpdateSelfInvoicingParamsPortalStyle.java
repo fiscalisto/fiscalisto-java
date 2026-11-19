@@ -99,13 +99,21 @@ public class UpdateSelfInvoicingParamsPortalStyle {
     private String shadow;
 
     /**
+     * Cómo llama el portal a lo que se factura, en todos sus textos: `ticket` (por omisión), `nota`, `cuenta`, `compra`, `pedido`, `orden`, `reservacion`, `estancia` o `boleto`. Un hotel usa `reservacion`: «Esta reservación ya se facturó».
+     * <p>
+     * Valores: ticket, nota, cuenta, compra, pedido, orden, reservacion, estancia, boleto.
+     */
+    @JsonProperty("noun")
+    private String noun;
+
+    /**
      * Los textos, cada uno con `es` y `en`, combinados por llave con lo guardado. El título, el mensaje y dónde viene el código en español son `portal_title`, `portal_message` y `code_hint`; aquí van en inglés.
      */
     @JsonProperty("texts")
     private UpdateSelfInvoicingParamsPortalStyleTexts texts;
 
     /**
-     * Las formas de dar sus datos además de escribirlos. Todas `true` por omisión.
+     * Las formas de dar sus datos además de escribirlos. Todas `true` por omisión menos `norfc`.
      */
     @JsonProperty("ways")
     private UpdateSelfInvoicingParamsPortalStyleWays ways;
@@ -287,6 +295,20 @@ public class UpdateSelfInvoicingParamsPortalStyle {
     }
 
     /**
+     * Cómo llama el portal a lo que se factura, en todos sus textos: `ticket` (por omisión), `nota`, `cuenta`, `compra`, `pedido`, `orden`, `reservacion`, `estancia` o `boleto`. Un hotel usa `reservacion`: «Esta reservación ya se facturó».
+     * <p>
+     * Valores: ticket, nota, cuenta, compra, pedido, orden, reservacion, estancia, boleto.
+     */
+    public String getNoun() {
+        return noun;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyle setNoun(String noun) {
+        this.noun = noun;
+        return this;
+    }
+
+    /**
      * Los textos, cada uno con `es` y `en`, combinados por llave con lo guardado. El título, el mensaje y dónde viene el código en español son `portal_title`, `portal_message` y `code_hint`; aquí van en inglés.
      */
     public UpdateSelfInvoicingParamsPortalStyleTexts getTexts() {
@@ -299,7 +321,7 @@ public class UpdateSelfInvoicingParamsPortalStyle {
     }
 
     /**
-     * Las formas de dar sus datos además de escribirlos. Todas `true` por omisión.
+     * Las formas de dar sus datos además de escribirlos. Todas `true` por omisión menos `norfc`.
      */
     public UpdateSelfInvoicingParamsPortalStyleWays getWays() {
         return ways;

@@ -124,6 +124,12 @@ public class Invoice {
     private String paymentTerms;
 
     /**
+     * Nota para el cliente: sale en el PDF, no en el XML. Se cambia después de timbrar con POST /v1/invoices/{id} (el XML no cambia; el siguiente PDF ya la lleva).
+     */
+    @JsonProperty("notes")
+    private String notes;
+
+    /**
      * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
      */
     @JsonProperty("currency")
@@ -486,6 +492,18 @@ public class Invoice {
 
     public Invoice setPaymentTerms(String paymentTerms) {
         this.paymentTerms = paymentTerms;
+        return this;
+    }
+
+    /**
+     * Nota para el cliente: sale en el PDF, no en el XML. Se cambia después de timbrar con POST /v1/invoices/{id} (el XML no cambia; el siguiente PDF ya la lleva).
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    public Invoice setNotes(String notes) {
+        this.notes = notes;
         return this;
     }
 

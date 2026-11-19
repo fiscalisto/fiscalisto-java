@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * UpdateSelfInvoicingParamsPortalStyleWays: Las formas de dar sus datos además de escribirlos. Todas `true` por omisión.
+ * UpdateSelfInvoicingParamsPortalStyleWays: Las formas de dar sus datos además de escribirlos. Todas `true` por omisión menos `norfc`.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -37,10 +37,16 @@ public class UpdateSelfInvoicingParamsPortalStyleWays {
     private Boolean recall;
 
     /**
-     * Ofrecer facturar a clientes en el extranjero.
+     * Ofrecer facturar a clientes en el extranjero (el tax ID es opcional).
      */
     @JsonProperty("abroad")
     private Boolean abroad;
+
+    /**
+     * Ofrecer «No tengo RFC»: facturar a nombre de la persona con XAXX010101000, régimen 616, uso S01 y el CP del emisor. `false` por omisión.
+     */
+    @JsonProperty("norfc")
+    private Boolean norfc;
 
     /**
      * Ofrecer subir la constancia (PDF).
@@ -91,7 +97,7 @@ public class UpdateSelfInvoicingParamsPortalStyleWays {
     }
 
     /**
-     * Ofrecer facturar a clientes en el extranjero.
+     * Ofrecer facturar a clientes en el extranjero (el tax ID es opcional).
      */
     public Boolean getAbroad() {
         return abroad;
@@ -99,6 +105,18 @@ public class UpdateSelfInvoicingParamsPortalStyleWays {
 
     public UpdateSelfInvoicingParamsPortalStyleWays setAbroad(Boolean abroad) {
         this.abroad = abroad;
+        return this;
+    }
+
+    /**
+     * Ofrecer «No tengo RFC»: facturar a nombre de la persona con XAXX010101000, régimen 616, uso S01 y el CP del emisor. `false` por omisión.
+     */
+    public Boolean getNorfc() {
+        return norfc;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleWays setNorfc(Boolean norfc) {
+        this.norfc = norfc;
         return this;
     }
 }

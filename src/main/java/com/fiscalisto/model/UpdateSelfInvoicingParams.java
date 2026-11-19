@@ -108,6 +108,12 @@ public class UpdateSelfInvoicingParams {
     private String invoiceSeries;
 
     /**
+     * `true`: el portal le pide al comprador una nota para el PDF de su factura (hasta 500 caracteres; Autofactura › Nota del cliente). Solo sale en el PDF, nunca en el XML. Por omisión `false`.
+     */
+    @JsonProperty("customer_notes")
+    private Boolean customerNotes;
+
+    /**
      * Los conceptos de la factura que se hace el comprador (Autofactura › Conceptos de la factura): desglosados o en uno solo, y si el comprador puede elegir. Mande solo lo que cambia; `null` regresa a desglosados sin elección.
      */
     @JsonProperty("invoice_concepts")
@@ -306,6 +312,18 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setInvoiceSeries(String invoiceSeries) {
         this.invoiceSeries = invoiceSeries;
+        return this;
+    }
+
+    /**
+     * `true`: el portal le pide al comprador una nota para el PDF de su factura (hasta 500 caracteres; Autofactura › Nota del cliente). Solo sale en el PDF, nunca en el XML. Por omisión `false`.
+     */
+    public Boolean getCustomerNotes() {
+        return customerNotes;
+    }
+
+    public UpdateSelfInvoicingParams setCustomerNotes(Boolean customerNotes) {
+        this.customerNotes = customerNotes;
         return this;
     }
 

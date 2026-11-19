@@ -43,6 +43,12 @@ public class PortalStyleWays {
     private Boolean abroad;
 
     /**
+     * «No tengo RFC»: a nombre de la persona, con XAXX010101000.
+     */
+    @JsonProperty("norfc")
+    private Boolean norfc;
+
+    /**
      * Subir la constancia (PDF).
      */
     public Boolean getConstancia() {
@@ -99,6 +105,18 @@ public class PortalStyleWays {
 
     public PortalStyleWays setAbroad(Boolean abroad) {
         this.abroad = abroad;
+        return this;
+    }
+
+    /**
+     * «No tengo RFC»: a nombre de la persona, con XAXX010101000.
+     */
+    public Boolean getNorfc() {
+        return norfc;
+    }
+
+    public PortalStyleWays setNorfc(Boolean norfc) {
+        this.norfc = norfc;
         return this;
     }
 }

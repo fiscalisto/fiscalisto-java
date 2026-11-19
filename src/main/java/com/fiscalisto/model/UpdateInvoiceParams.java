@@ -19,6 +19,12 @@ public class UpdateInvoiceParams {
     private String costCenter;
 
     /**
+     * Nota para el cliente en el PDF (hasta 1,000 caracteres), o null para quitarla. No va en el XML: la factura timbrada no cambia y el siguiente PDF (GET /v1/invoices/{id}/pdf, el correo) ya la lleva. Cada cambio queda en el historial de la factura en Fiscalisto.
+     */
+    @JsonProperty("notes")
+    private String notes;
+
+    /**
      * Su centro de costo (ccn_…), o null para quitárselo. Solo facturas, notas de crédito y recibos de nómina timbrados.
      */
     public String getCostCenter() {
@@ -27,6 +33,18 @@ public class UpdateInvoiceParams {
 
     public UpdateInvoiceParams setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Nota para el cliente en el PDF (hasta 1,000 caracteres), o null para quitarla. No va en el XML: la factura timbrada no cambia y el siguiente PDF (GET /v1/invoices/{id}/pdf, el correo) ya la lleva. Cada cambio queda en el historial de la factura en Fiscalisto.
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    public UpdateInvoiceParams setNotes(String notes) {
+        this.notes = notes;
         return this;
     }
 }
