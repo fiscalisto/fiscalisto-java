@@ -81,6 +81,12 @@ public class ManualJournalEntry {
     private String reversesOn;
 
     /**
+     * El último mes (AAAA-MM) en que se repite cada mes, o null si es de una sola fecha.
+     */
+    @JsonProperty("repeat_until")
+    private String repeatUntil;
+
+    /**
      * El UUID del CFDI con el que se relaciona, o null.
      */
     @JsonProperty("uuid")
@@ -237,6 +243,18 @@ public class ManualJournalEntry {
 
     public ManualJournalEntry setReversesOn(String reversesOn) {
         this.reversesOn = reversesOn;
+        return this;
+    }
+
+    /**
+     * El último mes (AAAA-MM) en que se repite cada mes, o null si es de una sola fecha.
+     */
+    public String getRepeatUntil() {
+        return repeatUntil;
+    }
+
+    public ManualJournalEntry setRepeatUntil(String repeatUntil) {
+        this.repeatUntil = repeatUntil;
         return this;
     }
 

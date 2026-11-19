@@ -65,6 +65,12 @@ public class UpdateManualEntryParams {
     private String uuidTaxId;
 
     /**
+     * Una póliza recurrente: se repite cada mes, el mismo día (el último si la fecha es el último del mes), hasta este mes (AAAA-MM), hasta 60 meses. null: solo en su fecha.
+     */
+    @JsonProperty("repeat_until")
+    private String repeatUntil;
+
+    /**
      * Sus cargos y abonos: cada renglón uno u otro; los cargos suman lo mismo que los abonos.
      * <p>
      * Obligatorio.
@@ -161,6 +167,18 @@ public class UpdateManualEntryParams {
 
     public UpdateManualEntryParams setUuidTaxId(String uuidTaxId) {
         this.uuidTaxId = uuidTaxId;
+        return this;
+    }
+
+    /**
+     * Una póliza recurrente: se repite cada mes, el mismo día (el último si la fecha es el último del mes), hasta este mes (AAAA-MM), hasta 60 meses. null: solo en su fecha.
+     */
+    public String getRepeatUntil() {
+        return repeatUntil;
+    }
+
+    public UpdateManualEntryParams setRepeatUntil(String repeatUntil) {
+        this.repeatUntil = repeatUntil;
         return this;
     }
 

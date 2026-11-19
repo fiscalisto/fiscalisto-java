@@ -51,6 +51,12 @@ public class CreatePayrollReceiptParams {
     private Long disabilityDays;
 
     /**
+     * Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos trabajados, vacaciones y premios. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
+     */
+    @JsonProperty("incidents")
+    private CreatePayrollReceiptParamsIncidents incidents;
+
+    /**
      * El recibo vigente (inv_… o UUID) que este corrige, calculado por Fiscalisto para el mismo empleado: el nuevo se calcula con los datos del empleado como están ahora, va relacionado con 04 y el anterior se cancela con motivo 01. Para un recibo que calculó su sistema use POST /v1/payroll_receipts/external con replaces.
      */
     @JsonProperty("replaces")
@@ -151,6 +157,18 @@ public class CreatePayrollReceiptParams {
     @JsonIgnore
     public CreatePayrollReceiptParams setDisabilityDays(long disabilityDays) {
         return setDisabilityDays(Long.valueOf(disabilityDays));
+    }
+
+    /**
+     * Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos trabajados, vacaciones y premios. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
+     */
+    public CreatePayrollReceiptParamsIncidents getIncidents() {
+        return incidents;
+    }
+
+    public CreatePayrollReceiptParams setIncidents(CreatePayrollReceiptParamsIncidents incidents) {
+        this.incidents = incidents;
+        return this;
     }
 
     /**
