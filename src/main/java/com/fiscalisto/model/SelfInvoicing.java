@@ -118,6 +118,12 @@ public class SelfInvoicing {
     private PortalStyle portalStyle;
 
     /**
+     * Desglosados o en un solo concepto, y si el comprador puede elegir (Autofactura › Conceptos de la factura).
+     */
+    @JsonProperty("invoice_concepts")
+    private InvoiceConcepts invoiceConcepts;
+
+    /**
      * Cuando se factura una persona moral que retiene (1.25% de ISR en RESICO, o lo del producto). keep_total: la base crece y la factura suma lo que se pagó. subtract: la base es la del ticket y el total es lo pagado menos la retención.
      * <p>
      * Valores: keep_total, subtract.
@@ -346,6 +352,18 @@ public class SelfInvoicing {
 
     public SelfInvoicing setPortalStyle(PortalStyle portalStyle) {
         this.portalStyle = portalStyle;
+        return this;
+    }
+
+    /**
+     * Desglosados o en un solo concepto, y si el comprador puede elegir (Autofactura › Conceptos de la factura).
+     */
+    public InvoiceConcepts getInvoiceConcepts() {
+        return invoiceConcepts;
+    }
+
+    public SelfInvoicing setInvoiceConcepts(InvoiceConcepts invoiceConcepts) {
+        this.invoiceConcepts = invoiceConcepts;
         return this;
     }
 

@@ -108,6 +108,12 @@ public class UpdateSelfInvoicingParams {
     private String invoiceSeries;
 
     /**
+     * Los conceptos de la factura que se hace el comprador (Autofactura › Conceptos de la factura): desglosados o en uno solo, y si el comprador puede elegir. Mande solo lo que cambia; `null` regresa a desglosados sin elección.
+     */
+    @JsonProperty("invoice_concepts")
+    private UpdateSelfInvoicingParamsInvoiceConcepts invoiceConcepts;
+
+    /**
      * Los conceptos de la factura global: `ticket` (por omisión), uno «Venta» por ticket con su folio como `NoIdentificacion`; `summary`, solo el monto total del periodo, uno por combinación de impuestos con `NoIdentificacion` «Resumen» (regla 2.7.1.21 de la RMF 2026). `summary` es solo para un emisor persona física en RESICO (626); otro contesta `invalid_request`.
      * <p>
      * Valores: ticket, summary.
@@ -300,6 +306,18 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setInvoiceSeries(String invoiceSeries) {
         this.invoiceSeries = invoiceSeries;
+        return this;
+    }
+
+    /**
+     * Los conceptos de la factura que se hace el comprador (Autofactura › Conceptos de la factura): desglosados o en uno solo, y si el comprador puede elegir. Mande solo lo que cambia; `null` regresa a desglosados sin elección.
+     */
+    public UpdateSelfInvoicingParamsInvoiceConcepts getInvoiceConcepts() {
+        return invoiceConcepts;
+    }
+
+    public UpdateSelfInvoicingParams setInvoiceConcepts(UpdateSelfInvoicingParamsInvoiceConcepts invoiceConcepts) {
+        this.invoiceConcepts = invoiceConcepts;
         return this;
     }
 
