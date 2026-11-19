@@ -79,6 +79,30 @@ public class UpdateSelfInvoicingParamsPortalStyleTexts {
     private UpdateSelfInvoicingParamsPortalStyleTextsSuccessMessage successMessage;
 
     /**
+     * El título de la elección de conceptos («Conceptos en su factura»; ver `invoice_concepts`); `null` vuelve al de Fiscalisto.
+     */
+    @JsonProperty("concepts_title")
+    private UpdateSelfInvoicingParamsPortalStyleTextsConceptsTitle conceptsTitle;
+
+    /**
+     * La opción de conceptos desglosados («Desglosados»); `null` vuelve al de Fiscalisto.
+     */
+    @JsonProperty("concepts_itemized")
+    private UpdateSelfInvoicingParamsPortalStyleTextsConceptsItemized conceptsItemized;
+
+    /**
+     * La opción de un solo concepto («Un solo concepto»); `null` vuelve al de Fiscalisto.
+     */
+    @JsonProperty("concepts_single")
+    private UpdateSelfInvoicingParamsPortalStyleTextsConceptsSingle conceptsSingle;
+
+    /**
+     * La opción de conceptos por categoría («Por categoría»); `null` vuelve al de Fiscalisto.
+     */
+    @JsonProperty("concepts_grouped")
+    private UpdateSelfInvoicingParamsPortalStyleTextsConceptsGrouped conceptsGrouped;
+
+    /**
      * El título (en español es `portal_title`); `null` vuelve al de Fiscalisto.
      */
     public UpdateSelfInvoicingParamsPortalStyleTextsTitle getTitle() {
@@ -207,6 +231,54 @@ public class UpdateSelfInvoicingParamsPortalStyleTexts {
 
     public UpdateSelfInvoicingParamsPortalStyleTexts setSuccessMessage(UpdateSelfInvoicingParamsPortalStyleTextsSuccessMessage successMessage) {
         this.successMessage = successMessage;
+        return this;
+    }
+
+    /**
+     * El título de la elección de conceptos («Conceptos en su factura»; ver `invoice_concepts`); `null` vuelve al de Fiscalisto.
+     */
+    public UpdateSelfInvoicingParamsPortalStyleTextsConceptsTitle getConceptsTitle() {
+        return conceptsTitle;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleTexts setConceptsTitle(UpdateSelfInvoicingParamsPortalStyleTextsConceptsTitle conceptsTitle) {
+        this.conceptsTitle = conceptsTitle;
+        return this;
+    }
+
+    /**
+     * La opción de conceptos desglosados («Desglosados»); `null` vuelve al de Fiscalisto.
+     */
+    public UpdateSelfInvoicingParamsPortalStyleTextsConceptsItemized getConceptsItemized() {
+        return conceptsItemized;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleTexts setConceptsItemized(UpdateSelfInvoicingParamsPortalStyleTextsConceptsItemized conceptsItemized) {
+        this.conceptsItemized = conceptsItemized;
+        return this;
+    }
+
+    /**
+     * La opción de un solo concepto («Un solo concepto»); `null` vuelve al de Fiscalisto.
+     */
+    public UpdateSelfInvoicingParamsPortalStyleTextsConceptsSingle getConceptsSingle() {
+        return conceptsSingle;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleTexts setConceptsSingle(UpdateSelfInvoicingParamsPortalStyleTextsConceptsSingle conceptsSingle) {
+        this.conceptsSingle = conceptsSingle;
+        return this;
+    }
+
+    /**
+     * La opción de conceptos por categoría («Por categoría»); `null` vuelve al de Fiscalisto.
+     */
+    public UpdateSelfInvoicingParamsPortalStyleTextsConceptsGrouped getConceptsGrouped() {
+        return conceptsGrouped;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleTexts setConceptsGrouped(UpdateSelfInvoicingParamsPortalStyleTextsConceptsGrouped conceptsGrouped) {
+        this.conceptsGrouped = conceptsGrouped;
         return this;
     }
 }

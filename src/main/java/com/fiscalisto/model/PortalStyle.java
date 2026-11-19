@@ -127,7 +127,7 @@ public class PortalStyle {
     private PortalStyleColors colors;
 
     /**
-     * Los textos propios por llave (step_ticket, submit, success_title…), cada uno con es y en. Uno que falta lleva el de Fiscalisto.
+     * Los textos propios por llave (step_ticket, submit, success_title, concepts_title…), cada uno con es y en. Uno que falta lleva el de Fiscalisto.
      */
     @JsonProperty("texts")
     private Map<String, Object> texts;
@@ -341,7 +341,7 @@ public class PortalStyle {
     }
 
     /**
-     * Los textos propios por llave (step_ticket, submit, success_title…), cada uno con es y en. Uno que falta lleva el de Fiscalisto.
+     * Los textos propios por llave (step_ticket, submit, success_title, concepts_title…), cada uno con es y en. Uno que falta lleva el de Fiscalisto.
      */
     public Map<String, Object> getTexts() {
         return texts;

@@ -118,7 +118,7 @@ public class SelfInvoicing {
     private PortalStyle portalStyle;
 
     /**
-     * Desglosados o en un solo concepto, y si el comprador puede elegir (Autofactura › Conceptos de la factura).
+     * Desglosados, en un solo concepto o por los grupos de la empresa, y qué puede elegir el comprador (Autofactura › Conceptos de la factura).
      */
     @JsonProperty("invoice_concepts")
     private InvoiceConcepts invoiceConcepts;
@@ -356,7 +356,7 @@ public class SelfInvoicing {
     }
 
     /**
-     * Desglosados o en un solo concepto, y si el comprador puede elegir (Autofactura › Conceptos de la factura).
+     * Desglosados, en un solo concepto o por los grupos de la empresa, y qué puede elegir el comprador (Autofactura › Conceptos de la factura).
      */
     public InvoiceConcepts getInvoiceConcepts() {
         return invoiceConcepts;

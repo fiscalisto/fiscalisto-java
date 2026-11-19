@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * InvoiceConcepts: Los conceptos de la factura que se hace el comprador en el portal.
  */
@@ -13,18 +15,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InvoiceConcepts {
     /**
-     * itemized: un concepto por renglón del ticket; single: uno solo (más uno por cada otro juego de impuestos, como una noche con ISH).
+     * itemized: un concepto por renglón del ticket; single: uno solo; grouped: uno por cada grupo de groups. Lo que lleva otro juego de impuestos (como una noche con ISH) va siempre en su propio concepto.
      * <p>
-     * Valores: itemized, single.
+     * Valores: itemized, single, grouped.
      */
     @JsonProperty("mode")
     private String mode;
 
     /**
-     * Si el comprador puede elegir en el portal entre desglosados y un solo concepto.
+     * Si el comprador puede elegir en el portal entre las opciones de customer_options.
      */
     @JsonProperty("customer_choice")
     private Boolean customerChoice;
+
+    /**
+     * Las opciones que ve el comprador cuando puede elegir (incluye siempre mode, que llega elegida).
+     */
+    @JsonProperty("customer_options")
+    private List<String> customerOptions;
 
     /**
      * La descripción del concepto único, como «Consumo».
@@ -45,9 +53,29 @@ public class InvoiceConcepts {
     private String unitKey;
 
     /**
-     * itemized: un concepto por renglón del ticket; single: uno solo (más uno por cada otro juego de impuestos, como una noche con ISH).
+     * Los grupos de «Por categoría», en orden: cada renglón va en el primero que lo tome.
+     */
+    @JsonProperty("groups")
+    private List<InvoiceConceptsGroup> groups;
+
+    /**
+     * Lo que ningún grupo toma: itemized, desglosado; group, en un concepto más llamado ungrouped_name.
      * <p>
-     * Valores: itemized, single.
+     * Valores: itemized, group.
+     */
+    @JsonProperty("ungrouped")
+    private String ungrouped;
+
+    /**
+     * El nombre del concepto para lo que ningún grupo toma.
+     */
+    @JsonProperty("ungrouped_name")
+    private String ungroupedName;
+
+    /**
+     * itemized: un concepto por renglón del ticket; single: uno solo; grouped: uno por cada grupo de groups. Lo que lleva otro juego de impuestos (como una noche con ISH) va siempre en su propio concepto.
+     * <p>
+     * Valores: itemized, single, grouped.
      */
     public String getMode() {
         return mode;
@@ -59,7 +87,7 @@ public class InvoiceConcepts {
     }
 
     /**
-     * Si el comprador puede elegir en el portal entre desglosados y un solo concepto.
+     * Si el comprador puede elegir en el portal entre las opciones de customer_options.
      */
     public Boolean getCustomerChoice() {
         return customerChoice;
@@ -67,6 +95,18 @@ public class InvoiceConcepts {
 
     public InvoiceConcepts setCustomerChoice(Boolean customerChoice) {
         this.customerChoice = customerChoice;
+        return this;
+    }
+
+    /**
+     * Las opciones que ve el comprador cuando puede elegir (incluye siempre mode, que llega elegida).
+     */
+    public List<String> getCustomerOptions() {
+        return customerOptions;
+    }
+
+    public InvoiceConcepts setCustomerOptions(List<String> customerOptions) {
+        this.customerOptions = customerOptions;
         return this;
     }
 
@@ -103,6 +143,44 @@ public class InvoiceConcepts {
 
     public InvoiceConcepts setUnitKey(String unitKey) {
         this.unitKey = unitKey;
+        return this;
+    }
+
+    /**
+     * Los grupos de «Por categoría», en orden: cada renglón va en el primero que lo tome.
+     */
+    public List<InvoiceConceptsGroup> getGroups() {
+        return groups;
+    }
+
+    public InvoiceConcepts setGroups(List<InvoiceConceptsGroup> groups) {
+        this.groups = groups;
+        return this;
+    }
+
+    /**
+     * Lo que ningún grupo toma: itemized, desglosado; group, en un concepto más llamado ungrouped_name.
+     * <p>
+     * Valores: itemized, group.
+     */
+    public String getUngrouped() {
+        return ungrouped;
+    }
+
+    public InvoiceConcepts setUngrouped(String ungrouped) {
+        this.ungrouped = ungrouped;
+        return this;
+    }
+
+    /**
+     * El nombre del concepto para lo que ningún grupo toma.
+     */
+    public String getUngroupedName() {
+        return ungroupedName;
+    }
+
+    public InvoiceConcepts setUngroupedName(String ungroupedName) {
+        this.ungroupedName = ungroupedName;
         return this;
     }
 }
