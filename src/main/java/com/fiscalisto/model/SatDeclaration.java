@@ -141,6 +141,20 @@ public class SatDeclaration {
     private SatDeclarationSummary summary;
 
     /**
+     * read: ya se leyó su PDF (sections, summary, receipt y los *_due vienen de él; una cifra en null es que la declaración no la trae). pending: está listada pero su PDF aún no se descarga, así que sus cifras vienen vacías o en null; se descarga sola, sin otro timbre, para figures_expected_at. unavailable: el SAT no ha dado el PDF (files_error dice por qué); se vuelve a pedir en la siguiente lectura.
+     * <p>
+     * Valores: read, pending, unavailable.
+     */
+    @JsonProperty("figures_status")
+    private String figuresStatus;
+
+    /**
+     * Cuándo deberían estar sus cifras, si no están (la lectura en segundo plano que termina una consulta cortada por tiempo). null cuando ya están o cuando no hay una lectura programada: entonces llegan con el siguiente POST /v1/sat_declarations/refresh.
+     */
+    @JsonProperty("figures_expected_at")
+    private String figuresExpectedAt;
+
+    /**
      * Su pago en el banco, de «Declaraciones pagadas» del SAT (solo las mensuales; null en las demás). status: paid (el SAT tiene el pago), unpaid (tiene algo a pagar y el SAT no lo tenía pagado en checked_at), overdue (igual, con la línea de captura vencida), nothing_to_pay o unchecked (aún no se revisa). paid_on, amount_paid y bank del pago más reciente, y cada pago en payments con su banco, día, línea de captura, medio (channel), importe, número de operación del banco y llave de pago.
      */
     @JsonProperty("payment")
@@ -441,6 +455,32 @@ public class SatDeclaration {
 
     public SatDeclaration setSummary(SatDeclarationSummary summary) {
         this.summary = summary;
+        return this;
+    }
+
+    /**
+     * read: ya se leyó su PDF (sections, summary, receipt y los *_due vienen de él; una cifra en null es que la declaración no la trae). pending: está listada pero su PDF aún no se descarga, así que sus cifras vienen vacías o en null; se descarga sola, sin otro timbre, para figures_expected_at. unavailable: el SAT no ha dado el PDF (files_error dice por qué); se vuelve a pedir en la siguiente lectura.
+     * <p>
+     * Valores: read, pending, unavailable.
+     */
+    public String getFiguresStatus() {
+        return figuresStatus;
+    }
+
+    public SatDeclaration setFiguresStatus(String figuresStatus) {
+        this.figuresStatus = figuresStatus;
+        return this;
+    }
+
+    /**
+     * Cuándo deberían estar sus cifras, si no están (la lectura en segundo plano que termina una consulta cortada por tiempo). null cuando ya están o cuando no hay una lectura programada: entonces llegan con el siguiente POST /v1/sat_declarations/refresh.
+     */
+    public String getFiguresExpectedAt() {
+        return figuresExpectedAt;
+    }
+
+    public SatDeclaration setFiguresExpectedAt(String figuresExpectedAt) {
+        this.figuresExpectedAt = figuresExpectedAt;
         return this;
     }
 

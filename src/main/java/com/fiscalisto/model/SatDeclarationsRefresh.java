@@ -58,6 +58,12 @@ public class SatDeclarationsRefresh {
     private Long pending;
 
     /**
+     * Con status processing: cuándo deberían estar los archivos y las cifras que faltan (pending), que se descargan solos sin otro timbre. Mientras, GET /v1/sat_declarations ya las lista, con figures_status pending. null con status completed.
+     */
+    @JsonProperty("completes_at")
+    private String completesAt;
+
+    /**
      * Si una parte del SAT falló (por ejemplo, la anual), lo que dijo; lo demás sí se trajo. null si todo salió.
      */
     @JsonProperty("warning")
@@ -174,6 +180,18 @@ public class SatDeclarationsRefresh {
     @JsonIgnore
     public SatDeclarationsRefresh setPending(long pending) {
         return setPending(Long.valueOf(pending));
+    }
+
+    /**
+     * Con status processing: cuándo deberían estar los archivos y las cifras que faltan (pending), que se descargan solos sin otro timbre. Mientras, GET /v1/sat_declarations ya las lista, con figures_status pending. null con status completed.
+     */
+    public String getCompletesAt() {
+        return completesAt;
+    }
+
+    public SatDeclarationsRefresh setCompletesAt(String completesAt) {
+        this.completesAt = completesAt;
+        return this;
     }
 
     /**

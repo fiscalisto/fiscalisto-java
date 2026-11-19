@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SatDeclarationPayment {
     /**
-     * paid, unpaid (algo a pagar que el SAT no tenía pagado), overdue (igual, línea de captura vencida), nothing_to_pay o unchecked.
+     * paid, unpaid (algo a pagar que el SAT no tenía pagado), overdue (igual, línea de captura vencida), nothing_to_pay o unchecked (aún no se sabe: sus cifras no se han leído, ver figures_status, o su pago no se ha buscado; checked_at viene en null).
      * <p>
      * Valores: paid, unpaid, overdue, nothing_to_pay, unchecked.
      */
@@ -55,7 +55,7 @@ public class SatDeclarationPayment {
     private List<SatDeclarationPaymentPayment> payments;
 
     /**
-     * paid, unpaid (algo a pagar que el SAT no tenía pagado), overdue (igual, línea de captura vencida), nothing_to_pay o unchecked.
+     * paid, unpaid (algo a pagar que el SAT no tenía pagado), overdue (igual, línea de captura vencida), nothing_to_pay o unchecked (aún no se sabe: sus cifras no se han leído, ver figures_status, o su pago no se ha buscado; checked_at viene en null).
      * <p>
      * Valores: paid, unpaid, overdue, nothing_to_pay, unchecked.
      */
