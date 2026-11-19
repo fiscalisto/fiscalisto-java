@@ -32,6 +32,12 @@ public class CreateIssuerOnboardingLinkParams {
     private Boolean keepEfirma;
 
     /**
+     * true para pedir solo la e.firma, sin el CSD: para consultar el SAT por su cliente sin timbrar por él. Implica keep_efirma. El emisor sigue sin poder timbrar hasta que suba su CSD.
+     */
+    @JsonProperty("efirma_only")
+    private Boolean efirmaOnly;
+
+    /**
      * A dónde regresa el botón al terminar, por ejemplo la página de su plataforma donde su cliente sigue. Sin ella, la página solo dice que ya terminó.
      */
     public String getReturnUrl() {
@@ -69,6 +75,18 @@ public class CreateIssuerOnboardingLinkParams {
 
     public CreateIssuerOnboardingLinkParams setKeepEfirma(Boolean keepEfirma) {
         this.keepEfirma = keepEfirma;
+        return this;
+    }
+
+    /**
+     * true para pedir solo la e.firma, sin el CSD: para consultar el SAT por su cliente sin timbrar por él. Implica keep_efirma. El emisor sigue sin poder timbrar hasta que suba su CSD.
+     */
+    public Boolean getEfirmaOnly() {
+        return efirmaOnly;
+    }
+
+    public CreateIssuerOnboardingLinkParams setEfirmaOnly(Boolean efirmaOnly) {
+        this.efirmaOnly = efirmaOnly;
         return this;
     }
 }

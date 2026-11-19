@@ -49,6 +49,12 @@ public class IssuerOnboardingLink {
     private Boolean keepEfirma;
 
     /**
+     * La página pide solo la e.firma, sin el CSD (para consultar el SAT).
+     */
+    @JsonProperty("efirma_only")
+    private Boolean efirmaOnly;
+
+    /**
      * Cuándo deja de servir la liga. Pida otra cuando quiera.
      */
     @JsonProperty("expires_at")
@@ -129,6 +135,18 @@ public class IssuerOnboardingLink {
 
     public IssuerOnboardingLink setKeepEfirma(Boolean keepEfirma) {
         this.keepEfirma = keepEfirma;
+        return this;
+    }
+
+    /**
+     * La página pide solo la e.firma, sin el CSD (para consultar el SAT).
+     */
+    public Boolean getEfirmaOnly() {
+        return efirmaOnly;
+    }
+
+    public IssuerOnboardingLink setEfirmaOnly(Boolean efirmaOnly) {
+        this.efirmaOnly = efirmaOnly;
         return this;
     }
 
