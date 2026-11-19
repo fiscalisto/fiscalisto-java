@@ -47,7 +47,7 @@ public class UpdateManualEntryParams {
     private String journalType;
 
     /**
-     * Solo con kind accrual: la póliza se revierte sola el día 1 del mes siguiente (para cuando llegue la factura).
+     * Solo con kind accrual o adjustment: la póliza se revierte sola el día 1 del mes siguiente (una provisión, para cuando llegue la factura; un ajuste de cierre como la revaluación cambiaria).
      */
     @JsonProperty("reverse_next_month")
     private Boolean reverseNextMonth;
@@ -135,7 +135,7 @@ public class UpdateManualEntryParams {
     }
 
     /**
-     * Solo con kind accrual: la póliza se revierte sola el día 1 del mes siguiente (para cuando llegue la factura).
+     * Solo con kind accrual o adjustment: la póliza se revierte sola el día 1 del mes siguiente (una provisión, para cuando llegue la factura; un ajuste de cierre como la revaluación cambiaria).
      */
     public Boolean getReverseNextMonth() {
         return reverseNextMonth;

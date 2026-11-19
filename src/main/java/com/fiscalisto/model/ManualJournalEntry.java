@@ -69,7 +69,7 @@ public class ManualJournalEntry {
     private String journalType;
 
     /**
-     * true: una provisión que se revierte sola el día 1 del mes siguiente.
+     * true: una provisión o un ajuste de cierre (como la revaluación cambiaria) que se revierte solo el día 1 del mes siguiente.
      */
     @JsonProperty("reverse_next_month")
     private Boolean reverseNextMonth;
@@ -223,7 +223,7 @@ public class ManualJournalEntry {
     }
 
     /**
-     * true: una provisión que se revierte sola el día 1 del mes siguiente.
+     * true: una provisión o un ajuste de cierre (como la revaluación cambiaria) que se revierte solo el día 1 del mes siguiente.
      */
     public Boolean getReverseNextMonth() {
         return reverseNextMonth;
