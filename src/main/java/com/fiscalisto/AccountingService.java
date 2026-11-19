@@ -7,12 +7,14 @@ import com.fiscalisto.model.CrossCheckCfdi;
 import com.fiscalisto.model.CrossChecks;
 import com.fiscalisto.model.Diot;
 import com.fiscalisto.model.FinancialStatements;
+import com.fiscalisto.model.GeneralLedger;
 import com.fiscalisto.model.GetCrossCheckCfdiParams;
 import com.fiscalisto.model.GetCrossChecksParams;
 import com.fiscalisto.model.GetDiotFileParams;
 import com.fiscalisto.model.GetDiotParams;
 import com.fiscalisto.model.GetElectronicAccountingParams;
 import com.fiscalisto.model.GetFinancialStatementsParams;
+import com.fiscalisto.model.GetGeneralLedgerParams;
 import com.fiscalisto.model.GetTrialBalanceParams;
 import com.fiscalisto.model.GetVatRefundParams;
 import com.fiscalisto.model.JournalEntry;
@@ -74,6 +76,23 @@ public final class AccountingService {
 
     public TrialBalance trialBalance(GetTrialBalanceParams params) {
         return trialBalance(params, null);
+    }
+
+    /**
+     * Ver el auxiliar de cuentas
+     * <p>
+     * El libro mayor de un periodo de hasta 12 meses: el saldo inicial de cada cuenta, cada cargo y abono con su póliza (journal_entry, el mismo id de journal_entries), su CFDI y el saldo que deja, y el saldo final. Solo las cuentas que se movieron, o la que pida con account aunque no tenga movimientos. Una cuenta que no está en el catálogo contesta account_missing.
+     * <p>
+     * GET /v1/accounting/general_ledger
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-general-ledger
+     */
+    public GeneralLedger generalLedger(GetGeneralLedgerParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/general_ledger", null, params, false, GeneralLedger.class, options);
+    }
+
+    public GeneralLedger generalLedger(GetGeneralLedgerParams params) {
+        return generalLedger(params, null);
     }
 
     /**
