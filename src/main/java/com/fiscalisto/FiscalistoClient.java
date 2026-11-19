@@ -77,6 +77,8 @@ public final class FiscalistoClient {
     private final FixedAssetsService fixedAssets;
     private final ClosedPeriodService closedPeriod;
     private final FxRevaluationsService fxRevaluations;
+    private final CostOfSalesService costOfSales;
+    private final TaxDeterminationsService taxDeterminations;
     private final BankMovementsService bankMovements;
     private final StoreConnectionsService storeConnections;
     private final RecurringInvoicesService recurringInvoices;
@@ -165,6 +167,8 @@ public final class FiscalistoClient {
         this.fixedAssets = new FixedAssetsService(api);
         this.closedPeriod = new ClosedPeriodService(api);
         this.fxRevaluations = new FxRevaluationsService(api);
+        this.costOfSales = new CostOfSalesService(api);
+        this.taxDeterminations = new TaxDeterminationsService(api);
         this.bankMovements = new BankMovementsService(api);
         this.storeConnections = new StoreConnectionsService(api);
         this.recurringInvoices = new RecurringInvoicesService(api);
@@ -512,6 +516,16 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public FxRevaluationsService fxRevaluations() {
         return fxRevaluations;
+    }
+
+    /** Contabilidad. */
+    public CostOfSalesService costOfSales() {
+        return costOfSales;
+    }
+
+    /** Contabilidad. */
+    public TaxDeterminationsService taxDeterminations() {
+        return taxDeterminations;
     }
 
     /** Contabilidad. */
