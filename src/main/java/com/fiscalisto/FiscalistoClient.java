@@ -69,6 +69,7 @@ public final class FiscalistoClient {
     private final PortalSuppliersService portalSuppliers;
     private final SupplierInvoicesService supplierInvoices;
     private final SatDeclarationsService satDeclarations;
+    private final SatRefreshesService satRefreshes;
     private final TicketsService tickets;
     private final AccountingService accounting;
     private final ManualEntriesService manualEntries;
@@ -154,6 +155,7 @@ public final class FiscalistoClient {
         this.portalSuppliers = new PortalSuppliersService(api);
         this.supplierInvoices = new SupplierInvoicesService(api);
         this.satDeclarations = new SatDeclarationsService(api);
+        this.satRefreshes = new SatRefreshesService(api);
         this.tickets = new TicketsService(api);
         this.accounting = new AccountingService(api);
         this.manualEntries = new ManualEntriesService(api);
@@ -466,6 +468,11 @@ public final class FiscalistoClient {
     /** Declaraciones del SAT. */
     public SatDeclarationsService satDeclarations() {
         return satDeclarations;
+    }
+
+    /** Declaraciones del SAT. */
+    public SatRefreshesService satRefreshes() {
+        return satRefreshes;
     }
 
     /** Autofactura. */

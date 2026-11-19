@@ -9,7 +9,7 @@ import com.fiscalisto.model.RefreshSatDeclarationsParams;
 import com.fiscalisto.model.SatAnnualPreload;
 import com.fiscalisto.model.SatDeclaration;
 import com.fiscalisto.model.SatDeclarationCalendar;
-import com.fiscalisto.model.SatDeclarationsRefresh;
+import com.fiscalisto.model.SatRefresh;
 
 /**
  * Declaraciones del SAT: client.satDeclarations().
@@ -24,21 +24,21 @@ public final class SatDeclarationsService {
     /**
      * Consultar las declaraciones de un emisor en el SAT
      * <p>
-     * Entra al SAT con la e.firma guardada del emisor y trae las declaraciones que presentó: provisionales o definitivas (desde 2022), la anual de persona moral (desde 2019) y las del servicio anterior Declaraciones y pagos, con su PDF, su acuse y sus cifras. La primera consulta trae todos los años que el SAT conserva; las siguientes, este año y el anterior. Solo consulta: nunca presenta ni firma nada. En producción usa 1 timbre por consulta (regresa si el SAT no contesta) y se puede hacer una vez cada 10 minutos por emisor. Contesta en menos de un minuto; si queda algo por bajar (status processing), sigue solo en la siguiente hora sin otro timbre. En pruebas no se le pregunta al SAT: trae declaraciones de ejemplo al instante.
+     * Entra al SAT con la e.firma guardada del emisor y trae las declaraciones que presentó: provisionales o definitivas (desde 2022), la anual de persona moral (desde 2019) y las del servicio anterior Declaraciones y pagos, con su PDF, su acuse y sus cifras. La primera consulta trae todos los años que el SAT conserva; las siguientes, este año y el anterior. Solo consulta: nunca presenta ni firma nada. En producción usa 1 timbre por consulta y se puede hacer una vez cada 10 minutos por emisor. Contesta 202 en cuanto la acepta (status processing) y consulta al SAT en segundo plano: sat_refresh.completed o sat_refresh.failed dicen cómo terminó, y GET /v1/sat_refreshes/{id} también. Su timbre se aparta al aceptarla (sin timbres contesta 402 de inmediato), se usa cuando el SAT contesta y regresa si no contesta. Si al terminar queda algo por bajar (result.pending), sigue solo en la siguiente hora sin otro timbre. En pruebas no se le pregunta al SAT: trae declaraciones de ejemplo al instante (la consulta ya viene completed y también llega sat_refresh.completed).
      * <p>
      * POST /v1/sat_declarations/refresh
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/declaraciones-del-sat/refresh-sat-declarations
      */
-    public SatDeclarationsRefresh refresh(RefreshSatDeclarationsParams params, RequestOptions options) {
-        return api.request("POST", "/v1/sat_declarations/refresh", params, null, true, SatDeclarationsRefresh.class, options);
+    public SatRefresh refresh(RefreshSatDeclarationsParams params, RequestOptions options) {
+        return api.request("POST", "/v1/sat_declarations/refresh", params, null, true, SatRefresh.class, options);
     }
 
-    public SatDeclarationsRefresh refresh(RefreshSatDeclarationsParams params) {
+    public SatRefresh refresh(RefreshSatDeclarationsParams params) {
         return refresh(params, null);
     }
 
-    public SatDeclarationsRefresh refresh() {
+    public SatRefresh refresh() {
         return refresh(null, null);
     }
 
