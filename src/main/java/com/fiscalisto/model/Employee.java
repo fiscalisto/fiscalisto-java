@@ -101,10 +101,22 @@ public class Employee {
     private BigDecimal dailySalary;
 
     /**
-     * Salario diario integrado (SalarioDiarioIntegrado): no menor al salario diario.
+     * El SDI de los elementos fijos (cuota diaria con aguinaldo, prima vacacional y demás prestaciones fijas).
      */
     @JsonProperty("integrated_daily_salary")
     private BigDecimal integratedDailySalary;
+
+    /**
+     * La parte variable del SDI desde variable_salary_from: lo que las horas extra triples, la prima dominical y los premios del bimestre anterior suman por día (artículo 30 de la LSS). Se fija con POST /v1/variable_salaries; los recibos usan integrated_daily_salary más esta.
+     */
+    @JsonProperty("variable_integrated_daily_salary")
+    private BigDecimal variableIntegratedDailySalary;
+
+    /**
+     * Desde cuándo aplica variable_integrated_daily_salary (AAAA-MM-DD).
+     */
+    @JsonProperty("variable_salary_from")
+    private String variableSalaryFrom;
 
     /**
      * Tipo de contrato (TipoContrato), c_TipoContrato. Por omisión 01, por tiempo indeterminado.
@@ -406,7 +418,7 @@ public class Employee {
     }
 
     /**
-     * Salario diario integrado (SalarioDiarioIntegrado): no menor al salario diario.
+     * El SDI de los elementos fijos (cuota diaria con aguinaldo, prima vacacional y demás prestaciones fijas).
      */
     public BigDecimal getIntegratedDailySalary() {
         return integratedDailySalary;
@@ -420,6 +432,35 @@ public class Employee {
     @JsonIgnore
     public Employee setIntegratedDailySalary(double integratedDailySalary) {
         return setIntegratedDailySalary(BigDecimal.valueOf(integratedDailySalary));
+    }
+
+    /**
+     * La parte variable del SDI desde variable_salary_from: lo que las horas extra triples, la prima dominical y los premios del bimestre anterior suman por día (artículo 30 de la LSS). Se fija con POST /v1/variable_salaries; los recibos usan integrated_daily_salary más esta.
+     */
+    public BigDecimal getVariableIntegratedDailySalary() {
+        return variableIntegratedDailySalary;
+    }
+
+    public Employee setVariableIntegratedDailySalary(BigDecimal variableIntegratedDailySalary) {
+        this.variableIntegratedDailySalary = variableIntegratedDailySalary;
+        return this;
+    }
+
+    @JsonIgnore
+    public Employee setVariableIntegratedDailySalary(double variableIntegratedDailySalary) {
+        return setVariableIntegratedDailySalary(BigDecimal.valueOf(variableIntegratedDailySalary));
+    }
+
+    /**
+     * Desde cuándo aplica variable_integrated_daily_salary (AAAA-MM-DD).
+     */
+    public String getVariableSalaryFrom() {
+        return variableSalaryFrom;
+    }
+
+    public Employee setVariableSalaryFrom(String variableSalaryFrom) {
+        this.variableSalaryFrom = variableSalaryFrom;
+        return this;
     }
 
     /**
