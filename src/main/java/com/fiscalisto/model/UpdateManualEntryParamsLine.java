@@ -42,6 +42,36 @@ public class UpdateManualEntryParamsLine {
     private String costCenter;
 
     /**
+     * Un renglón en otra moneda: su clave ISO 4217 (USD, EUR…). Con ella van foreign_amount y exchange_rate, y debit o credit es su producto en pesos.
+     */
+    @JsonProperty("currency")
+    private String currency;
+
+    /**
+     * El importe del renglón en su moneda.
+     */
+    @JsonProperty("foreign_amount")
+    private BigDecimal foreignAmount;
+
+    /**
+     * El tipo de cambio del renglón: pesos por una unidad de su moneda.
+     */
+    @JsonProperty("exchange_rate")
+    private BigDecimal exchangeRate;
+
+    /**
+     * El CFDI que documenta este renglón, aparte del de la póliza: así una póliza lleva varios.
+     */
+    @JsonProperty("cfdi_uuid")
+    private String cfdiUuid;
+
+    /**
+     * El RFC de quien emitió o recibió el CFDI del renglón.
+     */
+    @JsonProperty("cfdi_tax_id")
+    private String cfdiTaxId;
+
+    /**
      * El número de la cuenta en su catálogo (GET /v1/accounting/accounts), por ejemplo 205-06.
      * <p>
      * Obligatorio.
@@ -98,6 +128,76 @@ public class UpdateManualEntryParamsLine {
 
     public UpdateManualEntryParamsLine setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Un renglón en otra moneda: su clave ISO 4217 (USD, EUR…). Con ella van foreign_amount y exchange_rate, y debit o credit es su producto en pesos.
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    public UpdateManualEntryParamsLine setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
+
+    /**
+     * El importe del renglón en su moneda.
+     */
+    public BigDecimal getForeignAmount() {
+        return foreignAmount;
+    }
+
+    public UpdateManualEntryParamsLine setForeignAmount(BigDecimal foreignAmount) {
+        this.foreignAmount = foreignAmount;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateManualEntryParamsLine setForeignAmount(double foreignAmount) {
+        return setForeignAmount(BigDecimal.valueOf(foreignAmount));
+    }
+
+    /**
+     * El tipo de cambio del renglón: pesos por una unidad de su moneda.
+     */
+    public BigDecimal getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public UpdateManualEntryParamsLine setExchangeRate(BigDecimal exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateManualEntryParamsLine setExchangeRate(double exchangeRate) {
+        return setExchangeRate(BigDecimal.valueOf(exchangeRate));
+    }
+
+    /**
+     * El CFDI que documenta este renglón, aparte del de la póliza: así una póliza lleva varios.
+     */
+    public String getCfdiUuid() {
+        return cfdiUuid;
+    }
+
+    public UpdateManualEntryParamsLine setCfdiUuid(String cfdiUuid) {
+        this.cfdiUuid = cfdiUuid;
+        return this;
+    }
+
+    /**
+     * El RFC de quien emitió o recibió el CFDI del renglón.
+     */
+    public String getCfdiTaxId() {
+        return cfdiTaxId;
+    }
+
+    public UpdateManualEntryParamsLine setCfdiTaxId(String cfdiTaxId) {
+        this.cfdiTaxId = cfdiTaxId;
         return this;
     }
 }

@@ -52,6 +52,36 @@ public class ManualJournalEntryLine {
     private String costCenter;
 
     /**
+     * Su moneda (ISO 4217) si es en otra, o null si es en pesos.
+     */
+    @JsonProperty("currency")
+    private String currency;
+
+    /**
+     * Su importe en esa moneda, o null.
+     */
+    @JsonProperty("foreign_amount")
+    private BigDecimal foreignAmount;
+
+    /**
+     * Su tipo de cambio, o null.
+     */
+    @JsonProperty("exchange_rate")
+    private BigDecimal exchangeRate;
+
+    /**
+     * El UUID del CFDI de este renglón, o null.
+     */
+    @JsonProperty("cfdi_uuid")
+    private String cfdiUuid;
+
+    /**
+     * El RFC de la otra parte de ese CFDI, o null.
+     */
+    @JsonProperty("cfdi_tax_id")
+    private String cfdiTaxId;
+
+    /**
      * El número de cuenta.
      */
     public String getAccount() {
@@ -130,6 +160,76 @@ public class ManualJournalEntryLine {
 
     public ManualJournalEntryLine setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Su moneda (ISO 4217) si es en otra, o null si es en pesos.
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    public ManualJournalEntryLine setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
+
+    /**
+     * Su importe en esa moneda, o null.
+     */
+    public BigDecimal getForeignAmount() {
+        return foreignAmount;
+    }
+
+    public ManualJournalEntryLine setForeignAmount(BigDecimal foreignAmount) {
+        this.foreignAmount = foreignAmount;
+        return this;
+    }
+
+    @JsonIgnore
+    public ManualJournalEntryLine setForeignAmount(double foreignAmount) {
+        return setForeignAmount(BigDecimal.valueOf(foreignAmount));
+    }
+
+    /**
+     * Su tipo de cambio, o null.
+     */
+    public BigDecimal getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public ManualJournalEntryLine setExchangeRate(BigDecimal exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public ManualJournalEntryLine setExchangeRate(double exchangeRate) {
+        return setExchangeRate(BigDecimal.valueOf(exchangeRate));
+    }
+
+    /**
+     * El UUID del CFDI de este renglón, o null.
+     */
+    public String getCfdiUuid() {
+        return cfdiUuid;
+    }
+
+    public ManualJournalEntryLine setCfdiUuid(String cfdiUuid) {
+        this.cfdiUuid = cfdiUuid;
+        return this;
+    }
+
+    /**
+     * El RFC de la otra parte de ese CFDI, o null.
+     */
+    public String getCfdiTaxId() {
+        return cfdiTaxId;
+    }
+
+    public ManualJournalEntryLine setCfdiTaxId(String cfdiTaxId) {
+        this.cfdiTaxId = cfdiTaxId;
         return this;
     }
 }
