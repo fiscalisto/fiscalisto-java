@@ -8,6 +8,8 @@ import com.fiscalisto.model.ExternalPayrollReceiptCreate;
 import com.fiscalisto.model.ExternalPayrollReceiptPreview;
 import com.fiscalisto.model.ExtraordinaryPayrollReceiptPreview;
 import com.fiscalisto.model.Invoice;
+import com.fiscalisto.model.NetToGross;
+import com.fiscalisto.model.NetToGrossParams;
 import com.fiscalisto.model.PayrollReceiptPreview;
 import com.fiscalisto.model.PreviewExtraordinaryPayrollReceiptParams;
 import com.fiscalisto.model.PreviewPayrollReceiptParams;
@@ -37,6 +39,23 @@ public final class PayrollReceiptsService {
 
     public Invoice create(CreatePayrollReceiptParams params) {
         return create(params, null);
+    }
+
+    /**
+     * Neto a bruto
+     * <p>
+     * El salario diario y el SDI cuyo recibo ordinario de un periodo completo paga el neto que pide, con el ISR y el IMSS de hoy, como «Calcular desde el neto» en cada empleado de la app. Con employee toma su periodicidad y prestaciones; sin él, las que mande o las de la ley. Sin faltas, incidencias ni descuentos como Infonavit o préstamos. No guarda nada: para usarlo, actualice al empleado.
+     * <p>
+     * POST /v1/payroll/net_to_gross
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/net-to-gross
+     */
+    public NetToGross netToGross(NetToGrossParams params, RequestOptions options) {
+        return api.request("POST", "/v1/payroll/net_to_gross", params, null, true, NetToGross.class, options);
+    }
+
+    public NetToGross netToGross(NetToGrossParams params) {
+        return netToGross(params, null);
     }
 
     /**
