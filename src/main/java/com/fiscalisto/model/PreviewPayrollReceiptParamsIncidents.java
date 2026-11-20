@@ -65,6 +65,12 @@ public class PreviewPayrollReceiptParamsIncidents {
     private PreviewPayrollReceiptParamsIncidentsDisabilityPay disabilityPay;
 
     /**
+     * Retroactivo de un aumento: la diferencia de salario de los días ya pagados con el anterior, como percepción 001 (clave RET) gravada, que paga ISR con el sueldo del periodo (art. 96 de la LISR). Las cuotas IMSS de la diferencia las cubre la modificación de salario con su fecha en el SUA; el recibo no retiene la parte del trabajador (art. 38 de la LSS).
+     */
+    @JsonProperty("retroactive")
+    private PreviewPayrollReceiptParamsIncidentsRetroactive retroactive;
+
+    /**
      * Premios, comisiones y bonos del periodo, gravados.
      */
     @JsonProperty("bonuses")
@@ -198,6 +204,18 @@ public class PreviewPayrollReceiptParamsIncidents {
 
     public PreviewPayrollReceiptParamsIncidents setDisabilityPay(PreviewPayrollReceiptParamsIncidentsDisabilityPay disabilityPay) {
         this.disabilityPay = disabilityPay;
+        return this;
+    }
+
+    /**
+     * Retroactivo de un aumento: la diferencia de salario de los días ya pagados con el anterior, como percepción 001 (clave RET) gravada, que paga ISR con el sueldo del periodo (art. 96 de la LISR). Las cuotas IMSS de la diferencia las cubre la modificación de salario con su fecha en el SUA; el recibo no retiene la parte del trabajador (art. 38 de la LSS).
+     */
+    public PreviewPayrollReceiptParamsIncidentsRetroactive getRetroactive() {
+        return retroactive;
+    }
+
+    public PreviewPayrollReceiptParamsIncidents setRetroactive(PreviewPayrollReceiptParamsIncidentsRetroactive retroactive) {
+        this.retroactive = retroactive;
         return this;
     }
 
