@@ -88,6 +88,8 @@ public final class FiscalistoClient {
     private final BudgetsService budgets;
     private final InflationAdjustmentsService inflationAdjustments;
     private final InflationAccountsService inflationAccounts;
+    private final DepreciationReconciliationsService depreciationReconciliations;
+    private final BookDepreciationRatesService bookDepreciationRates;
     private final CostCenterResultsService costCenterResults;
     private final PayrollProvisionsService payrollProvisions;
     private final TaxDeterminationsService taxDeterminations;
@@ -191,6 +193,8 @@ public final class FiscalistoClient {
         this.budgets = new BudgetsService(api);
         this.inflationAdjustments = new InflationAdjustmentsService(api);
         this.inflationAccounts = new InflationAccountsService(api);
+        this.depreciationReconciliations = new DepreciationReconciliationsService(api);
+        this.bookDepreciationRates = new BookDepreciationRatesService(api);
         this.costCenterResults = new CostCenterResultsService(api);
         this.payrollProvisions = new PayrollProvisionsService(api);
         this.taxDeterminations = new TaxDeterminationsService(api);
@@ -597,6 +601,16 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public InflationAccountsService inflationAccounts() {
         return inflationAccounts;
+    }
+
+    /** Contabilidad. */
+    public DepreciationReconciliationsService depreciationReconciliations() {
+        return depreciationReconciliations;
+    }
+
+    /** Contabilidad. */
+    public BookDepreciationRatesService bookDepreciationRates() {
+        return bookDepreciationRates;
     }
 
     /** Contabilidad. */

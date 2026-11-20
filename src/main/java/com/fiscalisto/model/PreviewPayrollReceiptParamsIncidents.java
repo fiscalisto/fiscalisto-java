@@ -59,6 +59,12 @@ public class PreviewPayrollReceiptParamsIncidents {
     private BigDecimal vacationDays;
 
     /**
+     * Si la empresa paga los disability_days del recibo: percepción 014 con su nodo Incapacidad. Exenta como previsión social con el límite de 7 UMA al año (art. 93 de la LISR); la de un riesgo de trabajo, toda.
+     */
+    @JsonProperty("disability_pay")
+    private PreviewPayrollReceiptParamsIncidentsDisabilityPay disabilityPay;
+
+    /**
      * Premios, comisiones y bonos del periodo, gravados.
      */
     @JsonProperty("bonuses")
@@ -181,6 +187,18 @@ public class PreviewPayrollReceiptParamsIncidents {
     @JsonIgnore
     public PreviewPayrollReceiptParamsIncidents setVacationDays(double vacationDays) {
         return setVacationDays(BigDecimal.valueOf(vacationDays));
+    }
+
+    /**
+     * Si la empresa paga los disability_days del recibo: percepción 014 con su nodo Incapacidad. Exenta como previsión social con el límite de 7 UMA al año (art. 93 de la LISR); la de un riesgo de trabajo, toda.
+     */
+    public PreviewPayrollReceiptParamsIncidentsDisabilityPay getDisabilityPay() {
+        return disabilityPay;
+    }
+
+    public PreviewPayrollReceiptParamsIncidents setDisabilityPay(PreviewPayrollReceiptParamsIncidentsDisabilityPay disabilityPay) {
+        this.disabilityPay = disabilityPay;
+        return this;
     }
 
     /**

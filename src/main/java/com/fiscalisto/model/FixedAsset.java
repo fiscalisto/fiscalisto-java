@@ -84,10 +84,22 @@ public class FixedAsset {
     private BigDecimal cost;
 
     /**
-     * Su tasa anual de depreciación (0.3 es 30%).
+     * Su tasa anual de depreciación contable (0.3 es 30%): la del artículo 34 de la LISR o la que fijó con POST /v1/accounting/book_depreciation_rates.
      */
     @JsonProperty("annual_rate")
     private BigDecimal annualRate;
+
+    /**
+     * Su valor residual como fracción del monto original; 0 por omisión.
+     */
+    @JsonProperty("residual_rate")
+    private BigDecimal residualRate;
+
+    /**
+     * La tasa del artículo 34 de la LISR, la de su deducción fiscal.
+     */
+    @JsonProperty("tax_annual_rate")
+    private BigDecimal taxAnnualRate;
 
     /**
      * Lo que se deprecia cada mes mientras dura.
@@ -265,7 +277,7 @@ public class FixedAsset {
     }
 
     /**
-     * Su tasa anual de depreciación (0.3 es 30%).
+     * Su tasa anual de depreciación contable (0.3 es 30%): la del artículo 34 de la LISR o la que fijó con POST /v1/accounting/book_depreciation_rates.
      */
     public BigDecimal getAnnualRate() {
         return annualRate;
@@ -279,6 +291,40 @@ public class FixedAsset {
     @JsonIgnore
     public FixedAsset setAnnualRate(double annualRate) {
         return setAnnualRate(BigDecimal.valueOf(annualRate));
+    }
+
+    /**
+     * Su valor residual como fracción del monto original; 0 por omisión.
+     */
+    public BigDecimal getResidualRate() {
+        return residualRate;
+    }
+
+    public FixedAsset setResidualRate(BigDecimal residualRate) {
+        this.residualRate = residualRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public FixedAsset setResidualRate(double residualRate) {
+        return setResidualRate(BigDecimal.valueOf(residualRate));
+    }
+
+    /**
+     * La tasa del artículo 34 de la LISR, la de su deducción fiscal.
+     */
+    public BigDecimal getTaxAnnualRate() {
+        return taxAnnualRate;
+    }
+
+    public FixedAsset setTaxAnnualRate(BigDecimal taxAnnualRate) {
+        this.taxAnnualRate = taxAnnualRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public FixedAsset setTaxAnnualRate(double taxAnnualRate) {
+        return setTaxAnnualRate(BigDecimal.valueOf(taxAnnualRate));
     }
 
     /**
