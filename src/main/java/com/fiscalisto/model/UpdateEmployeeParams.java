@@ -82,6 +82,30 @@ public class UpdateEmployeeParams {
     private BigDecimal integratedDailySalary;
 
     /**
+     * Días de aguinaldo al año: al menos 15 (LFT art. 87), que es el valor por omisión.
+     */
+    @JsonProperty("aguinaldo_days")
+    private BigDecimal aguinaldoDays;
+
+    /**
+     * Prima vacacional como fracción del salario de sus vacaciones: al menos 0.25 (LFT art. 80), el valor por omisión.
+     */
+    @JsonProperty("vacation_premium")
+    private BigDecimal vacationPremium;
+
+    /**
+     * Vales de despensa al mes (percepción 029), por los días pagados de cada recibo ordinario: exentos como previsión social con el límite del artículo 93 de la LISR. 0 por omisión.
+     */
+    @JsonProperty("pantry_vouchers")
+    private BigDecimal pantryVouchers;
+
+    /**
+     * Fondo de ahorro: fracción del sueldo de cada recibo que aporta la empresa y el trabajador por igual, hasta 0.13 (LISR art. 27 fr. XI). Va como percepción 005 y como deducciones 004 (claves FAT y FAE) de ambas aportaciones. 0 por omisión.
+     */
+    @JsonProperty("savings_fund_rate")
+    private BigDecimal savingsFundRate;
+
+    /**
      * Tipo de contrato (TipoContrato), c_TipoContrato. Por omisión 01, por tiempo indeterminado.
      * <p>
      * Valores: 01, 02, 03, 04, 05, 06, 07, 08.
@@ -339,6 +363,74 @@ public class UpdateEmployeeParams {
     @JsonIgnore
     public UpdateEmployeeParams setIntegratedDailySalary(double integratedDailySalary) {
         return setIntegratedDailySalary(BigDecimal.valueOf(integratedDailySalary));
+    }
+
+    /**
+     * Días de aguinaldo al año: al menos 15 (LFT art. 87), que es el valor por omisión.
+     */
+    public BigDecimal getAguinaldoDays() {
+        return aguinaldoDays;
+    }
+
+    public UpdateEmployeeParams setAguinaldoDays(BigDecimal aguinaldoDays) {
+        this.aguinaldoDays = aguinaldoDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateEmployeeParams setAguinaldoDays(double aguinaldoDays) {
+        return setAguinaldoDays(BigDecimal.valueOf(aguinaldoDays));
+    }
+
+    /**
+     * Prima vacacional como fracción del salario de sus vacaciones: al menos 0.25 (LFT art. 80), el valor por omisión.
+     */
+    public BigDecimal getVacationPremium() {
+        return vacationPremium;
+    }
+
+    public UpdateEmployeeParams setVacationPremium(BigDecimal vacationPremium) {
+        this.vacationPremium = vacationPremium;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateEmployeeParams setVacationPremium(double vacationPremium) {
+        return setVacationPremium(BigDecimal.valueOf(vacationPremium));
+    }
+
+    /**
+     * Vales de despensa al mes (percepción 029), por los días pagados de cada recibo ordinario: exentos como previsión social con el límite del artículo 93 de la LISR. 0 por omisión.
+     */
+    public BigDecimal getPantryVouchers() {
+        return pantryVouchers;
+    }
+
+    public UpdateEmployeeParams setPantryVouchers(BigDecimal pantryVouchers) {
+        this.pantryVouchers = pantryVouchers;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateEmployeeParams setPantryVouchers(double pantryVouchers) {
+        return setPantryVouchers(BigDecimal.valueOf(pantryVouchers));
+    }
+
+    /**
+     * Fondo de ahorro: fracción del sueldo de cada recibo que aporta la empresa y el trabajador por igual, hasta 0.13 (LISR art. 27 fr. XI). Va como percepción 005 y como deducciones 004 (claves FAT y FAE) de ambas aportaciones. 0 por omisión.
+     */
+    public BigDecimal getSavingsFundRate() {
+        return savingsFundRate;
+    }
+
+    public UpdateEmployeeParams setSavingsFundRate(BigDecimal savingsFundRate) {
+        this.savingsFundRate = savingsFundRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateEmployeeParams setSavingsFundRate(double savingsFundRate) {
+        return setSavingsFundRate(BigDecimal.valueOf(savingsFundRate));
     }
 
     /**

@@ -20,7 +20,7 @@ public class CreateSatReviewParamsNotice {
     private String step;
 
     /**
-     * El día en que se lo notificaron (en el Buzón, el día en que lo abrió o el quinto día hábil después del aviso, lo que pase primero). No puede ser futuro.
+     * El día en que se lo notificaron (en el Buzón, el día en que lo abrió o, si no lo abrió, el cuarto día hábil después del aviso). No puede ser futuro.
      * <p>
      * Obligatorio.
      */
@@ -58,7 +58,7 @@ public class CreateSatReviewParamsNotice {
     }
 
     /**
-     * El día en que se lo notificaron (en el Buzón, el día en que lo abrió o el quinto día hábil después del aviso, lo que pase primero). No puede ser futuro.
+     * El día en que se lo notificaron (en el Buzón, el día en que lo abrió o, si no lo abrió, el cuarto día hábil después del aviso). No puede ser futuro.
      * <p>
      * Obligatorio.
      */

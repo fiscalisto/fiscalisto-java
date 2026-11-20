@@ -119,6 +119,30 @@ public class Employee {
     private String variableSalaryFrom;
 
     /**
+     * Días de aguinaldo al año (al menos 15).
+     */
+    @JsonProperty("aguinaldo_days")
+    private BigDecimal aguinaldoDays;
+
+    /**
+     * Prima vacacional, fracción del salario de las vacaciones (al menos 0.25).
+     */
+    @JsonProperty("vacation_premium")
+    private BigDecimal vacationPremium;
+
+    /**
+     * Vales de despensa al mes que lleva cada recibo ordinario (percepción 029).
+     */
+    @JsonProperty("pantry_vouchers")
+    private BigDecimal pantryVouchers;
+
+    /**
+     * Fracción del sueldo que aportan al fondo de ahorro la empresa y el trabajador por igual (percepción 005).
+     */
+    @JsonProperty("savings_fund_rate")
+    private BigDecimal savingsFundRate;
+
+    /**
      * Tipo de contrato (TipoContrato), c_TipoContrato. Por omisión 01, por tiempo indeterminado.
      */
     @JsonProperty("contract_type")
@@ -461,6 +485,74 @@ public class Employee {
     public Employee setVariableSalaryFrom(String variableSalaryFrom) {
         this.variableSalaryFrom = variableSalaryFrom;
         return this;
+    }
+
+    /**
+     * Días de aguinaldo al año (al menos 15).
+     */
+    public BigDecimal getAguinaldoDays() {
+        return aguinaldoDays;
+    }
+
+    public Employee setAguinaldoDays(BigDecimal aguinaldoDays) {
+        this.aguinaldoDays = aguinaldoDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public Employee setAguinaldoDays(double aguinaldoDays) {
+        return setAguinaldoDays(BigDecimal.valueOf(aguinaldoDays));
+    }
+
+    /**
+     * Prima vacacional, fracción del salario de las vacaciones (al menos 0.25).
+     */
+    public BigDecimal getVacationPremium() {
+        return vacationPremium;
+    }
+
+    public Employee setVacationPremium(BigDecimal vacationPremium) {
+        this.vacationPremium = vacationPremium;
+        return this;
+    }
+
+    @JsonIgnore
+    public Employee setVacationPremium(double vacationPremium) {
+        return setVacationPremium(BigDecimal.valueOf(vacationPremium));
+    }
+
+    /**
+     * Vales de despensa al mes que lleva cada recibo ordinario (percepción 029).
+     */
+    public BigDecimal getPantryVouchers() {
+        return pantryVouchers;
+    }
+
+    public Employee setPantryVouchers(BigDecimal pantryVouchers) {
+        this.pantryVouchers = pantryVouchers;
+        return this;
+    }
+
+    @JsonIgnore
+    public Employee setPantryVouchers(double pantryVouchers) {
+        return setPantryVouchers(BigDecimal.valueOf(pantryVouchers));
+    }
+
+    /**
+     * Fracción del sueldo que aportan al fondo de ahorro la empresa y el trabajador por igual (percepción 005).
+     */
+    public BigDecimal getSavingsFundRate() {
+        return savingsFundRate;
+    }
+
+    public Employee setSavingsFundRate(BigDecimal savingsFundRate) {
+        this.savingsFundRate = savingsFundRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public Employee setSavingsFundRate(double savingsFundRate) {
+        return setSavingsFundRate(BigDecimal.valueOf(savingsFundRate));
     }
 
     /**
