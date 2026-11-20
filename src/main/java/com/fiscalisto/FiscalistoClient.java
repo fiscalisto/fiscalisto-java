@@ -79,6 +79,10 @@ public final class FiscalistoClient {
     private final SatRetentionsService satRetentions;
     private final PortalSuppliersService portalSuppliers;
     private final SupplierInvoicesService supplierInvoices;
+    private final PayableInvoicesService payableInvoices;
+    private final PayoutsService payouts;
+    private final PayeeAccountsService payeeAccounts;
+    private final PayoutMandatesService payoutMandates;
     private final SatDeclarationsService satDeclarations;
     private final SatRefreshesService satRefreshes;
     private final TicketsService tickets;
@@ -194,6 +198,10 @@ public final class FiscalistoClient {
         this.satRetentions = new SatRetentionsService(api);
         this.portalSuppliers = new PortalSuppliersService(api);
         this.supplierInvoices = new SupplierInvoicesService(api);
+        this.payableInvoices = new PayableInvoicesService(api);
+        this.payouts = new PayoutsService(api);
+        this.payeeAccounts = new PayeeAccountsService(api);
+        this.payoutMandates = new PayoutMandatesService(api);
         this.satDeclarations = new SatDeclarationsService(api);
         this.satRefreshes = new SatRefreshesService(api);
         this.tickets = new TicketsService(api);
@@ -576,6 +584,26 @@ public final class FiscalistoClient {
     /** Portal de proveedores. */
     public SupplierInvoicesService supplierInvoices() {
         return supplierInvoices;
+    }
+
+    /** Pagos a proveedores. */
+    public PayableInvoicesService payableInvoices() {
+        return payableInvoices;
+    }
+
+    /** Pagos a proveedores. */
+    public PayoutsService payouts() {
+        return payouts;
+    }
+
+    /** Pagos a proveedores. */
+    public PayeeAccountsService payeeAccounts() {
+        return payeeAccounts;
+    }
+
+    /** Pagos a proveedores. */
+    public PayoutMandatesService payoutMandates() {
+        return payoutMandates;
     }
 
     /** Declaraciones del SAT. */
