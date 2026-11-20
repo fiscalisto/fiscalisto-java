@@ -46,6 +46,12 @@ public class ManualJournalEntryLine {
     private BigDecimal credit;
 
     /**
+     * Su centro de costo (ccn_…), o null.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * El número de cuenta.
      */
     public String getAccount() {
@@ -113,5 +119,17 @@ public class ManualJournalEntryLine {
     @JsonIgnore
     public ManualJournalEntryLine setCredit(double credit) {
         return setCredit(BigDecimal.valueOf(credit));
+    }
+
+    /**
+     * Su centro de costo (ccn_…), o null.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public ManualJournalEntryLine setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
+        return this;
     }
 }

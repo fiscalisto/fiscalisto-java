@@ -82,6 +82,8 @@ public final class FiscalistoClient {
     private final ClosedPeriodService closedPeriod;
     private final FxRevaluationsService fxRevaluations;
     private final CostOfSalesService costOfSales;
+    private final BudgetsService budgets;
+    private final CostCenterResultsService costCenterResults;
     private final PayrollProvisionsService payrollProvisions;
     private final TaxDeterminationsService taxDeterminations;
     private final LedgerBankAccountsService ledgerBankAccounts;
@@ -178,6 +180,8 @@ public final class FiscalistoClient {
         this.closedPeriod = new ClosedPeriodService(api);
         this.fxRevaluations = new FxRevaluationsService(api);
         this.costOfSales = new CostOfSalesService(api);
+        this.budgets = new BudgetsService(api);
+        this.costCenterResults = new CostCenterResultsService(api);
         this.payrollProvisions = new PayrollProvisionsService(api);
         this.taxDeterminations = new TaxDeterminationsService(api);
         this.ledgerBankAccounts = new LedgerBankAccountsService(api);
@@ -553,6 +557,16 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public CostOfSalesService costOfSales() {
         return costOfSales;
+    }
+
+    /** Contabilidad. */
+    public BudgetsService budgets() {
+        return budgets;
+    }
+
+    /** Contabilidad. */
+    public CostCenterResultsService costCenterResults() {
+        return costCenterResults;
     }
 
     /** Contabilidad. */

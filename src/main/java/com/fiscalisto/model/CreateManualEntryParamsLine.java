@@ -36,6 +36,12 @@ public class CreateManualEntryParamsLine {
     private BigDecimal credit;
 
     /**
+     * Su centro de costo (ccn_…, GET /v1/cost_centers), opcional: los resultados por centro de costo y los presupuestos lo leen.
+     */
+    @JsonProperty("cost_center")
+    private String costCenter;
+
+    /**
      * El número de la cuenta en su catálogo (GET /v1/accounting/accounts), por ejemplo 205-06.
      * <p>
      * Obligatorio.
@@ -81,5 +87,17 @@ public class CreateManualEntryParamsLine {
     @JsonIgnore
     public CreateManualEntryParamsLine setCredit(double credit) {
         return setCredit(BigDecimal.valueOf(credit));
+    }
+
+    /**
+     * Su centro de costo (ccn_…, GET /v1/cost_centers), opcional: los resultados por centro de costo y los presupuestos lo leen.
+     */
+    public String getCostCenter() {
+        return costCenter;
+    }
+
+    public CreateManualEntryParamsLine setCostCenter(String costCenter) {
+        this.costCenter = costCenter;
+        return this;
     }
 }
