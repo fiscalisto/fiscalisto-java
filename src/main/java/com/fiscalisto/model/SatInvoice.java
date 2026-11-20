@@ -148,6 +148,12 @@ public class SatInvoice {
     private String satStatus;
 
     /**
+     * Solo recibidas, marcadas con mark_paid, en la app o por una regla: without_complement true en una PPD pagada sin complemento de pago (el SAT la sigue viendo sin pagar); false en una PUE, donde solo se anotó de dónde salió el dinero.
+     */
+    @JsonProperty("paid_otherwise")
+    private SatInvoicePaidOtherwise paidOtherwise;
+
+    /**
      * Su centro de costo (ccn_…), o null. Póngalo o cámbielo con POST /v1/sat_invoices/{id}.
      */
     @JsonProperty("cost_center")
@@ -435,6 +441,18 @@ public class SatInvoice {
 
     public SatInvoice setSatStatus(String satStatus) {
         this.satStatus = satStatus;
+        return this;
+    }
+
+    /**
+     * Solo recibidas, marcadas con mark_paid, en la app o por una regla: without_complement true en una PPD pagada sin complemento de pago (el SAT la sigue viendo sin pagar); false en una PUE, donde solo se anotó de dónde salió el dinero.
+     */
+    public SatInvoicePaidOtherwise getPaidOtherwise() {
+        return paidOtherwise;
+    }
+
+    public SatInvoice setPaidOtherwise(SatInvoicePaidOtherwise paidOtherwise) {
+        this.paidOtherwise = paidOtherwise;
         return this;
     }
 

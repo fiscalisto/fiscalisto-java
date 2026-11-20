@@ -3,6 +3,7 @@
 package com.fiscalisto;
 
 import com.fiscalisto.model.ListSatInvoicesParams;
+import com.fiscalisto.model.MarkSatInvoicePaidParams;
 import com.fiscalisto.model.SatInvoice;
 import com.fiscalisto.model.UpdateSatInvoiceParams;
 
@@ -86,6 +87,44 @@ public final class SatInvoicesService {
 
     public SatInvoice update(String id) {
         return update(id, null, null);
+    }
+
+    /**
+     * Marcar como pagada una factura recibida
+     * <p>
+     * Una factura PPD recibida que la empresa pagó (en efectivo, de caja chica, con un reembolso…) y cuyo proveedor no emitió el complemento de pago: sale de Por pagar como pagada sin complemento, con cuándo, cómo y de dónde se pagó. El SAT la sigue viendo sin pagar: el IVA no se acredita ni el gasto se deduce hasta que llegue el complemento. En una PUE recibida, que ya está pagada, solo anota de dónde salió el dinero (money_source). Lo marcado se ve en paid_otherwise.
+     * <p>
+     * POST /v1/sat_invoices/{id}/mark_paid
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/mark-sat-invoice-paid
+     */
+    public SatInvoice markPaid(String id, MarkSatInvoicePaidParams params, RequestOptions options) {
+        return api.request("POST", "/v1/sat_invoices/" + ApiClient.encode(id) + "/mark_paid", params, null, true, SatInvoice.class, options);
+    }
+
+    public SatInvoice markPaid(String id, MarkSatInvoicePaidParams params) {
+        return markPaid(id, params, null);
+    }
+
+    public SatInvoice markPaid(String id) {
+        return markPaid(id, null, null);
+    }
+
+    /**
+     * Quitar la marca de pagada
+     * <p>
+     * Deshace mark_paid (o lo que marcó una regla de Pagos sin complemento): una PPD vuelve a Por pagar y una PUE pierde su origen del dinero. Una regla ya no la vuelve a marcar.
+     * <p>
+     * POST /v1/sat_invoices/{id}/mark_unpaid
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/descargas-del-sat/mark-sat-invoice-unpaid
+     */
+    public SatInvoice markUnpaid(String id, RequestOptions options) {
+        return api.request("POST", "/v1/sat_invoices/" + ApiClient.encode(id) + "/mark_unpaid", null, null, true, SatInvoice.class, options);
+    }
+
+    public SatInvoice markUnpaid(String id) {
+        return markUnpaid(id, null);
     }
 
     /**
