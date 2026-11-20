@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * CreatePayrollReceiptParamsIncidents: Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos trabajados, vacaciones y premios. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
+ * CreatePayrollReceiptParamsIncidents: Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos, descansos y festivos trabajados, vacaciones, premios y comisiones. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -41,13 +41,25 @@ public class CreatePayrollReceiptParamsIncidents {
     private Long sundays;
 
     /**
+     * Días de descanso semanal que trabajó sin descansar otro en su lugar: salario doble por cada uno además del día (LFT art. 73). Exentos con las horas extra: la mitad, hasta 5 UMA por semana entre ambos; todo si gana el salario mínimo (LISR art. 93 fr. I).
+     */
+    @JsonProperty("rest_days_worked")
+    private Long restDaysWorked;
+
+    /**
+     * Días de descanso obligatorio que trabajó (1 de enero, 1 de mayo, 16 de septiembre, 25 de diciembre, los lunes del art. 74 y la jornada electoral): salario doble por cada uno además del día (LFT art. 75), exento como rest_days_worked.
+     */
+    @JsonProperty("holidays_worked")
+    private Long holidaysWorked;
+
+    /**
      * Días de vacaciones que disfrutó en el periodo (se pagan como sueldo dentro de days): su prima vacacional con el porcentaje del empleado, exenta hasta 15 UMA en el año.
      */
     @JsonProperty("vacation_days")
     private BigDecimal vacationDays;
 
     /**
-     * Premios y bonos del periodo, gravados.
+     * Premios, comisiones y bonos del periodo, gravados.
      */
     @JsonProperty("bonuses")
     private List<CreatePayrollReceiptParamsIncidentsBonus> bonuses;
@@ -121,6 +133,40 @@ public class CreatePayrollReceiptParamsIncidents {
     }
 
     /**
+     * Días de descanso semanal que trabajó sin descansar otro en su lugar: salario doble por cada uno además del día (LFT art. 73). Exentos con las horas extra: la mitad, hasta 5 UMA por semana entre ambos; todo si gana el salario mínimo (LISR art. 93 fr. I).
+     */
+    public Long getRestDaysWorked() {
+        return restDaysWorked;
+    }
+
+    public CreatePayrollReceiptParamsIncidents setRestDaysWorked(Long restDaysWorked) {
+        this.restDaysWorked = restDaysWorked;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreatePayrollReceiptParamsIncidents setRestDaysWorked(long restDaysWorked) {
+        return setRestDaysWorked(Long.valueOf(restDaysWorked));
+    }
+
+    /**
+     * Días de descanso obligatorio que trabajó (1 de enero, 1 de mayo, 16 de septiembre, 25 de diciembre, los lunes del art. 74 y la jornada electoral): salario doble por cada uno además del día (LFT art. 75), exento como rest_days_worked.
+     */
+    public Long getHolidaysWorked() {
+        return holidaysWorked;
+    }
+
+    public CreatePayrollReceiptParamsIncidents setHolidaysWorked(Long holidaysWorked) {
+        this.holidaysWorked = holidaysWorked;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreatePayrollReceiptParamsIncidents setHolidaysWorked(long holidaysWorked) {
+        return setHolidaysWorked(Long.valueOf(holidaysWorked));
+    }
+
+    /**
      * Días de vacaciones que disfrutó en el periodo (se pagan como sueldo dentro de days): su prima vacacional con el porcentaje del empleado, exenta hasta 15 UMA en el año.
      */
     public BigDecimal getVacationDays() {
@@ -138,7 +184,7 @@ public class CreatePayrollReceiptParamsIncidents {
     }
 
     /**
-     * Premios y bonos del periodo, gravados.
+     * Premios, comisiones y bonos del periodo, gravados.
      */
     public List<CreatePayrollReceiptParamsIncidentsBonus> getBonuses() {
         return bonuses;

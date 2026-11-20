@@ -51,7 +51,7 @@ public class CreatePayrollReceiptParams {
     private Long disabilityDays;
 
     /**
-     * Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos trabajados, vacaciones y premios. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
+     * Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos, descansos y festivos trabajados, vacaciones, premios y comisiones. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
      */
     @JsonProperty("incidents")
     private CreatePayrollReceiptParamsIncidents incidents;
@@ -160,7 +160,7 @@ public class CreatePayrollReceiptParams {
     }
 
     /**
-     * Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos trabajados, vacaciones y premios. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
+     * Incidencias del periodo, como en Nómina › Emitir recibos: horas extra, domingos, descansos y festivos trabajados, vacaciones, premios y comisiones. Fiscalisto calcula sus importes, su parte exenta y el ISR con el sueldo.
      */
     public CreatePayrollReceiptParamsIncidents getIncidents() {
         return incidents;

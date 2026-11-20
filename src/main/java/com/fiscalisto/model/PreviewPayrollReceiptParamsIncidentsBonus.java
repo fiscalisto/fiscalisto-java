@@ -16,9 +16,9 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PreviewPayrollReceiptParamsIncidentsBonus {
     /**
-     * 010 premio de puntualidad, 049 premio de asistencia, 038 otro bono (c_TipoPercepcion).
+     * 010 premio de puntualidad, 049 premio de asistencia, 028 comisiones, 038 otro bono (c_TipoPercepcion).
      * <p>
-     * Valores: 010, 049, 038.
+     * Valores: 010, 049, 028, 038.
      * <p>
      * Obligatorio.
      */
@@ -40,9 +40,9 @@ public class PreviewPayrollReceiptParamsIncidentsBonus {
     private String concept;
 
     /**
-     * 010 premio de puntualidad, 049 premio de asistencia, 038 otro bono (c_TipoPercepcion).
+     * 010 premio de puntualidad, 049 premio de asistencia, 028 comisiones, 038 otro bono (c_TipoPercepcion).
      * <p>
-     * Valores: 010, 049, 038.
+     * Valores: 010, 049, 028, 038.
      * <p>
      * Obligatorio.
      */
