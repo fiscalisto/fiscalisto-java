@@ -312,6 +312,9 @@ public final class ErrorCode {
     /** La factura recurrente está en pausa: reanúdela con active: true para timbrarla. */
     public static final String RECURRING_PAUSED = "recurring_paused";
 
+    /** Ese emisor no presenta la declaración anual de persona moral del régimen general: es persona física, RESICO, no lucrativa o tiene otro régimen de ISR en Impuestos. */
+    public static final String REGIME_NOT_APPLICABLE = "regime_not_applicable";
+
     /** Otra solicitud con la misma Idempotency-Key sigue en proceso, otra solicitud está cambiando el mismo objeto (dos actualizaciones del mismo cliente a la vez esperan su turno hasta 15 segundos), u otro comprobante que se timbra a la vez no terminó en unos segundos (otro recibo de nómina del mismo empleado, otro pago de la misma factura) (409, con Retry-After). Repítala en un momento con la misma llave: contestará lo mismo. */
     public static final String REQUEST_IN_PROGRESS = "request_in_progress";
 
