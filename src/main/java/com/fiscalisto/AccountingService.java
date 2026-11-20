@@ -4,6 +4,7 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.CashFlow;
 import com.fiscalisto.model.ComparativeStatements;
+import com.fiscalisto.model.ConsolidatedStatements;
 import com.fiscalisto.model.CreateLedgerAccountParams;
 import com.fiscalisto.model.CrossCheckCfdi;
 import com.fiscalisto.model.CrossChecks;
@@ -14,6 +15,7 @@ import com.fiscalisto.model.FinancialStatements;
 import com.fiscalisto.model.GeneralLedger;
 import com.fiscalisto.model.GetCashFlowParams;
 import com.fiscalisto.model.GetComparativeStatementsParams;
+import com.fiscalisto.model.GetConsolidatedStatementsParams;
 import com.fiscalisto.model.GetCrossCheckCfdiParams;
 import com.fiscalisto.model.GetCrossChecksParams;
 import com.fiscalisto.model.GetDiotFileParams;
@@ -283,6 +285,23 @@ public final class AccountingService {
 
     public LedgerAccount createAccount(CreateLedgerAccountParams params) {
         return createAccount(params, null);
+    }
+
+    /**
+     * Ver los estados financieros consolidados
+     * <p>
+     * El estado de resultados y el balance general de varios RFC del espacio del emisor sumados cuenta por cuenta (comparten el catálogo), menos las eliminaciones del mes (POST /v1/accounting/consolidation_eliminations), con la hoja de consolidación (el saldo de cada cuenta en cada RFC, lo eliminado y el consolidado) y lo que los RFC se facturaron entre ellos sin impuestos. Los libros de cada RFC no cambian. Un emisor con un solo RFC contesta parameter_invalid en rfcs.
+     * <p>
+     * GET /v1/accounting/consolidated_statements
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-consolidated-statements
+     */
+    public ConsolidatedStatements consolidatedStatements(GetConsolidatedStatementsParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/consolidated_statements", null, params, false, ConsolidatedStatements.class, options);
+    }
+
+    public ConsolidatedStatements consolidatedStatements(GetConsolidatedStatementsParams params) {
+        return consolidatedStatements(params, null);
     }
 
     /**

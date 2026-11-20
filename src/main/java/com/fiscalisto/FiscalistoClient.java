@@ -92,6 +92,7 @@ public final class FiscalistoClient {
     private final BookDepreciationRatesService bookDepreciationRates;
     private final ChartTemplatesService chartTemplates;
     private final AccountRenumberingsService accountRenumberings;
+    private final ConsolidationEliminationsService consolidationEliminations;
     private final EntryTemplatesService entryTemplates;
     private final CostCenterResultsService costCenterResults;
     private final PayrollProvisionsService payrollProvisions;
@@ -200,6 +201,7 @@ public final class FiscalistoClient {
         this.bookDepreciationRates = new BookDepreciationRatesService(api);
         this.chartTemplates = new ChartTemplatesService(api);
         this.accountRenumberings = new AccountRenumberingsService(api);
+        this.consolidationEliminations = new ConsolidationEliminationsService(api);
         this.entryTemplates = new EntryTemplatesService(api);
         this.costCenterResults = new CostCenterResultsService(api);
         this.payrollProvisions = new PayrollProvisionsService(api);
@@ -627,6 +629,11 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public AccountRenumberingsService accountRenumberings() {
         return accountRenumberings;
+    }
+
+    /** Contabilidad. */
+    public ConsolidationEliminationsService consolidationEliminations() {
+        return consolidationEliminations;
     }
 
     /** Contabilidad. */
