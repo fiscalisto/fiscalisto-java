@@ -7,6 +7,7 @@ import com.fiscalisto.model.CreateBranchParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListBranchesParams;
 import com.fiscalisto.model.UpdateBranchParams;
+import com.fiscalisto.model.UploadBranchLogoParams;
 
 /**
  * Sucursales: client.branches().
@@ -122,5 +123,39 @@ public final class BranchesService {
 
     public Deleted delete(String id) {
         return delete(id, null);
+    }
+
+    /**
+     * Subir el logo de la sucursal
+     * <p>
+     * El logo de la sucursal (PNG o JPG de hasta 1 MB, en base64): va en lo que factura desde ella y en el portal de autofactura de los tickets que la nombran. Reemplaza el anterior; sin logo propio usa el del emisor.
+     * <p>
+     * POST /v1/branches/{id}/logo
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/sucursales/upload-branch-logo
+     */
+    public Branch uploadLogo(String id, UploadBranchLogoParams params, RequestOptions options) {
+        return api.request("POST", "/v1/branches/" + ApiClient.encode(id) + "/logo", params, null, true, Branch.class, options);
+    }
+
+    public Branch uploadLogo(String id, UploadBranchLogoParams params) {
+        return uploadLogo(id, params, null);
+    }
+
+    /**
+     * Quitar el logo de la sucursal
+     * <p>
+     * Lo que factura y sus tickets vuelven al logo del emisor. Sin logo contesta 404.
+     * <p>
+     * DELETE /v1/branches/{id}/logo
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/sucursales/delete-branch-logo
+     */
+    public Branch deleteLogo(String id, RequestOptions options) {
+        return api.request("DELETE", "/v1/branches/" + ApiClient.encode(id) + "/logo", null, null, false, Branch.class, options);
+    }
+
+    public Branch deleteLogo(String id) {
+        return deleteLogo(id, null);
     }
 }

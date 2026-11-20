@@ -101,6 +101,12 @@ public class CreateTicketParams {
     private CreateTicketParamsBuyer buyer;
 
     /**
+     * Sucursal (brn_…) donde se hizo la venta: su factura se timbra desde ahí (su código postal en LugarExpedicion) y el portal muestra el nombre comercial y el logo de la sucursal. Sin ella, la Matriz.
+     */
+    @JsonProperty("branch")
+    private String branch;
+
+    /**
      * Una venta de varios conceptos (el folio de un hotel: noches, desayunos, lavandería), cada uno con su producto o sus claves, sus impuestos y lo que se cobró por él; hasta 200. En lugar de `product`, `description`, `product_key`, `unit_key` e `iva`. La factura del cliente lleva un concepto por línea; la factura global, uno por cada combinación de impuestos del ticket.
      */
     @JsonProperty("lines")
@@ -275,6 +281,18 @@ public class CreateTicketParams {
 
     public CreateTicketParams setBuyer(CreateTicketParamsBuyer buyer) {
         this.buyer = buyer;
+        return this;
+    }
+
+    /**
+     * Sucursal (brn_…) donde se hizo la venta: su factura se timbra desde ahí (su código postal en LugarExpedicion) y el portal muestra el nombre comercial y el logo de la sucursal. Sin ella, la Matriz.
+     */
+    public String getBranch() {
+        return branch;
+    }
+
+    public CreateTicketParams setBranch(String branch) {
+        this.branch = branch;
         return this;
     }
 

@@ -133,6 +133,12 @@ public class Ticket {
     private TicketCustomer customer;
 
     /**
+     * La sucursal (brn_…) donde se hizo la venta, o null (la Matriz). Su factura se timbra desde ahí y el portal muestra su nombre y su logo.
+     */
+    @JsonProperty("branch")
+    private String branch;
+
+    /**
      * Quién pagó, como lo conoce el origen de la venta (el `buyer` que mandó, o el cliente de un pago de Stripe). No es el receptor de la factura (`customer`).
      */
     @JsonProperty("buyer")
@@ -381,6 +387,18 @@ public class Ticket {
 
     public Ticket setCustomer(TicketCustomer customer) {
         this.customer = customer;
+        return this;
+    }
+
+    /**
+     * La sucursal (brn_…) donde se hizo la venta, o null (la Matriz). Su factura se timbra desde ahí y el portal muestra su nombre y su logo.
+     */
+    public String getBranch() {
+        return branch;
+    }
+
+    public Ticket setBranch(String branch) {
+        this.branch = branch;
         return this;
     }
 

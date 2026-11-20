@@ -57,6 +57,12 @@ public class FxRevaluation {
     private List<FxRevaluationDocument> documents;
 
     /**
+     * Sus cuentas de banco en otra moneda: statement_balance (el saldo del último estado de cuenta al cierre, en su moneda, o null si no hay), statement_date y book_balance (lo que sus libros traen en pesos antes de la revaluación). La diferencia contra statement_balance × el tipo de cambio de cierre va a Utilidad o Pérdida cambiaria.
+     */
+    @JsonProperty("bank_accounts")
+    private List<FxRevaluationBankAccount> bankAccounts;
+
+    /**
      * La póliza de revaluación (mje_…) si ya se registró, o null. Es una póliza a mano de tipo adjustment con reverse_next_month.
      */
     @JsonProperty("manual_entry")
@@ -143,6 +149,18 @@ public class FxRevaluation {
 
     public FxRevaluation setDocuments(List<FxRevaluationDocument> documents) {
         this.documents = documents;
+        return this;
+    }
+
+    /**
+     * Sus cuentas de banco en otra moneda: statement_balance (el saldo del último estado de cuenta al cierre, en su moneda, o null si no hay), statement_date y book_balance (lo que sus libros traen en pesos antes de la revaluación). La diferencia contra statement_balance × el tipo de cambio de cierre va a Utilidad o Pérdida cambiaria.
+     */
+    public List<FxRevaluationBankAccount> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public FxRevaluation setBankAccounts(List<FxRevaluationBankAccount> bankAccounts) {
+        this.bankAccounts = bankAccounts;
         return this;
     }
 
