@@ -5,8 +5,11 @@ package com.fiscalisto;
 import com.fiscalisto.model.CreateEmployeeParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.Employee;
+import com.fiscalisto.model.EmployeeVacations;
+import com.fiscalisto.model.GetEmployeeVacationsParams;
 import com.fiscalisto.model.ListEmployeesParams;
 import com.fiscalisto.model.UpdateEmployeeParams;
+import com.fiscalisto.model.UpdateEmployeeVacationsParams;
 
 /**
  * Nómina: client.employees().
@@ -122,5 +125,43 @@ public final class EmployeesService {
 
     public Deleted delete(String id) {
         return delete(id, null);
+    }
+
+    /**
+     * Vacaciones de un empleado
+     * <p>
+     * Los días de vacaciones de cada año de servicio (artículo 76 de la LFT: 12 el primero, dos más cada año hasta 20 y luego dos más cada cinco), los que tomó (los días de vacaciones de sus recibos timbrados, restados del año más antiguo que le quede), hasta cuándo dárselos (seis meses después del aniversario, artículo 81) y cuándo prescriben (un año después, artículo 516). pending_days son los de años cumplidos que no han prescrito: los que paga el finiquito.
+     * <p>
+     * GET /v1/employees/{id}/vacations
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/get-employee-vacations
+     */
+    public EmployeeVacations vacations(String id, GetEmployeeVacationsParams params, RequestOptions options) {
+        return api.request("GET", "/v1/employees/" + ApiClient.encode(id) + "/vacations", null, params, false, EmployeeVacations.class, options);
+    }
+
+    public EmployeeVacations vacations(String id, GetEmployeeVacationsParams params) {
+        return vacations(id, params, null);
+    }
+
+    public EmployeeVacations vacations(String id) {
+        return vacations(id, null, null);
+    }
+
+    /**
+     * Saldo de vacaciones antes de Fiscalisto
+     * <p>
+     * Guarda lo que el empleado tenía en un día según sus registros: los días que le quedaban de años cumplidos y los que ya había tomado del año en curso. Los recibos timbrados antes de ese día no se cuentan. opening_date null lo quita.
+     * <p>
+     * POST /v1/employees/{id}/vacations
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/update-employee-vacations
+     */
+    public EmployeeVacations updateVacations(String id, UpdateEmployeeVacationsParams params, RequestOptions options) {
+        return api.request("POST", "/v1/employees/" + ApiClient.encode(id) + "/vacations", params, null, true, EmployeeVacations.class, options);
+    }
+
+    public EmployeeVacations updateVacations(String id, UpdateEmployeeVacationsParams params) {
+        return updateVacations(id, params, null);
     }
 }

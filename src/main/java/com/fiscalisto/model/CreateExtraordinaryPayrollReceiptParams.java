@@ -83,10 +83,16 @@ public class CreateExtraordinaryPayrollReceiptParams {
     private Boolean twentyDaysPerYear;
 
     /**
-     * finiquito: los días de vacaciones del año de servicio en curso que ya tomó.
+     * finiquito: los días de vacaciones del año de servicio en curso que ya tomó. Por omisión, los de sus recibos timbrados (GET /v1/employees/{id}/vacations).
      */
     @JsonProperty("vacation_days_taken")
     private BigDecimal vacationDaysTaken;
+
+    /**
+     * finiquito: los días de vacaciones de años de servicio cumplidos que no disfrutó ni han prescrito; se pagan con su prima vacacional. Por omisión, pending_days de sus vacaciones.
+     */
+    @JsonProperty("vacation_days_owed")
+    private BigDecimal vacationDaysOwed;
 
     /**
      * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
@@ -242,7 +248,7 @@ public class CreateExtraordinaryPayrollReceiptParams {
     }
 
     /**
-     * finiquito: los días de vacaciones del año de servicio en curso que ya tomó.
+     * finiquito: los días de vacaciones del año de servicio en curso que ya tomó. Por omisión, los de sus recibos timbrados (GET /v1/employees/{id}/vacations).
      */
     public BigDecimal getVacationDaysTaken() {
         return vacationDaysTaken;
@@ -256,6 +262,23 @@ public class CreateExtraordinaryPayrollReceiptParams {
     @JsonIgnore
     public CreateExtraordinaryPayrollReceiptParams setVacationDaysTaken(double vacationDaysTaken) {
         return setVacationDaysTaken(BigDecimal.valueOf(vacationDaysTaken));
+    }
+
+    /**
+     * finiquito: los días de vacaciones de años de servicio cumplidos que no disfrutó ni han prescrito; se pagan con su prima vacacional. Por omisión, pending_days de sus vacaciones.
+     */
+    public BigDecimal getVacationDaysOwed() {
+        return vacationDaysOwed;
+    }
+
+    public CreateExtraordinaryPayrollReceiptParams setVacationDaysOwed(BigDecimal vacationDaysOwed) {
+        this.vacationDaysOwed = vacationDaysOwed;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateExtraordinaryPayrollReceiptParams setVacationDaysOwed(double vacationDaysOwed) {
+        return setVacationDaysOwed(BigDecimal.valueOf(vacationDaysOwed));
     }
 
     /**
