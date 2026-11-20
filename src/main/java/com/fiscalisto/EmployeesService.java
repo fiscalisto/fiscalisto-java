@@ -6,6 +6,7 @@ import com.fiscalisto.model.CreateEmployeeParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.Employee;
 import com.fiscalisto.model.EmployeeVacations;
+import com.fiscalisto.model.GetEmployeeVacationCertificateParams;
 import com.fiscalisto.model.GetEmployeeVacationsParams;
 import com.fiscalisto.model.ListEmployeesParams;
 import com.fiscalisto.model.UpdateEmployeeParams;
@@ -163,5 +164,26 @@ public final class EmployeesService {
 
     public EmployeeVacations updateVacations(String id, UpdateEmployeeVacationsParams params) {
         return updateVacations(id, params, null);
+    }
+
+    /**
+     * Constancia de vacaciones
+     * <p>
+     * El PDF de la constancia que el artículo 81 de la LFT pide entregar cada año: su antigüedad al último aniversario, los días de vacaciones que le corresponden (artículo 76) con su prima vacacional, cuándo disfrutarlos (las fechas que mande, o los seis meses siguientes al aniversario) y los días pendientes de años anteriores con cuándo prescriben, con espacio para las firmas. Antes de su primer aniversario dice cuándo lo cumple y cuántos días le tocarán.
+     * <p>
+     * GET /v1/employees/{id}/vacations/certificate
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/get-employee-vacation-certificate
+     */
+    public byte[] vacationCertificate(String id, GetEmployeeVacationCertificateParams params, RequestOptions options) {
+        return api.bytes("GET", "/v1/employees/" + ApiClient.encode(id) + "/vacations/certificate", null, params, false, options);
+    }
+
+    public byte[] vacationCertificate(String id, GetEmployeeVacationCertificateParams params) {
+        return vacationCertificate(id, params, null);
+    }
+
+    public byte[] vacationCertificate(String id) {
+        return vacationCertificate(id, null, null);
     }
 }
