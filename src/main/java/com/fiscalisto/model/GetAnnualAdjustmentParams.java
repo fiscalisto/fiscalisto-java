@@ -1,0 +1,60 @@
+// Generado por `bun run openapi` desde la especificación OpenAPI de la API: no lo edite.
+
+package com.fiscalisto.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * GetAnnualAdjustmentParams: los campos de «Ajuste anual del ISR».
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class GetAnnualAdjustmentParams {
+    /**
+     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     */
+    @JsonProperty("issuer")
+    private String issuer;
+
+    /**
+     * El ejercicio: 2026.
+     * <p>
+     * Obligatorio.
+     */
+    @JsonProperty("year")
+    private Long year;
+
+    /**
+     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     */
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public GetAnnualAdjustmentParams setIssuer(String issuer) {
+        this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * El ejercicio: 2026.
+     * <p>
+     * Obligatorio.
+     */
+    public Long getYear() {
+        return year;
+    }
+
+    public GetAnnualAdjustmentParams setYear(Long year) {
+        this.year = year;
+        return this;
+    }
+
+    @JsonIgnore
+    public GetAnnualAdjustmentParams setYear(long year) {
+        return setYear(Long.valueOf(year));
+    }
+}

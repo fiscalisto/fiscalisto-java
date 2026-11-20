@@ -34,6 +34,8 @@ public final class FiscalistoClient {
     private final ImssFilesService imssFiles;
     private final EmployeeDeductionsService employeeDeductions;
     private final VariableSalariesService variableSalaries;
+    private final AnnualAdjustmentsService annualAdjustments;
+    private final PayrollTaxesService payrollTaxes;
     private final InvoiceBatchesService invoiceBatches;
     private final TaxIdsService taxIds;
     private final BranchesService branches;
@@ -126,6 +128,8 @@ public final class FiscalistoClient {
         this.imssFiles = new ImssFilesService(api);
         this.employeeDeductions = new EmployeeDeductionsService(api);
         this.variableSalaries = new VariableSalariesService(api);
+        this.annualAdjustments = new AnnualAdjustmentsService(api);
+        this.payrollTaxes = new PayrollTaxesService(api);
         this.invoiceBatches = new InvoiceBatchesService(api);
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
@@ -305,6 +309,16 @@ public final class FiscalistoClient {
     /** Nómina. */
     public VariableSalariesService variableSalaries() {
         return variableSalaries;
+    }
+
+    /** Nómina. */
+    public AnnualAdjustmentsService annualAdjustments() {
+        return annualAdjustments;
+    }
+
+    /** Nómina. */
+    public PayrollTaxesService payrollTaxes() {
+        return payrollTaxes;
     }
 
     /** Lotes. */

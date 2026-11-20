@@ -15,7 +15,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApplyVariableSalaryParams {
     /**
-     * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
+     * El emisor (iss_…); por omisión, el único de la cuenta.
      */
     @JsonProperty("issuer")
     private String issuer;
@@ -37,7 +37,7 @@ public class ApplyVariableSalaryParams {
     private List<String> employees;
 
     /**
-     * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
+     * El emisor (iss_…); por omisión, el único de la cuenta.
      */
     public String getIssuer() {
         return issuer;
