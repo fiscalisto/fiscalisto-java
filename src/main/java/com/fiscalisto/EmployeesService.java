@@ -3,9 +3,11 @@
 package com.fiscalisto;
 
 import com.fiscalisto.model.CreateEmployeeParams;
+import com.fiscalisto.model.CreateEmployeeRaiseParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.Employee;
 import com.fiscalisto.model.EmployeePortal;
+import com.fiscalisto.model.EmployeeRaise;
 import com.fiscalisto.model.EmployeeVacations;
 import com.fiscalisto.model.GetEmployeeVacationCertificateParams;
 import com.fiscalisto.model.GetEmployeeVacationsParams;
@@ -73,6 +75,27 @@ public final class EmployeesService {
 
     public Iterable<Employee> listAutoPaging() {
         return listAutoPaging(null, null);
+    }
+
+    /**
+     * Aumento de sueldo
+     * <p>
+     * Un aumento para varios empleados a la vez, como «Aumento de sueldo» en Nómina › Empleados de la app: percent (porcentaje), amount (pesos más por día) o daily_salary (un salario nuevo). Cada empleado conserva su factor de integración (SDI ÷ salario), y el SDI nuevo queda como modificación de salario con fecha effective_date en Movimientos del IMSS, para presentarla a más tardar en imss_deadline (5 días hábiles, artículo 34 de la Ley del Seguro Social). Rige desde hoy o antes; los periodos ya timbrados desde entonces se pagan con el retroactivo de las incidencias. Si un empleado no puede recibirlo (no es un aumento, queda bajo el salario mínimo, no trabajaba ese día), contesta 400 y no cambia a nadie; dry_run true dice cómo quedaría cada uno, con su error, sin guardar.
+     * <p>
+     * POST /v1/employee_raises
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/create-employee-raise
+     */
+    public EmployeeRaise raise(CreateEmployeeRaiseParams params, RequestOptions options) {
+        return api.request("POST", "/v1/employee_raises", params, null, true, EmployeeRaise.class, options);
+    }
+
+    public EmployeeRaise raise(CreateEmployeeRaiseParams params) {
+        return raise(params, null);
+    }
+
+    public EmployeeRaise raise() {
+        return raise(null, null);
     }
 
     /**
