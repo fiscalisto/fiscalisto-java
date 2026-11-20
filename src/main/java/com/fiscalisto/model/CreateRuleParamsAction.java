@@ -26,10 +26,10 @@ public class CreateRuleParamsAction {
     private String type;
 
     /**
-     * tag: la etiqueta.
+     * tag: la etiqueta (tag_…, GET /v1/tags). Un número, el id de antes, también se acepta.
      */
     @JsonProperty("tag")
-    private Long tag;
+    private Object tag;
 
     /**
      * tag: quitarla si la orden deja de cumplir.
@@ -78,20 +78,15 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * tag: la etiqueta.
+     * tag: la etiqueta (tag_…, GET /v1/tags). Un número, el id de antes, también se acepta.
      */
-    public Long getTag() {
+    public Object getTag() {
         return tag;
     }
 
-    public CreateRuleParamsAction setTag(Long tag) {
+    public CreateRuleParamsAction setTag(Object tag) {
         this.tag = tag;
         return this;
-    }
-
-    @JsonIgnore
-    public CreateRuleParamsAction setTag(long tag) {
-        return setTag(Long.valueOf(tag));
     }
 
     /**

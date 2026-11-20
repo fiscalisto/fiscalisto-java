@@ -77,9 +77,9 @@ public class AnnualAdjustmentEmployee {
     private BigDecimal balance;
 
     /**
-     * Por qué no se le calcula (artículo 97): started, entró después del 1 de enero; left, salió antes del 1 de diciembre; income, ganó más de $400,000; files_own, presenta su declaración.
+     * Por qué no se le calcula (artículo 97): started, entró después del 1 de enero; left, salió antes del 1 de diciembre; income, ganó más de $400,000; files_own, presenta su declaración; minimum, gana el salario mínimo y su saldo a cargo no se le descuenta (Constitución art. 123-A-VIII, LFT 97).
      * <p>
-     * Valores: started, left, income, files_own.
+     * Valores: started, left, income, files_own, minimum.
      */
     @JsonProperty("excluded")
     private String excluded;
@@ -264,9 +264,9 @@ public class AnnualAdjustmentEmployee {
     }
 
     /**
-     * Por qué no se le calcula (artículo 97): started, entró después del 1 de enero; left, salió antes del 1 de diciembre; income, ganó más de $400,000; files_own, presenta su declaración.
+     * Por qué no se le calcula (artículo 97): started, entró después del 1 de enero; left, salió antes del 1 de diciembre; income, ganó más de $400,000; files_own, presenta su declaración; minimum, gana el salario mínimo y su saldo a cargo no se le descuenta (Constitución art. 123-A-VIII, LFT 97).
      * <p>
-     * Valores: started, left, income, files_own.
+     * Valores: started, left, income, files_own, minimum.
      */
     public String getExcluded() {
         return excluded;

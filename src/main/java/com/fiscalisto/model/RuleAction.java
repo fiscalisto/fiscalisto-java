@@ -24,10 +24,10 @@ public class RuleAction {
     private String type;
 
     /**
-     * tag: la etiqueta.
+     * tag: la etiqueta (tag_…, GET /v1/tags).
      */
     @JsonProperty("tag")
-    private Long tag;
+    private String tag;
 
     /**
      * tag: se quita si la orden deja de cumplir.
@@ -74,20 +74,15 @@ public class RuleAction {
     }
 
     /**
-     * tag: la etiqueta.
+     * tag: la etiqueta (tag_…, GET /v1/tags).
      */
-    public Long getTag() {
+    public String getTag() {
         return tag;
     }
 
-    public RuleAction setTag(Long tag) {
+    public RuleAction setTag(String tag) {
         this.tag = tag;
         return this;
-    }
-
-    @JsonIgnore
-    public RuleAction setTag(long tag) {
-        return setTag(Long.valueOf(tag));
     }
 
     /**
