@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PayrollBatchReceiptError {
     /**
-     * payroll_invalid, payroll_period_overlap, payroll_receipt_exists, invoice_rejected, invoice_invalid, insufficient_balance…
+     * payroll_invalid, payroll_approval_required, payroll_period_overlap, payroll_receipt_exists, invoice_rejected, invoice_invalid, insufficient_balance…
      */
     @JsonProperty("code")
     private String code;
@@ -25,7 +25,7 @@ public class PayrollBatchReceiptError {
     private String message;
 
     /**
-     * payroll_invalid, payroll_period_overlap, payroll_receipt_exists, invoice_rejected, invoice_invalid, insufficient_balance…
+     * payroll_invalid, payroll_approval_required, payroll_period_overlap, payroll_receipt_exists, invoice_rejected, invoice_invalid, insufficient_balance…
      */
     public String getCode() {
         return code;

@@ -30,6 +30,7 @@ public final class FiscalistoClient {
     private final VacationRequestsService vacationRequests;
     private final PayrollReceiptsService payrollReceipts;
     private final PayrollBatchesService payrollBatches;
+    private final PayrollApprovalsService payrollApprovals;
     private final PayrollBankFilesService payrollBankFiles;
     private final ImssMovementsService imssMovements;
     private final ImssFilesService imssFiles;
@@ -142,6 +143,7 @@ public final class FiscalistoClient {
         this.vacationRequests = new VacationRequestsService(api);
         this.payrollReceipts = new PayrollReceiptsService(api);
         this.payrollBatches = new PayrollBatchesService(api);
+        this.payrollApprovals = new PayrollApprovalsService(api);
         this.payrollBankFiles = new PayrollBankFilesService(api);
         this.imssMovements = new ImssMovementsService(api);
         this.imssFiles = new ImssFilesService(api);
@@ -325,6 +327,11 @@ public final class FiscalistoClient {
     /** Nómina. */
     public PayrollBatchesService payrollBatches() {
         return payrollBatches;
+    }
+
+    /** Nómina. */
+    public PayrollApprovalsService payrollApprovals() {
+        return payrollApprovals;
     }
 
     /** Nómina. */

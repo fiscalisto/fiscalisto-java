@@ -30,7 +30,7 @@ public class GeneralLedgerAccountMovement {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation, manual, asset_disposal, bank_identification.
+     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation, manual, asset_disposal, bank_identification, foreign_supplier_operations.
      */
     @JsonProperty("type")
     private String type;
@@ -98,7 +98,7 @@ public class GeneralLedgerAccountMovement {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation, manual, asset_disposal, bank_identification.
+     * Valores: invoice, payment_received, payment_made, payroll, employee_expenses, depreciation, manual, asset_disposal, bank_identification, foreign_supplier_operations.
      */
     public String getType() {
         return type;

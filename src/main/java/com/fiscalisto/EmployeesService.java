@@ -86,16 +86,16 @@ public final class EmployeesService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/create-employee-raise
      */
-    public EmployeeRaise raise(CreateEmployeeRaiseParams params, RequestOptions options) {
+    public EmployeeRaise giveRaise(CreateEmployeeRaiseParams params, RequestOptions options) {
         return api.request("POST", "/v1/employee_raises", params, null, true, EmployeeRaise.class, options);
     }
 
-    public EmployeeRaise raise(CreateEmployeeRaiseParams params) {
-        return raise(params, null);
+    public EmployeeRaise giveRaise(CreateEmployeeRaiseParams params) {
+        return giveRaise(params, null);
     }
 
-    public EmployeeRaise raise() {
-        return raise(null, null);
+    public EmployeeRaise giveRaise() {
+        return giveRaise(null, null);
     }
 
     /**
