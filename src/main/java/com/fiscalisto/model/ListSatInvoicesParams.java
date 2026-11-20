@@ -72,6 +72,12 @@ public class ListSatInvoicesParams {
     private String costCenter;
 
     /**
+     * Solo las que llevan esta etiqueta (tag_…).
+     */
+    @JsonProperty("tag")
+    private String tag;
+
+    /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
      */
     public Long getLimit() {
@@ -185,6 +191,18 @@ public class ListSatInvoicesParams {
 
     public ListSatInvoicesParams setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Solo las que llevan esta etiqueta (tag_…).
+     */
+    public String getTag() {
+        return tag;
+    }
+
+    public ListSatInvoicesParams setTag(String tag) {
+        this.tag = tag;
         return this;
     }
 }

@@ -45,6 +45,7 @@ public final class FiscalistoClient {
     private final BranchesService branches;
     private final RulesService rules;
     private final CostCentersService costCenters;
+    private final TagsService tags;
     private final PriceListsService priceLists;
     private final CustomerGroupsService customerGroups;
     private final PricesService prices;
@@ -165,6 +166,7 @@ public final class FiscalistoClient {
         this.branches = new BranchesService(api);
         this.rules = new RulesService(api);
         this.costCenters = new CostCentersService(api);
+        this.tags = new TagsService(api);
         this.priceLists = new PriceListsService(api);
         this.customerGroups = new CustomerGroupsService(api);
         this.prices = new PricesService(api);
@@ -416,6 +418,11 @@ public final class FiscalistoClient {
     /** Centros de costo. */
     public CostCentersService costCenters() {
         return costCenters;
+    }
+
+    /** Etiquetas. */
+    public TagsService tags() {
+        return tags;
     }
 
     /** Listas de precios. */

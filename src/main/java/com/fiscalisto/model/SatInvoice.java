@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * SatInvoice: Una factura que el SAT tiene del emisor, emitida o recibida, traída con una descarga.
@@ -158,6 +159,12 @@ public class SatInvoice {
      */
     @JsonProperty("cost_center")
     private String costCenter;
+
+    /**
+     * Sus etiquetas, por nombre. automatic: true en las que puso una regla (la orden de compra a la que se vinculó o una regla de Ajustes › Reglas). Cámbielas con POST /v1/sat_invoices/{id}.
+     */
+    @JsonProperty("tags")
+    private List<SatInvoiceTag> tags;
 
     /**
      * La descarga (sdl_…) que la trajo, o null.
@@ -465,6 +472,18 @@ public class SatInvoice {
 
     public SatInvoice setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Sus etiquetas, por nombre. automatic: true en las que puso una regla (la orden de compra a la que se vinculó o una regla de Ajustes › Reglas). Cámbielas con POST /v1/sat_invoices/{id}.
+     */
+    public List<SatInvoiceTag> getTags() {
+        return tags;
+    }
+
+    public SatInvoice setTags(List<SatInvoiceTag> tags) {
+        this.tags = tags;
         return this;
     }
 

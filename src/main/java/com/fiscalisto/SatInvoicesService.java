@@ -71,7 +71,7 @@ public final class SatInvoicesService {
     /**
      * Actualizar una factura del SAT
      * <p>
-     * Lo que se puede cambiar de un CFDI del SAT sin tocarlo: su centro de costo (cost_center, o null para quitárselo), para ver sus gastos por obra, proyecto o área.
+     * Lo que se puede cambiar de un CFDI del SAT sin tocarlo: su centro de costo (cost_center, o null para quitárselo), para ver sus gastos por obra, proyecto o área, y sus etiquetas (tags, exactamente las que manda: ids tag_… o nombres; un nombre nuevo crea la etiqueta).
      * <p>
      * POST /v1/sat_invoices/{id}
      * <p>

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * UpdateSatInvoiceParams: los campos de «Actualizar una factura del SAT».
  */
@@ -19,6 +21,12 @@ public class UpdateSatInvoiceParams {
     private String costCenter;
 
     /**
+     * Sus etiquetas, exactamente estas (hasta 10): ids (tag_…) o nombres; un nombre nuevo crea la etiqueta. [] se las quita. Una que puso una regla y no manda se queda quitada.
+     */
+    @JsonProperty("tags")
+    private List<String> tags;
+
+    /**
      * Su centro de costo (ccn_…), o null para quitárselo. Los complementos de pago y los traslados no llevan.
      */
     public String getCostCenter() {
@@ -27,6 +35,18 @@ public class UpdateSatInvoiceParams {
 
     public UpdateSatInvoiceParams setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Sus etiquetas, exactamente estas (hasta 10): ids (tag_…) o nombres; un nombre nuevo crea la etiqueta. [] se las quita. Una que puso una regla y no manda se queda quitada.
+     */
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public UpdateSatInvoiceParams setTags(List<String> tags) {
+        this.tags = tags;
         return this;
     }
 }
