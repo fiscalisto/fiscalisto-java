@@ -348,6 +348,9 @@ public final class ErrorCode {
     /** No existe esa ruta. Revise la dirección y la versión (/v1). */
     public static final String ROUTE_NOT_FOUND = "route_not_found";
 
+    /** La regla no se puede guardar así: el mensaje dice por qué (una acción que no va con su trigger, como cost_center en una orden de compra; una etiqueta, etapa o centro de costo que no existe; un campo o un valor que no va con su operador; más de 200 reglas). */
+    public static final String RULE_INVALID = "rule_invalid";
+
     /** El pedido está en borrador: confírmelo primero con POST /v1/sales_orders/{id}/confirm. */
     public static final String SALES_ORDER_DRAFT = "sales_order_draft";
 

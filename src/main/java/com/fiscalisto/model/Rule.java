@@ -1,0 +1,278 @@
+// Generado por `bun run openapi` desde la especificación OpenAPI de la API: no lo edite.
+
+package com.fiscalisto.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+
+/**
+ * Rule: Una regla de la empresa: cuando pasa algo (trigger), si se cumplen sus condiciones, hace sus acciones. Las mismas de Ajustes › Reglas en la app.
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Rule {
+    /**
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
+     */
+    @JsonProperty("id")
+    private String id;
+
+    /**
+     * true en producción (llaves fk_live_), false en pruebas (fk_test_). Lo de pruebas no vale ante el SAT.
+     */
+    @JsonProperty("livemode")
+    private Boolean livemode;
+
+    /**
+     * Qué tipo de objeto es («invoice», «customer»…).
+     */
+    @JsonProperty("object")
+    private String object;
+
+    /**
+     * El emisor (iss_…).
+     */
+    @JsonProperty("issuer")
+    private String issuer;
+
+    /**
+     * Nombre.
+     */
+    @JsonProperty("name")
+    private String name;
+
+    /**
+     * Cuándo corre.
+     * <p>
+     * Valores: invoice.received, invoice.issued, purchase_order.saved, purchase_order.approved, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
+     */
+    @JsonProperty("trigger")
+    private String trigger;
+
+    /**
+     * Si: lo que tiene que cumplir la factura u orden. Sin condiciones, corre siempre.
+     */
+    @JsonProperty("conditions")
+    private RuleConditions conditions;
+
+    /**
+     * Entonces: lo que hace, en este orden.
+     */
+    @JsonProperty("actions")
+    private List<RuleAction> actions;
+
+    /**
+     * true: corre una sola vez por factura u orden.
+     */
+    @JsonProperty("once_per_record")
+    private Boolean oncePerRecord;
+
+    /**
+     * true: si se cumple, las reglas que siguen no corren para ese registro.
+     */
+    @JsonProperty("stop_after")
+    private Boolean stopAfter;
+
+    /**
+     * false: en pausa.
+     */
+    @JsonProperty("enabled")
+    private Boolean enabled;
+
+    /**
+     * Su lugar en el orden en que corren (1 primero).
+     */
+    @JsonProperty("position")
+    private Long position;
+
+    /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    @JsonProperty("created_at")
+    private String createdAt;
+
+    /**
+     * Cuándo cambió por última vez, ISO 8601 (-06:00).
+     */
+    @JsonProperty("updated_at")
+    private String updatedAt;
+
+    /**
+     * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
+     */
+    public String getId() {
+        return id;
+    }
+
+    public Rule setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * true en producción (llaves fk_live_), false en pruebas (fk_test_). Lo de pruebas no vale ante el SAT.
+     */
+    public Boolean getLivemode() {
+        return livemode;
+    }
+
+    public Rule setLivemode(Boolean livemode) {
+        this.livemode = livemode;
+        return this;
+    }
+
+    /**
+     * Qué tipo de objeto es («invoice», «customer»…).
+     */
+    public String getObject() {
+        return object;
+    }
+
+    public Rule setObject(String object) {
+        this.object = object;
+        return this;
+    }
+
+    /**
+     * El emisor (iss_…).
+     */
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public Rule setIssuer(String issuer) {
+        this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * Nombre.
+     */
+    public String getName() {
+        return name;
+    }
+
+    public Rule setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Cuándo corre.
+     * <p>
+     * Valores: invoice.received, invoice.issued, purchase_order.saved, purchase_order.approved, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
+     */
+    public String getTrigger() {
+        return trigger;
+    }
+
+    public Rule setTrigger(String trigger) {
+        this.trigger = trigger;
+        return this;
+    }
+
+    /**
+     * Si: lo que tiene que cumplir la factura u orden. Sin condiciones, corre siempre.
+     */
+    public RuleConditions getConditions() {
+        return conditions;
+    }
+
+    public Rule setConditions(RuleConditions conditions) {
+        this.conditions = conditions;
+        return this;
+    }
+
+    /**
+     * Entonces: lo que hace, en este orden.
+     */
+    public List<RuleAction> getActions() {
+        return actions;
+    }
+
+    public Rule setActions(List<RuleAction> actions) {
+        this.actions = actions;
+        return this;
+    }
+
+    /**
+     * true: corre una sola vez por factura u orden.
+     */
+    public Boolean getOncePerRecord() {
+        return oncePerRecord;
+    }
+
+    public Rule setOncePerRecord(Boolean oncePerRecord) {
+        this.oncePerRecord = oncePerRecord;
+        return this;
+    }
+
+    /**
+     * true: si se cumple, las reglas que siguen no corren para ese registro.
+     */
+    public Boolean getStopAfter() {
+        return stopAfter;
+    }
+
+    public Rule setStopAfter(Boolean stopAfter) {
+        this.stopAfter = stopAfter;
+        return this;
+    }
+
+    /**
+     * false: en pausa.
+     */
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public Rule setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+    }
+
+    /**
+     * Su lugar en el orden en que corren (1 primero).
+     */
+    public Long getPosition() {
+        return position;
+    }
+
+    public Rule setPosition(Long position) {
+        this.position = position;
+        return this;
+    }
+
+    @JsonIgnore
+    public Rule setPosition(long position) {
+        return setPosition(Long.valueOf(position));
+    }
+
+    /**
+     * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public Rule setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Cuándo cambió por última vez, ISO 8601 (-06:00).
+     */
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public Rule setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+}
