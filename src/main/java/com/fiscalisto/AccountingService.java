@@ -2,17 +2,25 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.CashFlow;
+import com.fiscalisto.model.ComparativeStatements;
 import com.fiscalisto.model.CreateLedgerAccountParams;
 import com.fiscalisto.model.CrossCheckCfdi;
 import com.fiscalisto.model.CrossChecks;
 import com.fiscalisto.model.Diot;
+import com.fiscalisto.model.EquityChanges;
+import com.fiscalisto.model.FinancialRatios;
 import com.fiscalisto.model.FinancialStatements;
 import com.fiscalisto.model.GeneralLedger;
+import com.fiscalisto.model.GetCashFlowParams;
+import com.fiscalisto.model.GetComparativeStatementsParams;
 import com.fiscalisto.model.GetCrossCheckCfdiParams;
 import com.fiscalisto.model.GetCrossChecksParams;
 import com.fiscalisto.model.GetDiotFileParams;
 import com.fiscalisto.model.GetDiotParams;
 import com.fiscalisto.model.GetElectronicAccountingParams;
+import com.fiscalisto.model.GetEquityChangesParams;
+import com.fiscalisto.model.GetFinancialRatiosParams;
 import com.fiscalisto.model.GetFinancialStatementsParams;
 import com.fiscalisto.model.GetGeneralLedgerParams;
 import com.fiscalisto.model.GetTrialBalanceParams;
@@ -110,6 +118,74 @@ public final class AccountingService {
 
     public FinancialStatements financialStatements(GetFinancialStatementsParams params) {
         return financialStatements(params, null);
+    }
+
+    /**
+     * Ver el estado de flujos de efectivo
+     * <p>
+     * El estado de flujos de efectivo (NIF B-2, método indirecto) del mes o de enero al mes: la utilidad, la depreciación y amortización que se suman, el cambio en capital de trabajo, y las actividades de inversión y de financiamiento, hasta el efectivo al cierre. Cada cuenta va a su actividad por su código agrupador; difference es 0 cuando la balanza cuadra. Como Estados financieros › Flujo de efectivo en la app.
+     * <p>
+     * GET /v1/accounting/cash_flow
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-cash-flow
+     */
+    public CashFlow cashFlow(GetCashFlowParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/cash_flow", null, params, false, CashFlow.class, options);
+    }
+
+    public CashFlow cashFlow(GetCashFlowParams params) {
+        return cashFlow(params, null);
+    }
+
+    /**
+     * Ver el estado de cambios en el capital contable
+     * <p>
+     * El estado de cambios en el capital contable (NIF B-4) de enero al mes: cada cuenta de capital del 1 de enero al cierre, con sus aportaciones, retiros, dividendos y traspasos, y el resultado del ejercicio. Como Estados financieros › Capital contable en la app.
+     * <p>
+     * GET /v1/accounting/equity_changes
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-equity-changes
+     */
+    public EquityChanges equityChanges(GetEquityChangesParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/equity_changes", null, params, false, EquityChanges.class, options);
+    }
+
+    public EquityChanges equityChanges(GetEquityChangesParams params) {
+        return equityChanges(params, null);
+    }
+
+    /**
+     * Comparar los estados financieros con otro mes
+     * <p>
+     * El estado de resultados (del mes y de enero al mes) y el balance general junto a los del mismo mes del año anterior (compare_to=previous_year, por omisión) o del mes anterior (previous_month), con la variación y su porcentaje por grupo de cuentas. Como Estados financieros › Comparativo en la app.
+     * <p>
+     * GET /v1/accounting/comparative_statements
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-comparative-statements
+     */
+    public ComparativeStatements comparativeStatements(GetComparativeStatementsParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/comparative_statements", null, params, false, ComparativeStatements.class, options);
+    }
+
+    public ComparativeStatements comparativeStatements(GetComparativeStatementsParams params) {
+        return comparativeStatements(params, null);
+    }
+
+    /**
+     * Ver las razones financieras
+     * <p>
+     * Liquidez, prueba ácida, endeudamiento, apalancamiento, márgenes, rendimiento sobre capital y sobre activo, y días de cobro, de pago y de inventario al cierre del mes, con las cifras de que salen. Rentabilidad y rotación usan los resultados de enero al mes. Como Estados financieros › Razones financieras en la app.
+     * <p>
+     * GET /v1/accounting/financial_ratios
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-financial-ratios
+     */
+    public FinancialRatios financialRatios(GetFinancialRatiosParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/financial_ratios", null, params, false, FinancialRatios.class, options);
+    }
+
+    public FinancialRatios financialRatios(GetFinancialRatiosParams params) {
+        return financialRatios(params, null);
     }
 
     /**

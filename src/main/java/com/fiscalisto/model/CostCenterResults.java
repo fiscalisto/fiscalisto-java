@@ -27,25 +27,25 @@ public class CostCenterResults {
     private Boolean livemode;
 
     /**
-     * El emisor (iss_…).
+     * El emisor.
      */
     @JsonProperty("issuer")
     private String issuer;
 
     /**
-     * Un solo mes, del 1 al 12 (MesIni y MesFin iguales).
+     * El mes (AAAA-MM).
      */
     @JsonProperty("month")
     private String month;
 
     /**
-     * El mes.
+     * Cada centro de costo en el mes.
      */
     @JsonProperty("month_results")
     private List<CostCenterResultsMonthResult> monthResults;
 
     /**
-     * De enero al mes.
+     * Cada centro de costo de enero al mes.
      */
     @JsonProperty("year_to_date")
     private List<CostCenterResultsYearToDateItem> yearToDate;
@@ -75,7 +75,7 @@ public class CostCenterResults {
     }
 
     /**
-     * El emisor (iss_…).
+     * El emisor.
      */
     public String getIssuer() {
         return issuer;
@@ -87,7 +87,7 @@ public class CostCenterResults {
     }
 
     /**
-     * Un solo mes, del 1 al 12 (MesIni y MesFin iguales).
+     * El mes (AAAA-MM).
      */
     public String getMonth() {
         return month;
@@ -99,7 +99,7 @@ public class CostCenterResults {
     }
 
     /**
-     * El mes.
+     * Cada centro de costo en el mes.
      */
     public List<CostCenterResultsMonthResult> getMonthResults() {
         return monthResults;
@@ -111,7 +111,7 @@ public class CostCenterResults {
     }
 
     /**
-     * De enero al mes.
+     * Cada centro de costo de enero al mes.
      */
     public List<CostCenterResultsYearToDateItem> getYearToDate() {
         return yearToDate;
