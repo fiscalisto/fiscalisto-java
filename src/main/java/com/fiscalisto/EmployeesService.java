@@ -5,11 +5,13 @@ package com.fiscalisto;
 import com.fiscalisto.model.CreateEmployeeParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.Employee;
+import com.fiscalisto.model.EmployeePortal;
 import com.fiscalisto.model.EmployeeVacations;
 import com.fiscalisto.model.GetEmployeeVacationCertificateParams;
 import com.fiscalisto.model.GetEmployeeVacationsParams;
 import com.fiscalisto.model.ListEmployeesParams;
 import com.fiscalisto.model.UpdateEmployeeParams;
+import com.fiscalisto.model.UpdateEmployeePortalParams;
 import com.fiscalisto.model.UpdateEmployeeVacationsParams;
 
 /**
@@ -185,5 +187,39 @@ public final class EmployeesService {
 
     public byte[] vacationCertificate(String id) {
         return vacationCertificate(id, null, null);
+    }
+
+    /**
+     * Portal del empleado
+     * <p>
+     * El enlace personal del empleado (sin cuenta) para ver, descargar y firmar de recibido sus recibos de nómina, ver sus vacaciones y pedir días; los celulares ligados y los recibos que firmó.
+     * <p>
+     * GET /v1/employees/{id}/portal
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/get-employee-portal
+     */
+    public EmployeePortal portal(String id, RequestOptions options) {
+        return api.request("GET", "/v1/employees/" + ApiClient.encode(id) + "/portal", null, null, false, EmployeePortal.class, options);
+    }
+
+    public EmployeePortal portal(String id) {
+        return portal(id, null);
+    }
+
+    /**
+     * Activar, cambiar o apagar el portal
+     * <p>
+     * enable crea el enlace (o deja el que tiene), renew hace uno nuevo (el anterior deja de funcionar y sus celulares se desligan) y disable lo apaga. Lo firmado se queda. Con send_email se lo manda a su correo.
+     * <p>
+     * POST /v1/employees/{id}/portal
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/update-employee-portal
+     */
+    public EmployeePortal updatePortal(String id, UpdateEmployeePortalParams params, RequestOptions options) {
+        return api.request("POST", "/v1/employees/" + ApiClient.encode(id) + "/portal", params, null, true, EmployeePortal.class, options);
+    }
+
+    public EmployeePortal updatePortal(String id, UpdateEmployeePortalParams params) {
+        return updatePortal(id, params, null);
     }
 }

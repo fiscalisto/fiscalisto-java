@@ -27,7 +27,7 @@ public class BooksLogEntryActor {
     private String name;
 
     /**
-     * label.
+     * El nombre y el id de la llave de la API, o el del asistente («ChatGPT»); null para un usuario del panel.
      */
     @JsonProperty("label")
     private String label;
@@ -59,7 +59,7 @@ public class BooksLogEntryActor {
     }
 
     /**
-     * label.
+     * El nombre y el id de la llave de la API, o el del asistente («ChatGPT»); null para un usuario del panel.
      */
     public String getLabel() {
         return label;
