@@ -34,6 +34,12 @@ public class UpdatePayrollTaxSettingsParams {
     private Map<String, String> stateOptions;
 
     /**
+     * El día del mes siguiente en que se paga el impuesto de cada estado, por su c_Estado: {"NLE": 17}. null vuelve al día de su ley (Ciudad de México 17, Jalisco 12, Estado de México 10); los demás estados, sin día, salen por confirmar en GET /v1/payroll_calendar. Solo cambia los estados que mande.
+     */
+    @JsonProperty("due_days")
+    private Map<String, Object> dueDays;
+
+    /**
      * El emisor (iss_…); por omisión, el único de la cuenta.
      */
     public String getIssuer() {
@@ -66,6 +72,18 @@ public class UpdatePayrollTaxSettingsParams {
 
     public UpdatePayrollTaxSettingsParams setStateOptions(Map<String, String> stateOptions) {
         this.stateOptions = stateOptions;
+        return this;
+    }
+
+    /**
+     * El día del mes siguiente en que se paga el impuesto de cada estado, por su c_Estado: {"NLE": 17}. null vuelve al día de su ley (Ciudad de México 17, Jalisco 12, Estado de México 10); los demás estados, sin día, salen por confirmar en GET /v1/payroll_calendar. Solo cambia los estados que mande.
+     */
+    public Map<String, Object> getDueDays() {
+        return dueDays;
+    }
+
+    public UpdatePayrollTaxSettingsParams setDueDays(Map<String, Object> dueDays) {
+        this.dueDays = dueDays;
         return this;
     }
 }

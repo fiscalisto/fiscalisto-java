@@ -46,6 +46,12 @@ public class PayrollTaxSettings {
     private Map<String, String> stateOptions;
 
     /**
+     * El día del mes siguiente en que se paga el impuesto de cada estado que lo indicó, por su c_Estado; los demás, el de su ley.
+     */
+    @JsonProperty("due_days")
+    private Map<String, Object> dueDays;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -102,6 +108,18 @@ public class PayrollTaxSettings {
 
     public PayrollTaxSettings setStateOptions(Map<String, String> stateOptions) {
         this.stateOptions = stateOptions;
+        return this;
+    }
+
+    /**
+     * El día del mes siguiente en que se paga el impuesto de cada estado que lo indicó, por su c_Estado; los demás, el de su ley.
+     */
+    public Map<String, Object> getDueDays() {
+        return dueDays;
+    }
+
+    public PayrollTaxSettings setDueDays(Map<String, Object> dueDays) {
+        this.dueDays = dueDays;
         return this;
     }
 }
