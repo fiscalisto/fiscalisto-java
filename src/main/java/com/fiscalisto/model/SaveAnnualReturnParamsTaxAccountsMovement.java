@@ -42,7 +42,7 @@ public class SaveAnnualReturnParamsTaxAccountsMovement {
     private BigDecimal amount;
 
     /**
-     * Un dividendo o reembolso: de qué CUFIN sale primero (por omisión cufin, la de 2014 en adelante).
+     * Un dividendo o reembolso: de qué CUFIN sale primero (por omisión cufin, la de 2014 en adelante). Un dividend_received: a cuál se suma (cufin_2013 si viene de utilidades de quien paga generadas hasta 2013, regla 3.23.6 de la RMF).
      * <p>
      * Valores: cufin, cufin_2013.
      */
@@ -123,7 +123,7 @@ public class SaveAnnualReturnParamsTaxAccountsMovement {
     }
 
     /**
-     * Un dividendo o reembolso: de qué CUFIN sale primero (por omisión cufin, la de 2014 en adelante).
+     * Un dividendo o reembolso: de qué CUFIN sale primero (por omisión cufin, la de 2014 en adelante). Un dividend_received: a cuál se suma (cufin_2013 si viene de utilidades de quien paga generadas hasta 2013, regla 3.23.6 de la RMF).
      * <p>
      * Valores: cufin, cufin_2013.
      */

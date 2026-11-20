@@ -2,6 +2,7 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -57,6 +58,18 @@ public class AttendanceReport {
      */
     @JsonProperty("overtime_policy")
     private String overtimePolicy;
+
+    /**
+     * La jornada ordinaria de la semana al último día del periodo: la de la ley (48 en 2026, 46 en 2027, 44 en 2028, 42 en 2029 y 40 desde 2030; LFT art. 59 y transitorio segundo del decreto DOF 01-05-2026) o la de la empresa si es menor. Lo trabajado de más en la semana son horas extra.
+     */
+    @JsonProperty("ordinary_week_hours")
+    private Long ordinaryWeekHours;
+
+    /**
+     * La jornada semanal que fijó la empresa en Horario y reglas, o null si sigue la de la ley.
+     */
+    @JsonProperty("weekly_hours")
+    private Long weeklyHours;
 
     /**
      * Cada empleado del emisor en el periodo.
@@ -148,6 +161,40 @@ public class AttendanceReport {
     public AttendanceReport setOvertimePolicy(String overtimePolicy) {
         this.overtimePolicy = overtimePolicy;
         return this;
+    }
+
+    /**
+     * La jornada ordinaria de la semana al último día del periodo: la de la ley (48 en 2026, 46 en 2027, 44 en 2028, 42 en 2029 y 40 desde 2030; LFT art. 59 y transitorio segundo del decreto DOF 01-05-2026) o la de la empresa si es menor. Lo trabajado de más en la semana son horas extra.
+     */
+    public Long getOrdinaryWeekHours() {
+        return ordinaryWeekHours;
+    }
+
+    public AttendanceReport setOrdinaryWeekHours(Long ordinaryWeekHours) {
+        this.ordinaryWeekHours = ordinaryWeekHours;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReport setOrdinaryWeekHours(long ordinaryWeekHours) {
+        return setOrdinaryWeekHours(Long.valueOf(ordinaryWeekHours));
+    }
+
+    /**
+     * La jornada semanal que fijó la empresa en Horario y reglas, o null si sigue la de la ley.
+     */
+    public Long getWeeklyHours() {
+        return weeklyHours;
+    }
+
+    public AttendanceReport setWeeklyHours(Long weeklyHours) {
+        this.weeklyHours = weeklyHours;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReport setWeeklyHours(long weeklyHours) {
+        return setWeeklyHours(Long.valueOf(weeklyHours));
     }
 
     /**

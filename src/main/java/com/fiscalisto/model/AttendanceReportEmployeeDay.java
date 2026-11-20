@@ -64,6 +64,12 @@ public class AttendanceReportEmployeeDay {
     private Long rejectedOvertimeMinutes;
 
     /**
+     * Minutos de su horario de ese día que pasan de la jornada ordinaria de la semana (ordinary_week_hours, LFT art. 59): son horas extra por ley aunque estén en su horario, y cuentan para la nómina.
+     */
+    @JsonProperty("week_excess_minutes")
+    private Long weekExcessMinutes;
+
+    /**
      * La nota del día que puso la empresa, o null.
      * <p>
      * Valores: vacaciones, incapacidad, permiso_con_goce, permiso_sin_goce, descanso, festivo, falta.
@@ -198,6 +204,23 @@ public class AttendanceReportEmployeeDay {
     @JsonIgnore
     public AttendanceReportEmployeeDay setRejectedOvertimeMinutes(long rejectedOvertimeMinutes) {
         return setRejectedOvertimeMinutes(Long.valueOf(rejectedOvertimeMinutes));
+    }
+
+    /**
+     * Minutos de su horario de ese día que pasan de la jornada ordinaria de la semana (ordinary_week_hours, LFT art. 59): son horas extra por ley aunque estén en su horario, y cuentan para la nómina.
+     */
+    public Long getWeekExcessMinutes() {
+        return weekExcessMinutes;
+    }
+
+    public AttendanceReportEmployeeDay setWeekExcessMinutes(Long weekExcessMinutes) {
+        this.weekExcessMinutes = weekExcessMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployeeDay setWeekExcessMinutes(long weekExcessMinutes) {
+        return setWeekExcessMinutes(Long.valueOf(weekExcessMinutes));
     }
 
     /**

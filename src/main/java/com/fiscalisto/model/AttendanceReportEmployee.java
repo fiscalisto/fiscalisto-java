@@ -94,13 +94,13 @@ public class AttendanceReportEmployee {
     private Long flaggedMarks;
 
     /**
-     * Horas extra que se pagan dobles (hasta 9 por semana en 2026, 12 desde 2027).
+     * Horas extra que se pagan dobles: hasta 9 por semana en 2026 y 2027, 10 en 2028, 11 en 2029 y 12 desde 2030 (LFT art. 66 y transitorio cuarto del decreto DOF 01-05-2026).
      */
     @JsonProperty("overtime_double_minutes")
     private Long overtimeDoubleMinutes;
 
     /**
-     * Horas extra que se pagan triples (las que pasan del límite de la semana).
+     * Horas extra que se pagan triples: las que pasan de las dobles de la semana, hasta 4 por semana (LFT art. 68).
      */
     @JsonProperty("overtime_triple_minutes")
     private Long overtimeTripleMinutes;
@@ -110,6 +110,12 @@ public class AttendanceReportEmployee {
      */
     @JsonProperty("overtime_minutes")
     private Long overtimeMinutes;
+
+    /**
+     * De las dobles y triples, los minutos de su horario que pasan de la jornada ordinaria de la semana (ordinary_week_hours, LFT art. 59): un horario de 48 horas en 2027 da 2 horas extra cada semana.
+     */
+    @JsonProperty("week_excess_minutes")
+    private Long weekExcessMinutes;
 
     /**
      * Minutos de más que nadie autorizó: quedan en el registro y no cuentan para la nómina.
@@ -361,7 +367,7 @@ public class AttendanceReportEmployee {
     }
 
     /**
-     * Horas extra que se pagan dobles (hasta 9 por semana en 2026, 12 desde 2027).
+     * Horas extra que se pagan dobles: hasta 9 por semana en 2026 y 2027, 10 en 2028, 11 en 2029 y 12 desde 2030 (LFT art. 66 y transitorio cuarto del decreto DOF 01-05-2026).
      */
     public Long getOvertimeDoubleMinutes() {
         return overtimeDoubleMinutes;
@@ -378,7 +384,7 @@ public class AttendanceReportEmployee {
     }
 
     /**
-     * Horas extra que se pagan triples (las que pasan del límite de la semana).
+     * Horas extra que se pagan triples: las que pasan de las dobles de la semana, hasta 4 por semana (LFT art. 68).
      */
     public Long getOvertimeTripleMinutes() {
         return overtimeTripleMinutes;
@@ -409,6 +415,23 @@ public class AttendanceReportEmployee {
     @JsonIgnore
     public AttendanceReportEmployee setOvertimeMinutes(long overtimeMinutes) {
         return setOvertimeMinutes(Long.valueOf(overtimeMinutes));
+    }
+
+    /**
+     * De las dobles y triples, los minutos de su horario que pasan de la jornada ordinaria de la semana (ordinary_week_hours, LFT art. 59): un horario de 48 horas en 2027 da 2 horas extra cada semana.
+     */
+    public Long getWeekExcessMinutes() {
+        return weekExcessMinutes;
+    }
+
+    public AttendanceReportEmployee setWeekExcessMinutes(Long weekExcessMinutes) {
+        this.weekExcessMinutes = weekExcessMinutes;
+        return this;
+    }
+
+    @JsonIgnore
+    public AttendanceReportEmployee setWeekExcessMinutes(long weekExcessMinutes) {
+        return setWeekExcessMinutes(Long.valueOf(weekExcessMinutes));
     }
 
     /**

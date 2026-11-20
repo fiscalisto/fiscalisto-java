@@ -9,6 +9,7 @@ import com.fiscalisto.model.Employee;
 import com.fiscalisto.model.EmployeePortal;
 import com.fiscalisto.model.EmployeeRaise;
 import com.fiscalisto.model.EmployeeVacations;
+import com.fiscalisto.model.GetEmployeePayStatementParams;
 import com.fiscalisto.model.GetEmployeeVacationCertificateParams;
 import com.fiscalisto.model.GetEmployeeVacationsParams;
 import com.fiscalisto.model.ListEmployeesParams;
@@ -210,6 +211,23 @@ public final class EmployeesService {
 
     public byte[] vacationCertificate(String id) {
         return vacationCertificate(id, null, null);
+    }
+
+    /**
+     * Constancia de sueldos
+     * <p>
+     * El PDF de lo que se le pagó al empleado en un año, de sus recibos de nómina vigentes por fecha de pago: cada percepción con su parte gravada y exenta, las deducciones (ISR retenido, IMSS y otras), los otros pagos con el subsidio para el empleo causado, y el neto. Resume sus CFDI de nómina, que son el comprobante de lo pagado y retenido (LISR art. 99 fr. III); no los sustituye. El empleado la baja también desde su portal.
+     * <p>
+     * GET /v1/employees/{id}/pay_statement
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/get-employee-pay-statement
+     */
+    public byte[] payStatement(String id, GetEmployeePayStatementParams params, RequestOptions options) {
+        return api.bytes("GET", "/v1/employees/" + ApiClient.encode(id) + "/pay_statement", null, params, false, options);
+    }
+
+    public byte[] payStatement(String id, GetEmployeePayStatementParams params) {
+        return payStatement(id, params, null);
     }
 
     /**
