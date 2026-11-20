@@ -86,6 +86,8 @@ public final class FiscalistoClient {
     private final FxRevaluationsService fxRevaluations;
     private final CostOfSalesService costOfSales;
     private final BudgetsService budgets;
+    private final InflationAdjustmentsService inflationAdjustments;
+    private final InflationAccountsService inflationAccounts;
     private final CostCenterResultsService costCenterResults;
     private final PayrollProvisionsService payrollProvisions;
     private final TaxDeterminationsService taxDeterminations;
@@ -187,6 +189,8 @@ public final class FiscalistoClient {
         this.fxRevaluations = new FxRevaluationsService(api);
         this.costOfSales = new CostOfSalesService(api);
         this.budgets = new BudgetsService(api);
+        this.inflationAdjustments = new InflationAdjustmentsService(api);
+        this.inflationAccounts = new InflationAccountsService(api);
         this.costCenterResults = new CostCenterResultsService(api);
         this.payrollProvisions = new PayrollProvisionsService(api);
         this.taxDeterminations = new TaxDeterminationsService(api);
@@ -583,6 +587,16 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public BudgetsService budgets() {
         return budgets;
+    }
+
+    /** Contabilidad. */
+    public InflationAdjustmentsService inflationAdjustments() {
+        return inflationAdjustments;
+    }
+
+    /** Contabilidad. */
+    public InflationAccountsService inflationAccounts() {
+        return inflationAccounts;
     }
 
     /** Contabilidad. */
