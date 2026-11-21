@@ -55,6 +55,12 @@ public class Payout {
     private String status;
 
     /**
+     * El nombre del lote («Fletes»), o null: la app lo llama por su día.
+     */
+    @JsonProperty("name")
+    private String name;
+
+    /**
      * El día en que sale (AAAA-MM-DD, hora de la Ciudad de México).
      */
     @JsonProperty("pay_on")
@@ -236,6 +242,18 @@ public class Payout {
 
     public Payout setStatus(String status) {
         this.status = status;
+        return this;
+    }
+
+    /**
+     * El nombre del lote («Fletes»), o null: la app lo llama por su día.
+     */
+    public String getName() {
+        return name;
+    }
+
+    public Payout setName(String name) {
+        this.name = name;
         return this;
     }
 

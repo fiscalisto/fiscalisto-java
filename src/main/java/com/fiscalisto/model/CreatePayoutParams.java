@@ -27,6 +27,12 @@ public class CreatePayoutParams {
     private String payOn;
 
     /**
+     * El nombre del lote («Fletes»), para encontrarlo en la app entre los lotes abiertos. Sin nombre, la app lo llama por su día («Lote del jueves 27 nov»).
+     */
+    @JsonProperty("name")
+    private String name;
+
+    /**
      * Una nota para quien lo revisa y lo firma.
      */
     @JsonProperty("note")
@@ -69,6 +75,18 @@ public class CreatePayoutParams {
 
     public CreatePayoutParams setPayOn(String payOn) {
         this.payOn = payOn;
+        return this;
+    }
+
+    /**
+     * El nombre del lote («Fletes»), para encontrarlo en la app entre los lotes abiertos. Sin nombre, la app lo llama por su día («Lote del jueves 27 nov»).
+     */
+    public String getName() {
+        return name;
+    }
+
+    public CreatePayoutParams setName(String name) {
+        this.name = name;
         return this;
     }
 
