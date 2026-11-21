@@ -16,9 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateRuleParamsAction {
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla.
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote.
      * <p>
      * Obligatorio.
      */
@@ -46,6 +46,26 @@ public class CreateRuleParamsAction {
     private Boolean removeWhenUnmet;
 
     /**
+     * lote: el nombre del lote («Fletes»); vacío o null: «Lote del jueves 27 nov».
+     */
+    @JsonProperty("lote_name")
+    private String loteName;
+
+    /**
+     * lote: el día que paga: el siguiente lunes … viernes (hoy incluido), a los `days` días, o `due`, la fecha de pago del contrarecibo del portal. Un día inhábil pasa al siguiente hábil. Por omisión, friday.
+     * <p>
+     * Valores: monday, tuesday, wednesday, thursday, friday, in_days, due.
+     */
+    @JsonProperty("pay_on")
+    private String payOn;
+
+    /**
+     * lote con pay_on in_days: cuántos días después.
+     */
+    @JsonProperty("days")
+    private Long days;
+
+    /**
      * Su centro de costo (ccn_…): la obra, proyecto, sucursal o área a la que pertenece, para ver ingresos y gastos por centro en Reportes. No cambia el CFDI. Sus notas de crédito lo toman solas.
      */
     @JsonProperty("cost_center")
@@ -70,9 +90,9 @@ public class CreateRuleParamsAction {
     private String note;
 
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla.
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote.
      * <p>
      * Obligatorio.
      */
@@ -121,6 +141,49 @@ public class CreateRuleParamsAction {
     public CreateRuleParamsAction setRemoveWhenUnmet(Boolean removeWhenUnmet) {
         this.removeWhenUnmet = removeWhenUnmet;
         return this;
+    }
+
+    /**
+     * lote: el nombre del lote («Fletes»); vacío o null: «Lote del jueves 27 nov».
+     */
+    public String getLoteName() {
+        return loteName;
+    }
+
+    public CreateRuleParamsAction setLoteName(String loteName) {
+        this.loteName = loteName;
+        return this;
+    }
+
+    /**
+     * lote: el día que paga: el siguiente lunes … viernes (hoy incluido), a los `days` días, o `due`, la fecha de pago del contrarecibo del portal. Un día inhábil pasa al siguiente hábil. Por omisión, friday.
+     * <p>
+     * Valores: monday, tuesday, wednesday, thursday, friday, in_days, due.
+     */
+    public String getPayOn() {
+        return payOn;
+    }
+
+    public CreateRuleParamsAction setPayOn(String payOn) {
+        this.payOn = payOn;
+        return this;
+    }
+
+    /**
+     * lote con pay_on in_days: cuántos días después.
+     */
+    public Long getDays() {
+        return days;
+    }
+
+    public CreateRuleParamsAction setDays(Long days) {
+        this.days = days;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateRuleParamsAction setDays(long days) {
+        return setDays(Long.valueOf(days));
     }
 
     /**

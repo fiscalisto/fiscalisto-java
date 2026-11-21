@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote.
      */
     @JsonProperty("type")
     private String type;
@@ -66,9 +66,29 @@ public class RuleAction {
     private String note;
 
     /**
+     * lote: el nombre del lote; null: «Lote del jueves 27 nov».
+     */
+    @JsonProperty("lote_name")
+    private String loteName;
+
+    /**
+     * lote: el día que paga (siguiente día de la semana, a los días, o el del contrarecibo).
+     * <p>
+     * Valores: monday, tuesday, wednesday, thursday, friday, in_days, due.
+     */
+    @JsonProperty("pay_on")
+    private String payOn;
+
+    /**
+     * lote con pay_on in_days: cuántos días.
+     */
+    @JsonProperty("days")
+    private Long days;
+
+    /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote.
      */
     public String getType() {
         return type;
@@ -166,5 +186,48 @@ public class RuleAction {
     public RuleAction setNote(String note) {
         this.note = note;
         return this;
+    }
+
+    /**
+     * lote: el nombre del lote; null: «Lote del jueves 27 nov».
+     */
+    public String getLoteName() {
+        return loteName;
+    }
+
+    public RuleAction setLoteName(String loteName) {
+        this.loteName = loteName;
+        return this;
+    }
+
+    /**
+     * lote: el día que paga (siguiente día de la semana, a los días, o el del contrarecibo).
+     * <p>
+     * Valores: monday, tuesday, wednesday, thursday, friday, in_days, due.
+     */
+    public String getPayOn() {
+        return payOn;
+    }
+
+    public RuleAction setPayOn(String payOn) {
+        this.payOn = payOn;
+        return this;
+    }
+
+    /**
+     * lote con pay_on in_days: cuántos días.
+     */
+    public Long getDays() {
+        return days;
+    }
+
+    public RuleAction setDays(Long days) {
+        this.days = days;
+        return this;
+    }
+
+    @JsonIgnore
+    public RuleAction setDays(long days) {
+        return setDays(Long.valueOf(days));
     }
 }

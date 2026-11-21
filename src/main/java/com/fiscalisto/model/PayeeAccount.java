@@ -93,6 +93,18 @@ public class PayeeAccount {
     private String verifiedByHandReason;
 
     /**
+     * Su número de cuenta, si se anotó junto a la CLABE (solo de referencia: la transferencia usa la CLABE), o null.
+     */
+    @JsonProperty("account_number")
+    private String accountNumber;
+
+    /**
+     * true si es la cuenta predeterminada del proveedor: la que usa un pago cuando no se elige otra.
+     */
+    @JsonProperty("is_default")
+    private Boolean isDefault;
+
+    /**
      * verifying (verificando con el banco), pending_approval (verificada, por aprobar), holder_mismatch (es de otra persona), failed (no existe o no recibe), approved, rejected o replaced (la sustituyó otra).
      * <p>
      * Valores: verifying, pending_approval, holder_mismatch, failed, approved, rejected, replaced.
@@ -279,6 +291,30 @@ public class PayeeAccount {
 
     public PayeeAccount setVerifiedByHandReason(String verifiedByHandReason) {
         this.verifiedByHandReason = verifiedByHandReason;
+        return this;
+    }
+
+    /**
+     * Su número de cuenta, si se anotó junto a la CLABE (solo de referencia: la transferencia usa la CLABE), o null.
+     */
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public PayeeAccount setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        return this;
+    }
+
+    /**
+     * true si es la cuenta predeterminada del proveedor: la que usa un pago cuando no se elige otra.
+     */
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public PayeeAccount setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
         return this;
     }
 
