@@ -73,6 +73,14 @@ public class InvoiceConcepts {
     private String ungroupedName;
 
     /**
+     * Qué pasa con el detail de cada línea del ticket: customer, el comprador ve la casilla sin marcar y la marca si lo quiere; always, va siempre después de la descripción; never, no va nunca.
+     * <p>
+     * Valores: customer, always, never.
+     */
+    @JsonProperty("line_detail")
+    private String lineDetail;
+
+    /**
      * itemized: un concepto por renglón del ticket; single: uno solo; grouped: uno por cada grupo de groups. Lo que lleva otro juego de impuestos (como una noche con ISH) va siempre en su propio concepto.
      * <p>
      * Valores: itemized, single, grouped.
@@ -181,6 +189,20 @@ public class InvoiceConcepts {
 
     public InvoiceConcepts setUngroupedName(String ungroupedName) {
         this.ungroupedName = ungroupedName;
+        return this;
+    }
+
+    /**
+     * Qué pasa con el detail de cada línea del ticket: customer, el comprador ve la casilla sin marcar y la marca si lo quiere; always, va siempre después de la descripción; never, no va nunca.
+     * <p>
+     * Valores: customer, always, never.
+     */
+    public String getLineDetail() {
+        return lineDetail;
+    }
+
+    public InvoiceConcepts setLineDetail(String lineDetail) {
+        this.lineDetail = lineDetail;
         return this;
     }
 }

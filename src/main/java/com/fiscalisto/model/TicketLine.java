@@ -53,6 +53,12 @@ public class TicketLine {
     private List<TicketLineLocalTax> localTaxes;
 
     /**
+     * El detalle que mandó (noches, fechas, reservación): va después de la descripción en la factura según `invoice_concepts.line_detail` de la autofactura.
+     */
+    @JsonProperty("detail")
+    private String detail;
+
+    /**
      * Cantidad (Cantidad). Por omisión 1.
      */
     @JsonProperty("quantity")
@@ -133,6 +139,18 @@ public class TicketLine {
 
     public TicketLine setLocalTaxes(List<TicketLineLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * El detalle que mandó (noches, fechas, reservación): va después de la descripción en la factura según `invoice_concepts.line_detail` de la autofactura.
+     */
+    public String getDetail() {
+        return detail;
+    }
+
+    public TicketLine setDetail(String detail) {
+        this.detail = detail;
         return this;
     }
 

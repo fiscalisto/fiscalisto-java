@@ -37,6 +37,10 @@ public final class PayoutsService {
         return create(params, null);
     }
 
+    public Payout create() {
+        return create(null, null);
+    }
+
     /**
      * Listar pagos a proveedores
      * <p>

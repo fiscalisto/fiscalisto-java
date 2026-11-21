@@ -155,7 +155,7 @@ public class SatInvoice {
     private SatInvoicePaidOtherwise paidOtherwise;
 
     /**
-     * Solo en una PUE recibida pagada en efectivo cuando la empresa pide confirmar estos pagos (Ajustes › Pagos sin complemento): pending hasta que alguien anote de dónde salió el dinero (mark_paid con money_source), confirmed después. Null en las demás. Sus impuestos no cambian.
+     * Solo en una PUE recibida pagada en efectivo cuando la empresa pide confirmar estos pagos (Ajustes › Pagos en efectivo): pending hasta que alguien anote de dónde salió el dinero (mark_paid con money_source), confirmed después. Null en las demás. Sus impuestos no cambian.
      * <p>
      * Valores: pending, confirmed.
      */
@@ -472,7 +472,7 @@ public class SatInvoice {
     }
 
     /**
-     * Solo en una PUE recibida pagada en efectivo cuando la empresa pide confirmar estos pagos (Ajustes › Pagos sin complemento): pending hasta que alguien anote de dónde salió el dinero (mark_paid con money_source), confirmed después. Null en las demás. Sus impuestos no cambian.
+     * Solo en una PUE recibida pagada en efectivo cuando la empresa pide confirmar estos pagos (Ajustes › Pagos en efectivo): pending hasta que alguien anote de dónde salió el dinero (mark_paid con money_source), confirmed después. Null en las demás. Sus impuestos no cambian.
      * <p>
      * Valores: pending, confirmed.
      */

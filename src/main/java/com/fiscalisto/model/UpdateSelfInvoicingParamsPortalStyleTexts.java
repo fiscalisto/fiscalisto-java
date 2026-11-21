@@ -103,6 +103,12 @@ public class UpdateSelfInvoicingParamsPortalStyleTexts {
     private UpdateSelfInvoicingParamsPortalStyleTextsConceptsGrouped conceptsGrouped;
 
     /**
+     * La casilla del detalle de los conceptos («Incluir el detalle en la descripción…»; ver `invoice_concepts.line_detail`); `null` vuelve al de Fiscalisto.
+     */
+    @JsonProperty("detail_label")
+    private UpdateSelfInvoicingParamsPortalStyleTextsDetailLabel detailLabel;
+
+    /**
      * El título (en español es `portal_title`); `null` vuelve al de Fiscalisto.
      */
     public UpdateSelfInvoicingParamsPortalStyleTextsTitle getTitle() {
@@ -279,6 +285,18 @@ public class UpdateSelfInvoicingParamsPortalStyleTexts {
 
     public UpdateSelfInvoicingParamsPortalStyleTexts setConceptsGrouped(UpdateSelfInvoicingParamsPortalStyleTextsConceptsGrouped conceptsGrouped) {
         this.conceptsGrouped = conceptsGrouped;
+        return this;
+    }
+
+    /**
+     * La casilla del detalle de los conceptos («Incluir el detalle en la descripción…»; ver `invoice_concepts.line_detail`); `null` vuelve al de Fiscalisto.
+     */
+    public UpdateSelfInvoicingParamsPortalStyleTextsDetailLabel getDetailLabel() {
+        return detailLabel;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleTexts setDetailLabel(UpdateSelfInvoicingParamsPortalStyleTextsDetailLabel detailLabel) {
+        this.detailLabel = detailLabel;
         return this;
     }
 }

@@ -47,12 +47,16 @@ public class CreatePayoutParams {
     private String exchangeRate;
 
     /**
-     * Las facturas recibidas a pagar (de 1 a 500). Las de un mismo proveedor van en una sola transferencia a su cuenta aprobada.
-     * <p>
-     * Obligatorio.
+     * Las facturas recibidas a pagar (hasta 500). Las de un mismo proveedor van en una sola transferencia a su cuenta aprobada. Mande invoices, payments o las dos.
      */
     @JsonProperty("invoices")
     private List<CreatePayoutParamsInvoice> invoices;
+
+    /**
+     * Pagos sin factura (hasta 500 entre los dos arreglos): una nómina, un anticipo, un reembolso. Los de un mismo RFC van en una sola transferencia.
+     */
+    @JsonProperty("payments")
+    private List<CreatePayoutParamsPayment> payments;
 
     /**
      * El emisor (iss_…). Por omisión, su único emisor.
@@ -117,9 +121,7 @@ public class CreatePayoutParams {
     }
 
     /**
-     * Las facturas recibidas a pagar (de 1 a 500). Las de un mismo proveedor van en una sola transferencia a su cuenta aprobada.
-     * <p>
-     * Obligatorio.
+     * Las facturas recibidas a pagar (hasta 500). Las de un mismo proveedor van en una sola transferencia a su cuenta aprobada. Mande invoices, payments o las dos.
      */
     public List<CreatePayoutParamsInvoice> getInvoices() {
         return invoices;
@@ -127,6 +129,18 @@ public class CreatePayoutParams {
 
     public CreatePayoutParams setInvoices(List<CreatePayoutParamsInvoice> invoices) {
         this.invoices = invoices;
+        return this;
+    }
+
+    /**
+     * Pagos sin factura (hasta 500 entre los dos arreglos): una nómina, un anticipo, un reembolso. Los de un mismo RFC van en una sola transferencia.
+     */
+    public List<CreatePayoutParamsPayment> getPayments() {
+        return payments;
+    }
+
+    public CreatePayoutParams setPayments(List<CreatePayoutParamsPayment> payments) {
+        this.payments = payments;
         return this;
     }
 }

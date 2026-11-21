@@ -73,6 +73,14 @@ public class UpdateSelfInvoicingParamsInvoiceConcepts {
     private String ungroupedName;
 
     /**
+     * Qué pasa con el `detail` de cada línea del ticket (las noches, fechas y reservación de una estancia): `customer` (por omisión), el comprador ve la casilla «Incluir el detalle en la descripción» sin marcar y la marca si lo quiere; `always`, va siempre después de la descripción, sin casilla; `never`, no va nunca, sin casilla.
+     * <p>
+     * Valores: customer, always, never.
+     */
+    @JsonProperty("line_detail")
+    private String lineDetail;
+
+    /**
      * `itemized` (por omisión): un concepto por renglón del ticket (Hospedaje, Restaurante, Bar…). `single`: uno solo, con `description`. `grouped`: los conceptos de `groups`. Un concepto lleva un solo juego de impuestos, así que los renglones con otros (una noche con ISH, IVA 0 %, retenciones) van aparte. El total y los impuestos no cambian.
      * <p>
      * Valores: itemized, single, grouped.
@@ -181,6 +189,20 @@ public class UpdateSelfInvoicingParamsInvoiceConcepts {
 
     public UpdateSelfInvoicingParamsInvoiceConcepts setUngroupedName(String ungroupedName) {
         this.ungroupedName = ungroupedName;
+        return this;
+    }
+
+    /**
+     * Qué pasa con el `detail` de cada línea del ticket (las noches, fechas y reservación de una estancia): `customer` (por omisión), el comprador ve la casilla «Incluir el detalle en la descripción» sin marcar y la marca si lo quiere; `always`, va siempre después de la descripción, sin casilla; `never`, no va nunca, sin casilla.
+     * <p>
+     * Valores: customer, always, never.
+     */
+    public String getLineDetail() {
+        return lineDetail;
+    }
+
+    public UpdateSelfInvoicingParamsInvoiceConcepts setLineDetail(String lineDetail) {
+        this.lineDetail = lineDetail;
         return this;
     }
 }

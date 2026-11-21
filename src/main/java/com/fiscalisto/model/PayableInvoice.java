@@ -95,6 +95,18 @@ public class PayableInvoice {
     private String paymentMethod;
 
     /**
+     * Las retenciones de la factura. total y amount_due ya vienen sin ellas: el pago manda el neto y la empresa las entera al SAT a más tardar el 17 del mes siguiente. null: no retiene.
+     */
+    @JsonProperty("withheld")
+    private PayableInvoiceWithheld withheld;
+
+    /**
+     * Pronto pago del portal de proveedores. Aceptado, amount_due ya es el total menos el descuento hasta que llega la nota de crédito del proveedor. null: no tiene.
+     */
+    @JsonProperty("early_payment")
+    private PayableInvoiceEarlyPayment earlyPayment;
+
+    /**
      * El pago abierto (pyo_…) en el que ya está, o null.
      */
     @JsonProperty("in_payout")
@@ -286,6 +298,30 @@ public class PayableInvoice {
 
     public PayableInvoice setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+        return this;
+    }
+
+    /**
+     * Las retenciones de la factura. total y amount_due ya vienen sin ellas: el pago manda el neto y la empresa las entera al SAT a más tardar el 17 del mes siguiente. null: no retiene.
+     */
+    public PayableInvoiceWithheld getWithheld() {
+        return withheld;
+    }
+
+    public PayableInvoice setWithheld(PayableInvoiceWithheld withheld) {
+        this.withheld = withheld;
+        return this;
+    }
+
+    /**
+     * Pronto pago del portal de proveedores. Aceptado, amount_due ya es el total menos el descuento hasta que llega la nota de crédito del proveedor. null: no tiene.
+     */
+    public PayableInvoiceEarlyPayment getEarlyPayment() {
+        return earlyPayment;
+    }
+
+    public PayableInvoice setEarlyPayment(PayableInvoiceEarlyPayment earlyPayment) {
+        this.earlyPayment = earlyPayment;
         return this;
     }
 

@@ -55,6 +55,12 @@ public class CreateTicketParamsLine {
     private List<CreateTicketParamsLineLocalTax> localTaxes;
 
     /**
+     * Lo que solo dice esta venta, como las noches, fechas y número de reservación de una estancia. Con él, la factura dice «Hospedaje · 6 noches, del 14 al 20 de noviembre»; cuándo va lo decide `invoice_concepts.line_detail` de la autofactura (por omisión, el cliente lo elige en el portal).
+     */
+    @JsonProperty("detail")
+    private String detail;
+
+    /**
      * Unidades (noches, piezas). Por omisión 1.
      */
     @JsonProperty("quantity")
@@ -139,6 +145,18 @@ public class CreateTicketParamsLine {
 
     public CreateTicketParamsLine setLocalTaxes(List<CreateTicketParamsLineLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * Lo que solo dice esta venta, como las noches, fechas y número de reservación de una estancia. Con él, la factura dice «Hospedaje · 6 noches, del 14 al 20 de noviembre»; cuándo va lo decide `invoice_concepts.line_detail` de la autofactura (por omisión, el cliente lo elige en el portal).
+     */
+    public String getDetail() {
+        return detail;
+    }
+
+    public CreateTicketParamsLine setDetail(String detail) {
+        this.detail = detail;
         return this;
     }
 
