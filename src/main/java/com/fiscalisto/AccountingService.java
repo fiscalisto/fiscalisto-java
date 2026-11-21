@@ -13,6 +13,7 @@ import com.fiscalisto.model.EquityChanges;
 import com.fiscalisto.model.FinancialRatios;
 import com.fiscalisto.model.FinancialStatements;
 import com.fiscalisto.model.GeneralLedger;
+import com.fiscalisto.model.GetBooksExportParams;
 import com.fiscalisto.model.GetCashFlowParams;
 import com.fiscalisto.model.GetComparativeStatementsParams;
 import com.fiscalisto.model.GetConsolidatedStatementsParams;
@@ -313,12 +314,29 @@ public final class AccountingService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-electronic-accounting
      */
-    public String electronicAccounting(GetElectronicAccountingParams params, RequestOptions options) {
-        return new String(api.bytes("GET", "/v1/accounting/electronic_accounting", null, params, false, options), java.nio.charset.StandardCharsets.UTF_8);
+    public byte[] electronicAccounting(GetElectronicAccountingParams params, RequestOptions options) {
+        return api.bytes("GET", "/v1/accounting/electronic_accounting", null, params, false, options);
     }
 
-    public String electronicAccounting(GetElectronicAccountingParams params) {
+    public byte[] electronicAccounting(GetElectronicAccountingParams params) {
         return electronicAccounting(params, null);
+    }
+
+    /**
+     * Descargar toda la contabilidad de un periodo
+     * <p>
+     * Un ZIP para llevar los libros a otro sistema, de from_month a to_month (hasta 24 meses): el catálogo (1-catalogo, Excel con número, nombre, nivel, código agrupador y naturaleza), los saldos iniciales al primer día de from_month en deudor y acreedor (2-saldos-iniciales), las pólizas de todo el periodo para CONTPAQi Contabilidad (un TXT) y para Aspel COI (un Excel por mes), la balanza de comprobación de cada mes (una hoja por mes) y, en contabilidad-electronica, el catálogo (CT) y la balanza de cada mes (BN) en XML 1.3 del Anexo 24. LEEME.txt dice el orden en que se importa. Son los mismos libros de financial_statements y electronic_accounting.
+     * <p>
+     * GET /v1/accounting/books_export
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-books-export
+     */
+    public byte[] booksExport(GetBooksExportParams params, RequestOptions options) {
+        return api.bytes("GET", "/v1/accounting/books_export", null, params, false, options);
+    }
+
+    public byte[] booksExport(GetBooksExportParams params) {
+        return booksExport(params, null);
     }
 
     /**

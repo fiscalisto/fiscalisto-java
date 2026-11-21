@@ -138,11 +138,11 @@ public final class SatReviewsService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/cumplimiento-sat/download-sat-review-answer
      */
-    public String downloadAnswer(String id, RequestOptions options) {
-        return new String(api.bytes("GET", "/v1/sat_reviews/" + ApiClient.encode(id) + "/answer", null, null, false, options), java.nio.charset.StandardCharsets.UTF_8);
+    public byte[] downloadAnswer(String id, RequestOptions options) {
+        return api.bytes("GET", "/v1/sat_reviews/" + ApiClient.encode(id) + "/answer", null, null, false, options);
     }
 
-    public String downloadAnswer(String id) {
+    public byte[] downloadAnswer(String id) {
         return downloadAnswer(id, null);
     }
 }

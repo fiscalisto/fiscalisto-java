@@ -97,11 +97,11 @@ public final class ExportsService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/exportaciones/download-export
      */
-    public String download(String id, RequestOptions options) {
-        return new String(api.bytes("GET", "/v1/exports/" + ApiClient.encode(id) + "/download", null, null, false, options), java.nio.charset.StandardCharsets.UTF_8);
+    public byte[] download(String id, RequestOptions options) {
+        return api.bytes("GET", "/v1/exports/" + ApiClient.encode(id) + "/download", null, null, false, options);
     }
 
-    public String download(String id) {
+    public byte[] download(String id) {
         return download(id, null);
     }
 }

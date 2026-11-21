@@ -62,7 +62,7 @@ public class Invoice {
     private String type;
 
     /**
-     * processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada con una cancelación en espera del cliente. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
+     * processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada, sin el UUID aún (se resuelve sola, como processing). Una cancelación en espera del cliente no cambia status: sigue valid, con cancellation.status pending. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
      * <p>
      * Valores: processing, pending, valid, rejected, canceled.
      */
@@ -374,7 +374,7 @@ public class Invoice {
     }
 
     /**
-     * processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada con una cancelación en espera del cliente. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
+     * processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada, sin el UUID aún (se resuelve sola, como processing). Una cancelación en espera del cliente no cambia status: sigue valid, con cancellation.status pending. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
      * <p>
      * Valores: processing, pending, valid, rejected, canceled.
      */
