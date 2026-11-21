@@ -16,9 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateRuleParamsAction {
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura.
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings, extra_signature.
      * <p>
      * Obligatorio.
      */
@@ -110,15 +110,27 @@ public class CreateRuleParamsAction {
     private String message;
 
     /**
+     * extra_signature: cuántas firmas más pide (1 a 3). Por omisión, 1.
+     */
+    @JsonProperty("signatures")
+    private Long signatures;
+
+    /**
+     * extra_signature: por qué, para quien firma («Proveedor nuevo»).
+     */
+    @JsonProperty("reason")
+    private String reason;
+
+    /**
      * review_findings: los hallazgos que da por revisados (sus códigos, `code` en GET /v1/sat_findings). No los que cambian impuestos o la lista negra: cancelado, efos_definitivo, efos_presunto, lista_69b_bis, lista_69.
      */
     @JsonProperty("findings")
     private List<String> findings;
 
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura.
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings, extra_signature.
      * <p>
      * Obligatorio.
      */
@@ -300,6 +312,35 @@ public class CreateRuleParamsAction {
 
     public CreateRuleParamsAction setMessage(String message) {
         this.message = message;
+        return this;
+    }
+
+    /**
+     * extra_signature: cuántas firmas más pide (1 a 3). Por omisión, 1.
+     */
+    public Long getSignatures() {
+        return signatures;
+    }
+
+    public CreateRuleParamsAction setSignatures(Long signatures) {
+        this.signatures = signatures;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateRuleParamsAction setSignatures(long signatures) {
+        return setSignatures(Long.valueOf(signatures));
+    }
+
+    /**
+     * extra_signature: por qué, para quien firma («Proveedor nuevo»).
+     */
+    public String getReason() {
+        return reason;
+    }
+
+    public CreateRuleParamsAction setReason(String reason) {
+        this.reason = reason;
         return this;
     }
 

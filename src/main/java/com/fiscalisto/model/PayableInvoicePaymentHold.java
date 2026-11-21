@@ -25,7 +25,7 @@ public class PayableInvoicePaymentHold {
     private String note;
 
     /**
-     * held_at.
+     * Cuándo lo retuvo (UTC).
      */
     @JsonProperty("held_at")
     private String heldAt;
@@ -55,7 +55,7 @@ public class PayableInvoicePaymentHold {
     }
 
     /**
-     * held_at.
+     * Cuándo lo retuvo (UTC).
      */
     public String getHeldAt() {
         return heldAt;

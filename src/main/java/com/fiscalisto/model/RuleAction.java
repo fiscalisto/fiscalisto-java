@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature.
      */
     @JsonProperty("type")
     private String type;
@@ -92,6 +92,18 @@ public class RuleAction {
     private List<String> findings;
 
     /**
+     * extra_signature: cuántas firmas más pide (1 a 3).
+     */
+    @JsonProperty("signatures")
+    private Long signatures;
+
+    /**
+     * extra_signature: por qué, para quien firma.
+     */
+    @JsonProperty("reason")
+    private String reason;
+
+    /**
      * lote: el nombre del lote; null: «Lote del jueves 27 nov».
      */
     @JsonProperty("lote_name")
@@ -114,7 +126,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature.
      */
     public String getType() {
         return type;
@@ -261,6 +273,35 @@ public class RuleAction {
 
     public RuleAction setFindings(List<String> findings) {
         this.findings = findings;
+        return this;
+    }
+
+    /**
+     * extra_signature: cuántas firmas más pide (1 a 3).
+     */
+    public Long getSignatures() {
+        return signatures;
+    }
+
+    public RuleAction setSignatures(Long signatures) {
+        this.signatures = signatures;
+        return this;
+    }
+
+    @JsonIgnore
+    public RuleAction setSignatures(long signatures) {
+        return setSignatures(Long.valueOf(signatures));
+    }
+
+    /**
+     * extra_signature: por qué, para quien firma.
+     */
+    public String getReason() {
+        return reason;
+    }
+
+    public RuleAction setReason(String reason) {
+        this.reason = reason;
         return this;
     }
 
