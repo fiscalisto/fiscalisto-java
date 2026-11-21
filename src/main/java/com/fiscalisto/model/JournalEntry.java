@@ -103,6 +103,12 @@ public class JournalEntry {
     private BigDecimal exchangeRate;
 
     /**
+     * Sus renglones se editaron a mano (POST /v1/accounting/automatic_entries/{uuid}).
+     */
+    @JsonProperty("edited")
+    private Boolean edited;
+
+    /**
      * Los movimientos, en pesos: el cargo (debit) o abono (credit) a cada cuenta.
      */
     @JsonProperty("lines")
@@ -286,6 +292,18 @@ public class JournalEntry {
     @JsonIgnore
     public JournalEntry setExchangeRate(double exchangeRate) {
         return setExchangeRate(BigDecimal.valueOf(exchangeRate));
+    }
+
+    /**
+     * Sus renglones se editaron a mano (POST /v1/accounting/automatic_entries/{uuid}).
+     */
+    public Boolean getEdited() {
+        return edited;
+    }
+
+    public JournalEntry setEdited(Boolean edited) {
+        this.edited = edited;
+        return this;
     }
 
     /**

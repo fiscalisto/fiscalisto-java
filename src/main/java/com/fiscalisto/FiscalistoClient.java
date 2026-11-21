@@ -94,6 +94,7 @@ public final class FiscalistoClient {
     private final TicketsService tickets;
     private final AccountingService accounting;
     private final ManualEntriesService manualEntries;
+    private final AutomaticEntriesService automaticEntries;
     private final OpeningBalancesService openingBalances;
     private final FixedAssetsService fixedAssets;
     private final ClosedPeriodService closedPeriod;
@@ -219,6 +220,7 @@ public final class FiscalistoClient {
         this.tickets = new TicketsService(api);
         this.accounting = new AccountingService(api);
         this.manualEntries = new ManualEntriesService(api);
+        this.automaticEntries = new AutomaticEntriesService(api);
         this.openingBalances = new OpeningBalancesService(api);
         this.fixedAssets = new FixedAssetsService(api);
         this.closedPeriod = new ClosedPeriodService(api);
@@ -671,6 +673,11 @@ public final class FiscalistoClient {
     /** Contabilidad. */
     public ManualEntriesService manualEntries() {
         return manualEntries;
+    }
+
+    /** Contabilidad. */
+    public AutomaticEntriesService automaticEntries() {
+        return automaticEntries;
     }
 
     /** Contabilidad. */
