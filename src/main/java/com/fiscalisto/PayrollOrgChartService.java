@@ -6,7 +6,9 @@ import com.fiscalisto.model.AssignPayrollOrgChartParams;
 import com.fiscalisto.model.CreatePayrollVacancyParams;
 import com.fiscalisto.model.FillPayrollVacancyParams;
 import com.fiscalisto.model.GetPayrollOrgChartParams;
+import com.fiscalisto.model.Hiring;
 import com.fiscalisto.model.PayrollOrgChart;
+import com.fiscalisto.model.PublishPayrollVacancyParams;
 import com.fiscalisto.model.RemovePayrollDepartmentParams;
 import com.fiscalisto.model.SavePayrollDepartmentParams;
 import com.fiscalisto.model.UpdatePayrollVacancyParams;
@@ -159,5 +161,22 @@ public final class PayrollOrgChartService {
 
     public PayrollOrgChart fillVacancy(String id, FillPayrollVacancyParams params) {
         return fillVacancy(id, params, null);
+    }
+
+    /**
+     * Publicar una vacante
+     * <p>
+     * La pone en la página de empleos del emisor (published true) o la quita (false), con su descripción, requisitos, tipo de contrato, lugar, sueldo visible, fecha de cierre y el formulario (jbf_…) que llenan quienes se postulan. Solo una approved se publica; publicarla enciende la página si estaba apagada. Google la puede mostrar en sus resultados de empleos (JobPosting). Contesta hiring.
+     * <p>
+     * POST /v1/payroll_org_chart/vacancies/{id}/publish
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/publish-payroll-vacancy
+     */
+    public Hiring publishVacancy(String id, PublishPayrollVacancyParams params, RequestOptions options) {
+        return api.request("POST", "/v1/payroll_org_chart/vacancies/" + ApiClient.encode(id) + "/publish", params, null, true, Hiring.class, options);
+    }
+
+    public Hiring publishVacancy(String id, PublishPayrollVacancyParams params) {
+        return publishVacancy(id, params, null);
     }
 }

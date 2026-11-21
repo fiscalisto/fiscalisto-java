@@ -41,6 +41,8 @@ public final class FiscalistoClient {
     private final PayrollReportsService payrollReports;
     private final PayrollCalendarService payrollCalendar;
     private final PayrollOrgChartService payrollOrgChart;
+    private final HiringService hiring;
+    private final CandidatesService candidates;
     private final InvoiceBatchesService invoiceBatches;
     private final TaxIdsService taxIds;
     private final BranchesService branches;
@@ -163,6 +165,8 @@ public final class FiscalistoClient {
         this.payrollReports = new PayrollReportsService(api);
         this.payrollCalendar = new PayrollCalendarService(api);
         this.payrollOrgChart = new PayrollOrgChartService(api);
+        this.hiring = new HiringService(api);
+        this.candidates = new CandidatesService(api);
         this.invoiceBatches = new InvoiceBatchesService(api);
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
@@ -400,6 +404,16 @@ public final class FiscalistoClient {
     /** Nómina. */
     public PayrollOrgChartService payrollOrgChart() {
         return payrollOrgChart;
+    }
+
+    /** Nómina. */
+    public HiringService hiring() {
+        return hiring;
+    }
+
+    /** Nómina. */
+    public CandidatesService candidates() {
+        return candidates;
     }
 
     /** Lotes. */
