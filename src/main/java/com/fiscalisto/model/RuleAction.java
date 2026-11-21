@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, notify.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify.
      */
     @JsonProperty("type")
     private String type;
@@ -68,7 +68,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, notify.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify.
      */
     public String getType() {
         return type;
