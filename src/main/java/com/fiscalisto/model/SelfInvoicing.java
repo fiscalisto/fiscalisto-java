@@ -144,6 +144,12 @@ public class SelfInvoicing {
     private Boolean customerNotes;
 
     /**
+     * true: cuando un comprador no puede facturar por algo del emisor, se avisa por correo; false: solo queda en Alertas.
+     */
+    @JsonProperty("failure_email")
+    private Boolean failureEmail;
+
+    /**
      * ticket: la factura global lleva un concepto «Venta» por ticket, con su folio. summary: solo el monto total del periodo, uno por combinación de impuestos (NoIdentificacion «Resumen»), para una persona física en RESICO (regla 2.7.1.21 de la RMF 2026).
      * <p>
      * Valores: ticket, summary.
@@ -408,6 +414,18 @@ public class SelfInvoicing {
 
     public SelfInvoicing setCustomerNotes(Boolean customerNotes) {
         this.customerNotes = customerNotes;
+        return this;
+    }
+
+    /**
+     * true: cuando un comprador no puede facturar por algo del emisor, se avisa por correo; false: solo queda en Alertas.
+     */
+    public Boolean getFailureEmail() {
+        return failureEmail;
+    }
+
+    public SelfInvoicing setFailureEmail(Boolean failureEmail) {
+        this.failureEmail = failureEmail;
         return this;
     }
 

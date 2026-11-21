@@ -94,6 +94,18 @@ public class RuleAction {
     private String per;
 
     /**
+     * email_supplier: las columnas de cada tabla del mensaje; null: las de siempre.
+     */
+    @JsonProperty("columns")
+    private RuleActionColumns columns;
+
+    /**
+     * email_supplier: personas del equipo con copia (mem_…).
+     */
+    @JsonProperty("cc")
+    private List<String> cc;
+
+    /**
      * review_findings: los hallazgos que da por revisados (sus códigos).
      */
     @JsonProperty("findings")
@@ -283,6 +295,30 @@ public class RuleAction {
 
     public RuleAction setPer(String per) {
         this.per = per;
+        return this;
+    }
+
+    /**
+     * email_supplier: las columnas de cada tabla del mensaje; null: las de siempre.
+     */
+    public RuleActionColumns getColumns() {
+        return columns;
+    }
+
+    public RuleAction setColumns(RuleActionColumns columns) {
+        this.columns = columns;
+        return this;
+    }
+
+    /**
+     * email_supplier: personas del equipo con copia (mem_…).
+     */
+    public List<String> getCc() {
+        return cc;
+    }
+
+    public RuleAction setCc(List<String> cc) {
+        this.cc = cc;
         return this;
     }
 

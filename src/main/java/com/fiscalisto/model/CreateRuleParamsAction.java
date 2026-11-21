@@ -84,7 +84,7 @@ public class CreateRuleParamsAction {
     private List<String> members;
 
     /**
-     * notify: lo que dice el aviso. hold_payment: por qué se retiene (hasta 200).
+     * notify: lo que dice el aviso. hold_payment: por qué se retiene (hasta 200). Puede llevar las variables de `message`, menos las tablas.
      */
     @JsonProperty("note")
     private String note;
@@ -98,13 +98,13 @@ public class CreateRuleParamsAction {
     private String topic;
 
     /**
-     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
+     * email_supplier: el asunto. Lleva las variables de `message`, menos las tablas.
      */
     @JsonProperty("subject")
     private String subject;
 
     /**
-     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
+     * email_supplier: el mensaje. Variables: {folio}, {total}, {fecha}, {empresa}, {rfc_empresa}, {proveedor}, {rfc_proveedor}, {subtotal}, {iva}, {retenciones} y {moneda}; de una factura también {uuid}, {metodo_pago}, {forma_pago}, {uso_cfdi}, {conceptos}, {categoria}, {saldo}, {orden}, {contrarecibo}, {fecha_promesa}, {hallazgos} y la tabla {tabla_conceptos}; de una orden {entrega}, {almacen}, {credito}, {comprador}, {nota}, {enlace} y la tabla {tabla_productos}; en invoice.rejected y purchase_order.rejected, {motivo_rechazo}; en los momentos de pagos {facturas}, la tabla {tabla_facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}, en payout.paid {rastreo} y {cep}, en payout.failed {motivo}. Un correo por pago (per payout) no lleva las de una sola factura. Cada {tabla_…} se dibuja como tabla, con las columnas de `columns`; un dato que el registro no tiene queda en blanco.
      */
     @JsonProperty("message")
     private String message;
@@ -118,13 +118,25 @@ public class CreateRuleParamsAction {
     private String per;
 
     /**
+     * email_supplier: las columnas de cada tabla del mensaje, en su orden. tabla_facturas: folio, uuid, fecha, total, retenido, pagado; tabla_conceptos: clave, descripcion, cantidad, unidad, precio, importe; tabla_productos: producto, codigo, cantidad, recibido, pendiente, precio, importe. Sin columnas, las de siempre.
+     */
+    @JsonProperty("columns")
+    private CreateRuleParamsActionColumns columns;
+
+    /**
+     * email_supplier: personas del equipo que reciben copia (mem_…, GET /v1/members).
+     */
+    @JsonProperty("cc")
+    private List<String> cc;
+
+    /**
      * extra_signature: cuántas firmas más pide (1 a 3). Por omisión, 1.
      */
     @JsonProperty("signatures")
     private Long signatures;
 
     /**
-     * extra_signature: por qué, para quien firma («Proveedor nuevo»).
+     * extra_signature: por qué, para quien firma («Proveedor nuevo»). Puede llevar las variables de `message`, menos las tablas.
      */
     @JsonProperty("reason")
     private String reason;
@@ -274,7 +286,7 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * notify: lo que dice el aviso. hold_payment: por qué se retiene (hasta 200).
+     * notify: lo que dice el aviso. hold_payment: por qué se retiene (hasta 200). Puede llevar las variables de `message`, menos las tablas.
      */
     public String getNote() {
         return note;
@@ -300,7 +312,7 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
+     * email_supplier: el asunto. Lleva las variables de `message`, menos las tablas.
      */
     public String getSubject() {
         return subject;
@@ -312,7 +324,7 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
+     * email_supplier: el mensaje. Variables: {folio}, {total}, {fecha}, {empresa}, {rfc_empresa}, {proveedor}, {rfc_proveedor}, {subtotal}, {iva}, {retenciones} y {moneda}; de una factura también {uuid}, {metodo_pago}, {forma_pago}, {uso_cfdi}, {conceptos}, {categoria}, {saldo}, {orden}, {contrarecibo}, {fecha_promesa}, {hallazgos} y la tabla {tabla_conceptos}; de una orden {entrega}, {almacen}, {credito}, {comprador}, {nota}, {enlace} y la tabla {tabla_productos}; en invoice.rejected y purchase_order.rejected, {motivo_rechazo}; en los momentos de pagos {facturas}, la tabla {tabla_facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}, en payout.paid {rastreo} y {cep}, en payout.failed {motivo}. Un correo por pago (per payout) no lleva las de una sola factura. Cada {tabla_…} se dibuja como tabla, con las columnas de `columns`; un dato que el registro no tiene queda en blanco.
      */
     public String getMessage() {
         return message;
@@ -338,6 +350,30 @@ public class CreateRuleParamsAction {
     }
 
     /**
+     * email_supplier: las columnas de cada tabla del mensaje, en su orden. tabla_facturas: folio, uuid, fecha, total, retenido, pagado; tabla_conceptos: clave, descripcion, cantidad, unidad, precio, importe; tabla_productos: producto, codigo, cantidad, recibido, pendiente, precio, importe. Sin columnas, las de siempre.
+     */
+    public CreateRuleParamsActionColumns getColumns() {
+        return columns;
+    }
+
+    public CreateRuleParamsAction setColumns(CreateRuleParamsActionColumns columns) {
+        this.columns = columns;
+        return this;
+    }
+
+    /**
+     * email_supplier: personas del equipo que reciben copia (mem_…, GET /v1/members).
+     */
+    public List<String> getCc() {
+        return cc;
+    }
+
+    public CreateRuleParamsAction setCc(List<String> cc) {
+        this.cc = cc;
+        return this;
+    }
+
+    /**
      * extra_signature: cuántas firmas más pide (1 a 3). Por omisión, 1.
      */
     public Long getSignatures() {
@@ -355,7 +391,7 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * extra_signature: por qué, para quien firma («Proveedor nuevo»).
+     * extra_signature: por qué, para quien firma («Proveedor nuevo»). Puede llevar las variables de `message`, menos las tablas.
      */
     public String getReason() {
         return reason;

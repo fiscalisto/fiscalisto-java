@@ -114,6 +114,12 @@ public class UpdateSelfInvoicingParams {
     private Boolean customerNotes;
 
     /**
+     * `true` (por omisión): cuando un comprador no puede facturar por algo del emisor (su CSD, sus datos, el PAC), se avisa por correo a los dueños y administradores. `false`: solo queda en Alertas, sin correo. Un error en los datos del comprador nunca avisa: el portal le dice cómo corregirlo.
+     */
+    @JsonProperty("failure_email")
+    private Boolean failureEmail;
+
+    /**
      * Los conceptos de la factura que se hace el comprador (Autofactura › Conceptos de la factura): desglosados o en uno solo, y si el comprador puede elegir. Mande solo lo que cambia; `null` regresa a desglosados sin elección.
      */
     @JsonProperty("invoice_concepts")
@@ -324,6 +330,18 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setCustomerNotes(Boolean customerNotes) {
         this.customerNotes = customerNotes;
+        return this;
+    }
+
+    /**
+     * `true` (por omisión): cuando un comprador no puede facturar por algo del emisor (su CSD, sus datos, el PAC), se avisa por correo a los dueños y administradores. `false`: solo queda en Alertas, sin correo. Un error en los datos del comprador nunca avisa: el portal le dice cómo corregirlo.
+     */
+    public Boolean getFailureEmail() {
+        return failureEmail;
+    }
+
+    public UpdateSelfInvoicingParams setFailureEmail(Boolean failureEmail) {
+        this.failureEmail = failureEmail;
         return this;
     }
 

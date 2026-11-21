@@ -79,6 +79,12 @@ public class UpdateSelfInvoicingParamsPortalStyleTexts {
     private UpdateSelfInvoicingParamsPortalStyleTextsSuccessMessage successMessage;
 
     /**
+     * Lo que dice el portal antes de su correo y teléfono cuando no se pudo facturar («¿Sigue con problemas?»); `null` vuelve al de Fiscalisto.
+     */
+    @JsonProperty("error_help")
+    private UpdateSelfInvoicingParamsPortalStyleTextsErrorHelp errorHelp;
+
+    /**
      * El título de la elección de conceptos («Conceptos en su factura»; ver `invoice_concepts`); `null` vuelve al de Fiscalisto.
      */
     @JsonProperty("concepts_title")
@@ -237,6 +243,18 @@ public class UpdateSelfInvoicingParamsPortalStyleTexts {
 
     public UpdateSelfInvoicingParamsPortalStyleTexts setSuccessMessage(UpdateSelfInvoicingParamsPortalStyleTextsSuccessMessage successMessage) {
         this.successMessage = successMessage;
+        return this;
+    }
+
+    /**
+     * Lo que dice el portal antes de su correo y teléfono cuando no se pudo facturar («¿Sigue con problemas?»); `null` vuelve al de Fiscalisto.
+     */
+    public UpdateSelfInvoicingParamsPortalStyleTextsErrorHelp getErrorHelp() {
+        return errorHelp;
+    }
+
+    public UpdateSelfInvoicingParamsPortalStyleTexts setErrorHelp(UpdateSelfInvoicingParamsPortalStyleTextsErrorHelp errorHelp) {
+        this.errorHelp = errorHelp;
         return this;
     }
 
