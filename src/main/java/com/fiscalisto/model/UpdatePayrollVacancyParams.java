@@ -2,9 +2,12 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigDecimal;
 
 /**
  * UpdatePayrollVacancyParams: los campos de «Cambiar una vacante».
@@ -49,6 +52,24 @@ public class UpdatePayrollVacancyParams {
      */
     @JsonProperty("opened_on")
     private String openedOn;
+
+    /**
+     * Sueldo mensual bruto que ofrece, desde (pesos); null si no lo dice.
+     */
+    @JsonProperty("salary_min")
+    private BigDecimal salaryMin;
+
+    /**
+     * Sueldo mensual bruto que ofrece, hasta (pesos); null si no lo dice.
+     */
+    @JsonProperty("salary_max")
+    private BigDecimal salaryMax;
+
+    /**
+     * Estado donde trabajará, como c_Estado (NLE, CMX…), para su impuesto sobre nómina; null para el de su jefe o el de la mayoría.
+     */
+    @JsonProperty("state")
+    private String state;
 
     /**
      * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
@@ -121,6 +142,52 @@ public class UpdatePayrollVacancyParams {
 
     public UpdatePayrollVacancyParams setOpenedOn(String openedOn) {
         this.openedOn = openedOn;
+        return this;
+    }
+
+    /**
+     * Sueldo mensual bruto que ofrece, desde (pesos); null si no lo dice.
+     */
+    public BigDecimal getSalaryMin() {
+        return salaryMin;
+    }
+
+    public UpdatePayrollVacancyParams setSalaryMin(BigDecimal salaryMin) {
+        this.salaryMin = salaryMin;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdatePayrollVacancyParams setSalaryMin(double salaryMin) {
+        return setSalaryMin(BigDecimal.valueOf(salaryMin));
+    }
+
+    /**
+     * Sueldo mensual bruto que ofrece, hasta (pesos); null si no lo dice.
+     */
+    public BigDecimal getSalaryMax() {
+        return salaryMax;
+    }
+
+    public UpdatePayrollVacancyParams setSalaryMax(BigDecimal salaryMax) {
+        this.salaryMax = salaryMax;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdatePayrollVacancyParams setSalaryMax(double salaryMax) {
+        return setSalaryMax(BigDecimal.valueOf(salaryMax));
+    }
+
+    /**
+     * Estado donde trabajará, como c_Estado (NLE, CMX…), para su impuesto sobre nómina; null para el de su jefe o el de la mayoría.
+     */
+    public String getState() {
+        return state;
+    }
+
+    public UpdatePayrollVacancyParams setState(String state) {
+        this.state = state;
         return this;
     }
 }

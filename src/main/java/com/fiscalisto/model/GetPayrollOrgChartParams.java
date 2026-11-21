@@ -19,6 +19,12 @@ public class GetPayrollOrgChartParams {
     private String issuer;
 
     /**
+     * Un día pasado (YYYY-MM-DD): el organigrama como estaba al cierre de ese día, con los jefes, departamentos y sucursales que tenían (se guardan desde el 21 de noviembre de 2026).
+     */
+    @JsonProperty("as_of")
+    private String asOf;
+
+    /**
      * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
      */
     public String getIssuer() {
@@ -27,6 +33,18 @@ public class GetPayrollOrgChartParams {
 
     public GetPayrollOrgChartParams setIssuer(String issuer) {
         this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * Un día pasado (YYYY-MM-DD): el organigrama como estaba al cierre de ese día, con los jefes, departamentos y sucursales que tenían (se guardan desde el 21 de noviembre de 2026).
+     */
+    public String getAsOf() {
+        return asOf;
+    }
+
+    public GetPayrollOrgChartParams setAsOf(String asOf) {
+        this.asOf = asOf;
         return this;
     }
 }

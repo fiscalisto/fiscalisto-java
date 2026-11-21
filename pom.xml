@@ -6,7 +6,7 @@
 
   <groupId>com.fiscalisto</groupId>
   <artifactId>fiscalisto</artifactId>
-  <version>0.1.145</version>
+  <version>0.1.146</version>
   <packaging>jar</packaging>
 
   <name>Fiscalisto</name>
