@@ -27,6 +27,12 @@ public class UpdateSatInvoiceParams {
     private List<String> tags;
 
     /**
+     * El número de cuenta de su catálogo en que se registra su ingreso o gasto («601-84-002»), en vez de la de su categoría; null la regresa a la de su categoría. Solo facturas y notas de crédito, en un mes que no está cerrado; no Caja ni Bancos.
+     */
+    @JsonProperty("account")
+    private String account;
+
+    /**
      * Su centro de costo (ccn_…), o null para quitárselo. Los complementos de pago y los traslados no llevan.
      */
     public String getCostCenter() {
@@ -47,6 +53,18 @@ public class UpdateSatInvoiceParams {
 
     public UpdateSatInvoiceParams setTags(List<String> tags) {
         this.tags = tags;
+        return this;
+    }
+
+    /**
+     * El número de cuenta de su catálogo en que se registra su ingreso o gasto («601-84-002»), en vez de la de su categoría; null la regresa a la de su categoría. Solo facturas y notas de crédito, en un mes que no está cerrado; no Caja ni Bancos.
+     */
+    public String getAccount() {
+        return account;
+    }
+
+    public UpdateSatInvoiceParams setAccount(String account) {
+        this.account = account;
         return this;
     }
 }

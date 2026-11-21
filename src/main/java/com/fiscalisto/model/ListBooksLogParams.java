@@ -14,9 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ListBooksLogParams {
     /**
-     * Solo los cambios de una cosa: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template o fixed_asset.
+     * Solo los cambios de una cosa: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template, fixed_asset o invoice_account (la cuenta de una factura).
      * <p>
-     * Valores: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template, fixed_asset.
+     * Valores: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template, fixed_asset, invoice_account.
      */
     @JsonProperty("subject")
     private String subject;
@@ -52,9 +52,9 @@ public class ListBooksLogParams {
     private String issuer;
 
     /**
-     * Solo los cambios de una cosa: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template o fixed_asset.
+     * Solo los cambios de una cosa: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template, fixed_asset o invoice_account (la cuenta de una factura).
      * <p>
-     * Valores: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template, fixed_asset.
+     * Valores: manual_journal_entry, opening_balances, account, chart_of_accounts, period_close, consolidation_elimination, entry_template, fixed_asset, invoice_account.
      */
     public String getSubject() {
         return subject;

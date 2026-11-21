@@ -169,6 +169,12 @@ public class SatInvoice {
     private String costCenter;
 
     /**
+     * El número de cuenta de su catálogo en que se registra su ingreso o gasto en vez de la de su categoría (en la app, en una regla de Ajustes › Reglas o con account). Null: la de su categoría.
+     */
+    @JsonProperty("account")
+    private String account;
+
+    /**
      * Sus etiquetas, por nombre. automatic: true en las que puso una regla (la orden de compra a la que se vinculó o una regla de Ajustes › Reglas). Cámbielas con POST /v1/sat_invoices/{id}.
      */
     @JsonProperty("tags")
@@ -494,6 +500,18 @@ public class SatInvoice {
 
     public SatInvoice setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * El número de cuenta de su catálogo en que se registra su ingreso o gasto en vez de la de su categoría (en la app, en una regla de Ajustes › Reglas o con account). Null: la de su categoría.
+     */
+    public String getAccount() {
+        return account;
+    }
+
+    public SatInvoice setAccount(String account) {
+        this.account = account;
         return this;
     }
 

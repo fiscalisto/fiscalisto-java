@@ -16,9 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateRuleParamsAction {
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; account (facturas): registrar su ingreso o gasto en la cuenta `account` del catálogo en vez de la de su categoría, nunca sobre la que eligió una persona ni en un mes cerrado; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings, extra_signature.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, account, lote, hold_payment, email_supplier, review_findings, extra_signature.
      * <p>
      * Obligatorio.
      */
@@ -38,6 +38,12 @@ public class CreateRuleParamsAction {
      */
     @JsonProperty("category")
     private String category;
+
+    /**
+     * account: el número de la cuenta del catálogo («601-84-002», GET /v1/accounting/accounts). No una de Caja o Bancos.
+     */
+    @JsonProperty("account")
+    private String account;
 
     /**
      * tag: quitarla si la orden deja de cumplir.
@@ -148,9 +154,9 @@ public class CreateRuleParamsAction {
     private List<String> findings;
 
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; account (facturas): registrar su ingreso o gasto en la cuenta `account` del catálogo en vez de la de su categoría, nunca sobre la que eligió una persona ni en un mes cerrado; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings, extra_signature.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, account, lote, hold_payment, email_supplier, review_findings, extra_signature.
      * <p>
      * Obligatorio.
      */
@@ -186,6 +192,18 @@ public class CreateRuleParamsAction {
 
     public CreateRuleParamsAction setCategory(String category) {
         this.category = category;
+        return this;
+    }
+
+    /**
+     * account: el número de la cuenta del catálogo («601-84-002», GET /v1/accounting/accounts). No una de Caja o Bancos.
+     */
+    public String getAccount() {
+        return account;
+    }
+
+    public CreateRuleParamsAction setAccount(String account) {
+        this.account = account;
         return this;
     }
 

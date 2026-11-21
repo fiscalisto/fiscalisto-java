@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateRuleParamsConditionsGroupCondition {
     /**
-     * Qué se revisa. Facturas: supplier, customer, partyName, ownRfc, direction (received/issued, en invoice.paid e invoice.cancelled), category (categoría de gasto), tags (tag_…), total, subtotal, tipo, metodo, forma, uso, moneda, serie, concept, clave, costCenter, ivaRetenido, isrRetenido, hasFindings. Órdenes de compra: supplier, ownRfc, total, category, warehouse, stage, createdBy, moneda, note.
+     * Qué se revisa. Facturas: supplier, customer, partyName, ownRfc, direction (received/issued, en invoice.paid e invoice.cancelled), category (categoría de gasto), tags (tag_…), total, subtotal, iva, saldo, age (días desde su fecha), newParty (la primera factura de ese proveedor o cliente), hasOrder (recibidas: ligada a una orden de compra), payoutAmount y newAccount (en payout.*: lo que se le paga al proveedor en el pago y si es el primer pago a esa cuenta), tipo, metodo, forma, uso, moneda, serie, concept, clave, costCenter, ivaRetenido, isrRetenido, hasFindings. Órdenes de compra: supplier, ownRfc, total, category, warehouse, stage, createdBy, moneda, note, project (el id del proyecto), paymentDays, deliveryDays (días para la entrega), advance (lleva anticipo), newSupplier (la primera orden a ese proveedor).
      * <p>
      * Obligatorio.
      */
@@ -59,7 +59,7 @@ public class CreateRuleParamsConditionsGroupCondition {
     private String text;
 
     /**
-     * Qué se revisa. Facturas: supplier, customer, partyName, ownRfc, direction (received/issued, en invoice.paid e invoice.cancelled), category (categoría de gasto), tags (tag_…), total, subtotal, tipo, metodo, forma, uso, moneda, serie, concept, clave, costCenter, ivaRetenido, isrRetenido, hasFindings. Órdenes de compra: supplier, ownRfc, total, category, warehouse, stage, createdBy, moneda, note.
+     * Qué se revisa. Facturas: supplier, customer, partyName, ownRfc, direction (received/issued, en invoice.paid e invoice.cancelled), category (categoría de gasto), tags (tag_…), total, subtotal, iva, saldo, age (días desde su fecha), newParty (la primera factura de ese proveedor o cliente), hasOrder (recibidas: ligada a una orden de compra), payoutAmount y newAccount (en payout.*: lo que se le paga al proveedor en el pago y si es el primer pago a esa cuenta), tipo, metodo, forma, uso, moneda, serie, concept, clave, costCenter, ivaRetenido, isrRetenido, hasFindings. Órdenes de compra: supplier, ownRfc, total, category, warehouse, stage, createdBy, moneda, note, project (el id del proyecto), paymentDays, deliveryDays (días para la entrega), advance (lleva anticipo), newSupplier (la primera orden a ese proveedor).
      * <p>
      * Obligatorio.
      */

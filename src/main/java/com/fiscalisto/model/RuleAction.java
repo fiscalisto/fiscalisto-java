@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account.
      */
     @JsonProperty("type")
     private String type;
@@ -28,6 +28,12 @@ public class RuleAction {
      */
     @JsonProperty("tag")
     private String tag;
+
+    /**
+     * account: el número de cuenta del catálogo en que se registra la factura, en vez de la de su categoría (no cambia la que eligió una persona).
+     */
+    @JsonProperty("account")
+    private String account;
 
     /**
      * category: la categoría de gasto (facturas recibidas).
@@ -146,7 +152,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account.
      */
     public String getType() {
         return type;
@@ -166,6 +172,18 @@ public class RuleAction {
 
     public RuleAction setTag(String tag) {
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * account: el número de cuenta del catálogo en que se registra la factura, en vez de la de su categoría (no cambia la que eligió una persona).
+     */
+    public String getAccount() {
+        return account;
+    }
+
+    public RuleAction setAccount(String account) {
+        this.account = account;
         return this;
     }
 
