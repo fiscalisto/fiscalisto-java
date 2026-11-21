@@ -4,8 +4,11 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.CancelPayoutParams;
 import com.fiscalisto.model.CreatePayoutParams;
+import com.fiscalisto.model.GetPayoutsPauseParams;
 import com.fiscalisto.model.ListPayoutsParams;
+import com.fiscalisto.model.PausePayoutsParams;
 import com.fiscalisto.model.Payout;
+import com.fiscalisto.model.PayoutsPause;
 
 /**
  * Pagos a proveedores: client.payouts().
@@ -20,7 +23,7 @@ public final class PayoutsService {
     /**
      * Preparar un pago a proveedores
      * <p>
-     * Un pago en borrador con estas facturas, revisado como en la app: las reglas antes de pagar, los límites y las cuentas aprobadas de cada proveedor. Las de un proveedor van en una transferencia. Nunca sale solo: alguien del equipo lo abre en app_url y lo firma con su llave de acceso. Solo si la empresa lo permite en Pagos › Configurar pagos (si no, 403 payouts_api_disabled); lo que no se puede pagar contesta 400 payout_invalid con el motivo. Pide Idempotency-Key: si la respuesta se pierde, repítala con el mismo valor y contesta el mismo pago, nunca uno nuevo.
+     * Un pago en borrador con estas facturas, revisado como en la app: las reglas antes de pagar, los límites y las cuentas aprobadas de cada proveedor. Las de un proveedor van en una transferencia. Nunca sale solo: alguien del equipo lo abre en app_url y lo firma con su llave de acceso. Solo si la empresa lo permite en Pagos › Configurar pagos (si no, 403 payouts_api_disabled); lo que no se puede pagar contesta 400 payout_invalid con el motivo. Pide Idempotency-Key: si la respuesta se pierde, repítala con el mismo valor y contesta el mismo pago, nunca uno nuevo. La misma llave con otra solicitud (otras facturas, montos o día) contesta 409 idempotency_key_reused, aunque hayan pasado más de 24 horas.
      * <p>
      * POST /v1/payouts
      * <p>
@@ -66,6 +69,44 @@ public final class PayoutsService {
 
     public Iterable<Payout> listAutoPaging() {
         return listAutoPaging(null, null);
+    }
+
+    /**
+     * Ver si los pagos están en pausa
+     * <p>
+     * Si la empresa pausó todos sus pagos («Pausar todos los pagos»), desde cuándo y por qué.
+     * <p>
+     * GET /v1/payouts/pause
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/pagos-a-proveedores/get-payouts-pause
+     */
+    public PayoutsPause getPause(GetPayoutsPauseParams params, RequestOptions options) {
+        return api.request("GET", "/v1/payouts/pause", null, params, false, PayoutsPause.class, options);
+    }
+
+    public PayoutsPause getPause(GetPayoutsPauseParams params) {
+        return getPause(params, null);
+    }
+
+    public PayoutsPause getPause() {
+        return getPause(null, null);
+    }
+
+    /**
+     * Pausar todos los pagos
+     * <p>
+     * El freno de emergencia de la empresa, para una herramienta de seguridad o el botón de su ERP: al instante no sale ninguna transferencia (pagos firmados, reintentos ni recurrentes) y les llega el aviso a los administradores con el motivo. La API nunca reanuda: lo firman en la app las personas de Quién firma, cada una con su llave de acceso. Solo si la empresa deja que la API trabaje con sus pagos en Pagos › Configurar pagos (si no, 403 payouts_api_disabled). Pausar lo que ya está en pausa no cambia nada.
+     * <p>
+     * POST /v1/payouts/pause
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/pagos-a-proveedores/pause-payouts
+     */
+    public PayoutsPause pause(PausePayoutsParams params, RequestOptions options) {
+        return api.request("POST", "/v1/payouts/pause", params, null, true, PayoutsPause.class, options);
+    }
+
+    public PayoutsPause pause(PausePayoutsParams params) {
+        return pause(params, null);
     }
 
     /**
