@@ -16,9 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateRuleParamsAction {
     /**
-     * tag (órdenes): poner la etiqueta `tag`; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; notify: avisar a `members` (mem_…).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; notify: avisar a `members` (mem_…).
      * <p>
-     * Valores: tag, cost_center, stage, close, notify.
+     * Valores: tag, cost_center, stage, close, notify, category.
      * <p>
      * Obligatorio.
      */
@@ -30,6 +30,14 @@ public class CreateRuleParamsAction {
      */
     @JsonProperty("tag")
     private Object tag;
+
+    /**
+     * category: la categoría de gasto, como la app la nombra («Combustible»).
+     * <p>
+     * Valores: Renta y arrendamiento, Servicios profesionales, Nómina y personal, Transporte y fletes, Combustible, Viáticos y viajes, Alimentos y representación, Telecomunicaciones e internet, Energía y agua, Software y suscripciones, Equipo de cómputo, Papelería y oficina, Mantenimiento y reparaciones, Publicidad y marketing, Seguros y fianzas, Comisiones bancarias y financieras, Impuestos y derechos, Compras de mercancía e inventario, Materias primas y producción, Activo fijo y mobiliario, Vehículos, Capacitación, Donativos, Otros gastos.
+     */
+    @JsonProperty("category")
+    private String category;
 
     /**
      * tag: quitarla si la orden deja de cumplir.
@@ -62,9 +70,9 @@ public class CreateRuleParamsAction {
     private String note;
 
     /**
-     * tag (órdenes): poner la etiqueta `tag`; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; notify: avisar a `members` (mem_…).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; notify: avisar a `members` (mem_…).
      * <p>
-     * Valores: tag, cost_center, stage, close, notify.
+     * Valores: tag, cost_center, stage, close, notify, category.
      * <p>
      * Obligatorio.
      */
@@ -86,6 +94,20 @@ public class CreateRuleParamsAction {
 
     public CreateRuleParamsAction setTag(Object tag) {
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * category: la categoría de gasto, como la app la nombra («Combustible»).
+     * <p>
+     * Valores: Renta y arrendamiento, Servicios profesionales, Nómina y personal, Transporte y fletes, Combustible, Viáticos y viajes, Alimentos y representación, Telecomunicaciones e internet, Energía y agua, Software y suscripciones, Equipo de cómputo, Papelería y oficina, Mantenimiento y reparaciones, Publicidad y marketing, Seguros y fianzas, Comisiones bancarias y financieras, Impuestos y derechos, Compras de mercancía e inventario, Materias primas y producción, Activo fijo y mobiliario, Vehículos, Capacitación, Donativos, Otros gastos.
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    public CreateRuleParamsAction setCategory(String category) {
+        this.category = category;
         return this;
     }
 

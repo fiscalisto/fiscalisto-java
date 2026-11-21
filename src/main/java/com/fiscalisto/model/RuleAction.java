@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, stage, close, notify.
+     * Valores: tag, cost_center, category, stage, close, notify.
      */
     @JsonProperty("type")
     private String type;
@@ -28,6 +28,12 @@ public class RuleAction {
      */
     @JsonProperty("tag")
     private String tag;
+
+    /**
+     * category: la categoría de gasto (facturas recibidas).
+     */
+    @JsonProperty("category")
+    private String category;
 
     /**
      * tag: se quita si la orden deja de cumplir.
@@ -62,7 +68,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, stage, close, notify.
+     * Valores: tag, cost_center, category, stage, close, notify.
      */
     public String getType() {
         return type;
@@ -82,6 +88,18 @@ public class RuleAction {
 
     public RuleAction setTag(String tag) {
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * category: la categoría de gasto (facturas recibidas).
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    public RuleAction setCategory(String category) {
+        this.category = category;
         return this;
     }
 
