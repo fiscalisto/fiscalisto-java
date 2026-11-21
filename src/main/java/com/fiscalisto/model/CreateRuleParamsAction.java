@@ -110,6 +110,14 @@ public class CreateRuleParamsAction {
     private String message;
 
     /**
+     * email_supplier en payout.submitted, payout.paid y payout.failed: payout manda un correo por pago y proveedor con todas sus facturas ({folio} es la lista de folios, {total} lo que se le paga y {fecha} la fecha del pago); invoice, uno por factura. Por omisión, payout.
+     * <p>
+     * Valores: payout, invoice.
+     */
+    @JsonProperty("per")
+    private String per;
+
+    /**
      * extra_signature: cuántas firmas más pide (1 a 3). Por omisión, 1.
      */
     @JsonProperty("signatures")
@@ -312,6 +320,20 @@ public class CreateRuleParamsAction {
 
     public CreateRuleParamsAction setMessage(String message) {
         this.message = message;
+        return this;
+    }
+
+    /**
+     * email_supplier en payout.submitted, payout.paid y payout.failed: payout manda un correo por pago y proveedor con todas sus facturas ({folio} es la lista de folios, {total} lo que se le paga y {fecha} la fecha del pago); invoice, uno por factura. Por omisión, payout.
+     * <p>
+     * Valores: payout, invoice.
+     */
+    public String getPer() {
+        return per;
+    }
+
+    public CreateRuleParamsAction setPer(String per) {
+        this.per = per;
         return this;
     }
 

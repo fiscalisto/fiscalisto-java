@@ -16,6 +16,7 @@ public class FiscalistoException extends RuntimeException {
     private final String invoice;
     private final String docUrl;
     private final String requestId;
+    private final String requestLogUrl;
     private final int statusCode;
     private final String idempotencyKey;
     private final JsonNode raw;
@@ -30,6 +31,7 @@ public class FiscalistoException extends RuntimeException {
         this.invoice = text(raw, "invoice", null);
         this.docUrl = text(raw, "doc_url", null);
         this.requestId = text(raw, "request_id", requestId);
+        this.requestLogUrl = text(raw, "request_log_url", null);
         this.statusCode = statusCode;
         this.idempotencyKey = idempotencyKey;
     }
@@ -71,6 +73,11 @@ public class FiscalistoException extends RuntimeException {
     /** Búsquelo en Desarrolladores › Solicitudes o mándelo a soporte. */
     public String getRequestId() {
         return requestId;
+    }
+
+    /** La solicitud en Desarrolladores › Solicitudes, para abrirla en el navegador. */
+    public String getRequestLogUrl() {
+        return requestLogUrl;
     }
 
     /** El código HTTP (0: la solicitud no llegó). */

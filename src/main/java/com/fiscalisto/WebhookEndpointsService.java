@@ -6,11 +6,13 @@ import com.fiscalisto.model.CreateWebhookEndpointParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListWebhookDeliveriesParams;
 import com.fiscalisto.model.ListWebhookEndpointsParams;
+import com.fiscalisto.model.RecoverWebhookEndpointParams;
 import com.fiscalisto.model.RollWebhookSecretParams;
 import com.fiscalisto.model.TestWebhookEndpointParams;
 import com.fiscalisto.model.UpdateWebhookEndpointParams;
 import com.fiscalisto.model.WebhookDelivery;
 import com.fiscalisto.model.WebhookEndpoint;
+import com.fiscalisto.model.WebhookRecovery;
 import com.fiscalisto.model.WebhookTest;
 
 /**
@@ -203,5 +205,22 @@ public final class WebhookEndpointsService {
 
     public Iterable<WebhookDelivery> listDeliveriesAutoPaging() {
         return listDeliveriesAutoPaging(null, null);
+    }
+
+    /**
+     * Recuperar eventos fallidos
+     * <p>
+     * Después de que su servidor estuvo caído: le manda otra vez, ahora, todos los eventos desde since que este webhook escucha y no recibió (los que fallaron todos sus intentos y los que pasaron mientras estuvo apagado), del más antiguo al más reciente. Hasta 1,000 por llamada; si quedan más, next_since dice desde dónde volver a llamar. Cada uno es un intento aparte, firmado con su webhook-id de siempre, para que su servidor descarte los que ya tenía. El webhook tiene que estar encendido.
+     * <p>
+     * POST /v1/webhook_endpoints/{id}/recover
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/webhooks/recover-webhook-endpoint
+     */
+    public WebhookRecovery recover(String id, RecoverWebhookEndpointParams params, RequestOptions options) {
+        return api.request("POST", "/v1/webhook_endpoints/" + ApiClient.encode(id) + "/recover", params, null, true, WebhookRecovery.class, options);
+    }
+
+    public WebhookRecovery recover(String id, RecoverWebhookEndpointParams params) {
+        return recover(id, params, null);
     }
 }

@@ -63,6 +63,12 @@ public class ErrorBodyError {
     private String requestId;
 
     /**
+     * La solicitud en Desarrolladores › Solicitudes: lo que mandó, lo que contestamos y cómo repetirla. Viene en todos los errores salvo los 429.
+     */
+    @JsonProperty("request_log_url")
+    private String requestLogUrl;
+
+    /**
      * La familia del error: invalid_request_error, authentication_error, permission_error, not_found_error, idempotency_error, rate_limit_error, invoice_error, balance_error o api_error.
      * <p>
      * Valores: invalid_request_error, authentication_error, permission_error, not_found_error, idempotency_error, rate_limit_error, invoice_error, balance_error, api_error.
@@ -157,6 +163,18 @@ public class ErrorBodyError {
 
     public ErrorBodyError setRequestId(String requestId) {
         this.requestId = requestId;
+        return this;
+    }
+
+    /**
+     * La solicitud en Desarrolladores › Solicitudes: lo que mandó, lo que contestamos y cómo repetirla. Viene en todos los errores salvo los 429.
+     */
+    public String getRequestLogUrl() {
+        return requestLogUrl;
+    }
+
+    public ErrorBodyError setRequestLogUrl(String requestLogUrl) {
+        this.requestLogUrl = requestLogUrl;
         return this;
     }
 }

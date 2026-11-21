@@ -86,6 +86,14 @@ public class RuleAction {
     private String message;
 
     /**
+     * email_supplier en los disparadores de pagos: payout, un correo por pago y proveedor; invoice, uno por factura.
+     * <p>
+     * Valores: payout, invoice.
+     */
+    @JsonProperty("per")
+    private String per;
+
+    /**
      * review_findings: los hallazgos que da por revisados (sus códigos).
      */
     @JsonProperty("findings")
@@ -261,6 +269,20 @@ public class RuleAction {
 
     public RuleAction setMessage(String message) {
         this.message = message;
+        return this;
+    }
+
+    /**
+     * email_supplier en los disparadores de pagos: payout, un correo por pago y proveedor; invoice, uno por factura.
+     * <p>
+     * Valores: payout, invoice.
+     */
+    public String getPer() {
+        return per;
+    }
+
+    public RuleAction setPer(String per) {
+        this.per = per;
         return this;
     }
 
