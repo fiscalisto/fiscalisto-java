@@ -40,7 +40,7 @@ public class ProductionOrderComponent {
     private Boolean tracksStock;
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * Lo que vale el componente usado (cantidad por costo), o null si no tiene costo.
      */
     @JsonProperty("value")
     private BigDecimal value;
@@ -104,7 +104,7 @@ public class ProductionOrderComponent {
     }
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * Lo que vale el componente usado (cantidad por costo), o null si no tiene costo.
      */
     public BigDecimal getValue() {
         return value;

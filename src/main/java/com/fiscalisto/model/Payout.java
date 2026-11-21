@@ -61,6 +61,14 @@ public class Payout {
     private String payOn;
 
     /**
+     * En un pago programado con facturas en otra moneda, cómo toma el tipo de cambio: official (el oficial; si al salir se movió más de la tolerancia de Configurar pagos, se detiene hasta firmarlo de nuevo) o fixed (sale al tipo de cambio con que se firmó). null en pesos o si sale hoy.
+     * <p>
+     * Valores: official, fixed.
+     */
+    @JsonProperty("exchange_rate")
+    private String exchangeRate;
+
+    /**
      * La suma de sus transferencias, en pesos.
      */
     @JsonProperty("total")
@@ -240,6 +248,20 @@ public class Payout {
 
     public Payout setPayOn(String payOn) {
         this.payOn = payOn;
+        return this;
+    }
+
+    /**
+     * En un pago programado con facturas en otra moneda, cómo toma el tipo de cambio: official (el oficial; si al salir se movió más de la tolerancia de Configurar pagos, se detiene hasta firmarlo de nuevo) o fixed (sale al tipo de cambio con que se firmó). null en pesos o si sale hoy.
+     * <p>
+     * Valores: official, fixed.
+     */
+    public String getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public Payout setExchangeRate(String exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return this;
     }
 

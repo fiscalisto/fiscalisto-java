@@ -79,6 +79,20 @@ public class PayeeAccount {
     private Boolean thirdParty;
 
     /**
+     * Cómo se confió en la cuenta: bank (el banco confirmó el RFC del proveedor), by_hand (alguien la verificó a mano porque el RFC del banco solo cambiaba la homoclave o no venía), third_party (se autorizó como de un tercero), o null si aún no está aprobada.
+     * <p>
+     * Valores: bank, by_hand, third_party.
+     */
+    @JsonProperty("verification")
+    private String verification;
+
+    /**
+     * Cómo la verificó a mano quien la aprobó, o null.
+     */
+    @JsonProperty("verified_by_hand_reason")
+    private String verifiedByHandReason;
+
+    /**
      * verifying (verificando con el banco), pending_approval (verificada, por aprobar), holder_mismatch (es de otra persona), failed (no existe o no recibe), approved, rejected o replaced (la sustituyó otra).
      * <p>
      * Valores: verifying, pending_approval, holder_mismatch, failed, approved, rejected, replaced.
@@ -239,6 +253,32 @@ public class PayeeAccount {
 
     public PayeeAccount setThirdParty(Boolean thirdParty) {
         this.thirdParty = thirdParty;
+        return this;
+    }
+
+    /**
+     * Cómo se confió en la cuenta: bank (el banco confirmó el RFC del proveedor), by_hand (alguien la verificó a mano porque el RFC del banco solo cambiaba la homoclave o no venía), third_party (se autorizó como de un tercero), o null si aún no está aprobada.
+     * <p>
+     * Valores: bank, by_hand, third_party.
+     */
+    public String getVerification() {
+        return verification;
+    }
+
+    public PayeeAccount setVerification(String verification) {
+        this.verification = verification;
+        return this;
+    }
+
+    /**
+     * Cómo la verificó a mano quien la aprobó, o null.
+     */
+    public String getVerifiedByHandReason() {
+        return verifiedByHandReason;
+    }
+
+    public PayeeAccount setVerifiedByHandReason(String verifiedByHandReason) {
+        this.verifiedByHandReason = verifiedByHandReason;
         return this;
     }
 

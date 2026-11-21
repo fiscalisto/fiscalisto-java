@@ -33,6 +33,14 @@ public class CreatePayoutParams {
     private String note;
 
     /**
+     * En un pago programado con facturas en otra moneda: official (el tipo de cambio oficial; si al salir se movió más de la tolerancia de Configurar pagos, se detiene hasta firmarlo de nuevo) o fixed (sale al tipo de cambio de hoy, se mueva o no). Por omisión, lo que diga Configurar pagos.
+     * <p>
+     * Valores: official, fixed.
+     */
+    @JsonProperty("exchange_rate")
+    private String exchangeRate;
+
+    /**
      * Las facturas recibidas a pagar (de 1 a 500). Las de un mismo proveedor van en una sola transferencia a su cuenta aprobada.
      * <p>
      * Obligatorio.
@@ -73,6 +81,20 @@ public class CreatePayoutParams {
 
     public CreatePayoutParams setNote(String note) {
         this.note = note;
+        return this;
+    }
+
+    /**
+     * En un pago programado con facturas en otra moneda: official (el tipo de cambio oficial; si al salir se movió más de la tolerancia de Configurar pagos, se detiene hasta firmarlo de nuevo) o fixed (sale al tipo de cambio de hoy, se mueva o no). Por omisión, lo que diga Configurar pagos.
+     * <p>
+     * Valores: official, fixed.
+     */
+    public String getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public CreatePayoutParams setExchangeRate(String exchangeRate) {
+        this.exchangeRate = exchangeRate;
         return this;
     }
 

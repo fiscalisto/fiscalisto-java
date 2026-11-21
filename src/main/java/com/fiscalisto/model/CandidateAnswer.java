@@ -32,7 +32,7 @@ public class CandidateAnswer {
     private String type;
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * Lo que respondió: un texto, o una lista en una pregunta de varias opciones; null si no respondió.
      */
     @JsonProperty("value")
     private JsonNode value;
@@ -80,7 +80,7 @@ public class CandidateAnswer {
     }
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * Lo que respondió: un texto, o una lista en una pregunta de varias opciones; null si no respondió.
      */
     public JsonNode getValue() {
         return value;

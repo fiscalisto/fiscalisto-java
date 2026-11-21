@@ -16,7 +16,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PortalSupplierScore {
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * La calificación del proveedor, de 0 a 100, o null si aún no hay con qué calcularla.
      */
     @JsonProperty("value")
     private Long value;
@@ -36,7 +36,7 @@ public class PortalSupplierScore {
     private List<PortalSupplierScorePart> parts;
 
     /**
-     * Valor de la mercancía (ValorMercancia); obligatorio en transporte aéreo.
+     * La calificación del proveedor, de 0 a 100, o null si aún no hay con qué calcularla.
      */
     public Long getValue() {
         return value;
