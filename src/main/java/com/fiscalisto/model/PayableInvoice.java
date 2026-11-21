@@ -101,6 +101,12 @@ public class PayableInvoice {
     private String inPayout;
 
     /**
+     * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo suelte en la app («Soltar el pago»). null: no está retenido.
+     */
+    @JsonProperty("payment_hold")
+    private PayableInvoicePaymentHold paymentHold;
+
+    /**
      * Lo que las Reglas antes de pagar encontraron (por ejemplo cancelada en el SAT, o proveedor en la lista 69-B).
      */
     @JsonProperty("warnings")
@@ -292,6 +298,18 @@ public class PayableInvoice {
 
     public PayableInvoice setInPayout(String inPayout) {
         this.inPayout = inPayout;
+        return this;
+    }
+
+    /**
+     * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo suelte en la app («Soltar el pago»). null: no está retenido.
+     */
+    public PayableInvoicePaymentHold getPaymentHold() {
+        return paymentHold;
+    }
+
+    public PayableInvoice setPaymentHold(PayableInvoicePaymentHold paymentHold) {
+        this.paymentHold = paymentHold;
         return this;
     }
 

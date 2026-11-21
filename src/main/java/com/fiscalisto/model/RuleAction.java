@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings.
      */
     @JsonProperty("type")
     private String type;
@@ -60,10 +60,36 @@ public class RuleAction {
     private List<String> members;
 
     /**
-     * notify: lo que dice el aviso.
+     * notify: lo que dice el aviso. hold_payment: por qué se retiene.
      */
     @JsonProperty("note")
     private String note;
+
+    /**
+     * email_supplier: el tema de los correos del proveedor a los que va.
+     * <p>
+     * Valores: ordenes, pagos, facturas, complementos, documentos, precios.
+     */
+    @JsonProperty("topic")
+    private String topic;
+
+    /**
+     * email_supplier: el asunto.
+     */
+    @JsonProperty("subject")
+    private String subject;
+
+    /**
+     * email_supplier: el mensaje.
+     */
+    @JsonProperty("message")
+    private String message;
+
+    /**
+     * review_findings: los hallazgos que da por revisados (sus códigos).
+     */
+    @JsonProperty("findings")
+    private List<String> findings;
 
     /**
      * lote: el nombre del lote; null: «Lote del jueves 27 nov».
@@ -88,7 +114,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings.
      */
     public String getType() {
         return type;
@@ -177,7 +203,7 @@ public class RuleAction {
     }
 
     /**
-     * notify: lo que dice el aviso.
+     * notify: lo que dice el aviso. hold_payment: por qué se retiene.
      */
     public String getNote() {
         return note;
@@ -185,6 +211,56 @@ public class RuleAction {
 
     public RuleAction setNote(String note) {
         this.note = note;
+        return this;
+    }
+
+    /**
+     * email_supplier: el tema de los correos del proveedor a los que va.
+     * <p>
+     * Valores: ordenes, pagos, facturas, complementos, documentos, precios.
+     */
+    public String getTopic() {
+        return topic;
+    }
+
+    public RuleAction setTopic(String topic) {
+        this.topic = topic;
+        return this;
+    }
+
+    /**
+     * email_supplier: el asunto.
+     */
+    public String getSubject() {
+        return subject;
+    }
+
+    public RuleAction setSubject(String subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    /**
+     * email_supplier: el mensaje.
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    public RuleAction setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    /**
+     * review_findings: los hallazgos que da por revisados (sus códigos).
+     */
+    public List<String> getFindings() {
+        return findings;
+    }
+
+    public RuleAction setFindings(List<String> findings) {
+        this.findings = findings;
         return this;
     }
 

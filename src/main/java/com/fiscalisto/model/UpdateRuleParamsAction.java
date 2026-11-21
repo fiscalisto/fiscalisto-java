@@ -16,9 +16,9 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateRuleParamsAction {
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla.
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura.
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings.
      * <p>
      * Obligatorio.
      */
@@ -84,15 +84,41 @@ public class UpdateRuleParamsAction {
     private List<String> members;
 
     /**
-     * notify: lo que dice el aviso.
+     * notify: lo que dice el aviso. hold_payment: por qué se retiene (hasta 200).
      */
     @JsonProperty("note")
     private String note;
 
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla.
+     * email_supplier: el tema de los correos del proveedor a los que va (ordenes, pagos, facturas, complementos, documentos, precios; Ajustes › Correos a proveedores). Sin correos de ese tema, va a sus correos generales. Por omisión, facturas.
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote.
+     * Valores: ordenes, pagos, facturas, complementos, documentos, precios.
+     */
+    @JsonProperty("topic")
+    private String topic;
+
+    /**
+     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     */
+    @JsonProperty("subject")
+    private String subject;
+
+    /**
+     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     */
+    @JsonProperty("message")
+    private String message;
+
+    /**
+     * review_findings: los hallazgos que da por revisados (sus códigos, `code` en GET /v1/sat_findings). No los que cambian impuestos o la lista negra: cancelado, efos_definitivo, efos_presunto, lista_69b_bis, lista_69.
+     */
+    @JsonProperty("findings")
+    private List<String> findings;
+
+    /**
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura.
+     * <p>
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, lote, hold_payment, email_supplier, review_findings.
      * <p>
      * Obligatorio.
      */
@@ -228,7 +254,7 @@ public class UpdateRuleParamsAction {
     }
 
     /**
-     * notify: lo que dice el aviso.
+     * notify: lo que dice el aviso. hold_payment: por qué se retiene (hasta 200).
      */
     public String getNote() {
         return note;
@@ -236,6 +262,56 @@ public class UpdateRuleParamsAction {
 
     public UpdateRuleParamsAction setNote(String note) {
         this.note = note;
+        return this;
+    }
+
+    /**
+     * email_supplier: el tema de los correos del proveedor a los que va (ordenes, pagos, facturas, complementos, documentos, precios; Ajustes › Correos a proveedores). Sin correos de ese tema, va a sus correos generales. Por omisión, facturas.
+     * <p>
+     * Valores: ordenes, pagos, facturas, complementos, documentos, precios.
+     */
+    public String getTopic() {
+        return topic;
+    }
+
+    public UpdateRuleParamsAction setTopic(String topic) {
+        this.topic = topic;
+        return this;
+    }
+
+    /**
+     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     */
+    public String getSubject() {
+        return subject;
+    }
+
+    public UpdateRuleParamsAction setSubject(String subject) {
+        this.subject = subject;
+        return this;
+    }
+
+    /**
+     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    public UpdateRuleParamsAction setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+    /**
+     * review_findings: los hallazgos que da por revisados (sus códigos, `code` en GET /v1/sat_findings). No los que cambian impuestos o la lista negra: cancelado, efos_definitivo, efos_presunto, lista_69b_bis, lista_69.
+     */
+    public List<String> getFindings() {
+        return findings;
+    }
+
+    public UpdateRuleParamsAction setFindings(List<String> findings) {
+        this.findings = findings;
         return this;
     }
 }
