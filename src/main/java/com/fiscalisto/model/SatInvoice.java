@@ -155,6 +155,14 @@ public class SatInvoice {
     private SatInvoicePaidOtherwise paidOtherwise;
 
     /**
+     * Solo en una PUE recibida pagada en efectivo cuando la empresa pide confirmar estos pagos (Ajustes › Pagos sin complemento): pending hasta que alguien anote de dónde salió el dinero (mark_paid con money_source), confirmed después. Null en las demás. Sus impuestos no cambian.
+     * <p>
+     * Valores: pending, confirmed.
+     */
+    @JsonProperty("cash_confirmation")
+    private String cashConfirmation;
+
+    /**
      * Su centro de costo (ccn_…), o null. Póngalo o cámbielo con POST /v1/sat_invoices/{id}.
      */
     @JsonProperty("cost_center")
@@ -460,6 +468,20 @@ public class SatInvoice {
 
     public SatInvoice setPaidOtherwise(SatInvoicePaidOtherwise paidOtherwise) {
         this.paidOtherwise = paidOtherwise;
+        return this;
+    }
+
+    /**
+     * Solo en una PUE recibida pagada en efectivo cuando la empresa pide confirmar estos pagos (Ajustes › Pagos sin complemento): pending hasta que alguien anote de dónde salió el dinero (mark_paid con money_source), confirmed después. Null en las demás. Sus impuestos no cambian.
+     * <p>
+     * Valores: pending, confirmed.
+     */
+    public String getCashConfirmation() {
+        return cashConfirmation;
+    }
+
+    public SatInvoice setCashConfirmation(String cashConfirmation) {
+        this.cashConfirmation = cashConfirmation;
         return this;
     }
 

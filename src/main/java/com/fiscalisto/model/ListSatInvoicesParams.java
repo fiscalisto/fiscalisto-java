@@ -78,6 +78,14 @@ public class ListSatInvoicesParams {
     private String tag;
 
     /**
+     * Solo las PUE recibidas en efectivo que la empresa pide confirmar: pending (nadie ha anotado de dónde salió el dinero) o confirmed.
+     * <p>
+     * Valores: pending, confirmed.
+     */
+    @JsonProperty("cash_confirmation")
+    private String cashConfirmation;
+
+    /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
      */
     public Long getLimit() {
@@ -203,6 +211,20 @@ public class ListSatInvoicesParams {
 
     public ListSatInvoicesParams setTag(String tag) {
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * Solo las PUE recibidas en efectivo que la empresa pide confirmar: pending (nadie ha anotado de dónde salió el dinero) o confirmed.
+     * <p>
+     * Valores: pending, confirmed.
+     */
+    public String getCashConfirmation() {
+        return cashConfirmation;
+    }
+
+    public ListSatInvoicesParams setCashConfirmation(String cashConfirmation) {
+        this.cashConfirmation = cashConfirmation;
         return this;
     }
 }
