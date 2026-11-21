@@ -252,6 +252,18 @@ public class Invoice {
     private String recurringInvoice;
 
     /**
+     * Los tickets (`tkt_…`) que factura: el que su cliente facturó en la autofactura, el que su equipo facturó desde la página del ticket o los que asoció a ella. Vacío en las demás; los de una factura global están en GET /v1/tickets con `status=global`.
+     */
+    @JsonProperty("tickets")
+    private List<String> tickets;
+
+    /**
+     * Qué timbró la factura; `null` si se timbró fuera de Fiscalisto.
+     */
+    @JsonProperty("origin")
+    private InvoiceOrigin origin;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -776,6 +788,30 @@ public class Invoice {
 
     public Invoice setRecurringInvoice(String recurringInvoice) {
         this.recurringInvoice = recurringInvoice;
+        return this;
+    }
+
+    /**
+     * Los tickets (`tkt_…`) que factura: el que su cliente facturó en la autofactura, el que su equipo facturó desde la página del ticket o los que asoció a ella. Vacío en las demás; los de una factura global están en GET /v1/tickets con `status=global`.
+     */
+    public List<String> getTickets() {
+        return tickets;
+    }
+
+    public Invoice setTickets(List<String> tickets) {
+        this.tickets = tickets;
+        return this;
+    }
+
+    /**
+     * Qué timbró la factura; `null` si se timbró fuera de Fiscalisto.
+     */
+    public InvoiceOrigin getOrigin() {
+        return origin;
+    }
+
+    public Invoice setOrigin(InvoiceOrigin origin) {
+        this.origin = origin;
         return this;
     }
 

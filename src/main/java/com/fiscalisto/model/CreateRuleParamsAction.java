@@ -98,13 +98,13 @@ public class CreateRuleParamsAction {
     private String topic;
 
     /**
-     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
      */
     @JsonProperty("subject")
     private String subject;
 
     /**
-     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
      */
     @JsonProperty("message")
     private String message;
@@ -300,7 +300,7 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     * email_supplier: el asunto. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
      */
     public String getSubject() {
         return subject;
@@ -312,7 +312,7 @@ public class CreateRuleParamsAction {
     }
 
     /**
-     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}.
+     * email_supplier: el mensaje. Puede llevar {folio}, {total}, {fecha} y {empresa}. En los momentos de pagos también {facturas}, {pagado}, {fecha_pago}, {pago}, {cuenta}, {banco} y {referencia}; en payout.paid, {rastreo} y {cep}; en payout.failed, {motivo}.
      */
     public String getMessage() {
         return message;
