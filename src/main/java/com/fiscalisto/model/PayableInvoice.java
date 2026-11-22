@@ -107,7 +107,7 @@ public class PayableInvoice {
     private PayableInvoiceEarlyPayment earlyPayment;
 
     /**
-     * El pago abierto (pyo_…) en el que ya está, o null.
+     * El pago abierto (pyo_…) en el que ya está, o null. Si se dividió en varios pagos, el primero: un pago nuevo solo toma lo que esos no cubren.
      */
     @JsonProperty("in_payout")
     private String inPayout;
@@ -326,7 +326,7 @@ public class PayableInvoice {
     }
 
     /**
-     * El pago abierto (pyo_…) en el que ya está, o null.
+     * El pago abierto (pyo_…) en el que ya está, o null. Si se dividió en varios pagos, el primero: un pago nuevo solo toma lo que esos no cubren.
      */
     public String getInPayout() {
         return inPayout;

@@ -19,7 +19,7 @@ public final class FindingsService {
     /**
      * Listar hallazgos
      * <p>
-     * Lo que Fiscalisto encontró en las órdenes de compra, pagos, proveedores, contabilidad, viáticos y tickets de compra del emisor, el más reciente primero: una factura que no coincide con su orden, un proveedor en la lista 69-B, un documento vencido, Caja con saldo acreedor, una comprobación vencida, un ticket sin factura. Sin status, los que nadie ha revisado. Los de facturas están en GET /v1/sat_findings. No usa timbres.
+     * Lo que Fiscalisto encontró en las órdenes de compra, pagos, proveedores, contabilidad, viáticos, tickets de compra e inventario del emisor, el más reciente primero: una factura que no coincide con su orden, un proveedor en la lista 69-B, un documento vencido, Caja con saldo acreedor, una comprobación vencida, un ticket sin factura, una existencia negativa. Sin status, los que nadie ha revisado. Los de facturas están en GET /v1/sat_findings. No usa timbres.
      * <p>
      * GET /v1/findings
      * <p>
