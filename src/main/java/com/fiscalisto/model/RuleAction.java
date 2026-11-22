@@ -18,7 +18,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account, webhook.
      */
     @JsonProperty("type")
     private String type;
@@ -28,6 +28,18 @@ public class RuleAction {
      */
     @JsonProperty("tag")
     private String tag;
+
+    /**
+     * webhook: la dirección a la que manda rule.matched.
+     */
+    @JsonProperty("url")
+    private String url;
+
+    /**
+     * webhook: el webhook de Desarrolladores › Webhooks con esa dirección (we_…), donde están su secreto y sus envíos.
+     */
+    @JsonProperty("webhook_endpoint")
+    private String webhookEndpoint;
 
     /**
      * account: el número de cuenta del catálogo en que se registra la factura, en vez de la de su categoría (no cambia la que eligió una persona).
@@ -152,7 +164,7 @@ public class RuleAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account, webhook.
      */
     public String getType() {
         return type;
@@ -172,6 +184,30 @@ public class RuleAction {
 
     public RuleAction setTag(String tag) {
         this.tag = tag;
+        return this;
+    }
+
+    /**
+     * webhook: la dirección a la que manda rule.matched.
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    public RuleAction setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+    /**
+     * webhook: el webhook de Desarrolladores › Webhooks con esa dirección (we_…), donde están su secreto y sus envíos.
+     */
+    public String getWebhookEndpoint() {
+        return webhookEndpoint;
+    }
+
+    public RuleAction setWebhookEndpoint(String webhookEndpoint) {
+        this.webhookEndpoint = webhookEndpoint;
         return this;
     }
 

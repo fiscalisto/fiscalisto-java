@@ -16,14 +16,20 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateRuleParamsAction {
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; account (facturas): registrar su ingreso o gasto en la cuenta `account` del catálogo en vez de la de su categoría, nunca sobre la que eligió una persona ni en un mes cerrado; en bank.movement, registrar el movimiento con su póliza de ingresos o egresos contra esa cuenta (otra cuenta de banco de la empresa es un traspaso), si no tiene una ni es un mes cerrado; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; account (facturas): registrar su ingreso o gasto en la cuenta `account` del catálogo en vez de la de su categoría, nunca sobre la que eligió una persona ni en un mes cerrado; en bank.movement, registrar el movimiento con su póliza de ingresos o egresos contra esa cuenta (otra cuenta de banco de la empresa es un traspaso), si no tiene una ni es un mes cerrado; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió); webhook: mandar el evento rule.matched, con el registro y todos los campos de sus condiciones, a `url` (Zapier, Make, n8n o su sistema), firmado y con reintentos como los demás webhooks; al guardar se usa o se crea el webhook de esa dirección en Desarrolladores › Webhooks. Pide permiso de administrar la API.
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, account, lote, hold_payment, email_supplier, review_findings, extra_signature.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, account, lote, hold_payment, email_supplier, review_findings, extra_signature, webhook.
      * <p>
      * Obligatorio.
      */
     @JsonProperty("type")
     private String type;
+
+    /**
+     * webhook: la dirección https a la que manda rule.matched.
+     */
+    @JsonProperty("url")
+    private String url;
 
     /**
      * tag: la etiqueta (tag_…, GET /v1/tags). Un número, el id de antes, también se acepta.
@@ -154,9 +160,9 @@ public class UpdateRuleParamsAction {
     private List<String> findings;
 
     /**
-     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; account (facturas): registrar su ingreso o gasto en la cuenta `account` del catálogo en vez de la de su categoría, nunca sobre la que eligió una persona ni en un mes cerrado; en bank.movement, registrar el movimiento con su póliza de ingresos o egresos contra esa cuenta (otra cuenta de banco de la empresa es un traspaso), si no tiene una ni es un mes cerrado; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió).
+     * tag (facturas y órdenes): poner la etiqueta `tag`; category (facturas recibidas): poner la categoría de gasto `category`, nunca sobre la que eligió una persona; account (facturas): registrar su ingreso o gasto en la cuenta `account` del catálogo en vez de la de su categoría, nunca sobre la que eligió una persona ni en un mes cerrado; en bank.movement, registrar el movimiento con su póliza de ingresos o egresos contra esa cuenta (otra cuenta de banco de la empresa es un traspaso), si no tiene una ni es un mes cerrado; cost_center (facturas): poner `cost_center` (ccn_…), nunca sobre lo que puso una persona; stage (órdenes): pasar a la etapa `stage`; close (órdenes): cerrarla si ya llegó todo; ask_approval (órdenes en borrador): pedir aprobación por sus pasos de aprobación; notify: avisar a `members` (mem_…); lote (invoice.received e invoice.approved): agregar la factura al lote de pagos abierto `lote_name` que paga `pay_on`, o crear uno, preparado como quien hizo la regla; hold_payment (facturas recibidas): retener su pago hasta que alguien lo suelte, con `note`; email_supplier (facturas recibidas): escribirle al proveedor a los correos de su tema `topic`, con `subject` y `message`; review_findings: dar por revisados los hallazgos `findings` de la factura; extra_signature (payout.submitted): el pago necesita `signatures` firmas más que las de Configurar pagos, con `reason` para quien firma (nunca las baja; no cambia un pago que ya salió); webhook: mandar el evento rule.matched, con el registro y todos los campos de sus condiciones, a `url` (Zapier, Make, n8n o su sistema), firmado y con reintentos como los demás webhooks; al guardar se usa o se crea el webhook de esa dirección en Desarrolladores › Webhooks. Pide permiso de administrar la API.
      * <p>
-     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, account, lote, hold_payment, email_supplier, review_findings, extra_signature.
+     * Valores: tag, cost_center, stage, close, ask_approval, notify, category, account, lote, hold_payment, email_supplier, review_findings, extra_signature, webhook.
      * <p>
      * Obligatorio.
      */
@@ -166,6 +172,18 @@ public class UpdateRuleParamsAction {
 
     public UpdateRuleParamsAction setType(String type) {
         this.type = type;
+        return this;
+    }
+
+    /**
+     * webhook: la dirección https a la que manda rule.matched.
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    public UpdateRuleParamsAction setUrl(String url) {
+        this.url = url;
         return this;
     }
 
