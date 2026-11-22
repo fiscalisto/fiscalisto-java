@@ -50,7 +50,7 @@ public class CreateRecurringInvoiceParamsSchedule {
     /**
      * La zona de esa hora. Por omisión America/Mexico_City.
      * <p>
-     * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Ciudad_Juarez.
+     * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Matamoros, America/Ciudad_Juarez.
      */
     @JsonProperty("time_zone")
     private String timeZone;
@@ -132,7 +132,7 @@ public class CreateRecurringInvoiceParamsSchedule {
     /**
      * La zona de esa hora. Por omisión America/Mexico_City.
      * <p>
-     * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Ciudad_Juarez.
+     * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Matamoros, America/Ciudad_Juarez.
      */
     public String getTimeZone() {
         return timeZone;
