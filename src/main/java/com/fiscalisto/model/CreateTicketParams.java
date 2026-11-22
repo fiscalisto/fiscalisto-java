@@ -95,6 +95,20 @@ public class CreateTicketParams {
     private List<CreateTicketParamsLocalTax> localTaxes;
 
     /**
+     * IEPS incluido en su total, con `product_key` (un producto lleva el suyo): una tasa de c_TasaOCuota como 0.08 (botanas) o, con `ieps_factor` `Cuota`, pesos por unidad. La factura global lo desglosa aparte (RMF 2026 regla 2.7.1.21); la factura de un cliente que no paga IEPS lo lleva dentro del precio (LIEPS art. 19 fr. II).
+     */
+    @JsonProperty("ieps")
+    private BigDecimal ieps;
+
+    /**
+     * `Tasa` (por omisión) o `Cuota` (pesos por unidad).
+     * <p>
+     * Valores: Tasa, Cuota.
+     */
+    @JsonProperty("ieps_factor")
+    private String iepsFactor;
+
+    /**
      * Quién pagó, para reconocer la venta en Tickets. No es el receptor de la factura (eso lo escribe el comprador en el portal) y no se le manda nada.
      */
     @JsonProperty("buyer")
@@ -269,6 +283,37 @@ public class CreateTicketParams {
 
     public CreateTicketParams setLocalTaxes(List<CreateTicketParamsLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * IEPS incluido en su total, con `product_key` (un producto lleva el suyo): una tasa de c_TasaOCuota como 0.08 (botanas) o, con `ieps_factor` `Cuota`, pesos por unidad. La factura global lo desglosa aparte (RMF 2026 regla 2.7.1.21); la factura de un cliente que no paga IEPS lo lleva dentro del precio (LIEPS art. 19 fr. II).
+     */
+    public BigDecimal getIeps() {
+        return ieps;
+    }
+
+    public CreateTicketParams setIeps(BigDecimal ieps) {
+        this.ieps = ieps;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateTicketParams setIeps(double ieps) {
+        return setIeps(BigDecimal.valueOf(ieps));
+    }
+
+    /**
+     * `Tasa` (por omisión) o `Cuota` (pesos por unidad).
+     * <p>
+     * Valores: Tasa, Cuota.
+     */
+    public String getIepsFactor() {
+        return iepsFactor;
+    }
+
+    public CreateTicketParams setIepsFactor(String iepsFactor) {
+        this.iepsFactor = iepsFactor;
         return this;
     }
 

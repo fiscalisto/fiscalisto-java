@@ -55,6 +55,20 @@ public class CreateTicketParamsLine {
     private List<CreateTicketParamsLineLocalTax> localTaxes;
 
     /**
+     * IEPS incluido en su total, con `product_key` (un producto lleva el suyo): una tasa de c_TasaOCuota como 0.08 (botanas) o, con `ieps_factor` `Cuota`, pesos por unidad. La factura global lo desglosa aparte (RMF 2026 regla 2.7.1.21); la factura de un cliente que no paga IEPS lo lleva dentro del precio (LIEPS art. 19 fr. II).
+     */
+    @JsonProperty("ieps")
+    private BigDecimal ieps;
+
+    /**
+     * `Tasa` (por omisión) o `Cuota` (pesos por unidad).
+     * <p>
+     * Valores: Tasa, Cuota.
+     */
+    @JsonProperty("ieps_factor")
+    private String iepsFactor;
+
+    /**
      * Lo que solo dice esta venta, como las noches, fechas y número de reservación de una estancia. Con él, la factura dice «Hospedaje · 6 noches, del 14 al 20 de noviembre»; cuándo va lo decide `invoice_concepts.line_detail` de la autofactura (por omisión, el cliente lo elige en el portal).
      */
     @JsonProperty("detail")
@@ -145,6 +159,37 @@ public class CreateTicketParamsLine {
 
     public CreateTicketParamsLine setLocalTaxes(List<CreateTicketParamsLineLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * IEPS incluido en su total, con `product_key` (un producto lleva el suyo): una tasa de c_TasaOCuota como 0.08 (botanas) o, con `ieps_factor` `Cuota`, pesos por unidad. La factura global lo desglosa aparte (RMF 2026 regla 2.7.1.21); la factura de un cliente que no paga IEPS lo lleva dentro del precio (LIEPS art. 19 fr. II).
+     */
+    public BigDecimal getIeps() {
+        return ieps;
+    }
+
+    public CreateTicketParamsLine setIeps(BigDecimal ieps) {
+        this.ieps = ieps;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateTicketParamsLine setIeps(double ieps) {
+        return setIeps(BigDecimal.valueOf(ieps));
+    }
+
+    /**
+     * `Tasa` (por omisión) o `Cuota` (pesos por unidad).
+     * <p>
+     * Valores: Tasa, Cuota.
+     */
+    public String getIepsFactor() {
+        return iepsFactor;
+    }
+
+    public CreateTicketParamsLine setIepsFactor(String iepsFactor) {
+        this.iepsFactor = iepsFactor;
         return this;
     }
 

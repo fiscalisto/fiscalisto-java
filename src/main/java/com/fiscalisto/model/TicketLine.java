@@ -53,6 +53,20 @@ public class TicketLine {
     private List<TicketLineLocalTax> localTaxes;
 
     /**
+     * Su IEPS (el de su producto o el que mandó), incluido en su total: una tasa o, con `ieps_factor` `Cuota`, pesos por unidad. `null`: sin IEPS.
+     */
+    @JsonProperty("ieps")
+    private BigDecimal ieps;
+
+    /**
+     * Tasa o Cuota (TipoFactor del IEPS).
+     * <p>
+     * Valores: Tasa, Cuota.
+     */
+    @JsonProperty("ieps_factor")
+    private String iepsFactor;
+
+    /**
      * El detalle que mandó (noches, fechas, reservación): va después de la descripción en la factura según `invoice_concepts.line_detail` de la autofactura.
      */
     @JsonProperty("detail")
@@ -139,6 +153,37 @@ public class TicketLine {
 
     public TicketLine setLocalTaxes(List<TicketLineLocalTax> localTaxes) {
         this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * Su IEPS (el de su producto o el que mandó), incluido en su total: una tasa o, con `ieps_factor` `Cuota`, pesos por unidad. `null`: sin IEPS.
+     */
+    public BigDecimal getIeps() {
+        return ieps;
+    }
+
+    public TicketLine setIeps(BigDecimal ieps) {
+        this.ieps = ieps;
+        return this;
+    }
+
+    @JsonIgnore
+    public TicketLine setIeps(double ieps) {
+        return setIeps(BigDecimal.valueOf(ieps));
+    }
+
+    /**
+     * Tasa o Cuota (TipoFactor del IEPS).
+     * <p>
+     * Valores: Tasa, Cuota.
+     */
+    public String getIepsFactor() {
+        return iepsFactor;
+    }
+
+    public TicketLine setIepsFactor(String iepsFactor) {
+        this.iepsFactor = iepsFactor;
         return this;
     }
 
