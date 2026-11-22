@@ -111,7 +111,7 @@ public final class BankTransactionsService {
     /**
      * Explicar un depósito sin factura
      * <p>
-     * Un depósito que ninguna factura explica: venta (aún sin facturar), prestamo, traspaso o devolucion. El SAT puede presumir ingreso un depósito sin explicar (CFF art. 59 fr. III).
+     * Un depósito que ninguna factura explica: venta (aún sin facturar), prestamo, traspaso, devolucion o intereses. El SAT puede presumir ingreso un depósito sin explicar (CFF art. 59 fr. III).
      * <p>
      * POST /v1/bank_transactions/{id}/classify
      * <p>

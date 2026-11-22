@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClassifyBankTransactionParams {
     /**
-     * venta (una venta que aún no se factura), prestamo, traspaso (entre cuentas propias) o devolucion.
+     * venta (una venta que aún no se factura), prestamo, traspaso (entre cuentas propias), devolucion o intereses (los que paga el banco; ingreso acumulable).
      * <p>
-     * Valores: venta, prestamo, traspaso, devolucion.
+     * Valores: venta, prestamo, traspaso, devolucion, intereses.
      * <p>
      * Obligatorio.
      */
@@ -29,9 +29,9 @@ public class ClassifyBankTransactionParams {
     private String note;
 
     /**
-     * venta (una venta que aún no se factura), prestamo, traspaso (entre cuentas propias) o devolucion.
+     * venta (una venta que aún no se factura), prestamo, traspaso (entre cuentas propias), devolucion o intereses (los que paga el banco; ingreso acumulable).
      * <p>
-     * Valores: venta, prestamo, traspaso, devolucion.
+     * Valores: venta, prestamo, traspaso, devolucion, intereses.
      * <p>
      * Obligatorio.
      */

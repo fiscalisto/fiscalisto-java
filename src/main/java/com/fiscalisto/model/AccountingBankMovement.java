@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
 /**
- * AccountingBankMovement: Un movimiento de banco que ninguna factura explica (un retiro, o un depósito clasificado como préstamo, traspaso o devolución) y su póliza de ingresos o egresos contra Bancos, cuando ya se registró.
+ * AccountingBankMovement: Un movimiento de banco que ninguna factura explica (un retiro, o un depósito clasificado como préstamo, traspaso, devolución o intereses) y su póliza de ingresos o egresos contra Bancos, cuando ya se registró.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -86,7 +86,7 @@ public class AccountingBankMovement {
     /**
      * Un depósito: lo que dijo la conciliación (loan, transfer o refund). null en un retiro.
      * <p>
-     * Valores: loan, transfer, refund.
+     * Valores: loan, transfer, refund, interest.
      */
     @JsonProperty("classification")
     private String classification;
@@ -259,7 +259,7 @@ public class AccountingBankMovement {
     /**
      * Un depósito: lo que dijo la conciliación (loan, transfer o refund). null en un retiro.
      * <p>
-     * Valores: loan, transfer, refund.
+     * Valores: loan, transfer, refund, interest.
      */
     public String getClassification() {
         return classification;

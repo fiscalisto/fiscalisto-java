@@ -85,9 +85,9 @@ public class BankTransaction {
     private String status;
 
     /**
-     * classified: venta (aún sin facturar), prestamo, traspaso o devolucion; si no, null.
+     * classified: venta (aún sin facturar), prestamo, traspaso, devolucion o intereses; si no, null.
      * <p>
-     * Valores: venta, prestamo, traspaso, devolucion.
+     * Valores: venta, prestamo, traspaso, devolucion, intereses.
      */
     @JsonProperty("classification")
     private String classification;
@@ -262,9 +262,9 @@ public class BankTransaction {
     }
 
     /**
-     * classified: venta (aún sin facturar), prestamo, traspaso o devolucion; si no, null.
+     * classified: venta (aún sin facturar), prestamo, traspaso, devolucion o intereses; si no, null.
      * <p>
-     * Valores: venta, prestamo, traspaso, devolucion.
+     * Valores: venta, prestamo, traspaso, devolucion, intereses.
      */
     public String getClassification() {
         return classification;

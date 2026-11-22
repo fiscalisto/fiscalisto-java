@@ -21,7 +21,7 @@ public final class BankMovementsService {
     /**
      * Listar los movimientos de banco sin factura
      * <p>
-     * Los movimientos de banco de un mes que ninguna factura explica: los retiros de los estados de cuenta importados en la conciliación (comisiones, impuestos, pagos de préstamos, traspasos) y los depósitos que ahí se clasificaron como préstamo, traspaso o devolución. Cada uno con su póliza, si ya se registró, y la cuenta sugerida. Lo que pagó o cobró una factura ya está en la contabilidad por su CFDI.
+     * Los movimientos de banco de un mes que ninguna factura explica: los retiros de los estados de cuenta importados en la conciliación (comisiones, impuestos, pagos de préstamos, traspasos) y los depósitos que ahí se clasificaron como préstamo, traspaso, devolución o intereses. Cada uno con su póliza, si ya se registró, y la cuenta sugerida. Lo que pagó o cobró una factura ya está en la contabilidad por su CFDI.
      * <p>
      * GET /v1/accounting/bank_movements
      * <p>
