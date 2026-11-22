@@ -56,6 +56,12 @@ public class EmployeeNoticeSettings {
     private Boolean survey;
 
     /**
+     * Avisar cuando se abre un ciclo de Desempeño con evaluaciones que le toca hacer.
+     */
+    @JsonProperty("review")
+    private Boolean review;
+
+    /**
      * Los días después de timbrarse en que se le recuerda, una vez, firmar un recibo sin firmar; 0: nunca.
      */
     @JsonProperty("sign_reminder_days")
@@ -160,6 +166,18 @@ public class EmployeeNoticeSettings {
 
     public EmployeeNoticeSettings setSurvey(Boolean survey) {
         this.survey = survey;
+        return this;
+    }
+
+    /**
+     * Avisar cuando se abre un ciclo de Desempeño con evaluaciones que le toca hacer.
+     */
+    public Boolean getReview() {
+        return review;
+    }
+
+    public EmployeeNoticeSettings setReview(Boolean review) {
+        this.review = review;
         return this;
     }
 

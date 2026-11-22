@@ -44,6 +44,12 @@ public class UpdateEmployeeNoticeSettingsParams {
     private Boolean survey;
 
     /**
+     * Cuando se abre un ciclo de Desempeño con evaluaciones que le toca hacer (POST /v1/review_cycles/{id}/open).
+     */
+    @JsonProperty("review")
+    private Boolean review;
+
+    /**
      * Si un recibo sigue sin firmar de recibido estos días después de timbrarse, se le recuerda una vez. 0: nunca.
      */
     @JsonProperty("sign_reminder_days")
@@ -118,6 +124,18 @@ public class UpdateEmployeeNoticeSettingsParams {
 
     public UpdateEmployeeNoticeSettingsParams setSurvey(Boolean survey) {
         this.survey = survey;
+        return this;
+    }
+
+    /**
+     * Cuando se abre un ciclo de Desempeño con evaluaciones que le toca hacer (POST /v1/review_cycles/{id}/open).
+     */
+    public Boolean getReview() {
+        return review;
+    }
+
+    public UpdateEmployeeNoticeSettingsParams setReview(Boolean review) {
+        this.review = review;
         return this;
     }
 
