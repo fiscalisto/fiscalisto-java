@@ -8,6 +8,7 @@ import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.Employee;
 import com.fiscalisto.model.EmployeePortal;
 import com.fiscalisto.model.EmployeeRaise;
+import com.fiscalisto.model.EmployeeTraining;
 import com.fiscalisto.model.EmployeeVacations;
 import com.fiscalisto.model.GetEmployeePayStatementParams;
 import com.fiscalisto.model.GetEmployeeVacationCertificateParams;
@@ -15,6 +16,7 @@ import com.fiscalisto.model.GetEmployeeVacationsParams;
 import com.fiscalisto.model.ListEmployeesParams;
 import com.fiscalisto.model.UpdateEmployeeParams;
 import com.fiscalisto.model.UpdateEmployeePortalParams;
+import com.fiscalisto.model.UpdateEmployeeTrainingParams;
 import com.fiscalisto.model.UpdateEmployeeVacationsParams;
 
 /**
@@ -262,5 +264,43 @@ public final class EmployeesService {
 
     public EmployeePortal updatePortal(String id, UpdateEmployeePortalParams params) {
         return updatePortal(id, params, null);
+    }
+
+    /**
+     * Capacitación de un empleado
+     * <p>
+     * Su ocupación del Catálogo Nacional de Ocupaciones (la suya o la de su puesto), su grado de estudios y los cursos que tomó con su constancia.
+     * <p>
+     * GET /v1/employees/{id}/training
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/get-employee-training
+     */
+    public EmployeeTraining training(String id, RequestOptions options) {
+        return api.request("GET", "/v1/employees/" + ApiClient.encode(id) + "/training", null, null, false, EmployeeTraining.class, options);
+    }
+
+    public EmployeeTraining training(String id) {
+        return training(id, null);
+    }
+
+    /**
+     * Ocupación y estudios de un empleado
+     * <p>
+     * Su ocupación cuando no es la de su puesto (null usa la del puesto) y su grado de estudios terminados, que pide el aviso a la STPS.
+     * <p>
+     * POST /v1/employees/{id}/training
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/nomina/update-employee-training
+     */
+    public EmployeeTraining updateTraining(String id, UpdateEmployeeTrainingParams params, RequestOptions options) {
+        return api.request("POST", "/v1/employees/" + ApiClient.encode(id) + "/training", params, null, true, EmployeeTraining.class, options);
+    }
+
+    public EmployeeTraining updateTraining(String id, UpdateEmployeeTrainingParams params) {
+        return updateTraining(id, params, null);
+    }
+
+    public EmployeeTraining updateTraining(String id) {
+        return updateTraining(id, null, null);
     }
 }
