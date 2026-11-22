@@ -26,8 +26,11 @@ import com.fiscalisto.model.GetEquityChangesParams;
 import com.fiscalisto.model.GetFinancialRatiosParams;
 import com.fiscalisto.model.GetFinancialStatementsParams;
 import com.fiscalisto.model.GetGeneralLedgerParams;
+import com.fiscalisto.model.GetIepsCustomersFileParams;
+import com.fiscalisto.model.GetIepsCustomersParams;
 import com.fiscalisto.model.GetTrialBalanceParams;
 import com.fiscalisto.model.GetVatRefundParams;
+import com.fiscalisto.model.IepsCustomers;
 import com.fiscalisto.model.JournalEntry;
 import com.fiscalisto.model.LedgerAccount;
 import com.fiscalisto.model.LedgerAccountList;
@@ -371,5 +374,39 @@ public final class AccountingService {
 
     public String diotFile(GetDiotFileParams params) {
         return diotFile(params, null);
+    }
+
+    /**
+     * Ver los clientes con IEPS desglosado
+     * <p>
+     * La relación trimestral de los clientes a los que el emisor les trasladó el IEPS por separado (artículo 19, fracción II, tercer párrafo de la Ley del IEPS): bebidas alcohólicas, bebidas energetizantes, bebidas saborizadas y alimentos de alta densidad calórica, de sus facturas de ingreso no canceladas. Público en general y extranjeros no van. Se presenta cada trimestre en el MULTI-IEPS, Anexo 1 (regla 5.2.2 de la RMF 2026), en el mes siguiente al trimestre.
+     * <p>
+     * GET /v1/accounting/ieps_customers
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-ieps-customers
+     */
+    public IepsCustomers iepsCustomers(GetIepsCustomersParams params, RequestOptions options) {
+        return api.request("GET", "/v1/accounting/ieps_customers", null, params, false, IepsCustomers.class, options);
+    }
+
+    public IepsCustomers iepsCustomers(GetIepsCustomersParams params) {
+        return iepsCustomers(params, null);
+    }
+
+    /**
+     * Descargar los clientes con IEPS desglosado
+     * <p>
+     * La relación de un trimestre en CSV (UTF-8): RFC, nombre, facturas e IEPS trasladado de cada cliente, y el total; la misma que descarga la app en Impuestos.
+     * <p>
+     * GET /v1/accounting/ieps_customers/file
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/get-ieps-customers-file
+     */
+    public String iepsCustomersFile(GetIepsCustomersFileParams params, RequestOptions options) {
+        return new String(api.bytes("GET", "/v1/accounting/ieps_customers/file", null, params, false, options), java.nio.charset.StandardCharsets.UTF_8);
+    }
+
+    public String iepsCustomersFile(GetIepsCustomersFileParams params) {
+        return iepsCustomersFile(params, null);
     }
 }
