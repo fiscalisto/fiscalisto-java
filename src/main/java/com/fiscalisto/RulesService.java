@@ -2,15 +2,18 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.BacktestRuleParams;
 import com.fiscalisto.model.CreateRuleParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListRuleRunsParams;
 import com.fiscalisto.model.ListRulesParams;
 import com.fiscalisto.model.OrderRulesParams;
 import com.fiscalisto.model.Rule;
+import com.fiscalisto.model.RuleBacktest;
 import com.fiscalisto.model.RuleList;
 import com.fiscalisto.model.RuleRun;
 import com.fiscalisto.model.RuleTestList;
+import com.fiscalisto.model.RuleVersionList;
 import com.fiscalisto.model.TestRuleParams;
 import com.fiscalisto.model.UpdateRuleParams;
 
@@ -200,5 +203,60 @@ public final class RulesService {
 
     public Iterable<RuleRun> listRunsAutoPaging() {
         return listRunsAutoPaging(null, null);
+    }
+
+    /**
+     * Probar una regla en los últimos días
+     * <p>
+     * Con todos los registros de su trigger de los últimos days días (90 por omisión, hasta 2,000): en cuántos se cumple, cuánto suman y qué habría hecho. No cambia nada.
+     * <p>
+     * POST /v1/rules/{id}/backtest
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/reglas/backtest-rule
+     */
+    public RuleBacktest backtest(String id, BacktestRuleParams params, RequestOptions options) {
+        return api.request("POST", "/v1/rules/" + ApiClient.encode(id) + "/backtest", params, null, true, RuleBacktest.class, options);
+    }
+
+    public RuleBacktest backtest(String id, BacktestRuleParams params) {
+        return backtest(id, params, null);
+    }
+
+    public RuleBacktest backtest(String id) {
+        return backtest(id, null, null);
+    }
+
+    /**
+     * Cambios de una regla
+     * <p>
+     * Cada cambio, el más reciente primero, con quién lo hizo y la regla como quedó. También de una regla borrada (90 días).
+     * <p>
+     * GET /v1/rules/{id}/versions
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/reglas/list-rule-versions
+     */
+    public RuleVersionList listVersions(String id, RequestOptions options) {
+        return api.request("GET", "/v1/rules/" + ApiClient.encode(id) + "/versions", null, null, false, RuleVersionList.class, options);
+    }
+
+    public RuleVersionList listVersions(String id) {
+        return listVersions(id, null);
+    }
+
+    /**
+     * Regresar una regla a una versión
+     * <p>
+     * La regla vuelve a como quedó en esa versión; una borrada vuelve a existir. Se revisa como cualquier cambio y queda como una versión más.
+     * <p>
+     * POST /v1/rules/{id}/versions/{version}/restore
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/reglas/restore-rule-version
+     */
+    public Rule restoreVersion(String id, String version, RequestOptions options) {
+        return api.request("POST", "/v1/rules/" + ApiClient.encode(id) + "/versions/" + ApiClient.encode(version) + "/restore", null, null, true, Rule.class, options);
+    }
+
+    public Rule restoreVersion(String id, String version) {
+        return restoreVersion(id, version, null);
     }
 }
