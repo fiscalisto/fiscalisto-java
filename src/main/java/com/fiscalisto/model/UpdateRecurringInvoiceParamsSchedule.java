@@ -46,7 +46,7 @@ public class UpdateRecurringInvoiceParamsSchedule {
     private Long hour;
 
     /**
-     * La zona de esa hora. Por omisión America/Mexico_City.
+     * La zona de esa hora. Por omisión, la de la empresa emisora (su «Zona horaria»).
      * <p>
      * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Matamoros, America/Ciudad_Juarez.
      */
@@ -126,7 +126,7 @@ public class UpdateRecurringInvoiceParamsSchedule {
     }
 
     /**
-     * La zona de esa hora. Por omisión America/Mexico_City.
+     * La zona de esa hora. Por omisión, la de la empresa emisora (su «Zona horaria»).
      * <p>
      * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Matamoros, America/Ciudad_Juarez.
      */

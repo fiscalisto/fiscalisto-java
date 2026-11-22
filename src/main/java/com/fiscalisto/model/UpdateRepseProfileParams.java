@@ -25,6 +25,12 @@ public class UpdateRepseProfileParams {
     private String stpsFolio;
 
     /**
+     * Fecha en que la STPS otorgó el registro o su última renovación (YYYY-MM-DD). Se renueva cada tres años (LFT art. 15).
+     */
+    @JsonProperty("stps_registration_date")
+    private String stpsRegistrationDate;
+
+    /**
      * Correo del sujeto obligado.
      */
     @JsonProperty("email")
@@ -105,6 +111,18 @@ public class UpdateRepseProfileParams {
 
     public UpdateRepseProfileParams setStpsFolio(String stpsFolio) {
         this.stpsFolio = stpsFolio;
+        return this;
+    }
+
+    /**
+     * Fecha en que la STPS otorgó el registro o su última renovación (YYYY-MM-DD). Se renueva cada tres años (LFT art. 15).
+     */
+    public String getStpsRegistrationDate() {
+        return stpsRegistrationDate;
+    }
+
+    public UpdateRepseProfileParams setStpsRegistrationDate(String stpsRegistrationDate) {
+        this.stpsRegistrationDate = stpsRegistrationDate;
         return this;
     }
 

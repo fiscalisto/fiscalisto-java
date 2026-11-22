@@ -41,7 +41,7 @@ public class RecurringInvoiceSchedule {
     private Long hour;
 
     /**
-     * La zona de esa hora (America/Mexico_City, America/Cancun…).
+     * La zona de esa hora (America/Mexico_City, America/Cancun…); sin ella, la de la empresa emisora.
      */
     @JsonProperty("time_zone")
     private String timeZone;
@@ -107,7 +107,7 @@ public class RecurringInvoiceSchedule {
     }
 
     /**
-     * La zona de esa hora (America/Mexico_City, America/Cancun…).
+     * La zona de esa hora (America/Mexico_City, America/Cancun…); sin ella, la de la empresa emisora.
      */
     public String getTimeZone() {
         return timeZone;

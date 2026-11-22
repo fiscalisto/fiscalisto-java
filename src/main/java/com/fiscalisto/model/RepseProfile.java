@@ -37,6 +37,18 @@ public class RepseProfile {
     private String stpsFolio;
 
     /**
+     * Fecha en que la STPS otorgó el registro o su última renovación.
+     */
+    @JsonProperty("stps_registration_date")
+    private String stpsRegistrationDate;
+
+    /**
+     * Cuándo renovar el registro; null sin fecha de registro.
+     */
+    @JsonProperty("renewal")
+    private RepseProfileRenewal renewal;
+
+    /**
      * Correo del sujeto obligado.
      */
     @JsonProperty("email")
@@ -141,6 +153,30 @@ public class RepseProfile {
 
     public RepseProfile setStpsFolio(String stpsFolio) {
         this.stpsFolio = stpsFolio;
+        return this;
+    }
+
+    /**
+     * Fecha en que la STPS otorgó el registro o su última renovación.
+     */
+    public String getStpsRegistrationDate() {
+        return stpsRegistrationDate;
+    }
+
+    public RepseProfile setStpsRegistrationDate(String stpsRegistrationDate) {
+        this.stpsRegistrationDate = stpsRegistrationDate;
+        return this;
+    }
+
+    /**
+     * Cuándo renovar el registro; null sin fecha de registro.
+     */
+    public RepseProfileRenewal getRenewal() {
+        return renewal;
+    }
+
+    public RepseProfile setRenewal(RepseProfileRenewal renewal) {
+        this.renewal = renewal;
         return this;
     }
 

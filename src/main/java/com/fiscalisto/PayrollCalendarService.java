@@ -41,7 +41,7 @@ public final class PayrollCalendarService {
     /**
      * Marcar un pago de nómina como pagado
      * <p>
-     * Marca (paid true) o desmarca (false) un pago del calendario de nómina: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe o sisub, con su key como lo da GET /v1/payroll_calendar. Una nómina (pago) queda hecha al timbrar sus recibos.
+     * Marca (paid true) o desmarca (false) un pago del calendario de nómina: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub o renovacion_repse, con su key como lo da GET /v1/payroll_calendar. Una nómina (pago) queda hecha al timbrar sus recibos.
      * <p>
      * POST /v1/payroll_calendar/mark
      * <p>

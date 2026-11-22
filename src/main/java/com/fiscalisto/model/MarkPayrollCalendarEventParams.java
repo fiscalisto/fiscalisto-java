@@ -19,9 +19,9 @@ public class MarkPayrollCalendarEventParams {
     private String issuer;
 
     /**
-     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe o sisub.
+     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub o renovacion_repse.
      * <p>
-     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub.
+     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub, renovacion_repse.
      * <p>
      * Obligatorio.
      */
@@ -57,9 +57,9 @@ public class MarkPayrollCalendarEventParams {
     }
 
     /**
-     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe o sisub.
+     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub o renovacion_repse.
      * <p>
-     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub.
+     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub, renovacion_repse.
      * <p>
      * Obligatorio.
      */

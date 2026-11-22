@@ -19,9 +19,9 @@ public class PayrollCalendarEvent {
     private String object;
 
     /**
-     * pago (una nómina, en su fecha de pago), imss (cuotas del mes, LSS art. 39), rcv_infonavit (bimestrales), isn (impuesto sobre nómina de un estado), aguinaldo (LFT art. 87), ptu (LFT art. 122), prima_riesgo (determinación anual, RACERF art. 32), ajuste_anual (LISR art. 97), icsoe (informativa cuatrimestral al IMSS de un contratista REPSE, LSS art. 15-A) o sisub (la del Infonavit, Ley del Infonavit art. 29 Bis).
+     * pago (una nómina, en su fecha de pago), imss (cuotas del mes, LSS art. 39), rcv_infonavit (bimestrales), isn (impuesto sobre nómina de un estado), aguinaldo (LFT art. 87), ptu (LFT art. 122), prima_riesgo (determinación anual, RACERF art. 32), ajuste_anual (LISR art. 97), icsoe (informativa cuatrimestral al IMSS de un contratista REPSE, LSS art. 15-A), sisub (la del Infonavit, Ley del Infonavit art. 29 Bis) o renovacion_repse (la renovación del registro en el REPSE cada tres años, LFT art. 15).
      * <p>
-     * Valores: pago, imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub.
+     * Valores: pago, imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub, renovacion_repse.
      */
     @JsonProperty("obligation")
     private String obligation;
@@ -93,9 +93,9 @@ public class PayrollCalendarEvent {
     }
 
     /**
-     * pago (una nómina, en su fecha de pago), imss (cuotas del mes, LSS art. 39), rcv_infonavit (bimestrales), isn (impuesto sobre nómina de un estado), aguinaldo (LFT art. 87), ptu (LFT art. 122), prima_riesgo (determinación anual, RACERF art. 32), ajuste_anual (LISR art. 97), icsoe (informativa cuatrimestral al IMSS de un contratista REPSE, LSS art. 15-A) o sisub (la del Infonavit, Ley del Infonavit art. 29 Bis).
+     * pago (una nómina, en su fecha de pago), imss (cuotas del mes, LSS art. 39), rcv_infonavit (bimestrales), isn (impuesto sobre nómina de un estado), aguinaldo (LFT art. 87), ptu (LFT art. 122), prima_riesgo (determinación anual, RACERF art. 32), ajuste_anual (LISR art. 97), icsoe (informativa cuatrimestral al IMSS de un contratista REPSE, LSS art. 15-A), sisub (la del Infonavit, Ley del Infonavit art. 29 Bis) o renovacion_repse (la renovación del registro en el REPSE cada tres años, LFT art. 15).
      * <p>
-     * Valores: pago, imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub.
+     * Valores: pago, imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub, renovacion_repse.
      */
     public String getObligation() {
         return obligation;
