@@ -18,10 +18,30 @@ public class RuleElseAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account, webhook.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account, webhook, flag.
      */
     @JsonProperty("type")
     private String type;
+
+    /**
+     * flag: qué tan grave es el hallazgo de la regla.
+     * <p>
+     * Valores: critical, warning, info.
+     */
+    @JsonProperty("severity")
+    private String severity;
+
+    /**
+     * flag: qué revisar, como sale en Hallazgos.
+     */
+    @JsonProperty("detail")
+    private String detail;
+
+    /**
+     * flag: el código de su hallazgo (regla_…), el `code` en GET /v1/findings y GET /v1/sat_findings.
+     */
+    @JsonProperty("finding_code")
+    private String findingCode;
 
     /**
      * tag: la etiqueta (tag_…, GET /v1/tags).
@@ -164,7 +184,7 @@ public class RuleElseAction {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account, webhook.
+     * Valores: tag, cost_center, category, stage, close, ask_approval, notify, lote, hold_payment, email_supplier, review_findings, extra_signature, account, webhook, flag.
      */
     public String getType() {
         return type;
@@ -172,6 +192,44 @@ public class RuleElseAction {
 
     public RuleElseAction setType(String type) {
         this.type = type;
+        return this;
+    }
+
+    /**
+     * flag: qué tan grave es el hallazgo de la regla.
+     * <p>
+     * Valores: critical, warning, info.
+     */
+    public String getSeverity() {
+        return severity;
+    }
+
+    public RuleElseAction setSeverity(String severity) {
+        this.severity = severity;
+        return this;
+    }
+
+    /**
+     * flag: qué revisar, como sale en Hallazgos.
+     */
+    public String getDetail() {
+        return detail;
+    }
+
+    public RuleElseAction setDetail(String detail) {
+        this.detail = detail;
+        return this;
+    }
+
+    /**
+     * flag: el código de su hallazgo (regla_…), el `code` en GET /v1/findings y GET /v1/sat_findings.
+     */
+    public String getFindingCode() {
+        return findingCode;
+    }
+
+    public RuleElseAction setFindingCode(String findingCode) {
+        this.findingCode = findingCode;
         return this;
     }
 

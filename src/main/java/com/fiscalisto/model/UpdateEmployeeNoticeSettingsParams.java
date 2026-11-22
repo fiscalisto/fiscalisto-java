@@ -38,6 +38,12 @@ public class UpdateEmployeeNoticeSettingsParams {
     private Boolean vacation;
 
     /**
+     * Cuando se abre una encuesta NOM-035 o de clima para él (POST /v1/climate_surveys/{id}/open).
+     */
+    @JsonProperty("survey")
+    private Boolean survey;
+
+    /**
      * Si un recibo sigue sin firmar de recibido estos días después de timbrarse, se le recuerda una vez. 0: nunca.
      */
     @JsonProperty("sign_reminder_days")
@@ -100,6 +106,18 @@ public class UpdateEmployeeNoticeSettingsParams {
 
     public UpdateEmployeeNoticeSettingsParams setVacation(Boolean vacation) {
         this.vacation = vacation;
+        return this;
+    }
+
+    /**
+     * Cuando se abre una encuesta NOM-035 o de clima para él (POST /v1/climate_surveys/{id}/open).
+     */
+    public Boolean getSurvey() {
+        return survey;
+    }
+
+    public UpdateEmployeeNoticeSettingsParams setSurvey(Boolean survey) {
+        this.survey = survey;
         return this;
     }
 

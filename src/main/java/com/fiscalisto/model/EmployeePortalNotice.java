@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EmployeePortalNotice {
     /**
-     * receipt: recibo nuevo; receipt_canceled: se canceló uno; vacation_approved / vacation_rejected: la respuesta a sus vacaciones; sign_reminder: tiene un recibo por firmar.
+     * receipt: recibo nuevo; receipt_canceled: se canceló uno; vacation_approved / vacation_rejected: la respuesta a sus vacaciones; sign_reminder: tiene un recibo por firmar; survey: tiene una encuesta de clima laboral por contestar.
      * <p>
-     * Valores: receipt, receipt_canceled, vacation_approved, vacation_rejected, sign_reminder.
+     * Valores: receipt, receipt_canceled, vacation_approved, vacation_rejected, sign_reminder, survey.
      */
     @JsonProperty("kind")
     private String kind;
@@ -41,9 +41,9 @@ public class EmployeePortalNotice {
     private String sentAt;
 
     /**
-     * receipt: recibo nuevo; receipt_canceled: se canceló uno; vacation_approved / vacation_rejected: la respuesta a sus vacaciones; sign_reminder: tiene un recibo por firmar.
+     * receipt: recibo nuevo; receipt_canceled: se canceló uno; vacation_approved / vacation_rejected: la respuesta a sus vacaciones; sign_reminder: tiene un recibo por firmar; survey: tiene una encuesta de clima laboral por contestar.
      * <p>
-     * Valores: receipt, receipt_canceled, vacation_approved, vacation_rejected, sign_reminder.
+     * Valores: receipt, receipt_canceled, vacation_approved, vacation_rejected, sign_reminder, survey.
      */
     public String getKind() {
         return kind;
