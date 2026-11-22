@@ -47,6 +47,10 @@ public final class FiscalistoClient {
     private final CandidatesService candidates;
     private final TrainingService training;
     private final TrainingCoursesService trainingCourses;
+    private final ClimateService climate;
+    private final ClimateSurveysService climateSurveys;
+    private final ClimateActionsService climateActions;
+    private final ClimateComplaintsService climateComplaints;
     private final InvoiceBatchesService invoiceBatches;
     private final TaxIdsService taxIds;
     private final BranchesService branches;
@@ -179,6 +183,10 @@ public final class FiscalistoClient {
         this.candidates = new CandidatesService(api);
         this.training = new TrainingService(api);
         this.trainingCourses = new TrainingCoursesService(api);
+        this.climate = new ClimateService(api);
+        this.climateSurveys = new ClimateSurveysService(api);
+        this.climateActions = new ClimateActionsService(api);
+        this.climateComplaints = new ClimateComplaintsService(api);
         this.invoiceBatches = new InvoiceBatchesService(api);
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
@@ -450,6 +458,26 @@ public final class FiscalistoClient {
     /** Nómina. */
     public TrainingCoursesService trainingCourses() {
         return trainingCourses;
+    }
+
+    /** Nómina. */
+    public ClimateService climate() {
+        return climate;
+    }
+
+    /** Nómina. */
+    public ClimateSurveysService climateSurveys() {
+        return climateSurveys;
+    }
+
+    /** Nómina. */
+    public ClimateActionsService climateActions() {
+        return climateActions;
+    }
+
+    /** Nómina. */
+    public ClimateComplaintsService climateComplaints() {
+        return climateComplaints;
     }
 
     /** Lotes. */
