@@ -2,10 +2,12 @@
 
 package com.fiscalisto;
 
+import com.fiscalisto.model.CompareSuaCedulaParams;
 import com.fiscalisto.model.CreatePayrollProvisionParams;
 import com.fiscalisto.model.DeletePayrollProvisionParams;
 import com.fiscalisto.model.GetPayrollProvisionParams;
 import com.fiscalisto.model.PayrollProvision;
+import com.fiscalisto.model.SuaComparison;
 
 /**
  * Contabilidad: client.payrollProvisions().
@@ -78,5 +80,22 @@ public final class PayrollProvisionsService {
 
     public PayrollProvision delete(String month) {
         return delete(month, null, null);
+    }
+
+    /**
+     * Comparar las cuotas de un mes con el SUA
+     * <p>
+     * Lee la cédula de determinación de cuotas que imprimió el SUA para el mes (la mensual, del IMSS: cuota fija, excedente, prestaciones en dinero, gastos médicos de pensionados, riesgos de trabajo, invalidez y vida y guarderías) y la compara trabajador por trabajador, por su NSS, con lo que Fiscalisto calculó de los recibos timbrados: quién está solo en uno de los dos y en qué difieren los días, el salario base de cotización o las cuotas (hasta un peso es redondeo del SUA). Se calcula con la prima de riesgo de la cédula. No guarda nada: si el SUA tiene razón, mande sus importes a POST /v1/accounting/payroll_provisions/{month}. Como Cierre del mes › Cuotas patronales del mes › Comparar con el SUA en la app. Una cédula de otro mes contesta workers vacío y cedula_month con su mes.
+     * <p>
+     * POST /v1/accounting/payroll_provisions/{month}/sua_comparison
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/contabilidad/compare-sua-cedula
+     */
+    public SuaComparison compareSua(String month, CompareSuaCedulaParams params, RequestOptions options) {
+        return api.request("POST", "/v1/accounting/payroll_provisions/" + ApiClient.encode(month) + "/sua_comparison", params, null, true, SuaComparison.class, options);
+    }
+
+    public SuaComparison compareSua(String month, CompareSuaCedulaParams params) {
+        return compareSua(month, params, null);
     }
 }

@@ -51,6 +51,7 @@ public final class FiscalistoClient {
     private final TaxIdsService taxIds;
     private final BranchesService branches;
     private final RulesService rules;
+    private final SupplierGroupsService supplierGroups;
     private final FindingsService findings;
     private final CostCentersService costCenters;
     private final TagsService tags;
@@ -182,6 +183,7 @@ public final class FiscalistoClient {
         this.taxIds = new TaxIdsService(api);
         this.branches = new BranchesService(api);
         this.rules = new RulesService(api);
+        this.supplierGroups = new SupplierGroupsService(api);
         this.findings = new FindingsService(api);
         this.costCenters = new CostCentersService(api);
         this.tags = new TagsService(api);
@@ -468,6 +470,11 @@ public final class FiscalistoClient {
     /** Reglas. */
     public RulesService rules() {
         return rules;
+    }
+
+    /** Reglas. */
+    public SupplierGroupsService supplierGroups() {
+        return supplierGroups;
     }
 
     /** Hallazgos. */
