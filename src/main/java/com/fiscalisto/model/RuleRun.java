@@ -35,13 +35,13 @@ public class RuleRun {
     /**
      * Cuándo corre.
      * <p>
-     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
+     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, bank.movement, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
      */
     @JsonProperty("trigger")
     private String trigger;
 
     /**
-     * La factura u orden, en palabras.
+     * La factura, orden o movimiento del banco, en palabras.
      */
     @JsonProperty("record")
     private String record_;
@@ -49,7 +49,7 @@ public class RuleRun {
     /**
      * Qué es el registro.
      * <p>
-     * Valores: invoice, purchase_order.
+     * Valores: invoice, purchase_order, bank_movement.
      */
     @JsonProperty("record_type")
     private String recordType;
@@ -119,7 +119,7 @@ public class RuleRun {
     /**
      * Cuándo corre.
      * <p>
-     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
+     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, bank.movement, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
      */
     public String getTrigger() {
         return trigger;
@@ -131,7 +131,7 @@ public class RuleRun {
     }
 
     /**
-     * La factura u orden, en palabras.
+     * La factura, orden o movimiento del banco, en palabras.
      */
     public String getRecord() {
         return record_;
@@ -145,7 +145,7 @@ public class RuleRun {
     /**
      * Qué es el registro.
      * <p>
-     * Valores: invoice, purchase_order.
+     * Valores: invoice, purchase_order, bank_movement.
      */
     public String getRecordType() {
         return recordType;

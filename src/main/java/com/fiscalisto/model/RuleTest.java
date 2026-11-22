@@ -22,7 +22,7 @@ public class RuleTest {
     private String object;
 
     /**
-     * La factura u orden, en palabras.
+     * La factura, orden o movimiento del banco, en palabras.
      */
     @JsonProperty("record")
     private String record_;
@@ -38,6 +38,12 @@ public class RuleTest {
      */
     @JsonProperty("purchase_order")
     private Long purchaseOrder;
+
+    /**
+     * El movimiento del banco, su id en /v1/accounting/bank_movements: bwd_… un retiro, btx_… un depósito.
+     */
+    @JsonProperty("bank_movement")
+    private String bankMovement;
 
     /**
      * Si se cumplen sus condiciones.
@@ -76,7 +82,7 @@ public class RuleTest {
     }
 
     /**
-     * La factura u orden, en palabras.
+     * La factura, orden o movimiento del banco, en palabras.
      */
     public String getRecord() {
         return record_;
@@ -114,6 +120,18 @@ public class RuleTest {
     @JsonIgnore
     public RuleTest setPurchaseOrder(long purchaseOrder) {
         return setPurchaseOrder(Long.valueOf(purchaseOrder));
+    }
+
+    /**
+     * El movimiento del banco, su id en /v1/accounting/bank_movements: bwd_… un retiro, btx_… un depósito.
+     */
+    public String getBankMovement() {
+        return bankMovement;
+    }
+
+    public RuleTest setBankMovement(String bankMovement) {
+        this.bankMovement = bankMovement;
+        return this;
     }
 
     /**

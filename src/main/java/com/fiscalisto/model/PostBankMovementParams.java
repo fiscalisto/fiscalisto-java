@@ -27,7 +27,7 @@ public class PostBankMovementParams {
     private String description;
 
     /**
-     * Sugerir esta cuenta para los movimientos con el mismo texto del banco (suggested_account).
+     * Crear (o cambiar) la regla de bank.movement que registra en esta cuenta los movimientos con el mismo texto del banco al importar el siguiente estado de cuenta (Ajustes › Reglas).
      */
     @JsonProperty("remember")
     private Boolean remember;
@@ -59,7 +59,7 @@ public class PostBankMovementParams {
     }
 
     /**
-     * Sugerir esta cuenta para los movimientos con el mismo texto del banco (suggested_account).
+     * Crear (o cambiar) la regla de bank.movement que registra en esta cuenta los movimientos con el mismo texto del banco al importar el siguiente estado de cuenta (Ajustes › Reglas).
      */
     public Boolean getRemember() {
         return remember;
