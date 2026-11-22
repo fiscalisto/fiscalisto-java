@@ -13,15 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FindingRecord {
     /**
-     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement o expense_report (una comprobación de viáticos).
+     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement, expense_report (una comprobación de viáticos) o expense_ticket (un ticket de compra).
      * <p>
-     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report.
+     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report, expense_ticket.
      */
     @JsonProperty("type")
     private String type;
 
     /**
-     * Su id en la API: el pago (pyo_…), la comprobación (exr_…) o el RFC del proveedor; null si no tiene.
+     * Su id en la API: el pago (pyo_…), la comprobación (exr_…), el ticket (rct_…) o el RFC del proveedor; null si no tiene.
      */
     @JsonProperty("id")
     private String id;
@@ -39,9 +39,9 @@ public class FindingRecord {
     private String description;
 
     /**
-     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement o expense_report (una comprobación de viáticos).
+     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement, expense_report (una comprobación de viáticos) o expense_ticket (un ticket de compra).
      * <p>
-     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report.
+     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report, expense_ticket.
      */
     public String getType() {
         return type;
@@ -53,7 +53,7 @@ public class FindingRecord {
     }
 
     /**
-     * Su id en la API: el pago (pyo_…), la comprobación (exr_…) o el RFC del proveedor; null si no tiene.
+     * Su id en la API: el pago (pyo_…), la comprobación (exr_…), el ticket (rct_…) o el RFC del proveedor; null si no tiene.
      */
     public String getId() {
         return id;
