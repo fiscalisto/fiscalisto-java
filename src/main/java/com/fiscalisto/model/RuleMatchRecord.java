@@ -15,7 +15,7 @@ public class RuleMatchRecord {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: invoice, purchase_order, bank_movement.
+     * Valores: invoice, purchase_order, bank_movement, sat.
      */
     @JsonProperty("type")
     private String type;
@@ -41,7 +41,7 @@ public class RuleMatchRecord {
     /**
      * Tipo de comprobante (TipoDeComprobante): I ingreso, E egreso, P pago, T traslado, N nómina.
      * <p>
-     * Valores: invoice, purchase_order, bank_movement.
+     * Valores: invoice, purchase_order, bank_movement, sat.
      */
     public String getType() {
         return type;

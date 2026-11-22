@@ -35,21 +35,21 @@ public class RuleRun {
     /**
      * Cuándo corre.
      * <p>
-     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, invoice.daily, purchase_order.daily, bank.movement, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
+     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, invoice.daily, purchase_order.daily, bank.movement, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered, sat.listed, sat.opinion, sat.buzon, sat.certificate.
      */
     @JsonProperty("trigger")
     private String trigger;
 
     /**
-     * La factura, orden o movimiento del banco, en palabras.
+     * La factura, orden, movimiento del banco o aviso del SAT, en palabras.
      */
     @JsonProperty("record")
     private String record_;
 
     /**
-     * Qué es el registro.
+     * Qué es el registro (sat: un aviso del SAT).
      * <p>
-     * Valores: invoice, purchase_order, bank_movement.
+     * Valores: invoice, purchase_order, bank_movement, sat.
      */
     @JsonProperty("record_type")
     private String recordType;
@@ -119,7 +119,7 @@ public class RuleRun {
     /**
      * Cuándo corre.
      * <p>
-     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, invoice.daily, purchase_order.daily, bank.movement, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered.
+     * Valores: invoice.received, invoice.issued, invoice.paid, invoice.cancelled, invoice.approved, invoice.rejected, finding.created, payout.submitted, payout.paid, payout.failed, invoice.daily, purchase_order.daily, bank.movement, purchase_order.saved, purchase_order.approved, purchase_order.rejected, purchase_order.sent, purchase_order.confirmed, purchase_order.received_part, purchase_order.received_all, purchase_order.invoiced_all, purchase_order.price_variance, purchase_order.registered, sat.listed, sat.opinion, sat.buzon, sat.certificate.
      */
     public String getTrigger() {
         return trigger;
@@ -131,7 +131,7 @@ public class RuleRun {
     }
 
     /**
-     * La factura, orden o movimiento del banco, en palabras.
+     * La factura, orden, movimiento del banco o aviso del SAT, en palabras.
      */
     public String getRecord() {
         return record_;
@@ -143,9 +143,9 @@ public class RuleRun {
     }
 
     /**
-     * Qué es el registro.
+     * Qué es el registro (sat: un aviso del SAT).
      * <p>
-     * Valores: invoice, purchase_order, bank_movement.
+     * Valores: invoice, purchase_order, bank_movement, sat.
      */
     public String getRecordType() {
         return recordType;
