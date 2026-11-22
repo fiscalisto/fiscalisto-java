@@ -49,6 +49,12 @@ public class UpdateCustomerGroupParams {
     private Long creditDays;
 
     /**
+     * Días que vale una cotización nueva para sus clientes; null: los de la empresa (Ajustes › Horarios). Un cliente con los suyos los usa antes.
+     */
+    @JsonProperty("quote_valid_days")
+    private Long quoteValidDays;
+
+    /**
      * El pedido mínimo antes de IVA desde el Portal del cliente.
      */
     @JsonProperty("min_order")
@@ -156,6 +162,23 @@ public class UpdateCustomerGroupParams {
     @JsonIgnore
     public UpdateCustomerGroupParams setCreditDays(long creditDays) {
         return setCreditDays(Long.valueOf(creditDays));
+    }
+
+    /**
+     * Días que vale una cotización nueva para sus clientes; null: los de la empresa (Ajustes › Horarios). Un cliente con los suyos los usa antes.
+     */
+    public Long getQuoteValidDays() {
+        return quoteValidDays;
+    }
+
+    public UpdateCustomerGroupParams setQuoteValidDays(Long quoteValidDays) {
+        this.quoteValidDays = quoteValidDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateCustomerGroupParams setQuoteValidDays(long quoteValidDays) {
+        return setQuoteValidDays(Long.valueOf(quoteValidDays));
     }
 
     /**

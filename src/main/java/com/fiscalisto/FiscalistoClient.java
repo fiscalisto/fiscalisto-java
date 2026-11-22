@@ -16,6 +16,7 @@ public final class FiscalistoClient {
     private final TestClocksService testClocks;
     private final BalanceService balance;
     private final IssuersService issuers;
+    private final ScheduleSettingsService scheduleSettings;
     private final InvoicesService invoices;
     private final ReceivablesService receivables;
     private final CustomersService customers;
@@ -155,6 +156,7 @@ public final class FiscalistoClient {
         this.testClocks = new TestClocksService(api);
         this.balance = new BalanceService(api);
         this.issuers = new IssuersService(api);
+        this.scheduleSettings = new ScheduleSettingsService(api);
         this.invoices = new InvoicesService(api);
         this.receivables = new ReceivablesService(api);
         this.customers = new CustomersService(api);
@@ -309,6 +311,11 @@ public final class FiscalistoClient {
     /** Emisores. */
     public IssuersService issuers() {
         return issuers;
+    }
+
+    /** Emisores. */
+    public ScheduleSettingsService scheduleSettings() {
+        return scheduleSettings;
     }
 
     /** Facturas. */

@@ -71,6 +71,12 @@ public class CustomerGroup {
     private Long creditDays;
 
     /**
+     * Días que vale una cotización nueva (1 a 366). En un cliente o grupo, null usa los de su grupo o los de la empresa (Ajustes › Horarios).
+     */
+    @JsonProperty("quote_valid_days")
+    private Long quoteValidDays;
+
+    /**
      * Pedido mínimo, sin IVA, para pedir desde el Portal del cliente, o null sin mínimo.
      */
     @JsonProperty("min_order")
@@ -236,6 +242,23 @@ public class CustomerGroup {
     @JsonIgnore
     public CustomerGroup setCreditDays(long creditDays) {
         return setCreditDays(Long.valueOf(creditDays));
+    }
+
+    /**
+     * Días que vale una cotización nueva (1 a 366). En un cliente o grupo, null usa los de su grupo o los de la empresa (Ajustes › Horarios).
+     */
+    public Long getQuoteValidDays() {
+        return quoteValidDays;
+    }
+
+    public CustomerGroup setQuoteValidDays(Long quoteValidDays) {
+        this.quoteValidDays = quoteValidDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public CustomerGroup setQuoteValidDays(long quoteValidDays) {
+        return setQuoteValidDays(Long.valueOf(quoteValidDays));
     }
 
     /**

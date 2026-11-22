@@ -94,6 +94,12 @@ public class Customer {
     private Long creditDays;
 
     /**
+     * Días que vale una cotización nueva (1 a 366). En un cliente o grupo, null usa los de su grupo o los de la empresa (Ajustes › Horarios).
+     */
+    @JsonProperty("quote_valid_days")
+    private Long quoteValidDays;
+
+    /**
      * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
      */
     @JsonProperty("payment_terms")
@@ -288,6 +294,23 @@ public class Customer {
     @JsonIgnore
     public Customer setCreditDays(long creditDays) {
         return setCreditDays(Long.valueOf(creditDays));
+    }
+
+    /**
+     * Días que vale una cotización nueva (1 a 366). En un cliente o grupo, null usa los de su grupo o los de la empresa (Ajustes › Horarios).
+     */
+    public Long getQuoteValidDays() {
+        return quoteValidDays;
+    }
+
+    public Customer setQuoteValidDays(Long quoteValidDays) {
+        this.quoteValidDays = quoteValidDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public Customer setQuoteValidDays(long quoteValidDays) {
+        return setQuoteValidDays(Long.valueOf(quoteValidDays));
     }
 
     /**

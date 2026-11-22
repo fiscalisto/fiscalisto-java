@@ -102,6 +102,12 @@ public class CreateCustomerParams {
     private Long creditDays;
 
     /**
+     * Días que vale una cotización nueva para este cliente (valid_until); null: los de su grupo o los de la empresa (Ajustes › Horarios).
+     */
+    @JsonProperty("quote_valid_days")
+    private Long quoteValidDays;
+
+    /**
      * Sus condiciones de pago («Crédito a 30 días»): las facturas nuevas en la app empiezan con ellas; null: las de la empresa. POST /v1/invoices no las pone solas: mándelas en payment_terms.
      */
     @JsonProperty("payment_terms")
@@ -279,6 +285,23 @@ public class CreateCustomerParams {
     @JsonIgnore
     public CreateCustomerParams setCreditDays(long creditDays) {
         return setCreditDays(Long.valueOf(creditDays));
+    }
+
+    /**
+     * Días que vale una cotización nueva para este cliente (valid_until); null: los de su grupo o los de la empresa (Ajustes › Horarios).
+     */
+    public Long getQuoteValidDays() {
+        return quoteValidDays;
+    }
+
+    public CreateCustomerParams setQuoteValidDays(Long quoteValidDays) {
+        this.quoteValidDays = quoteValidDays;
+        return this;
+    }
+
+    @JsonIgnore
+    public CreateCustomerParams setQuoteValidDays(long quoteValidDays) {
+        return setQuoteValidDays(Long.valueOf(quoteValidDays));
     }
 
     /**
