@@ -99,6 +99,18 @@ public class Branch {
     private String pdfStyle;
 
     /**
+     * La zona horaria (IANA) en que cuenta su día: la elegida o, si no eligió, la de su código postal (Ley de los Husos Horarios). La fecha de sus facturas siempre es la hora local de su código postal.
+     */
+    @JsonProperty("time_zone")
+    private String timeZone;
+
+    /**
+     * true: time_zone se eligió; false: sigue la de su código postal.
+     */
+    @JsonProperty("time_zone_chosen")
+    private Boolean timeZoneChosen;
+
+    /**
      * true si está archivada: ya no se factura desde ella.
      */
     @JsonProperty("archived")
@@ -283,6 +295,30 @@ public class Branch {
 
     public Branch setPdfStyle(String pdfStyle) {
         this.pdfStyle = pdfStyle;
+        return this;
+    }
+
+    /**
+     * La zona horaria (IANA) en que cuenta su día: la elegida o, si no eligió, la de su código postal (Ley de los Husos Horarios). La fecha de sus facturas siempre es la hora local de su código postal.
+     */
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public Branch setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+        return this;
+    }
+
+    /**
+     * true: time_zone se eligió; false: sigue la de su código postal.
+     */
+    public Boolean getTimeZoneChosen() {
+        return timeZoneChosen;
+    }
+
+    public Branch setTimeZoneChosen(Boolean timeZoneChosen) {
+        this.timeZoneChosen = timeZoneChosen;
         return this;
     }
 

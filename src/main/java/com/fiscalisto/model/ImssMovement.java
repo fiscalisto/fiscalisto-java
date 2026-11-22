@@ -121,6 +121,12 @@ public class ImssMovement {
     private String reportedAt;
 
     /**
+     * El IMSS lo rechazó en el acuse del IDSE (sigue pending para corregirlo y enviarlo otra vez); null si no.
+     */
+    @JsonProperty("imss_rejection")
+    private ImssMovementImssRejection imssRejection;
+
+    /**
      * Lo que el IMSS rechazaría en su renglón (vacío: listo para el archivo).
      */
     @JsonProperty("problems")
@@ -328,6 +334,18 @@ public class ImssMovement {
 
     public ImssMovement setReportedAt(String reportedAt) {
         this.reportedAt = reportedAt;
+        return this;
+    }
+
+    /**
+     * El IMSS lo rechazó en el acuse del IDSE (sigue pending para corregirlo y enviarlo otra vez); null si no.
+     */
+    public ImssMovementImssRejection getImssRejection() {
+        return imssRejection;
+    }
+
+    public ImssMovement setImssRejection(ImssMovementImssRejection imssRejection) {
+        this.imssRejection = imssRejection;
         return this;
     }
 

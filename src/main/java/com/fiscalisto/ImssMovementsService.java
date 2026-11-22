@@ -74,7 +74,7 @@ public final class ImssMovementsService {
     /**
      * Marcar movimientos como presentados
      * <p>
-     * Cuando el IMSS ya los recibió (el acuse de IDSE o la importación en SUA): pasan a reported y ya no cambian ni se borran. Con reported false vuelven a pendientes. Devuelve los movimientos como quedaron.
+     * Cuando el IMSS ya los recibió (el acuse de IDSE o la importación en SUA): pasan a reported y ya no cambian ni se borran. Con reported false vuelven a pendientes. Los que el IMSS rechazó van en rejected con su razón: quedan pending con imss_rejection hasta que los corrija. Devuelve los movimientos como quedaron.
      * <p>
      * POST /v1/imss_movements/report
      * <p>
@@ -86,6 +86,10 @@ public final class ImssMovementsService {
 
     public ImssMovementList report(ReportImssMovementsParams params) {
         return report(params, null);
+    }
+
+    public ImssMovementList report() {
+        return report(null, null);
     }
 
     /**

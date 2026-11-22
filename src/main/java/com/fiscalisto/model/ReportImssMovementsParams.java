@@ -22,8 +22,6 @@ public class ReportImssMovementsParams {
 
     /**
      * Los movimientos (imv_…) que el IMSS ya recibió, hasta 1,000.
-     * <p>
-     * Obligatorio.
      */
     @JsonProperty("movements")
     private List<String> movements;
@@ -33,6 +31,12 @@ public class ReportImssMovementsParams {
      */
     @JsonProperty("reported")
     private Boolean reported;
+
+    /**
+     * Los que el IMSS rechazó en el acuse del IDSE, cada uno con su razón: vuelven a pendientes con imss_rejection, para corregirlos y enviarlos otra vez.
+     */
+    @JsonProperty("rejected")
+    private List<ReportImssMovementsParamsRejectedItem> rejected;
 
     /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
@@ -48,8 +52,6 @@ public class ReportImssMovementsParams {
 
     /**
      * Los movimientos (imv_…) que el IMSS ya recibió, hasta 1,000.
-     * <p>
-     * Obligatorio.
      */
     public List<String> getMovements() {
         return movements;
@@ -69,6 +71,18 @@ public class ReportImssMovementsParams {
 
     public ReportImssMovementsParams setReported(Boolean reported) {
         this.reported = reported;
+        return this;
+    }
+
+    /**
+     * Los que el IMSS rechazó en el acuse del IDSE, cada uno con su razón: vuelven a pendientes con imss_rejection, para corregirlos y enviarlos otra vez.
+     */
+    public List<ReportImssMovementsParamsRejectedItem> getRejected() {
+        return rejected;
+    }
+
+    public ReportImssMovementsParams setRejected(List<ReportImssMovementsParamsRejectedItem> rejected) {
+        this.rejected = rejected;
         return this;
     }
 }

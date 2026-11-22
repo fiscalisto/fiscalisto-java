@@ -79,6 +79,14 @@ public class CreateBranchParams {
     private String pdfStyle;
 
     /**
+     * Su zona horaria (IANA), cuando no es la de su código postal: cuándo empieza su día para «hoy», los límites por día y los avisos. null sigue la de su código postal. La fecha de sus facturas siempre es la hora local de su código postal (Anexo 20).
+     * <p>
+     * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Matamoros, America/Ciudad_Juarez.
+     */
+    @JsonProperty("time_zone")
+    private String timeZone;
+
+    /**
      * El emisor (iss_…). Por omisión, su único emisor.
      */
     public String getIssuer() {
@@ -201,6 +209,20 @@ public class CreateBranchParams {
 
     public CreateBranchParams setPdfStyle(String pdfStyle) {
         this.pdfStyle = pdfStyle;
+        return this;
+    }
+
+    /**
+     * Su zona horaria (IANA), cuando no es la de su código postal: cuándo empieza su día para «hoy», los límites por día y los avisos. null sigue la de su código postal. La fecha de sus facturas siempre es la hora local de su código postal (Anexo 20).
+     * <p>
+     * Valores: America/Mexico_City, America/Cancun, America/Mazatlan, America/Hermosillo, America/Tijuana, America/Matamoros, America/Ciudad_Juarez.
+     */
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public CreateBranchParams setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
         return this;
     }
 }
