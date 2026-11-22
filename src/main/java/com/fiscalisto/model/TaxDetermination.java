@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
 /**
- * TaxDetermination: La determinación de impuestos de un mes en la contabilidad: el IVA cobrado y pagado del mes (de sus pólizas) que pasa a IVA por pagar o a favor, el pago provisional de ISR sugerido y la póliza que los registra, si ya se registró.
+ * TaxDetermination: La determinación de impuestos de un mes en la contabilidad: el IVA cobrado y pagado del mes (de sus pólizas) que pasa a IVA por pagar o a favor, el IEPS cobrado menos el acreditable (LIEPS arts. 4 y 5) que pasa a IEPS por pagar o a favor, el pago provisional de ISR sugerido y la póliza que los registra, si ya se registró.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -68,6 +68,24 @@ public class TaxDetermination {
      */
     @JsonProperty("vat")
     private BigDecimal vat;
+
+    /**
+     * El IEPS trasladado cobrado en el mes, según sus pólizas (el de una factura PPD, con cada pago).
+     */
+    @JsonProperty("ieps_collected")
+    private BigDecimal iepsCollected;
+
+    /**
+     * El IEPS acreditable pagado en el mes, según sus pólizas: el que le trasladaron sus proveedores, si lo acredita (artículo 4 de la Ley del IEPS).
+     */
+    @JsonProperty("ieps_creditable")
+    private BigDecimal iepsCreditable;
+
+    /**
+     * ieps_collected − ieps_creditable: positivo, IEPS por pagar; negativo, IEPS a favor.
+     */
+    @JsonProperty("ieps")
+    private BigDecimal ieps;
 
     /**
      * El pago provisional de ISR que calcula Impuestos con su configuración, o null si no está configurado.
@@ -207,6 +225,57 @@ public class TaxDetermination {
     @JsonIgnore
     public TaxDetermination setVat(double vat) {
         return setVat(BigDecimal.valueOf(vat));
+    }
+
+    /**
+     * El IEPS trasladado cobrado en el mes, según sus pólizas (el de una factura PPD, con cada pago).
+     */
+    public BigDecimal getIepsCollected() {
+        return iepsCollected;
+    }
+
+    public TaxDetermination setIepsCollected(BigDecimal iepsCollected) {
+        this.iepsCollected = iepsCollected;
+        return this;
+    }
+
+    @JsonIgnore
+    public TaxDetermination setIepsCollected(double iepsCollected) {
+        return setIepsCollected(BigDecimal.valueOf(iepsCollected));
+    }
+
+    /**
+     * El IEPS acreditable pagado en el mes, según sus pólizas: el que le trasladaron sus proveedores, si lo acredita (artículo 4 de la Ley del IEPS).
+     */
+    public BigDecimal getIepsCreditable() {
+        return iepsCreditable;
+    }
+
+    public TaxDetermination setIepsCreditable(BigDecimal iepsCreditable) {
+        this.iepsCreditable = iepsCreditable;
+        return this;
+    }
+
+    @JsonIgnore
+    public TaxDetermination setIepsCreditable(double iepsCreditable) {
+        return setIepsCreditable(BigDecimal.valueOf(iepsCreditable));
+    }
+
+    /**
+     * ieps_collected − ieps_creditable: positivo, IEPS por pagar; negativo, IEPS a favor.
+     */
+    public BigDecimal getIeps() {
+        return ieps;
+    }
+
+    public TaxDetermination setIeps(BigDecimal ieps) {
+        this.ieps = ieps;
+        return this;
+    }
+
+    @JsonIgnore
+    public TaxDetermination setIeps(double ieps) {
+        return setIeps(BigDecimal.valueOf(ieps));
     }
 
     /**
