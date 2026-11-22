@@ -33,7 +33,7 @@ public class Issuer {
     private String object;
 
     /**
-     * api si lo creó con la API o en Desarrolladores; empresa si es una empresa de la app conectada a su cuenta (Desarrolladores › Emisores › Conectar una empresa): con ella solo se usa su Portal de proveedores, y status siempre es active.
+     * api si lo creó con la API o en Desarrolladores; empresa si es una empresa de la app conectada a su cuenta (Desarrolladores › Emisores › Conectar una empresa): con ella solo se usan su Portal de proveedores y, si se encendieron, sus pagos a proveedores, y status siempre es active.
      * <p>
      * Valores: api, empresa.
      */
@@ -189,7 +189,7 @@ public class Issuer {
     }
 
     /**
-     * api si lo creó con la API o en Desarrolladores; empresa si es una empresa de la app conectada a su cuenta (Desarrolladores › Emisores › Conectar una empresa): con ella solo se usa su Portal de proveedores, y status siempre es active.
+     * api si lo creó con la API o en Desarrolladores; empresa si es una empresa de la app conectada a su cuenta (Desarrolladores › Emisores › Conectar una empresa): con ella solo se usan su Portal de proveedores y, si se encendieron, sus pagos a proveedores, y status siempre es active.
      * <p>
      * Valores: api, empresa.
      */

@@ -79,9 +79,9 @@ public class PayeeAccount {
     private Boolean thirdParty;
 
     /**
-     * Cómo se confió en la cuenta: bank (el banco confirmó el RFC del proveedor), by_hand (alguien la verificó a mano porque el RFC del banco solo cambiaba la homoclave o no venía), third_party (se autorizó como de un tercero), o null si aún no está aprobada.
+     * Cómo se confió en la cuenta: bank (el banco confirmó el RFC del proveedor), by_name (el banco no dio el RFC y el nombre del titular es el del proveedor según el SAT, cuando la empresa lo permite), by_hand (alguien la verificó a mano porque el RFC del banco solo cambiaba la homoclave o no venía), third_party (se autorizó como de un tercero), o null si aún no está aprobada.
      * <p>
-     * Valores: bank, by_hand, third_party.
+     * Valores: bank, by_name, by_hand, third_party.
      */
     @JsonProperty("verification")
     private String verification;
@@ -269,9 +269,9 @@ public class PayeeAccount {
     }
 
     /**
-     * Cómo se confió en la cuenta: bank (el banco confirmó el RFC del proveedor), by_hand (alguien la verificó a mano porque el RFC del banco solo cambiaba la homoclave o no venía), third_party (se autorizó como de un tercero), o null si aún no está aprobada.
+     * Cómo se confió en la cuenta: bank (el banco confirmó el RFC del proveedor), by_name (el banco no dio el RFC y el nombre del titular es el del proveedor según el SAT, cuando la empresa lo permite), by_hand (alguien la verificó a mano porque el RFC del banco solo cambiaba la homoclave o no venía), third_party (se autorizó como de un tercero), o null si aún no está aprobada.
      * <p>
-     * Valores: bank, by_hand, third_party.
+     * Valores: bank, by_name, by_hand, third_party.
      */
     public String getVerification() {
         return verification;
