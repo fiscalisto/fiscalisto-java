@@ -235,7 +235,7 @@ public final class EmployeesService {
     /**
      * Portal del empleado
      * <p>
-     * El enlace personal del empleado (sin cuenta) para ver, descargar y firmar de recibido sus recibos de nómina, ver sus vacaciones y pedir días; los celulares ligados y los recibos que firmó.
+     * El enlace personal del empleado (sin cuenta) para ver, descargar y firmar de recibido sus recibos de nómina, ver sus vacaciones y pedir días; los celulares ligados, los que tienen avisos, sus últimos avisos y los recibos que firmó.
      * <p>
      * GET /v1/employees/{id}/portal
      * <p>

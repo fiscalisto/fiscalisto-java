@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * EmployeePortal: El portal del empleado: su enlace y los recibos que firmó de recibido.
+ * EmployeePortal: El portal del empleado: su enlace, los avisos que le llegan y los recibos que firmó de recibido.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -46,7 +46,7 @@ public class EmployeePortal {
     private String enabledAt;
 
     /**
-     * Los celulares ligados: el primero que lo abre y los que lo abren en la hora siguiente, hasta 3.
+     * Los celulares ligados: el primero que lo abre, los que lo abren en la hora siguiente (hasta 3) y la app Mi nómina que instala desde su enlace (hasta 6 en total).
      */
     @JsonProperty("phones")
     private Long phones;
@@ -56,6 +56,18 @@ public class EmployeePortal {
      */
     @JsonProperty("last_seen_at")
     private String lastSeenAt;
+
+    /**
+     * Los celulares en que instaló Mi nómina y activó los avisos (recibo nuevo, recibo cancelado, respuesta a sus vacaciones, recibo sin firmar).
+     */
+    @JsonProperty("push_phones")
+    private Long pushPhones;
+
+    /**
+     * Sus últimos 10 avisos, los más recientes primero.
+     */
+    @JsonProperty("notices")
+    private List<EmployeePortalNotice> notices;
 
     /**
      * Los recibos que firmó de recibido desde su enlace (con el día, su celular y su IP guardados), los más recientes primero.
@@ -124,7 +136,7 @@ public class EmployeePortal {
     }
 
     /**
-     * Los celulares ligados: el primero que lo abre y los que lo abren en la hora siguiente, hasta 3.
+     * Los celulares ligados: el primero que lo abre, los que lo abren en la hora siguiente (hasta 3) y la app Mi nómina que instala desde su enlace (hasta 6 en total).
      */
     public Long getPhones() {
         return phones;
@@ -149,6 +161,35 @@ public class EmployeePortal {
 
     public EmployeePortal setLastSeenAt(String lastSeenAt) {
         this.lastSeenAt = lastSeenAt;
+        return this;
+    }
+
+    /**
+     * Los celulares en que instaló Mi nómina y activó los avisos (recibo nuevo, recibo cancelado, respuesta a sus vacaciones, recibo sin firmar).
+     */
+    public Long getPushPhones() {
+        return pushPhones;
+    }
+
+    public EmployeePortal setPushPhones(Long pushPhones) {
+        this.pushPhones = pushPhones;
+        return this;
+    }
+
+    @JsonIgnore
+    public EmployeePortal setPushPhones(long pushPhones) {
+        return setPushPhones(Long.valueOf(pushPhones));
+    }
+
+    /**
+     * Sus últimos 10 avisos, los más recientes primero.
+     */
+    public List<EmployeePortalNotice> getNotices() {
+        return notices;
+    }
+
+    public EmployeePortal setNotices(List<EmployeePortalNotice> notices) {
+        this.notices = notices;
         return this;
     }
 
