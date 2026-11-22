@@ -55,6 +55,12 @@ public class RuleConditionsCondition {
     private String text;
 
     /**
+     * Para gte, lte y between: el otro campo numérico con el que se compara; value y to son entonces el % de ese campo.
+     */
+    @JsonProperty("compare_to")
+    private String compareTo;
+
+    /**
      * Qué se revisa (supplier, total, metodo, category…).
      */
     public String getField() {
@@ -135,6 +141,18 @@ public class RuleConditionsCondition {
 
     public RuleConditionsCondition setText(String text) {
         this.text = text;
+        return this;
+    }
+
+    /**
+     * Para gte, lte y between: el otro campo numérico con el que se compara; value y to son entonces el % de ese campo.
+     */
+    public String getCompareTo() {
+        return compareTo;
+    }
+
+    public RuleConditionsCondition setCompareTo(String compareTo) {
+        this.compareTo = compareTo;
         return this;
     }
 }
