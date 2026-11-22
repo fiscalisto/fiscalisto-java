@@ -66,6 +66,12 @@ public class Rule {
     private List<RuleAction> actions;
 
     /**
+     * Si no: lo que hace cuando sus condiciones no se cumplen ([]: nada).
+     */
+    @JsonProperty("else_actions")
+    private List<RuleElseAction> elseActions;
+
+    /**
      * true: corre una sola vez por factura u orden.
      */
     @JsonProperty("once_per_record")
@@ -202,6 +208,18 @@ public class Rule {
 
     public Rule setActions(List<RuleAction> actions) {
         this.actions = actions;
+        return this;
+    }
+
+    /**
+     * Si no: lo que hace cuando sus condiciones no se cumplen ([]: nada).
+     */
+    public List<RuleElseAction> getElseActions() {
+        return elseActions;
+    }
+
+    public Rule setElseActions(List<RuleElseAction> elseActions) {
+        this.elseActions = elseActions;
         return this;
     }
 

@@ -52,6 +52,12 @@ public class CreateRuleParams {
     private List<CreateRuleParamsAction> actions;
 
     /**
+     * Si no: de 0 a 8 acciones, las mismas de actions, que hace cuando sus condiciones no se cumplen. Solo con condiciones; [] las quita.
+     */
+    @JsonProperty("else_actions")
+    private List<CreateRuleParamsElseAction> elseActions;
+
+    /**
      * true: corre una sola vez por factura, orden o movimiento. Por omisión true, salvo purchase_order.saved.
      */
     @JsonProperty("once_per_record")
@@ -138,6 +144,18 @@ public class CreateRuleParams {
 
     public CreateRuleParams setActions(List<CreateRuleParamsAction> actions) {
         this.actions = actions;
+        return this;
+    }
+
+    /**
+     * Si no: de 0 a 8 acciones, las mismas de actions, que hace cuando sus condiciones no se cumplen. Solo con condiciones; [] las quita.
+     */
+    public List<CreateRuleParamsElseAction> getElseActions() {
+        return elseActions;
+    }
+
+    public CreateRuleParams setElseActions(List<CreateRuleParamsElseAction> elseActions) {
+        this.elseActions = elseActions;
         return this;
     }
 
