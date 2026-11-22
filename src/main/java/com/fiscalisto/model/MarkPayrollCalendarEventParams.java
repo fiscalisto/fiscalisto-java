@@ -19,9 +19,9 @@ public class MarkPayrollCalendarEventParams {
     private String issuer;
 
     /**
-     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo o ajuste_anual.
+     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe o sisub.
      * <p>
-     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual.
+     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub.
      * <p>
      * Obligatorio.
      */
@@ -29,7 +29,7 @@ public class MarkPayrollCalendarEventParams {
     private String obligation;
 
     /**
-     * Como lo da GET /v1/payroll_calendar: 2026-11, 2026-B6, 2026, 2026-11:CMX.
+     * Como lo da GET /v1/payroll_calendar: 2026-11, 2026-B6, 2026-C3, 2026, 2026-11:CMX.
      * <p>
      * Obligatorio.
      */
@@ -57,9 +57,9 @@ public class MarkPayrollCalendarEventParams {
     }
 
     /**
-     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo o ajuste_anual.
+     * imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe o sisub.
      * <p>
-     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual.
+     * Valores: imss, rcv_infonavit, isn, aguinaldo, ptu, prima_riesgo, ajuste_anual, icsoe, sisub.
      * <p>
      * Obligatorio.
      */
@@ -73,7 +73,7 @@ public class MarkPayrollCalendarEventParams {
     }
 
     /**
-     * Como lo da GET /v1/payroll_calendar: 2026-11, 2026-B6, 2026, 2026-11:CMX.
+     * Como lo da GET /v1/payroll_calendar: 2026-11, 2026-B6, 2026-C3, 2026, 2026-11:CMX.
      * <p>
      * Obligatorio.
      */

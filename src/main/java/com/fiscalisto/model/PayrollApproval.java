@@ -85,10 +85,16 @@ public class PayrollApproval {
     private String decidedAt;
 
     /**
-     * Por qué se rechazó (o el comentario de quien la aprobó), o null.
+     * Por qué se rechazó, el comentario de quien la aprobó, o el paso que la aprobó solo; o null.
      */
     @JsonProperty("note")
     private String note;
+
+    /**
+     * Mientras espera (pending): en qué paso de sus «Pasos de aprobación» va (Ajustes › Aprobaciones › Prenómina); null en otro estado.
+     */
+    @JsonProperty("step")
+    private PayrollApprovalStep step;
 
     /**
      * pap_…
@@ -230,7 +236,7 @@ public class PayrollApproval {
     }
 
     /**
-     * Por qué se rechazó (o el comentario de quien la aprobó), o null.
+     * Por qué se rechazó, el comentario de quien la aprobó, o el paso que la aprobó solo; o null.
      */
     public String getNote() {
         return note;
@@ -238,6 +244,18 @@ public class PayrollApproval {
 
     public PayrollApproval setNote(String note) {
         this.note = note;
+        return this;
+    }
+
+    /**
+     * Mientras espera (pending): en qué paso de sus «Pasos de aprobación» va (Ajustes › Aprobaciones › Prenómina); null en otro estado.
+     */
+    public PayrollApprovalStep getStep() {
+        return step;
+    }
+
+    public PayrollApproval setStep(PayrollApprovalStep step) {
+        this.step = step;
         return this;
     }
 }

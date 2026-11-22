@@ -42,6 +42,9 @@ public final class FiscalistoClient {
     private final PayrollTaxesService payrollTaxes;
     private final PayrollReportsService payrollReports;
     private final PayrollCalendarService payrollCalendar;
+    private final RepseContractsService repseContracts;
+    private final RepseProfileService repseProfile;
+    private final RepseReturnsService repseReturns;
     private final PayrollOrgChartService payrollOrgChart;
     private final HiringService hiring;
     private final CandidatesService candidates;
@@ -178,6 +181,9 @@ public final class FiscalistoClient {
         this.payrollTaxes = new PayrollTaxesService(api);
         this.payrollReports = new PayrollReportsService(api);
         this.payrollCalendar = new PayrollCalendarService(api);
+        this.repseContracts = new RepseContractsService(api);
+        this.repseProfile = new RepseProfileService(api);
+        this.repseReturns = new RepseReturnsService(api);
         this.payrollOrgChart = new PayrollOrgChartService(api);
         this.hiring = new HiringService(api);
         this.candidates = new CandidatesService(api);
@@ -433,6 +439,21 @@ public final class FiscalistoClient {
     /** Nómina. */
     public PayrollCalendarService payrollCalendar() {
         return payrollCalendar;
+    }
+
+    /** Nómina. */
+    public RepseContractsService repseContracts() {
+        return repseContracts;
+    }
+
+    /** Nómina. */
+    public RepseProfileService repseProfile() {
+        return repseProfile;
+    }
+
+    /** Nómina. */
+    public RepseReturnsService repseReturns() {
+        return repseReturns;
     }
 
     /** Nómina. */
