@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 /**
  * UpdateSelfInvoicingParams: los campos de «Cambiar las reglas de autofactura».
  */
@@ -118,6 +120,24 @@ public class UpdateSelfInvoicingParams {
      */
     @JsonProperty("failure_email")
     private Boolean failureEmail;
+
+    /**
+     * Dividir un ticket en varias facturas (Autofactura › Reglas de los tickets): cuántas facturas puede tener un ticket como máximo, de 2 a 50, contando la que toma todo lo que queda. `0` (por omisión): el comprador no puede dividirlo. Cada factura usa un timbre.
+     */
+    @JsonProperty("split_max")
+    private Long splitMax;
+
+    /**
+     * Lo menos que puede ser cada factura de un ticket dividido, con impuestos (por omisión 100). Tampoco puede quedar por facturar menos que esto, salvo la factura que toma todo lo que queda.
+     */
+    @JsonProperty("split_min")
+    private BigDecimal splitMin;
+
+    /**
+     * `true` (por omisión): un comprador puede hacerse varias facturas con los mismos datos de una vez (4 de 250 de un ticket de 1,000). `false`: una por persona.
+     */
+    @JsonProperty("split_same")
+    private Boolean splitSame;
 
     /**
      * Los conceptos de la factura que se hace el comprador (Autofactura › Conceptos de la factura): desglosados o en uno solo, y si el comprador puede elegir. Mande solo lo que cambia; `null` regresa a desglosados sin elección.
@@ -342,6 +362,52 @@ public class UpdateSelfInvoicingParams {
 
     public UpdateSelfInvoicingParams setFailureEmail(Boolean failureEmail) {
         this.failureEmail = failureEmail;
+        return this;
+    }
+
+    /**
+     * Dividir un ticket en varias facturas (Autofactura › Reglas de los tickets): cuántas facturas puede tener un ticket como máximo, de 2 a 50, contando la que toma todo lo que queda. `0` (por omisión): el comprador no puede dividirlo. Cada factura usa un timbre.
+     */
+    public Long getSplitMax() {
+        return splitMax;
+    }
+
+    public UpdateSelfInvoicingParams setSplitMax(Long splitMax) {
+        this.splitMax = splitMax;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateSelfInvoicingParams setSplitMax(long splitMax) {
+        return setSplitMax(Long.valueOf(splitMax));
+    }
+
+    /**
+     * Lo menos que puede ser cada factura de un ticket dividido, con impuestos (por omisión 100). Tampoco puede quedar por facturar menos que esto, salvo la factura que toma todo lo que queda.
+     */
+    public BigDecimal getSplitMin() {
+        return splitMin;
+    }
+
+    public UpdateSelfInvoicingParams setSplitMin(BigDecimal splitMin) {
+        this.splitMin = splitMin;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateSelfInvoicingParams setSplitMin(double splitMin) {
+        return setSplitMin(BigDecimal.valueOf(splitMin));
+    }
+
+    /**
+     * `true` (por omisión): un comprador puede hacerse varias facturas con los mismos datos de una vez (4 de 250 de un ticket de 1,000). `false`: una por persona.
+     */
+    public Boolean getSplitSame() {
+        return splitSame;
+    }
+
+    public UpdateSelfInvoicingParams setSplitSame(Boolean splitSame) {
+        this.splitSame = splitSame;
         return this;
     }
 

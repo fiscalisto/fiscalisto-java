@@ -127,6 +127,12 @@ public class Ticket {
     private String globalInvoice;
 
     /**
+     * Lo que ya cubren las facturas de un ticket dividido en varias (la autofactura lo permite con `split_max`), con impuestos. 0 si no se ha dividido; un ticket `pending` con más de 0 tiene `total - invoiced_amount` por facturar con el mismo código, y un ticket `invoiced` dividido tiene `invoice` null.
+     */
+    @JsonProperty("invoiced_amount")
+    private BigDecimal invoicedAmount;
+
+    /**
      * A quién se facturó, o null.
      */
     @JsonProperty("customer")
@@ -376,6 +382,23 @@ public class Ticket {
     public Ticket setGlobalInvoice(String globalInvoice) {
         this.globalInvoice = globalInvoice;
         return this;
+    }
+
+    /**
+     * Lo que ya cubren las facturas de un ticket dividido en varias (la autofactura lo permite con `split_max`), con impuestos. 0 si no se ha dividido; un ticket `pending` con más de 0 tiene `total - invoiced_amount` por facturar con el mismo código, y un ticket `invoiced` dividido tiene `invoice` null.
+     */
+    public BigDecimal getInvoicedAmount() {
+        return invoicedAmount;
+    }
+
+    public Ticket setInvoicedAmount(BigDecimal invoicedAmount) {
+        this.invoicedAmount = invoicedAmount;
+        return this;
+    }
+
+    @JsonIgnore
+    public Ticket setInvoicedAmount(double invoicedAmount) {
+        return setInvoicedAmount(BigDecimal.valueOf(invoicedAmount));
     }
 
     /**

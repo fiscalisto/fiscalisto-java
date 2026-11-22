@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 /**
  * SelfInvoicing: El portal de autofactura de un emisor y sus reglas.
  */
@@ -148,6 +150,24 @@ public class SelfInvoicing {
      */
     @JsonProperty("failure_email")
     private Boolean failureEmail;
+
+    /**
+     * Cuántas facturas puede tener un ticket como máximo (dividir un ticket en varias facturas), contando la que toma todo lo que queda; 0: no se puede dividir.
+     */
+    @JsonProperty("split_max")
+    private Long splitMax;
+
+    /**
+     * Lo menos que puede ser cada factura de un ticket dividido, con impuestos; tampoco puede quedar menos por facturar, salvo la factura que toma todo lo que queda.
+     */
+    @JsonProperty("split_min")
+    private BigDecimal splitMin;
+
+    /**
+     * true: un comprador puede hacerse varias facturas con los mismos datos de una vez (4 de 250 de un ticket de 1,000).
+     */
+    @JsonProperty("split_same")
+    private Boolean splitSame;
 
     /**
      * ticket: la factura global lleva un concepto «Venta» por ticket, con su folio. summary: solo el monto total del periodo, uno por combinación de impuestos (NoIdentificacion «Resumen»), para una persona física en RESICO (regla 2.7.1.21 de la RMF 2026).
@@ -426,6 +446,52 @@ public class SelfInvoicing {
 
     public SelfInvoicing setFailureEmail(Boolean failureEmail) {
         this.failureEmail = failureEmail;
+        return this;
+    }
+
+    /**
+     * Cuántas facturas puede tener un ticket como máximo (dividir un ticket en varias facturas), contando la que toma todo lo que queda; 0: no se puede dividir.
+     */
+    public Long getSplitMax() {
+        return splitMax;
+    }
+
+    public SelfInvoicing setSplitMax(Long splitMax) {
+        this.splitMax = splitMax;
+        return this;
+    }
+
+    @JsonIgnore
+    public SelfInvoicing setSplitMax(long splitMax) {
+        return setSplitMax(Long.valueOf(splitMax));
+    }
+
+    /**
+     * Lo menos que puede ser cada factura de un ticket dividido, con impuestos; tampoco puede quedar menos por facturar, salvo la factura que toma todo lo que queda.
+     */
+    public BigDecimal getSplitMin() {
+        return splitMin;
+    }
+
+    public SelfInvoicing setSplitMin(BigDecimal splitMin) {
+        this.splitMin = splitMin;
+        return this;
+    }
+
+    @JsonIgnore
+    public SelfInvoicing setSplitMin(double splitMin) {
+        return setSplitMin(BigDecimal.valueOf(splitMin));
+    }
+
+    /**
+     * true: un comprador puede hacerse varias facturas con los mismos datos de una vez (4 de 250 de un ticket de 1,000).
+     */
+    public Boolean getSplitSame() {
+        return splitSame;
+    }
+
+    public SelfInvoicing setSplitSame(Boolean splitSame) {
+        this.splitSame = splitSame;
         return this;
     }
 
