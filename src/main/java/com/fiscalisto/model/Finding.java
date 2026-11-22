@@ -40,9 +40,9 @@ public class Finding {
     private String issuer;
 
     /**
-     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad) o bank (movimientos del banco).
+     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad), bank (movimientos del banco) o expense_reports (comprobaciones de viáticos).
      * <p>
-     * Valores: purchase_orders, payouts, suppliers, accounting, bank.
+     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports.
      */
     @JsonProperty("area")
     private String area;
@@ -190,9 +190,9 @@ public class Finding {
     }
 
     /**
-     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad) o bank (movimientos del banco).
+     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad), bank (movimientos del banco) o expense_reports (comprobaciones de viáticos).
      * <p>
-     * Valores: purchase_orders, payouts, suppliers, accounting, bank.
+     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports.
      */
     public String getArea() {
         return area;
