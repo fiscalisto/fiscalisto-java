@@ -77,6 +77,14 @@ public class ComplianceOpinion {
     private String lastError;
 
     /**
+     * De quién es la falla de last_error, para decidir sin leer el texto. sat_unavailable: el servicio del SAT no está disponible o no respondió (es del SAT; se vuelve a pedir solo). sat_refused: el SAT respondió que no, con su motivo en el mensaje. account: le toca a su cliente (e.firma vencida, sin autorización, su plan). internal: ni lo uno ni lo otro; se vuelve a intentar. null si no falló.
+     * <p>
+     * Valores: sat_unavailable, sat_refused, account, internal.
+     */
+    @JsonProperty("last_error_cause")
+    private String lastErrorCause;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -195,6 +203,20 @@ public class ComplianceOpinion {
 
     public ComplianceOpinion setLastError(String lastError) {
         this.lastError = lastError;
+        return this;
+    }
+
+    /**
+     * De quién es la falla de last_error, para decidir sin leer el texto. sat_unavailable: el servicio del SAT no está disponible o no respondió (es del SAT; se vuelve a pedir solo). sat_refused: el SAT respondió que no, con su motivo en el mensaje. account: le toca a su cliente (e.firma vencida, sin autorización, su plan). internal: ni lo uno ni lo otro; se vuelve a intentar. null si no falló.
+     * <p>
+     * Valores: sat_unavailable, sat_refused, account, internal.
+     */
+    public String getLastErrorCause() {
+        return lastErrorCause;
+    }
+
+    public ComplianceOpinion setLastErrorCause(String lastErrorCause) {
+        this.lastErrorCause = lastErrorCause;
         return this;
     }
 }

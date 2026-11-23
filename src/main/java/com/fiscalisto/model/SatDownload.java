@@ -98,6 +98,14 @@ public class SatDownload {
     private String error;
 
     /**
+     * De quién es la falla de error, para decidir sin leer el texto. sat_unavailable: el servicio del SAT no está disponible o no respondió (es del SAT; se vuelve a pedir solo). sat_refused: el SAT respondió que no, con su motivo en el mensaje. account: le toca a su cliente (e.firma vencida, sin autorización, su plan). internal: ni lo uno ni lo otro; se vuelve a intentar. null si no falló.
+     * <p>
+     * Valores: sat_unavailable, sat_refused, account, internal.
+     */
+    @JsonProperty("error_cause")
+    private String errorCause;
+
+    /**
      * Cuándo se pidió.
      */
     @JsonProperty("created_at")
@@ -273,6 +281,20 @@ public class SatDownload {
 
     public SatDownload setError(String error) {
         this.error = error;
+        return this;
+    }
+
+    /**
+     * De quién es la falla de error, para decidir sin leer el texto. sat_unavailable: el servicio del SAT no está disponible o no respondió (es del SAT; se vuelve a pedir solo). sat_refused: el SAT respondió que no, con su motivo en el mensaje. account: le toca a su cliente (e.firma vencida, sin autorización, su plan). internal: ni lo uno ni lo otro; se vuelve a intentar. null si no falló.
+     * <p>
+     * Valores: sat_unavailable, sat_refused, account, internal.
+     */
+    public String getErrorCause() {
+        return errorCause;
+    }
+
+    public SatDownload setErrorCause(String errorCause) {
+        this.errorCause = errorCause;
         return this;
     }
 
