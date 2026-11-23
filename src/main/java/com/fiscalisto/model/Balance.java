@@ -34,7 +34,7 @@ public class Balance {
     private Long available;
 
     /**
-     * true si la cuenta timbra sin usar timbres.
+     * Obsoleto: siempre false. Solo las cuentas internas de Fiscalisto timbran sin usar timbres. Se conserva por compatibilidad; no lo use.
      */
     @JsonProperty("unlimited")
     private Boolean unlimited;
@@ -46,19 +46,19 @@ public class Balance {
     private Long lowBalanceAt;
 
     /**
-     * La recarga automática con la tarjeta guardada, o null si está apagada.
+     * La recarga automática con la tarjeta guardada, o null si está apagada (se enciende en Desarrolladores › Timbres y pagos).
      */
     @JsonProperty("auto_recharge")
     private BalanceAutoRecharge autoRecharge;
 
     /**
-     * Siempre true: los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`, los paquetes de su único saldo (comprados en Desarrolladores o en Plan y pagos). Los emisores conectados usan solo `available`. Se conserva por compatibilidad.
+     * Obsoleto: siempre true. Los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`, los paquetes de su único saldo (comprados en Desarrolladores o en Plan y pagos). Los emisores conectados usan solo `available`. Se conserva por compatibilidad.
      */
     @JsonProperty("use_plan_timbres")
     private Boolean usePlanTimbres;
 
     /**
-     * Los timbres del mes del plan de su empresa, que los RFC de la empresa (type own) usan antes que `available`; no se suman a `available`. null si la empresa no tiene un plan de paga con timbres al mes (Gratis o una prueba sin pagar) o en modo de prueba.
+     * Los timbres del mes del plan de su empresa, que los RFC de la empresa (type own) usan antes que `available`; no se suman a `available`. null si la empresa no tiene un plan de paga con timbres al mes (Gratis o una prueba sin pagar). Con llaves de prueba trae los mismos que en producción, como `available`.
      */
     @JsonProperty("plan_timbres")
     private BalancePlanTimbres planTimbres;
@@ -111,7 +111,7 @@ public class Balance {
     }
 
     /**
-     * true si la cuenta timbra sin usar timbres.
+     * Obsoleto: siempre false. Solo las cuentas internas de Fiscalisto timbran sin usar timbres. Se conserva por compatibilidad; no lo use.
      */
     public Boolean getUnlimited() {
         return unlimited;
@@ -140,7 +140,7 @@ public class Balance {
     }
 
     /**
-     * La recarga automática con la tarjeta guardada, o null si está apagada.
+     * La recarga automática con la tarjeta guardada, o null si está apagada (se enciende en Desarrolladores › Timbres y pagos).
      */
     public BalanceAutoRecharge getAutoRecharge() {
         return autoRecharge;
@@ -152,7 +152,7 @@ public class Balance {
     }
 
     /**
-     * Siempre true: los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`, los paquetes de su único saldo (comprados en Desarrolladores o en Plan y pagos). Los emisores conectados usan solo `available`. Se conserva por compatibilidad.
+     * Obsoleto: siempre true. Los RFC de la empresa (type own) timbran primero con los timbres del mes de su plan y después con `available`, los paquetes de su único saldo (comprados en Desarrolladores o en Plan y pagos). Los emisores conectados usan solo `available`. Se conserva por compatibilidad.
      */
     public Boolean getUsePlanTimbres() {
         return usePlanTimbres;
@@ -164,7 +164,7 @@ public class Balance {
     }
 
     /**
-     * Los timbres del mes del plan de su empresa, que los RFC de la empresa (type own) usan antes que `available`; no se suman a `available`. null si la empresa no tiene un plan de paga con timbres al mes (Gratis o una prueba sin pagar) o en modo de prueba.
+     * Los timbres del mes del plan de su empresa, que los RFC de la empresa (type own) usan antes que `available`; no se suman a `available`. null si la empresa no tiene un plan de paga con timbres al mes (Gratis o una prueba sin pagar). Con llaves de prueba trae los mismos que en producción, como `available`.
      */
     public BalancePlanTimbres getPlanTimbres() {
         return planTimbres;
