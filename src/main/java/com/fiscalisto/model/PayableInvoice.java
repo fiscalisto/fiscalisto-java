@@ -113,6 +113,12 @@ public class PayableInvoice {
     private String inPayout;
 
     /**
+     * Con «Notas de crédito relacionadas con la factura: Esperar a que alguien las acepte» en Configurar pagos: las notas que el proveedor relacionó con esta factura y que todavía no se restan de amount_due. Se aceptan en la app (**Aceptar nota de crédito**) o aplicándolas en un pago de esta factura (`credit_notes` de la línea). Vacío si la empresa las resta solas.
+     */
+    @JsonProperty("credit_notes_to_review")
+    private List<PayableInvoiceCreditNotesToReviewItem> creditNotesToReview;
+
+    /**
      * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo suelte en la app («Soltar el pago»). null: no está retenido.
      */
     @JsonProperty("payment_hold")
@@ -334,6 +340,18 @@ public class PayableInvoice {
 
     public PayableInvoice setInPayout(String inPayout) {
         this.inPayout = inPayout;
+        return this;
+    }
+
+    /**
+     * Con «Notas de crédito relacionadas con la factura: Esperar a que alguien las acepte» en Configurar pagos: las notas que el proveedor relacionó con esta factura y que todavía no se restan de amount_due. Se aceptan en la app (**Aceptar nota de crédito**) o aplicándolas en un pago de esta factura (`credit_notes` de la línea). Vacío si la empresa las resta solas.
+     */
+    public List<PayableInvoiceCreditNotesToReviewItem> getCreditNotesToReview() {
+        return creditNotesToReview;
+    }
+
+    public PayableInvoice setCreditNotesToReview(List<PayableInvoiceCreditNotesToReviewItem> creditNotesToReview) {
+        this.creditNotesToReview = creditNotesToReview;
         return this;
     }
 
