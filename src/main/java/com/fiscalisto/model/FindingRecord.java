@@ -13,15 +13,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FindingRecord {
     /**
-     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement, expense_report (una comprobación de viáticos), expense_ticket (un ticket de compra), product (la existencia de un producto) o customer (un cliente).
+     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement, expense_report (una comprobación de viáticos), expense_ticket (un ticket de compra), product (la existencia de un producto), customer (un cliente) o employee (un empleado).
      * <p>
-     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report, expense_ticket, product, customer.
+     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report, expense_ticket, product, customer, employee.
      */
     @JsonProperty("type")
     private String type;
 
     /**
-     * Su id en la API: el pago (pyo_…), la comprobación (exr_…), el ticket (rct_…), el producto (prd_…), el cliente (cus_…) o el RFC del proveedor; null si no tiene.
+     * Su id en la API: el pago (pyo_…), la comprobación (exr_…), el ticket (rct_…), el producto (prd_…), el cliente (cus_…), el empleado (emp_…) o el RFC del proveedor; null si no tiene.
      */
     @JsonProperty("id")
     private String id;
@@ -39,9 +39,9 @@ public class FindingRecord {
     private String description;
 
     /**
-     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement, expense_report (una comprobación de viáticos), expense_ticket (un ticket de compra), product (la existencia de un producto) o customer (un cliente).
+     * purchase_order, payout, supplier, poliza (la contabilidad de un mes), account (una cuenta en un mes), bank_movement, expense_report (una comprobación de viáticos), expense_ticket (un ticket de compra), product (la existencia de un producto), customer (un cliente) o employee (un empleado).
      * <p>
-     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report, expense_ticket, product, customer.
+     * Valores: purchase_order, payout, supplier, poliza, account, bank_movement, expense_report, expense_ticket, product, customer, employee.
      */
     public String getType() {
         return type;
@@ -53,7 +53,7 @@ public class FindingRecord {
     }
 
     /**
-     * Su id en la API: el pago (pyo_…), la comprobación (exr_…), el ticket (rct_…), el producto (prd_…), el cliente (cus_…) o el RFC del proveedor; null si no tiene.
+     * Su id en la API: el pago (pyo_…), la comprobación (exr_…), el ticket (rct_…), el producto (prd_…), el cliente (cus_…), el empleado (emp_…) o el RFC del proveedor; null si no tiene.
      */
     public String getId() {
         return id;

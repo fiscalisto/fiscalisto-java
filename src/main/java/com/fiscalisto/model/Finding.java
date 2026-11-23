@@ -40,9 +40,9 @@ public class Finding {
     private String issuer;
 
     /**
-     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad), bank (movimientos del banco), expense_reports (comprobaciones de viáticos), purchase_receipts (tickets de compra), inventory (inventario) o customers (clientes y cobranza).
+     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad), bank (movimientos del banco), expense_reports (comprobaciones de viáticos), purchase_receipts (tickets de compra), inventory (inventario), customers (clientes y cobranza) o payroll (nómina).
      * <p>
-     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory, customers.
+     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory, customers, payroll.
      */
     @JsonProperty("area")
     private String area;
@@ -190,9 +190,9 @@ public class Finding {
     }
 
     /**
-     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad), bank (movimientos del banco), expense_reports (comprobaciones de viáticos), purchase_receipts (tickets de compra), inventory (inventario) o customers (clientes y cobranza).
+     * purchase_orders (órdenes de compra), payouts (pagos a proveedores), suppliers (proveedores), accounting (contabilidad), bank (movimientos del banco), expense_reports (comprobaciones de viáticos), purchase_receipts (tickets de compra), inventory (inventario), customers (clientes y cobranza) o payroll (nómina).
      * <p>
-     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory, customers.
+     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory, customers, payroll.
      */
     public String getArea() {
         return area;
