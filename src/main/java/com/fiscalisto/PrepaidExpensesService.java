@@ -55,6 +55,10 @@ public final class PrepaidExpensesService {
         return update(uuid, params, null);
     }
 
+    public PrepaidExpense update(String uuid) {
+        return update(uuid, null, null);
+    }
+
     /**
      * Dejar de amortizar una factura
      * <p>

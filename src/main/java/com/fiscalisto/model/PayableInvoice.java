@@ -125,7 +125,7 @@ public class PayableInvoice {
     private List<PayableInvoiceCreditNotesToReviewItem> creditNotesToReview;
 
     /**
-     * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo suelte en la app («Soltar el pago»). null: no está retenido.
+     * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo libere en la app («Liberar el pago»). null: no está retenido.
      */
     @JsonProperty("payment_hold")
     private PayableInvoicePaymentHold paymentHold;
@@ -374,7 +374,7 @@ public class PayableInvoice {
     }
 
     /**
-     * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo suelte en la app («Soltar el pago»). null: no está retenido.
+     * Si una regla de Ajustes › Reglas retuvo su pago: no se paga hasta que alguien con permiso lo libere en la app («Liberar el pago»). null: no está retenido.
      */
     public PayableInvoicePaymentHold getPaymentHold() {
         return paymentHold;

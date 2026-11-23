@@ -85,6 +85,18 @@ public class PrepaidExpense {
     private Long months;
 
     /**
+     * Por fechas: el primer día que cubre, AAAA-MM-DD; cada mes se lleva lo de sus días. null: por meses completos, todos iguales.
+     */
+    @JsonProperty("start_date")
+    private String startDate;
+
+    /**
+     * Por fechas: el último día que cubre, incluido. null: por meses completos.
+     */
+    @JsonProperty("end_date")
+    private String endDate;
+
+    /**
      * Pesos que se amortizan en total: lo que su póliza carga a la cuenta 109 (sin el IVA acreditable).
      */
     @JsonProperty("amount")
@@ -239,6 +251,30 @@ public class PrepaidExpense {
     @JsonIgnore
     public PrepaidExpense setMonths(long months) {
         return setMonths(Long.valueOf(months));
+    }
+
+    /**
+     * Por fechas: el primer día que cubre, AAAA-MM-DD; cada mes se lleva lo de sus días. null: por meses completos, todos iguales.
+     */
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public PrepaidExpense setStartDate(String startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    /**
+     * Por fechas: el último día que cubre, incluido. null: por meses completos.
+     */
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public PrepaidExpense setEndDate(String endDate) {
+        this.endDate = endDate;
+        return this;
     }
 
     /**

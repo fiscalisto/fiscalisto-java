@@ -28,9 +28,7 @@ public class UpdatePrepaidExpenseParams {
     private String kind;
 
     /**
-     * Meses que cubre, de 1 a 120.
-     * <p>
-     * Obligatorio.
+     * Meses que cubre, de 1 a 120: una póliza igual cada mes. Va esto o start_date y end_date.
      */
     @JsonProperty("months")
     private Long months;
@@ -40,6 +38,18 @@ public class UpdatePrepaidExpenseParams {
      */
     @JsonProperty("start_month")
     private String startMonth;
+
+    /**
+     * Por fechas: el primer día que cubre, AAAA-MM-DD (en el mes de la factura o después). Con end_date, cada mes se lleva lo de los días que cubre; start_month y months salen de las fechas.
+     */
+    @JsonProperty("start_date")
+    private String startDate;
+
+    /**
+     * Por fechas: el último día que cubre, AAAA-MM-DD, incluido (una póliza del 15 de marzo al 14 de marzo del año siguiente). Hasta 120 meses.
+     */
+    @JsonProperty("end_date")
+    private String endDate;
 
     /**
      * Número de la cuenta de costos o gastos (500, 600 o 700) a la que se amortiza. Sin él, la que tiene, o la de su categoría.
@@ -74,9 +84,7 @@ public class UpdatePrepaidExpenseParams {
     }
 
     /**
-     * Meses que cubre, de 1 a 120.
-     * <p>
-     * Obligatorio.
+     * Meses que cubre, de 1 a 120: una póliza igual cada mes. Va esto o start_date y end_date.
      */
     public Long getMonths() {
         return months;
@@ -101,6 +109,30 @@ public class UpdatePrepaidExpenseParams {
 
     public UpdatePrepaidExpenseParams setStartMonth(String startMonth) {
         this.startMonth = startMonth;
+        return this;
+    }
+
+    /**
+     * Por fechas: el primer día que cubre, AAAA-MM-DD (en el mes de la factura o después). Con end_date, cada mes se lleva lo de los días que cubre; start_month y months salen de las fechas.
+     */
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public UpdatePrepaidExpenseParams setStartDate(String startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    /**
+     * Por fechas: el último día que cubre, AAAA-MM-DD, incluido (una póliza del 15 de marzo al 14 de marzo del año siguiente). Hasta 120 meses.
+     */
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public UpdatePrepaidExpenseParams setEndDate(String endDate) {
+        this.endDate = endDate;
         return this;
     }
 
