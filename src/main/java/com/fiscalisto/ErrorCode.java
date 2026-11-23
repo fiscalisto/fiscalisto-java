@@ -195,6 +195,9 @@ public final class ErrorCode {
     /** El PAC o el SAT no la aceptaron. sat_code trae su código (CFDI40xxx), message qué corregir y doc_url su explicación en [Rechazos del SAT](/docs/api/rechazos-del-sat). La factura queda como rejected; no se usó ningún timbre. */
     public static final String INVOICE_REJECTED = "invoice_rejected";
 
+    /** La llave solo funciona desde algunas IP (Solo desde estas IP, en Desarrolladores › Llaves) y la solicitud llegó desde otra. El mensaje dice desde cuál. */
+    public static final String IP_NOT_ALLOWED = "ip_not_allowed";
+
     /** El emisor está archivado: ya no timbra. Sus comprobantes se pueden consultar y cancelar. */
     public static final String ISSUER_ARCHIVED = "issuer_archived";
 
@@ -230,6 +233,9 @@ public final class ErrorCode {
 
     /** La llave es de solo lectura: puede hacer GET, validar RFC, revisar listas del SAT y calcular recibos de nómina, pero nada que timbre, cancele, envíe o cambie datos. */
     public static final String KEY_READ_ONLY = "key_read_only";
+
+    /** La llave tiene permisos por recurso y no tiene el que pide la ruta: lectura para un GET (o un POST que solo revisa), escritura para lo que cambia algo. El mensaje dice qué recurso y qué permiso. */
+    public static final String KEY_RESOURCE_DENIED = "key_resource_denied";
 
     /** La llave está limitada a algunos emisores y la solicitud toca otro (o crea uno nuevo, o usa algo de toda la cuenta como webhooks). */
     public static final String KEY_RESTRICTED = "key_restricted";
@@ -377,6 +383,9 @@ public final class ErrorCode {
 
     /** El SAT no contestó o no dejó entrar con la e.firma del emisor. El mensaje trae lo que dijo; no se usó ningún timbre. Reintente en 10 minutos. */
     public static final String SAT_UNAVAILABLE = "sat_unavailable";
+
+    /** La búsqueda de query no se entiende: un campo por el que no se busca, un operador que no va con ese campo, una comilla sin cerrar, AND y OR juntos o más de 10 cláusulas. El mensaje dice dónde. */
+    public static final String SEARCH_QUERY_INVALID = "search_query_invalid";
 
     /** Ese cambio ya no se puede deshacer: ya se deshizo, el ajuste cambió otra vez después (deshaga primero el más reciente) o ya no tiene el valor que dejó ese cambio. */
     public static final String SETTING_CHANGE_NOT_UNDOABLE = "setting_change_not_undoable";

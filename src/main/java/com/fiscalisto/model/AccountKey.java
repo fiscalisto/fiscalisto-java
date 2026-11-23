@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * AccountKey: La llave con que se hizo la solicitud: id, nombre y emisores a los que se limita.
@@ -37,6 +38,18 @@ public class AccountKey {
      */
     @JsonProperty("read_only")
     private Boolean readOnly;
+
+    /**
+     * Una llave con permisos por recurso: read (consulta) o write (consulta y cambia) en cada recurso (invoices, customers, payouts…, uno por sección de la referencia); uno que no aparece no tiene acceso (key_resource_denied). null si tiene todos los permisos.
+     */
+    @JsonProperty("permissions")
+    private Map<String, String> permissions;
+
+    /**
+     * Las IP o rangos (CIDR, IPv4 o IPv6) desde los que funciona la llave; desde otra responde ip_not_allowed. null si funciona desde cualquiera.
+     */
+    @JsonProperty("allowed_ips")
+    private List<String> allowedIps;
 
     /**
      * Cuándo deja de funcionar: la vigencia elegida al crearla, o el fin del traslape al cambiarla. null si no vence.
@@ -95,6 +108,30 @@ public class AccountKey {
 
     public AccountKey setReadOnly(Boolean readOnly) {
         this.readOnly = readOnly;
+        return this;
+    }
+
+    /**
+     * Una llave con permisos por recurso: read (consulta) o write (consulta y cambia) en cada recurso (invoices, customers, payouts…, uno por sección de la referencia); uno que no aparece no tiene acceso (key_resource_denied). null si tiene todos los permisos.
+     */
+    public Map<String, String> getPermissions() {
+        return permissions;
+    }
+
+    public AccountKey setPermissions(Map<String, String> permissions) {
+        this.permissions = permissions;
+        return this;
+    }
+
+    /**
+     * Las IP o rangos (CIDR, IPv4 o IPv6) desde los que funciona la llave; desde otra responde ip_not_allowed. null si funciona desde cualquiera.
+     */
+    public List<String> getAllowedIps() {
+        return allowedIps;
+    }
+
+    public AccountKey setAllowedIps(List<String> allowedIps) {
+        this.allowedIps = allowedIps;
         return this;
     }
 

@@ -6,6 +6,7 @@ import com.fiscalisto.model.CreateProductParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListProductsParams;
 import com.fiscalisto.model.Product;
+import com.fiscalisto.model.SearchProductsParams;
 import com.fiscalisto.model.StockLevelList;
 import com.fiscalisto.model.UpdateProductParams;
 
@@ -68,6 +69,32 @@ public final class ProductsService {
 
     public Iterable<Product> listAutoPaging() {
         return listAutoPaging(null, null);
+    }
+
+    /**
+     * Buscar productos
+     * <p>
+     * Con un lenguaje de búsqueda, como el de Stripe: campo:'valor' (igual, sin importar mayúsculas), campo~'valor' (contiene, 3 caracteres o más), &gt;, &gt;=, &lt; y &lt;= en números y fechas, -campo:'valor' (no) y campo:null; hasta 10 cláusulas unidas con AND o con OR. Se busca por name, description, sku, product_key, unit_key, unit_price y created. Los más recientes primero, por páginas como las listas. Una búsqueda que no se entiende responde search_query_invalid diciendo dónde.
+     * <p>
+     * GET /v1/products/search
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/productos/search-products
+     */
+    public Page<Product> search(SearchProductsParams params, RequestOptions options) {
+        return api.list("/v1/products/search", params, Product.class, options);
+    }
+
+    public Page<Product> search(SearchProductsParams params) {
+        return search(params, null);
+    }
+
+    /** Buscar productos: todos, página por página ({@code for (var x : …AutoPaging(…))}). */
+    public Iterable<Product> searchAutoPaging(SearchProductsParams params, RequestOptions options) {
+        return search(params, options).autoPagingIterable();
+    }
+
+    public Iterable<Product> searchAutoPaging(SearchProductsParams params) {
+        return searchAutoPaging(params, null);
     }
 
     /**

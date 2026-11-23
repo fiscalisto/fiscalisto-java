@@ -52,6 +52,12 @@ public class AutomaticJournalEntryLine {
     private String costCenter;
 
     /**
+     * Por qué este renglón va a esa cuenta, con el artículo de la ley que lo decide (la categoría y quién la puso, PUE o PPD, la tasa del IVA, una retención…). null en los renglones de una edición a mano y en los de un recibo de nómina.
+     */
+    @JsonProperty("reason")
+    private String reason;
+
+    /**
      * El número de cuenta.
      */
     public String getAccount() {
@@ -130,6 +136,18 @@ public class AutomaticJournalEntryLine {
 
     public AutomaticJournalEntryLine setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Por qué este renglón va a esa cuenta, con el artículo de la ley que lo decide (la categoría y quién la puso, PUE o PPD, la tasa del IVA, una retención…). null en los renglones de una edición a mano y en los de un recibo de nómina.
+     */
+    public String getReason() {
+        return reason;
+    }
+
+    public AutomaticJournalEntryLine setReason(String reason) {
+        this.reason = reason;
         return this;
     }
 }

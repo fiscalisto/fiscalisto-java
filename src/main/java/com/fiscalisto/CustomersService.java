@@ -7,6 +7,7 @@ import com.fiscalisto.model.Customer;
 import com.fiscalisto.model.CustomerPaymentBehavior;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListCustomersParams;
+import com.fiscalisto.model.SearchCustomersParams;
 import com.fiscalisto.model.UpdateCustomerParams;
 
 /**
@@ -85,6 +86,32 @@ public final class CustomersService {
 
     public Iterable<Customer> listAutoPaging() {
         return listAutoPaging(null, null);
+    }
+
+    /**
+     * Buscar clientes
+     * <p>
+     * Con un lenguaje de búsqueda, como el de Stripe: campo:'valor' (igual, sin importar mayúsculas), campo~'valor' (contiene, 3 caracteres o más), &gt;, &gt;=, &lt; y &lt;= en números y fechas, -campo:'valor' (no) y campo:null; hasta 10 cláusulas unidas con AND o con OR. Se busca por tax_id, legal_name, email, zip, tax_system, use y created. Los más recientes primero, por páginas como las listas. Una búsqueda que no se entiende responde search_query_invalid diciendo dónde.
+     * <p>
+     * GET /v1/customers/search
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/clientes/search-customers
+     */
+    public Page<Customer> search(SearchCustomersParams params, RequestOptions options) {
+        return api.list("/v1/customers/search", params, Customer.class, options);
+    }
+
+    public Page<Customer> search(SearchCustomersParams params) {
+        return search(params, null);
+    }
+
+    /** Buscar clientes: todos, página por página ({@code for (var x : …AutoPaging(…))}). */
+    public Iterable<Customer> searchAutoPaging(SearchCustomersParams params, RequestOptions options) {
+        return search(params, options).autoPagingIterable();
+    }
+
+    public Iterable<Customer> searchAutoPaging(SearchCustomersParams params) {
+        return searchAutoPaging(params, null);
     }
 
     /**
