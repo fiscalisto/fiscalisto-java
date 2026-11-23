@@ -113,6 +113,12 @@ public class PayableInvoice {
     private String inPayout;
 
     /**
+     * Las notas de crédito que el proveedor relacionó con esta factura en su CFDI y que ya se restaron de amount_due. Las aplicadas en pagos no van aquí.
+     */
+    @JsonProperty("credit_notes_subtracted")
+    private List<PayableInvoiceCreditNotesSubtractedItem> creditNotesSubtracted;
+
+    /**
      * Con «Notas de crédito relacionadas con la factura: Esperar a que alguien las acepte» en Configurar pagos: las notas que el proveedor relacionó con esta factura y que todavía no se restan de amount_due. Se aceptan en la app (**Aceptar nota de crédito**) o aplicándolas en un pago de esta factura (`credit_notes` de la línea). Vacío si la empresa las resta solas.
      */
     @JsonProperty("credit_notes_to_review")
@@ -340,6 +346,18 @@ public class PayableInvoice {
 
     public PayableInvoice setInPayout(String inPayout) {
         this.inPayout = inPayout;
+        return this;
+    }
+
+    /**
+     * Las notas de crédito que el proveedor relacionó con esta factura en su CFDI y que ya se restaron de amount_due. Las aplicadas en pagos no van aquí.
+     */
+    public List<PayableInvoiceCreditNotesSubtractedItem> getCreditNotesSubtracted() {
+        return creditNotesSubtracted;
+    }
+
+    public PayableInvoice setCreditNotesSubtracted(List<PayableInvoiceCreditNotesSubtractedItem> creditNotesSubtracted) {
+        this.creditNotesSubtracted = creditNotesSubtracted;
         return this;
     }
 
