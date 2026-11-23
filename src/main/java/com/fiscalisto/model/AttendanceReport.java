@@ -72,6 +72,14 @@ public class AttendanceReport {
     private Long weeklyHours;
 
     /**
+     * Desde cuándo un día da horas extra: agreed, al pasar el horario acordado de cada quien (LFT art. 58); law, al pasar la jornada de la ley para su turno (art. 61).
+     * <p>
+     * Valores: agreed, law.
+     */
+    @JsonProperty("daily_jornada")
+    private String dailyJornada;
+
+    /**
      * Cada empleado del emisor en el periodo.
      */
     @JsonProperty("employees")
@@ -195,6 +203,20 @@ public class AttendanceReport {
     @JsonIgnore
     public AttendanceReport setWeeklyHours(long weeklyHours) {
         return setWeeklyHours(Long.valueOf(weeklyHours));
+    }
+
+    /**
+     * Desde cuándo un día da horas extra: agreed, al pasar el horario acordado de cada quien (LFT art. 58); law, al pasar la jornada de la ley para su turno (art. 61).
+     * <p>
+     * Valores: agreed, law.
+     */
+    public String getDailyJornada() {
+        return dailyJornada;
+    }
+
+    public AttendanceReport setDailyJornada(String dailyJornada) {
+        this.dailyJornada = dailyJornada;
+        return this;
     }
 
     /**

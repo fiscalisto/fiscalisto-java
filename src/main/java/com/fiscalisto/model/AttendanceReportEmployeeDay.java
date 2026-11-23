@@ -34,6 +34,14 @@ public class AttendanceReportEmployeeDay {
     private AttendanceReportEmployeeDayScheduled scheduled;
 
     /**
+     * La jornada de ese día por ley, o null si descansa.
+     * <p>
+     * Valores: diurna, nocturna, mixta.
+     */
+    @JsonProperty("jornada")
+    private String jornada;
+
+    /**
      * Minutos trabajados ese día.
      */
     @JsonProperty("worked_minutes")
@@ -118,6 +126,20 @@ public class AttendanceReportEmployeeDay {
 
     public AttendanceReportEmployeeDay setScheduled(AttendanceReportEmployeeDayScheduled scheduled) {
         this.scheduled = scheduled;
+        return this;
+    }
+
+    /**
+     * La jornada de ese día por ley, o null si descansa.
+     * <p>
+     * Valores: diurna, nocturna, mixta.
+     */
+    public String getJornada() {
+        return jornada;
+    }
+
+    public AttendanceReportEmployeeDay setJornada(String jornada) {
+        this.jornada = jornada;
         return this;
     }
 

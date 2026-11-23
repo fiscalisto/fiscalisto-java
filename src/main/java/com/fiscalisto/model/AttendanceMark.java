@@ -87,7 +87,7 @@ public class AttendanceMark {
     private BigDecimal distanceM;
 
     /**
-     * Notas para revisar (la marca nunca se rechaza por ellas): no_location (no dio su ubicación), far (lejos del lugar), imprecise (ubicación imprecisa), remote (fuera de la sucursal), new_device (un celular nuevo).
+     * Notas para revisar (la marca nunca se rechaza por ellas): no_location (no dio su ubicación), far (lejos del lugar), imprecise (ubicación imprecisa), remote (fuera de la sucursal), new_device (un celular nuevo), offline (se hizo sin conexión y llegó después; at es la hora en que se hizo, corregida por el reloj del celular), code_time (sin conexión, con un código del checador de otra hora).
      */
     @JsonProperty("flags")
     private List<String> flags;
@@ -270,7 +270,7 @@ public class AttendanceMark {
     }
 
     /**
-     * Notas para revisar (la marca nunca se rechaza por ellas): no_location (no dio su ubicación), far (lejos del lugar), imprecise (ubicación imprecisa), remote (fuera de la sucursal), new_device (un celular nuevo).
+     * Notas para revisar (la marca nunca se rechaza por ellas): no_location (no dio su ubicación), far (lejos del lugar), imprecise (ubicación imprecisa), remote (fuera de la sucursal), new_device (un celular nuevo), offline (se hizo sin conexión y llegó después; at es la hora en que se hizo, corregida por el reloj del celular), code_time (sin conexión, con un código del checador de otra hora).
      */
     public List<String> getFlags() {
         return flags;
