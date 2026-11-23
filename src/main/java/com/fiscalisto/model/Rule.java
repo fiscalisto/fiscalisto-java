@@ -84,6 +84,12 @@ public class Rule {
     private Long waitDays;
 
     /**
+     * Si sigue así: pasos días después de que actuó (recordatorios, escalar); si sus condiciones ya no se cumplen, los que siguen no corren ([]: ninguno).
+     */
+    @JsonProperty("follow_ups")
+    private List<RuleFollowUp> followUps;
+
+    /**
      * true: si se cumple, las reglas que siguen no corren para ese registro.
      */
     @JsonProperty("stop_after")
@@ -250,6 +256,18 @@ public class Rule {
     @JsonIgnore
     public Rule setWaitDays(long waitDays) {
         return setWaitDays(Long.valueOf(waitDays));
+    }
+
+    /**
+     * Si sigue así: pasos días después de que actuó (recordatorios, escalar); si sus condiciones ya no se cumplen, los que siguen no corren ([]: ninguno).
+     */
+    public List<RuleFollowUp> getFollowUps() {
+        return followUps;
+    }
+
+    public Rule setFollowUps(List<RuleFollowUp> followUps) {
+        this.followUps = followUps;
+        return this;
     }
 
     /**

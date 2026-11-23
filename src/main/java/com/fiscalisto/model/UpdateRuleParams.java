@@ -60,6 +60,12 @@ public class UpdateRuleParams {
     private Long waitDays;
 
     /**
+     * Si sigue así: hasta 5 pasos días después de que actuó (recordatorios, escalar). El día de cada paso revisa de nuevo sus condiciones; si ya no se cumplen, los pasos que siguen no corren. [] los quita.
+     */
+    @JsonProperty("follow_ups")
+    private List<UpdateRuleParamsFollowUp> followUps;
+
+    /**
      * true: si se cumple, las reglas que siguen no corren para ese registro.
      */
     @JsonProperty("stop_after")
@@ -160,6 +166,18 @@ public class UpdateRuleParams {
     @JsonIgnore
     public UpdateRuleParams setWaitDays(long waitDays) {
         return setWaitDays(Long.valueOf(waitDays));
+    }
+
+    /**
+     * Si sigue así: hasta 5 pasos días después de que actuó (recordatorios, escalar). El día de cada paso revisa de nuevo sus condiciones; si ya no se cumplen, los pasos que siguen no corren. [] los quita.
+     */
+    public List<UpdateRuleParamsFollowUp> getFollowUps() {
+        return followUps;
+    }
+
+    public UpdateRuleParams setFollowUps(List<UpdateRuleParamsFollowUp> followUps) {
+        this.followUps = followUps;
+        return this;
     }
 
     /**
