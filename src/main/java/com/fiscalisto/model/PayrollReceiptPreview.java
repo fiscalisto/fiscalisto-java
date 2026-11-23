@@ -101,6 +101,12 @@ public class PayrollReceiptPreview {
     private PayrollReceiptPreviewTotals totals;
 
     /**
+     * Cómo se calculó cada línea de ISR, subsidio para el empleo e IMSS: base, tasa o renglón de la tarifa, la operación y el artículo de la ley. Son las mismas cifras del recibo, no un recálculo.
+     */
+    @JsonProperty("explanation")
+    private List<PayrollReceiptPreviewExplanationItem> explanation;
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -275,6 +281,18 @@ public class PayrollReceiptPreview {
 
     public PayrollReceiptPreview setTotals(PayrollReceiptPreviewTotals totals) {
         this.totals = totals;
+        return this;
+    }
+
+    /**
+     * Cómo se calculó cada línea de ISR, subsidio para el empleo e IMSS: base, tasa o renglón de la tarifa, la operación y el artículo de la ley. Son las mismas cifras del recibo, no un recálculo.
+     */
+    public List<PayrollReceiptPreviewExplanationItem> getExplanation() {
+        return explanation;
+    }
+
+    public PayrollReceiptPreview setExplanation(List<PayrollReceiptPreviewExplanationItem> explanation) {
+        this.explanation = explanation;
         return this;
     }
 }
