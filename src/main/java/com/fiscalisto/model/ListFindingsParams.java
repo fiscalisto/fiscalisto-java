@@ -32,9 +32,9 @@ public class ListFindingsParams {
     private String startingAfter;
 
     /**
-     * Solo los de un área: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts o inventory.
+     * Solo los de un área: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory o customers.
      * <p>
-     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory.
+     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory, customers.
      */
     @JsonProperty("area")
     private String area;
@@ -109,9 +109,9 @@ public class ListFindingsParams {
     }
 
     /**
-     * Solo los de un área: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts o inventory.
+     * Solo los de un área: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory o customers.
      * <p>
-     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory.
+     * Valores: purchase_orders, payouts, suppliers, accounting, bank, expense_reports, purchase_receipts, inventory, customers.
      */
     public String getArea() {
         return area;
