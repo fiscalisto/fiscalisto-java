@@ -33,6 +33,12 @@ public class GetGeneralLedgerParams {
     private String account;
 
     /**
+     * Solo las cuentas de este código agrupador del SAT (102 trae 102.01, 102.02…), como el renglón de un estado financiero. Con account no se usa.
+     */
+    @JsonProperty("grouping_code")
+    private String groupingCode;
+
+    /**
      * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
      */
     @JsonProperty("issuer")
@@ -73,6 +79,18 @@ public class GetGeneralLedgerParams {
 
     public GetGeneralLedgerParams setAccount(String account) {
         this.account = account;
+        return this;
+    }
+
+    /**
+     * Solo las cuentas de este código agrupador del SAT (102 trae 102.01, 102.02…), como el renglón de un estado financiero. Con account no se usa.
+     */
+    public String getGroupingCode() {
+        return groupingCode;
+    }
+
+    public GetGeneralLedgerParams setGroupingCode(String groupingCode) {
+        this.groupingCode = groupingCode;
         return this;
     }
 

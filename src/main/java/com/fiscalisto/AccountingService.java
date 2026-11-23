@@ -95,7 +95,7 @@ public final class AccountingService {
     /**
      * Ver el auxiliar de cuentas
      * <p>
-     * El libro mayor de un periodo de hasta 12 meses: el saldo inicial de cada cuenta, cada cargo y abono con su póliza (journal_entry, el mismo id de journal_entries), su CFDI y el saldo que deja, y el saldo final. Solo las cuentas que se movieron, o la que pida con account aunque no tenga movimientos. Una cuenta que no está en el catálogo contesta account_missing.
+     * El libro mayor de un periodo de hasta 12 meses: el saldo inicial de cada cuenta, cada cargo y abono con su póliza (journal_entry, el mismo id de journal_entries), su CFDI y el saldo que deja, y el saldo final. Solo las cuentas que se movieron, o la que pida con account aunque no tenga movimientos; grouping_code lo limita a las de un código agrupador. Una cuenta que no está en el catálogo contesta account_missing.
      * <p>
      * GET /v1/accounting/general_ledger
      * <p>
