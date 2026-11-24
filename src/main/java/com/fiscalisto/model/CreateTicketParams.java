@@ -81,7 +81,7 @@ public class CreateTicketParams {
     private String unitKey;
 
     /**
-     * Tasa de IVA incluida en el total. Por omisión 0.16.
+     * Tasa de IVA incluida en el total. Por omisión 0.16; también como número (0.16 o 16).
      * <p>
      * Valores: 0, 0.16, 0.08, exento.
      */
@@ -261,7 +261,7 @@ public class CreateTicketParams {
     }
 
     /**
-     * Tasa de IVA incluida en el total. Por omisión 0.16.
+     * Tasa de IVA incluida en el total. Por omisión 0.16; también como número (0.16 o 16).
      * <p>
      * Valores: 0, 0.16, 0.08, exento.
      */

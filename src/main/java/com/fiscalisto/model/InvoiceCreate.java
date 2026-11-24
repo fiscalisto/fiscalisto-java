@@ -199,7 +199,7 @@ public class InvoiceCreate {
     private BigDecimal exchangeRate;
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * Folio (Folio) de esta factura en vez del siguiente de la serie: ese número toma su lugar en la numeración. También acepta un texto de hasta 40 caracteres sin «|» ("TIME002", "000120"), como lo acepta el SAT (Anexo 20): va solo en esta factura y la numeración no cambia; "120" es el folio 120. Si otro CFDI del RFC y la serie ya lo tiene, se rechaza.
      */
     @JsonProperty("folio")
     private Long folio;
@@ -603,7 +603,7 @@ public class InvoiceCreate {
     }
 
     /**
-     * Folio (Folio). Fiscalisto asigna el siguiente de la serie; mande uno solo si debe ser ese.
+     * Folio (Folio) de esta factura en vez del siguiente de la serie: ese número toma su lugar en la numeración. También acepta un texto de hasta 40 caracteres sin «|» ("TIME002", "000120"), como lo acepta el SAT (Anexo 20): va solo en esta factura y la numeración no cambia; "120" es el folio 120. Si otro CFDI del RFC y la serie ya lo tiene, se rechaza.
      */
     public Long getFolio() {
         return folio;

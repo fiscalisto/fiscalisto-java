@@ -46,7 +46,7 @@ public class CreateAdvanceParams {
     private BigDecimal amount;
 
     /**
-     * Tasa de IVA trasladado: 0.16 (por omisión), 0.08 (región fronteriza), 0 o exento.
+     * Tasa de IVA trasladado: "0.16" (por omisión), "0.08" (región fronteriza), "0" o "exento". También como número (0.16, 16), con seis decimales ("0.160000") o en por ciento ("16%"); la respuesta la da como "0.16".
      * <p>
      * Valores: 0, 0.16, 0.08, exento.
      */
@@ -170,7 +170,7 @@ public class CreateAdvanceParams {
     }
 
     /**
-     * Tasa de IVA trasladado: 0.16 (por omisión), 0.08 (región fronteriza), 0 o exento.
+     * Tasa de IVA trasladado: "0.16" (por omisión), "0.08" (región fronteriza), "0" o "exento". También como número (0.16, 16), con seis decimales ("0.160000") o en por ciento ("16%"); la respuesta la da como "0.16".
      * <p>
      * Valores: 0, 0.16, 0.08, exento.
      */

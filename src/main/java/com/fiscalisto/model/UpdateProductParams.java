@@ -73,7 +73,7 @@ public class UpdateProductParams {
     private String taxability;
 
     /**
-     * Tasa de IVA trasladado: 0.16 (por omisión), 0.08 (región fronteriza), 0 o exento.
+     * Tasa de IVA trasladado: "0.16" (por omisión), "0.08" (región fronteriza), "0" o "exento". También como número (0.16, 16), con seis decimales ("0.160000") o en por ciento ("16%"); la respuesta la da como "0.16".
      * <p>
      * Valores: 0, 0.16, 0.08, exento.
      */
@@ -95,13 +95,13 @@ public class UpdateProductParams {
     private String iepsFactor;
 
     /**
-     * Tasa de IVA retenido (por ejemplo 0.106667, dos terceras partes del 16%).
+     * Tasa de IVA retenido, en fracción (por ejemplo 0.106667, dos terceras partes del 16%).
      */
     @JsonProperty("iva_retention")
     private BigDecimal ivaRetention;
 
     /**
-     * Tasa de ISR retenido (por ejemplo 0.10 honorarios, 0.0125 RESICO).
+     * Tasa de ISR retenido, en fracción (por ejemplo 0.10 honorarios, 0.0125 RESICO).
      */
     @JsonProperty("isr_retention")
     private BigDecimal isrRetention;
@@ -282,7 +282,7 @@ public class UpdateProductParams {
     }
 
     /**
-     * Tasa de IVA trasladado: 0.16 (por omisión), 0.08 (región fronteriza), 0 o exento.
+     * Tasa de IVA trasladado: "0.16" (por omisión), "0.08" (región fronteriza), "0" o "exento". También como número (0.16, 16), con seis decimales ("0.160000") o en por ciento ("16%"); la respuesta la da como "0.16".
      * <p>
      * Valores: 0, 0.16, 0.08, exento.
      */
@@ -327,7 +327,7 @@ public class UpdateProductParams {
     }
 
     /**
-     * Tasa de IVA retenido (por ejemplo 0.106667, dos terceras partes del 16%).
+     * Tasa de IVA retenido, en fracción (por ejemplo 0.106667, dos terceras partes del 16%).
      */
     public BigDecimal getIvaRetention() {
         return ivaRetention;
@@ -344,7 +344,7 @@ public class UpdateProductParams {
     }
 
     /**
-     * Tasa de ISR retenido (por ejemplo 0.10 honorarios, 0.0125 RESICO).
+     * Tasa de ISR retenido, en fracción (por ejemplo 0.10 honorarios, 0.0125 RESICO).
      */
     public BigDecimal getIsrRetention() {
         return isrRetention;
