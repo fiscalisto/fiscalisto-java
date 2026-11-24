@@ -163,6 +163,12 @@ public class SatInvoice {
     private String cashConfirmation;
 
     /**
+     * Cuándo alguien confirmó el pago en efectivo (cash_confirmation confirmed), en hora del centro de México. Null en las demás.
+     */
+    @JsonProperty("cash_confirmed_at")
+    private String cashConfirmedAt;
+
+    /**
      * Su centro de costo (ccn_…), o null. Póngalo o cámbielo con POST /v1/sat_invoices/{id}.
      */
     @JsonProperty("cost_center")
@@ -488,6 +494,18 @@ public class SatInvoice {
 
     public SatInvoice setCashConfirmation(String cashConfirmation) {
         this.cashConfirmation = cashConfirmation;
+        return this;
+    }
+
+    /**
+     * Cuándo alguien confirmó el pago en efectivo (cash_confirmation confirmed), en hora del centro de México. Null en las demás.
+     */
+    public String getCashConfirmedAt() {
+        return cashConfirmedAt;
+    }
+
+    public SatInvoice setCashConfirmedAt(String cashConfirmedAt) {
+        this.cashConfirmedAt = cashConfirmedAt;
         return this;
     }
 
