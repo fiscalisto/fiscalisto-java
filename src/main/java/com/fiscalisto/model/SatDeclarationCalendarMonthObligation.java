@@ -5,6 +5,7 @@ package com.fiscalisto.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class SatDeclarationCalendarMonthObligation {
      * Las declaraciones (dcl_…) que la presentaron, la normal y sus complementarias.
      */
     @JsonProperty("declarations")
-    private List<String> declarations;
+    private List<StringOr<SatDeclaration>> declarations;
 
     /**
      * Qué obligación es (las de summary.obligations), o annual_return para la anual.
@@ -67,11 +68,11 @@ public class SatDeclarationCalendarMonthObligation {
     /**
      * Las declaraciones (dcl_…) que la presentaron, la normal y sus complementarias.
      */
-    public List<String> getDeclarations() {
+    public List<StringOr<SatDeclaration>> getDeclarations() {
         return declarations;
     }
 
-    public SatDeclarationCalendarMonthObligation setDeclarations(List<String> declarations) {
+    public SatDeclarationCalendarMonthObligation setDeclarations(List<StringOr<SatDeclaration>> declarations) {
         this.declarations = declarations;
         return this;
     }

@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * PayeeAccount: Una cuenta de un proveedor a la que se le paga (Pagos › Cuentas de proveedores), verificada con el banco. Solo lectura: una CLABE se agrega o se cambia en la app.
@@ -34,7 +36,7 @@ public class PayeeAccount {
      * El emisor (iss_…) que paga.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * El RFC del proveedor.
@@ -175,13 +177,24 @@ public class PayeeAccount {
     /**
      * El emisor (iss_…) que paga.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public PayeeAccount setIssuer(String issuer) {
+    public PayeeAccount setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayeeAccount setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public PayeeAccount setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

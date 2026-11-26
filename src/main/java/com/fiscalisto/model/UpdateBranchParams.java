@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * UpdateBranchParams: los campos de «Actualizar una sucursal».
  */
@@ -81,6 +83,12 @@ public class UpdateBranchParams {
      */
     @JsonProperty("archived")
     private Boolean archived;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cómo la llama su equipo, por ejemplo «Sucursal Monterrey». Va en el PDF.
@@ -215,6 +223,18 @@ public class UpdateBranchParams {
 
     public UpdateBranchParams setArchived(Boolean archived) {
         this.archived = archived;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateBranchParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * UpdateTagParams: los campos de «Actualizar una etiqueta».
  */
@@ -25,6 +27,12 @@ public class UpdateTagParams {
      */
     @JsonProperty("color")
     private String color;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cómo la llama su equipo, por ejemplo «Obra Norte». No se repite (sin importar mayúsculas ni acentos).
@@ -49,6 +57,18 @@ public class UpdateTagParams {
 
     public UpdateTagParams setColor(String color) {
         this.color = color;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateTagParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 
@@ -37,7 +38,7 @@ public class VacationRequest {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * El nombre del empleado.
@@ -134,13 +135,24 @@ public class VacationRequest {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public VacationRequest setEmployee(String employee) {
+    public VacationRequest setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public VacationRequest setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public VacationRequest setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

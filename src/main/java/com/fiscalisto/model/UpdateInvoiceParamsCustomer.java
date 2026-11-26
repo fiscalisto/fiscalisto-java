@@ -1,0 +1,156 @@
+// Generado por `bun run openapi` desde la especificación OpenAPI de la API: no lo edite.
+
+package com.fiscalisto.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * UpdateInvoiceParamsCustomer: UpdateInvoiceParamsCustomer.
+ */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UpdateInvoiceParamsCustomer {
+    /**
+     * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
+     * <p>
+     * Obligatorio.
+     */
+    @JsonProperty("tax_id")
+    private String taxId;
+
+    /**
+     * Nombre o razón social tal como está en la constancia de situación fiscal, sin el régimen de capital (sin «S.A. de C.V.»).
+     * <p>
+     * Obligatorio.
+     */
+    @JsonProperty("legal_name")
+    private String legalName;
+
+    /**
+     * Régimen fiscal (RegimenFiscal), clave de c_RegimenFiscal: 601, 612, 626…
+     * <p>
+     * Obligatorio.
+     */
+    @JsonProperty("tax_system")
+    private String taxSystem;
+
+    /**
+     * Código postal del domicilio fiscal del cliente (DomicilioFiscalReceptor), 5 dígitos.
+     * <p>
+     * Obligatorio.
+     */
+    @JsonProperty("zip")
+    private String zip;
+
+    /**
+     * Correo a donde se envía (varios separados por comas). Solo se usa si se pide enviarlo.
+     */
+    @JsonProperty("email")
+    private String email;
+
+    /**
+     * Si es extranjero: su país de residencia (ResidenciaFiscal, c_Pais) y su número de registro tributario (NumRegIdTrib), con el RFC genérico XEXX010101000.
+     */
+    @JsonProperty("foreign")
+    private UpdateInvoiceParamsCustomerForeign foreign;
+
+    /**
+     * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio, salvo el del alcohol y los tabacos (tasas 0.5, 1.6 y 0.304), que va en el precio siempre (LIEPS art. 19 fr. II).
+     */
+    @JsonProperty("ieps_taxpayer")
+    private Boolean iepsTaxpayer;
+
+    /**
+     * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
+     * <p>
+     * Obligatorio.
+     */
+    public String getTaxId() {
+        return taxId;
+    }
+
+    public UpdateInvoiceParamsCustomer setTaxId(String taxId) {
+        this.taxId = taxId;
+        return this;
+    }
+
+    /**
+     * Nombre o razón social tal como está en la constancia de situación fiscal, sin el régimen de capital (sin «S.A. de C.V.»).
+     * <p>
+     * Obligatorio.
+     */
+    public String getLegalName() {
+        return legalName;
+    }
+
+    public UpdateInvoiceParamsCustomer setLegalName(String legalName) {
+        this.legalName = legalName;
+        return this;
+    }
+
+    /**
+     * Régimen fiscal (RegimenFiscal), clave de c_RegimenFiscal: 601, 612, 626…
+     * <p>
+     * Obligatorio.
+     */
+    public String getTaxSystem() {
+        return taxSystem;
+    }
+
+    public UpdateInvoiceParamsCustomer setTaxSystem(String taxSystem) {
+        this.taxSystem = taxSystem;
+        return this;
+    }
+
+    /**
+     * Código postal del domicilio fiscal del cliente (DomicilioFiscalReceptor), 5 dígitos.
+     * <p>
+     * Obligatorio.
+     */
+    public String getZip() {
+        return zip;
+    }
+
+    public UpdateInvoiceParamsCustomer setZip(String zip) {
+        this.zip = zip;
+        return this;
+    }
+
+    /**
+     * Correo a donde se envía (varios separados por comas). Solo se usa si se pide enviarlo.
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    public UpdateInvoiceParamsCustomer setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    /**
+     * Si es extranjero: su país de residencia (ResidenciaFiscal, c_Pais) y su número de registro tributario (NumRegIdTrib), con el RFC genérico XEXX010101000.
+     */
+    public UpdateInvoiceParamsCustomerForeign getForeign() {
+        return foreign;
+    }
+
+    public UpdateInvoiceParamsCustomer setForeign(UpdateInvoiceParamsCustomerForeign foreign) {
+        this.foreign = foreign;
+        return this;
+    }
+
+    /**
+     * true si el cliente es contribuyente de IEPS: el IEPS va desglosado en vez de sumado al precio, salvo el del alcohol y los tabacos (tasas 0.5, 1.6 y 0.304), que va en el precio siempre (LIEPS art. 19 fr. II).
+     */
+    public Boolean getIepsTaxpayer() {
+        return iepsTaxpayer;
+    }
+
+    public UpdateInvoiceParamsCustomer setIepsTaxpayer(Boolean iepsTaxpayer) {
+        this.iepsTaxpayer = iepsTaxpayer;
+        return this;
+    }
+}

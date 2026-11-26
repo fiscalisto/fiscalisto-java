@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,13 +39,13 @@ public class SupplierInvoice {
      * El emisor de su cuenta (iss_…) que la recibió.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * El proveedor (sup_…) que la mandó.
      */
     @JsonProperty("supplier")
-    private String supplier;
+    private StringOr<PortalSupplier> supplier;
 
     /**
      * El RFC del proveedor, o la clave `EXT-&lt;país&gt;-&lt;tax ID&gt;` de uno del extranjero.
@@ -62,7 +63,7 @@ public class SupplierInvoice {
      * La misma factura en sus facturas recibidas (sat_…), para su XML y su PDF, o null.
      */
     @JsonProperty("sat_invoice")
-    private String satInvoice;
+    private StringOr<SatInvoice> satInvoice;
 
     /**
      * Su serie, o null.
@@ -233,25 +234,47 @@ public class SupplierInvoice {
     /**
      * El emisor de su cuenta (iss_…) que la recibió.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public SupplierInvoice setIssuer(String issuer) {
+    public SupplierInvoice setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SupplierInvoice setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public SupplierInvoice setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
      * El proveedor (sup_…) que la mandó.
      */
-    public String getSupplier() {
+    public StringOr<PortalSupplier> getSupplier() {
         return supplier;
     }
 
-    public SupplierInvoice setSupplier(String supplier) {
+    public SupplierInvoice setSupplier(StringOr<PortalSupplier> supplier) {
         this.supplier = supplier;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SupplierInvoice setSupplier(String id) {
+        return setSupplier(StringOr.<PortalSupplier>id(id));
+    }
+
+    @JsonIgnore
+    public SupplierInvoice setSupplier(PortalSupplier supplier) {
+        return setSupplier(StringOr.of(supplier));
     }
 
     /**
@@ -281,13 +304,24 @@ public class SupplierInvoice {
     /**
      * La misma factura en sus facturas recibidas (sat_…), para su XML y su PDF, o null.
      */
-    public String getSatInvoice() {
+    public StringOr<SatInvoice> getSatInvoice() {
         return satInvoice;
     }
 
-    public SupplierInvoice setSatInvoice(String satInvoice) {
+    public SupplierInvoice setSatInvoice(StringOr<SatInvoice> satInvoice) {
         this.satInvoice = satInvoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SupplierInvoice setSatInvoice(String id) {
+        return setSatInvoice(StringOr.<SatInvoice>id(id));
+    }
+
+    @JsonIgnore
+    public SupplierInvoice setSatInvoice(SatInvoice satInvoice) {
+        return setSatInvoice(StringOr.of(satInvoice));
     }
 
     /**

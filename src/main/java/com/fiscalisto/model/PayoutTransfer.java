@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,7 +39,7 @@ public class PayoutTransfer {
      * El emisor (iss_…) que paga.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * El pago (pyo_…) al que pertenece.
@@ -183,13 +184,24 @@ public class PayoutTransfer {
     /**
      * El emisor (iss_…) que paga.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public PayoutTransfer setIssuer(String issuer) {
+    public PayoutTransfer setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayoutTransfer setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public PayoutTransfer setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

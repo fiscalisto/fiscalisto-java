@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdatePurchaseReceiptParams: los campos de «Corregir un ticket de compra».
@@ -83,6 +84,12 @@ public class UpdatePurchaseReceiptParams {
      */
     @JsonProperty("note")
     private String note;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El nombre de la tienda.
@@ -220,6 +227,18 @@ public class UpdatePurchaseReceiptParams {
 
     public UpdatePurchaseReceiptParams setNote(String note) {
         this.note = note;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdatePurchaseReceiptParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

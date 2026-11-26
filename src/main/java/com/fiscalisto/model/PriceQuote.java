@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class PriceQuote {
      * El cliente (cus_…) cuyos precios se calcularon.
      */
     @JsonProperty("customer")
-    private String customer;
+    private StringOr<Customer> customer;
 
     /**
      * Conceptos (Conceptos), al menos uno.
@@ -65,13 +67,24 @@ public class PriceQuote {
     /**
      * El cliente (cus_…) cuyos precios se calcularon.
      */
-    public String getCustomer() {
+    public StringOr<Customer> getCustomer() {
         return customer;
     }
 
-    public PriceQuote setCustomer(String customer) {
+    public PriceQuote setCustomer(StringOr<Customer> customer) {
         this.customer = customer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PriceQuote setCustomer(String id) {
+        return setCustomer(StringOr.<Customer>id(id));
+    }
+
+    @JsonIgnore
+    public PriceQuote setCustomer(Customer customer) {
+        return setCustomer(StringOr.of(customer));
     }
 
     /**

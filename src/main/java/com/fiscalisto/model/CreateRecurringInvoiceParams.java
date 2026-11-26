@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * CreateRecurringInvoiceParams: los campos de «Crear una factura recurrente».
  */
@@ -55,6 +57,12 @@ public class CreateRecurringInvoiceParams {
      */
     @JsonProperty("catch_up")
     private String catchUp;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
@@ -133,6 +141,18 @@ public class CreateRecurringInvoiceParams {
 
     public CreateRecurringInvoiceParams setCatchUp(String catchUp) {
         this.catchUp = catchUp;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateRecurringInvoiceParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

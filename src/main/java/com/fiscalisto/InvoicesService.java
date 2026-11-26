@@ -3,6 +3,7 @@
 package com.fiscalisto;
 
 import com.fiscalisto.model.CancelInvoiceParams;
+import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.GetInvoiceCancellationReceiptParams;
 import com.fiscalisto.model.GetInvoiceParams;
 import com.fiscalisto.model.GetInvoicePdfParams;
@@ -97,7 +98,7 @@ public final class InvoicesService {
     /**
      * Buscar facturas
      * <p>
-     * Con un lenguaje de búsqueda, como el de Stripe: campo:'valor' (igual, sin importar mayúsculas), campo~'valor' (contiene, 3 caracteres o más), &gt;, &gt;=, &lt; y &lt;= en números y fechas, -campo:'valor' (no) y campo:null; hasta 10 cláusulas unidas con AND o con OR. Se busca por customer (RFC), customer_name, uuid, series, folio, total, status (valid, pending, canceled, rejected o processing) y created. Los más recientes primero, por páginas como las listas. Una búsqueda que no se entiende responde search_query_invalid diciendo dónde.
+     * Con un lenguaje de búsqueda, como el de Stripe: campo:'valor' (igual, sin importar mayúsculas), campo~'valor' (contiene, 3 caracteres o más), &gt;, &gt;=, &lt; y &lt;= en números y fechas, -campo:'valor' (no) y campo:null; hasta 10 cláusulas unidas con AND o con OR. Se busca por customer (RFC), customer_name, uuid, series, folio, total, status (valid, pending, canceled, rejected o processing), created y metadata (metadata['order_id']:'123', con la llave entre corchetes). Los más recientes primero, por páginas como las listas. Una búsqueda que no se entiende responde search_query_invalid diciendo dónde.
      * <p>
      * GET /v1/invoices/search
      * <p>
@@ -123,7 +124,7 @@ public final class InvoicesService {
     /**
      * Ver una factura
      * <p>
-     * Por su id (inv_…) o por su folio fiscal (UUID).
+     * Por su id (inv_…) o por su folio fiscal (UUID). Un borrador responde con status draft; ya timbrado, su id responde con la factura timbrada (que tiene su propio id).
      * <p>
      * GET /v1/invoices/{id}
      * <p>
@@ -142,9 +143,9 @@ public final class InvoicesService {
     }
 
     /**
-     * Actualizar una factura
+     * Actualizar una factura o un borrador
      * <p>
-     * Lo que se puede cambiar de una factura timbrada sin tocar el CFDI: su centro de costo (cost_center, o null para quitárselo; los complementos de pago y los traslados no llevan) y la nota para el cliente del PDF (notes, o null para quitarla; el XML no cambia y el siguiente PDF y correo ya la llevan).
+     * Un borrador (status draft) se cambia completo: mande la factura entera, con el mismo cuerpo y las mismas revisiones que POST /v1/invoices (un error responde invoice_invalid; los avisos vienen en warnings); metadata que no mande se queda como estaba. Si esperaba la aprobación de un administrador en Fiscalisto, la solicitud se retira. De una factura timbrada solo cambia lo que no toca el CFDI: su centro de costo (cost_center, o null para quitárselo; los complementos de pago y los traslados no llevan) y la nota para el cliente del PDF (notes, o null para quitarla; el XML no cambia y el siguiente PDF y correo ya la llevan).
      * <p>
      * POST /v1/invoices/{id}
      * <p>
@@ -160,6 +161,40 @@ public final class InvoicesService {
 
     public Invoice update(String id) {
         return update(id, null, null);
+    }
+
+    /**
+     * Borrar un borrador
+     * <p>
+     * Borra un borrador (status draft), hecho con la API o en Fiscalisto. Una factura timbrada no se borra: responde invoice_not_draft; cancélela con POST /v1/invoices/{id}/cancel.
+     * <p>
+     * DELETE /v1/invoices/{id}
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/facturas/delete-invoice
+     */
+    public Deleted delete(String id, RequestOptions options) {
+        return api.request("DELETE", "/v1/invoices/" + ApiClient.encode(id), null, null, false, Deleted.class, options);
+    }
+
+    public Deleted delete(String id) {
+        return delete(id, null);
+    }
+
+    /**
+     * Timbrar un borrador
+     * <p>
+     * Timbra un borrador tal como está guardado (no lleva cuerpo; cámbielo antes con POST /v1/invoices/{id}), con las mismas revisiones y respuestas que POST /v1/invoices: 201 timbrada, o 202 en processing si el PAC tarda. Pide Idempotency-Key; además, un borrador se timbra una sola vez aunque lo timbren a la vez desde la API y desde Fiscalisto. Ya timbrado, responde con esa factura. Uno que espera la aprobación de un administrador responde draft_awaiting_approval.
+     * <p>
+     * POST /v1/invoices/{id}/stamp
+     * <p>
+     * Vea https://fiscalisto.com/docs/api/referencia/facturas/stamp-invoice
+     */
+    public Invoice stamp(String id, RequestOptions options) {
+        return api.request("POST", "/v1/invoices/" + ApiClient.encode(id) + "/stamp", null, null, true, Invoice.class, options);
+    }
+
+    public Invoice stamp(String id) {
+        return stamp(id, null);
     }
 
     /**

@@ -4,6 +4,7 @@ package com.fiscalisto;
 
 import com.fiscalisto.model.CreateSandboxParams;
 import com.fiscalisto.model.Deleted;
+import com.fiscalisto.model.ListSandboxesParams;
 import com.fiscalisto.model.Sandbox;
 import com.fiscalisto.model.SandboxList;
 
@@ -43,12 +44,16 @@ public final class SandboxesService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/entornos-de-prueba/list-sandboxes
      */
-    public SandboxList list(RequestOptions options) {
-        return api.request("GET", "/v1/sandboxes", null, null, false, SandboxList.class, options);
+    public SandboxList list(ListSandboxesParams params, RequestOptions options) {
+        return api.request("GET", "/v1/sandboxes", null, params, false, SandboxList.class, options);
+    }
+
+    public SandboxList list(ListSandboxesParams params) {
+        return list(params, null);
     }
 
     public SandboxList list() {
-        return list(null);
+        return list(null, null);
     }
 
     /**

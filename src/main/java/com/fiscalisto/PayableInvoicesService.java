@@ -3,7 +3,7 @@
 package com.fiscalisto;
 
 import com.fiscalisto.model.ListPayableInvoicesParams;
-import com.fiscalisto.model.PayableInvoiceList;
+import com.fiscalisto.model.PayableInvoice;
 
 /**
  * Pagos a proveedores: client.payableInvoices().
@@ -24,15 +24,28 @@ public final class PayableInvoicesService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/pagos-a-proveedores/list-payable-invoices
      */
-    public PayableInvoiceList list(ListPayableInvoicesParams params, RequestOptions options) {
-        return api.request("GET", "/v1/payable_invoices", null, params, false, PayableInvoiceList.class, options);
+    public Page<PayableInvoice> list(ListPayableInvoicesParams params, RequestOptions options) {
+        return api.list("/v1/payable_invoices", params, PayableInvoice.class, options);
     }
 
-    public PayableInvoiceList list(ListPayableInvoicesParams params) {
+    public Page<PayableInvoice> list(ListPayableInvoicesParams params) {
         return list(params, null);
     }
 
-    public PayableInvoiceList list() {
+    public Page<PayableInvoice> list() {
         return list(null, null);
+    }
+
+    /** Listar lo que falta por pagar: todos, página por página ({@code for (var x : …AutoPaging(…))}). */
+    public Iterable<PayableInvoice> listAutoPaging(ListPayableInvoicesParams params, RequestOptions options) {
+        return list(params, options).autoPagingIterable();
+    }
+
+    public Iterable<PayableInvoice> listAutoPaging(ListPayableInvoicesParams params) {
+        return listAutoPaging(params, null);
+    }
+
+    public Iterable<PayableInvoice> listAutoPaging() {
+        return listAutoPaging(null, null);
     }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,6 +17,12 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PayableInvoice {
+    /**
+     * Su folio fiscal (el mismo que uuid). Sirve como starting_after.
+     */
+    @JsonProperty("id")
+    private String id;
+
     /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
@@ -32,7 +39,7 @@ public class PayableInvoice {
      * La factura descargada del SAT (sat_…).
      */
     @JsonProperty("sat_invoice")
-    private String satInvoice;
+    private StringOr<SatInvoice> satInvoice;
 
     /**
      * El RFC del proveedor.
@@ -143,6 +150,18 @@ public class PayableInvoice {
     private String appUrl;
 
     /**
+     * Su folio fiscal (el mismo que uuid). Sirve como starting_after.
+     */
+    public String getId() {
+        return id;
+    }
+
+    public PayableInvoice setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Qué tipo de objeto es («invoice», «customer»…).
      */
     public String getObject() {
@@ -169,13 +188,24 @@ public class PayableInvoice {
     /**
      * La factura descargada del SAT (sat_…).
      */
-    public String getSatInvoice() {
+    public StringOr<SatInvoice> getSatInvoice() {
         return satInvoice;
     }
 
-    public PayableInvoice setSatInvoice(String satInvoice) {
+    public PayableInvoice setSatInvoice(StringOr<SatInvoice> satInvoice) {
         this.satInvoice = satInvoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayableInvoice setSatInvoice(String id) {
+        return setSatInvoice(StringOr.<SatInvoice>id(id));
+    }
+
+    @JsonIgnore
+    public PayableInvoice setSatInvoice(SatInvoice satInvoice) {
+        return setSatInvoice(StringOr.of(satInvoice));
     }
 
     /**

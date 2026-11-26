@@ -18,10 +18,13 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.time.Instant;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Lo que hace cada llamada del SDK: la llave, la Idempotency-Key, los reintentos seguros, los
@@ -29,9 +32,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public final class ApiClient {
     /** La versión del SDK, en el User-Agent. */
-    public static final String VERSION = "0.1.224";
+    public static final String VERSION = "0.1.225";
     /** La versión de la API para la que se hizo este SDK (cabecera Fiscalisto-Version). */
-    public static final String API_VERSION = "2026-10-24";
+    public static final String API_VERSION = "2026-11-25";
 
     /** El ObjectMapper del SDK: campos desconocidos se ignoran; nulls no se mandan. */
     public static final ObjectMapper MAPPER = new ObjectMapper()
@@ -51,6 +54,7 @@ public final class ApiClient {
     private final Duration timeout;
     private final HttpClient http;
     private final Sleeper sleeper;
+    private final AtomicBoolean warnedExpiry = new AtomicBoolean();
 
     ApiClient(ClientOptions options) {
         String k = options.apiKey != null ? options.apiKey : System.getenv("FISCALISTO_API_KEY");
@@ -96,12 +100,14 @@ public final class ApiClient {
         return list(path, queryOf(query), null, item, options);
     }
 
-    private <T> Page<T> list(String path, Map<String, String> query, String startingAfter, Class<T> item, RequestOptions options) {
+    private <T> Page<T> list(String path, Map<String, String> query, String cursor, Class<T> item, RequestOptions options) {
         Map<String, String> q = new java.util.LinkedHashMap<>(query);
-        if (startingAfter != null) q.put("starting_after", startingAfter);
+        // ending_before: the next page is the newer one.
+        boolean forward = query.get("ending_before") != null && !query.get("ending_before").isEmpty();
+        if (cursor != null) q.put(forward ? "ending_before" : "starting_after", cursor);
         JavaType type = MAPPER.getTypeFactory().constructParametricType(Page.class, item);
         Page<T> page = read(answer("GET", path, null, q, false, options), type);
-        page.setFetch(after -> list(path, query, after, item, options));
+        page.setFetch(after -> list(path, query, after, item, options), forward);
         return page;
     }
 
@@ -143,6 +149,13 @@ public final class ApiClient {
         tree.fields().forEachRemaining(e -> {
             JsonNode v = e.getValue();
             if (v.isNull()) return;
+            if (v.isObject()) {
+                // metadata[pedido]=A-1042, one pair per key.
+                v.fields().forEachRemaining(s -> {
+                    if (!s.getValue().isNull()) out.put(e.getKey() + "[" + s.getKey() + "]", s.getValue().asText());
+                });
+                return;
+            }
             if (!v.isValueNode()) throw new IllegalArgumentException(e.getKey() + " no va en la dirección.");
             out.put(e.getKey(), v.asText());
         });
@@ -166,7 +179,8 @@ public final class ApiClient {
         Map<String, String> q = queryOf(query);
         StringJoiner qs = new StringJoiner("&");
         q.forEach((k, v) -> qs.add(URLEncoder.encode(k, StandardCharsets.UTF_8) + "=" + URLEncoder.encode(v, StandardCharsets.UTF_8)));
-        URI uri = URI.create(baseUrl + path + (q.isEmpty() ? "" : "?" + qs));
+        for (String f : o.expand) qs.add("expand%5B%5D=" + URLEncoder.encode(f, StandardCharsets.UTF_8));
+        URI uri = URI.create(baseUrl + path + (qs.length() == 0 ? "" : "?" + qs));
         byte[] data = null;
         if (method.equals("POST")) {
             try {
@@ -208,6 +222,13 @@ public final class ApiClient {
             }
             int status = res.statusCode();
             String requestId = res.headers().firstValue("request-id").orElse(null);
+            if (!warnedExpiry.get()) {
+                String warning = expiryWarning(
+                        res.headers().firstValue("fiscalisto-key-expires-at").orElse(null),
+                        res.headers().firstValue("fiscalisto-warning").orElse(null),
+                        Instant.now());
+                if (warning != null && warnedExpiry.compareAndSet(false, true)) System.err.println(warning);
+            }
             if (status >= 200 && status < 300) return new Answer(res.body(), status, requestId);
             JsonNode raw = null;
             try {
@@ -217,7 +238,10 @@ public final class ApiClient {
                 // Not JSON: a proxy's page.
             }
             if (raw == null) raw = JsonNodeFactory.instance.objectNode();
-            double retryAfter = res.headers().firstValue("retry-after").map(ApiClient::number).orElse(0.0);
+            // Retry-After when the API sends it; otherwise RateLimit-Reset on a 429.
+            String after = res.headers().firstValue("retry-after").orElse(null);
+            if (after == null && status == 429) after = res.headers().firstValue("ratelimit-reset").orElse(null);
+            double retryAfter = after == null ? 0.0 : number(after);
             JsonNode code = raw.get("code");
             boolean retryable = status == 429
                     || (code != null && ErrorCode.REQUEST_IN_PROGRESS.equals(code.asText()))
@@ -228,6 +252,27 @@ public final class ApiClient {
             }
             throw new FiscalistoException(raw, status, requestId, idempotencyKey, null);
         }
+    }
+
+    /**
+     * The console message when the API says the key ends soon (Fiscalisto-Key-Expires-At within
+     * 7 days, or Fiscalisto-Warning: api_key_expires_soon); null otherwise.
+     */
+    static String expiryWarning(String expiresAt, String warning, Instant now) {
+        Instant at = null;
+        if (expiresAt != null) {
+            try {
+                at = Instant.parse(expiresAt);
+            } catch (DateTimeParseException ignored) {
+                // Not a date: only the warning counts.
+            }
+        }
+        boolean flagged = warning != null && warning.matches("(?s).*\\bapi_key_expires_soon\\b.*");
+        boolean near = at != null && at.isAfter(now) && !at.isAfter(now.plus(Duration.ofDays(7)));
+        if (!flagged && !near) return null;
+        String when = at != null ? "el " + at : "en menos de 7 días";
+        return "[fiscalisto] Su llave de la API vence " + when
+                + ". Cámbiela antes en Desarrolladores › Llaves (Cambiar llave) para que sus solicitudes no fallen con api_key_expired.";
     }
 
     private static double number(String s) {

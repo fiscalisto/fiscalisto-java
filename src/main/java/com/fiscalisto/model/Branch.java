@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * Branch: Una sucursal del emisor: otro lugar desde donde factura, con su código postal (LugarExpedicion), su dirección en el PDF, sus series y, si quiere, su propia marca (nombre comercial, logo, color y estilo del PDF).
  */
@@ -29,6 +31,12 @@ public class Branch {
      */
     @JsonProperty("object")
     private String object;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor de la sucursal.
@@ -161,6 +169,18 @@ public class Branch {
 
     public Branch setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public Branch setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ProductionOrder: Una orden de producción: los componentes de la receta salen de un almacén y lo producido entra a otro a su costo real.
@@ -35,6 +37,12 @@ public class ProductionOrder {
     private String object;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * El emisor.
      */
     @JsonProperty("issuer")
@@ -47,9 +55,9 @@ public class ProductionOrder {
     private String number;
 
     /**
-     * draft (borrador, nada se ha movido), in_process (los componentes ya salieron), completed (lo producido ya entró) o cancelled (todo regresó).
+     * draft (borrador, nada se ha movido), in_process (los componentes ya salieron), completed (lo producido ya entró) o canceled (todo regresó).
      * <p>
-     * Valores: draft, in_process, completed, cancelled.
+     * Valores: draft, in_process, completed, canceled.
      */
     @JsonProperty("status")
     private String status;
@@ -58,7 +66,7 @@ public class ProductionOrder {
      * Lo que se produce (prd_…).
      */
     @JsonProperty("product")
-    private String product;
+    private StringOr<Product> product;
 
     /**
      * Cuántas unidades se planearon.
@@ -147,8 +155,8 @@ public class ProductionOrder {
     /**
      * Cuándo se canceló, o null.
      */
-    @JsonProperty("cancelled_at")
-    private String cancelledAt;
+    @JsonProperty("canceled_at")
+    private String canceledAt;
 
     /**
      * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
@@ -187,6 +195,18 @@ public class ProductionOrder {
     }
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public ProductionOrder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+    }
+
+    /**
      * El emisor.
      */
     public String getIssuer() {
@@ -211,9 +231,9 @@ public class ProductionOrder {
     }
 
     /**
-     * draft (borrador, nada se ha movido), in_process (los componentes ya salieron), completed (lo producido ya entró) o cancelled (todo regresó).
+     * draft (borrador, nada se ha movido), in_process (los componentes ya salieron), completed (lo producido ya entró) o canceled (todo regresó).
      * <p>
-     * Valores: draft, in_process, completed, cancelled.
+     * Valores: draft, in_process, completed, canceled.
      */
     public String getStatus() {
         return status;
@@ -227,13 +247,24 @@ public class ProductionOrder {
     /**
      * Lo que se produce (prd_…).
      */
-    public String getProduct() {
+    public StringOr<Product> getProduct() {
         return product;
     }
 
-    public ProductionOrder setProduct(String product) {
+    public ProductionOrder setProduct(StringOr<Product> product) {
         this.product = product;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ProductionOrder setProduct(String id) {
+        return setProduct(StringOr.<Product>id(id));
+    }
+
+    @JsonIgnore
+    public ProductionOrder setProduct(Product product) {
+        return setProduct(StringOr.of(product));
     }
 
     /**
@@ -427,12 +458,12 @@ public class ProductionOrder {
     /**
      * Cuándo se canceló, o null.
      */
-    public String getCancelledAt() {
-        return cancelledAt;
+    public String getCanceledAt() {
+        return canceledAt;
     }
 
-    public ProductionOrder setCancelledAt(String cancelledAt) {
-        this.cancelledAt = cancelledAt;
+    public ProductionOrder setCanceledAt(String canceledAt) {
+        this.canceledAt = canceledAt;
         return this;
     }
 }

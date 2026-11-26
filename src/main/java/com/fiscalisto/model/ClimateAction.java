@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * ClimateAction: Una acción del Programa de intervención (numerales 8.3 a 8.5).
@@ -34,7 +36,7 @@ public class ClimateAction {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * La encuesta de la que sale (cls_…).
@@ -135,13 +137,24 @@ public class ClimateAction {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public ClimateAction setIssuer(String issuer) {
+    public ClimateAction setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ClimateAction setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public ClimateAction setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ReviewCycleParticipant {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Nombre.
@@ -44,13 +45,13 @@ public class ReviewCycleParticipant {
      * Su jefe en el organigrama (emp_…), quien la evalúa como jefe.
      */
     @JsonProperty("manager")
-    private String manager;
+    private StringOr<Employee> manager;
 
     /**
      * Los compañeros elegidos para evaluarla (emp_…).
      */
     @JsonProperty("peers")
-    private List<String> peers;
+    private List<StringOr<Employee>> peers;
 
     /**
      * Quién la evalúa, desde que se abre el ciclo.
@@ -109,13 +110,24 @@ public class ReviewCycleParticipant {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public ReviewCycleParticipant setEmployee(String employee) {
+    public ReviewCycleParticipant setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ReviewCycleParticipant setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public ReviewCycleParticipant setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**
@@ -157,23 +169,34 @@ public class ReviewCycleParticipant {
     /**
      * Su jefe en el organigrama (emp_…), quien la evalúa como jefe.
      */
-    public String getManager() {
+    public StringOr<Employee> getManager() {
         return manager;
     }
 
-    public ReviewCycleParticipant setManager(String manager) {
+    public ReviewCycleParticipant setManager(StringOr<Employee> manager) {
         this.manager = manager;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ReviewCycleParticipant setManager(String id) {
+        return setManager(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public ReviewCycleParticipant setManager(Employee manager) {
+        return setManager(StringOr.of(manager));
     }
 
     /**
      * Los compañeros elegidos para evaluarla (emp_…).
      */
-    public List<String> getPeers() {
+    public List<StringOr<Employee>> getPeers() {
         return peers;
     }
 
-    public ReviewCycleParticipant setPeers(List<String> peers) {
+    public ReviewCycleParticipant setPeers(List<StringOr<Employee>> peers) {
         this.peers = peers;
         return this;
     }

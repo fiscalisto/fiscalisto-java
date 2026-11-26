@@ -217,7 +217,7 @@ public class UpdateRecurringInvoiceParamsInvoice {
     private String date;
 
     /**
-     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
      */
     @JsonProperty("send_email")
     private Boolean sendEmail;
@@ -233,6 +233,12 @@ public class UpdateRecurringInvoiceParamsInvoice {
      */
     @JsonProperty("metadata")
     private Map<String, String> metadata;
+
+    /**
+     * Solo en POST /v1/invoices. true: la guarda como borrador (status draft) sin timbrar ni usar timbres, con las mismas revisiones que al timbrar (un error responde invoice_invalid; los avisos vienen en warnings). Se cambia con POST /v1/invoices/{id}, se timbra con POST /v1/invoices/{id}/stamp y se borra con DELETE /v1/invoices/{id}; también aparece en Por facturar de Fiscalisto. Idempotency-Key es opcional: con ella, repetir la solicitud devuelve el mismo borrador. En las demás rutas que reciben una factura no cambia nada.
+     */
+    @JsonProperty("draft")
+    private Boolean draft;
 
     /**
      * Solo en POST /v1/invoices. true: responde 202 en cuanto la factura queda guardada con su folio (status processing) y la timbra después de responder; invoice.stamped o invoice.failed dicen cómo terminó. En las demás rutas que reciben una factura no cambia nada.
@@ -301,10 +307,12 @@ public class UpdateRecurringInvoiceParamsInvoice {
     }
 
     /** Solo el id. */
+    @JsonIgnore
     public UpdateRecurringInvoiceParamsInvoice setCustomer(String id) {
         return setCustomer(StringOr.<InvoiceCreateCustomer>id(id));
     }
 
+    @JsonIgnore
     public UpdateRecurringInvoiceParamsInvoice setCustomer(InvoiceCreateCustomer customer) {
         return setCustomer(StringOr.of(customer));
     }
@@ -644,7 +652,7 @@ public class UpdateRecurringInvoiceParamsInvoice {
     }
 
     /**
-     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
      */
     public Boolean getSendEmail() {
         return sendEmail;
@@ -676,6 +684,18 @@ public class UpdateRecurringInvoiceParamsInvoice {
 
     public UpdateRecurringInvoiceParamsInvoice setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Solo en POST /v1/invoices. true: la guarda como borrador (status draft) sin timbrar ni usar timbres, con las mismas revisiones que al timbrar (un error responde invoice_invalid; los avisos vienen en warnings). Se cambia con POST /v1/invoices/{id}, se timbra con POST /v1/invoices/{id}/stamp y se borra con DELETE /v1/invoices/{id}; también aparece en Por facturar de Fiscalisto. Idempotency-Key es opcional: con ella, repetir la solicitud devuelve el mismo borrador. En las demás rutas que reciben una factura no cambia nada.
+     */
+    public Boolean getDraft() {
+        return draft;
+    }
+
+    public UpdateRecurringInvoiceParamsInvoice setDraft(Boolean draft) {
+        this.draft = draft;
         return this;
     }
 

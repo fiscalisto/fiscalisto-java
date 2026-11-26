@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ExtraordinaryPayrollReceiptPreview {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Qué paga: aguinaldo, ptu o finiquito.
@@ -141,13 +142,24 @@ public class ExtraordinaryPayrollReceiptPreview {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public ExtraordinaryPayrollReceiptPreview setEmployee(String employee) {
+    public ExtraordinaryPayrollReceiptPreview setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ExtraordinaryPayrollReceiptPreview setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public ExtraordinaryPayrollReceiptPreview setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

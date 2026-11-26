@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdateCustomerGroupParams: los campos de «Actualizar un grupo de clientes».
@@ -91,6 +92,12 @@ public class UpdateCustomerGroupParams {
      */
     @JsonProperty("prep_days")
     private Long prepDays;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Nombre.
@@ -268,5 +275,17 @@ public class UpdateCustomerGroupParams {
     @JsonIgnore
     public UpdateCustomerGroupParams setPrepDays(long prepDays) {
         return setPrepDays(Long.valueOf(prepDays));
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateCustomerGroupParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
     }
 }

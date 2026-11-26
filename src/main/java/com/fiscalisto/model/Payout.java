@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Payout: Un pago a proveedores con Fintoc: una o varias transferencias SPEI que salen juntas en su día, después de las firmas que la empresa pide. La API lo prepara; solo se firma en la app.
@@ -38,7 +40,7 @@ public class Payout {
      * El emisor (iss_…) que paga.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Su número en la empresa (Pago 12), como en la app.
@@ -137,6 +139,12 @@ public class Payout {
     private Boolean createdByApi;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * Cuándo se preparó.
      */
     @JsonProperty("created_at")
@@ -205,13 +213,24 @@ public class Payout {
     /**
      * El emisor (iss_…) que paga.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public Payout setIssuer(String issuer) {
+    public Payout setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Payout setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public Payout setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -407,6 +426,18 @@ public class Payout {
 
     public Payout setCreatedByApi(Boolean createdByApi) {
         this.createdByApi = createdByApi;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public Payout setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

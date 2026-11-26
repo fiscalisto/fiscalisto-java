@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class PortalSupplier {
      * El emisor de su cuenta (iss_…) cuyo portal es.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * El RFC del proveedor; uno del extranjero, sin RFC, trae su clave `EXT-&lt;país&gt;-&lt;tax ID&gt;` (país en c_Pais del SAT, «EXT-USA-123456789»).
@@ -151,13 +153,24 @@ public class PortalSupplier {
     /**
      * El emisor de su cuenta (iss_…) cuyo portal es.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public PortalSupplier setIssuer(String issuer) {
+    public PortalSupplier setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PortalSupplier setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public PortalSupplier setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

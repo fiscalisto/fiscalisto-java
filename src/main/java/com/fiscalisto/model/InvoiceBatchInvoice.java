@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -40,7 +41,7 @@ public class InvoiceBatchInvoice {
      * La factura timbrada (inv_…).
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<Invoice> invoice;
 
     /**
      * Folio fiscal que asigna el SAT (UUID del Timbre Fiscal Digital), en mayúsculas.
@@ -112,13 +113,24 @@ public class InvoiceBatchInvoice {
     /**
      * La factura timbrada (inv_…).
      */
-    public String getInvoice() {
+    public StringOr<Invoice> getInvoice() {
         return invoice;
     }
 
-    public InvoiceBatchInvoice setInvoice(String invoice) {
+    public InvoiceBatchInvoice setInvoice(StringOr<Invoice> invoice) {
         this.invoice = invoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public InvoiceBatchInvoice setInvoice(String id) {
+        return setInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public InvoiceBatchInvoice setInvoice(Invoice invoice) {
+        return setInvoice(StringOr.of(invoice));
     }
 
     /**

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -70,7 +71,7 @@ public class JournalEntry {
      * La factura (inv_…) si es la póliza de un CFDI que timbró este emisor; null en los demás casos.
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<Invoice> invoice;
 
     /**
      * El folio fiscal del CFDI (o del complemento de pago); null en la depreciación.
@@ -215,13 +216,24 @@ public class JournalEntry {
     /**
      * La factura (inv_…) si es la póliza de un CFDI que timbró este emisor; null en los demás casos.
      */
-    public String getInvoice() {
+    public StringOr<Invoice> getInvoice() {
         return invoice;
     }
 
-    public JournalEntry setInvoice(String invoice) {
+    public JournalEntry setInvoice(StringOr<Invoice> invoice) {
         this.invoice = invoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public JournalEntry setInvoice(String id) {
+        return setInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public JournalEntry setInvoice(Invoice invoice) {
+        return setInvoice(StringOr.of(invoice));
     }
 
     /**

@@ -54,7 +54,7 @@ public class CrossCheckCfdiExplanationExactCfdiItem {
     /**
      * Por qué lo explicaría.
      * <p>
-     * Valores: cancelled, ppd_not_collected, other_month, month_edge, credit_note, ppd_payment, duplicate, left_out, withholding_certificate.
+     * Valores: canceled, ppd_not_collected, other_month, month_edge, credit_note, ppd_payment, duplicate, left_out, withholding_certificate.
      */
     @JsonProperty("reason")
     private String reason;
@@ -150,7 +150,7 @@ public class CrossCheckCfdiExplanationExactCfdiItem {
     /**
      * Por qué lo explicaría.
      * <p>
-     * Valores: cancelled, ppd_not_collected, other_month, month_edge, credit_note, ppd_payment, duplicate, left_out, withholding_certificate.
+     * Valores: canceled, ppd_not_collected, other_month, month_edge, credit_note, ppd_payment, duplicate, left_out, withholding_certificate.
      */
     public String getReason() {
         return reason;

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 
@@ -37,7 +38,7 @@ public class PayrollOrgChartVacancy {
      * Bajo qué jefe (emp_…).
      */
     @JsonProperty("manager")
-    private String manager;
+    private StringOr<Employee> manager;
 
     /**
      * Sucursal (brn_…) desde donde se factura: su código postal va en LugarExpedicion, su dirección en el PDF y, si las tiene, sus series. Sin ella, el domicilio fiscal del emisor (la Matriz).
@@ -122,13 +123,24 @@ public class PayrollOrgChartVacancy {
     /**
      * Bajo qué jefe (emp_…).
      */
-    public String getManager() {
+    public StringOr<Employee> getManager() {
         return manager;
     }
 
-    public PayrollOrgChartVacancy setManager(String manager) {
+    public PayrollOrgChartVacancy setManager(StringOr<Employee> manager) {
         this.manager = manager;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollOrgChartVacancy setManager(String id) {
+        return setManager(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollOrgChartVacancy setManager(Employee manager) {
+        return setManager(StringOr.of(manager));
     }
 
     /**

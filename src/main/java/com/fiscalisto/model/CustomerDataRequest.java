@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * CustomerDataRequest: Una liga para que un cliente dé sus datos fiscales.
  */
@@ -67,6 +69,12 @@ public class CustomerDataRequest {
      */
     @JsonProperty("expires_at")
     private String expiresAt;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cuándo se creó.
@@ -187,6 +195,18 @@ public class CustomerDataRequest {
 
     public CustomerDataRequest setExpiresAt(String expiresAt) {
         this.expiresAt = expiresAt;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CustomerDataRequest setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

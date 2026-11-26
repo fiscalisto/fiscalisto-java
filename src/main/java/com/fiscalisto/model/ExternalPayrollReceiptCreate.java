@@ -128,7 +128,7 @@ public class ExternalPayrollReceiptCreate {
     private String replaces;
 
     /**
-     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
      */
     @JsonProperty("send_email")
     private Boolean sendEmail;
@@ -351,7 +351,7 @@ public class ExternalPayrollReceiptCreate {
     }
 
     /**
-     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
      */
     public Boolean getSendEmail() {
         return sendEmail;

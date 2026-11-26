@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class EmployeePortal {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Su enlace personal (sin cuenta) para ver, descargar y firmar de recibido sus recibos y pedir vacaciones; null si está apagado.
@@ -102,13 +103,24 @@ public class EmployeePortal {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public EmployeePortal setEmployee(String employee) {
+    public EmployeePortal setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public EmployeePortal setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public EmployeePortal setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

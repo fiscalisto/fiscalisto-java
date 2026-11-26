@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * RecurringInvoice: Una factura que el emisor timbra solo, cada mes, semana o día.
@@ -38,7 +40,7 @@ public class RecurringInvoice {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Para reconocerla.
@@ -76,7 +78,7 @@ public class RecurringInvoice {
      * La última factura (inv_…) que timbró, o null.
      */
     @JsonProperty("last_invoice")
-    private String lastInvoice;
+    private StringOr<Invoice> lastInvoice;
 
     /**
      * Por qué no se pudo timbrar la última vez (sin timbres, el cliente borrado, el SAT la rechazó…), o null. Se vuelve a intentar a la siguiente hora del día siguiente; también llega recurring_invoice.failed.
@@ -123,6 +125,12 @@ public class RecurringInvoice {
     private BigDecimal total;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * Cuándo se creó.
      */
     @JsonProperty("created_at")
@@ -167,13 +175,24 @@ public class RecurringInvoice {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public RecurringInvoice setIssuer(String issuer) {
+    public RecurringInvoice setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public RecurringInvoice setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public RecurringInvoice setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -241,13 +260,24 @@ public class RecurringInvoice {
     /**
      * La última factura (inv_…) que timbró, o null.
      */
-    public String getLastInvoice() {
+    public StringOr<Invoice> getLastInvoice() {
         return lastInvoice;
     }
 
-    public RecurringInvoice setLastInvoice(String lastInvoice) {
+    public RecurringInvoice setLastInvoice(StringOr<Invoice> lastInvoice) {
         this.lastInvoice = lastInvoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public RecurringInvoice setLastInvoice(String id) {
+        return setLastInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public RecurringInvoice setLastInvoice(Invoice lastInvoice) {
+        return setLastInvoice(StringOr.of(lastInvoice));
     }
 
     /**
@@ -339,6 +369,18 @@ public class RecurringInvoice {
     @JsonIgnore
     public RecurringInvoice setTotal(double total) {
         return setTotal(BigDecimal.valueOf(total));
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public RecurringInvoice setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
     }
 
     /**

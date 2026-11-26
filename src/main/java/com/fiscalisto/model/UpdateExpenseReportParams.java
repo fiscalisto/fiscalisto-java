@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * UpdateExpenseReportParams: los campos de «Actualizar una comprobación».
  */
@@ -53,6 +55,12 @@ public class UpdateExpenseReportParams {
      */
     @JsonProperty("end_date")
     private String endDate;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Su nombre. Por omisión, «Viaje a {destination}» o el periodo.
@@ -135,6 +143,18 @@ public class UpdateExpenseReportParams {
 
     public UpdateExpenseReportParams setEndDate(String endDate) {
         this.endDate = endDate;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateExpenseReportParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

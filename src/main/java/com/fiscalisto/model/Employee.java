@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Employee: Un empleado de un emisor, para sus recibos de nómina.
@@ -38,7 +40,7 @@ public class Employee {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Número de empleado (NumEmpleado).
@@ -263,6 +265,12 @@ public class Employee {
     private List<String> warnings;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -307,13 +315,24 @@ public class Employee {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public Employee setIssuer(String issuer) {
+    public Employee setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Employee setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public Employee setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -792,6 +811,18 @@ public class Employee {
 
     public Employee setWarnings(List<String> warnings) {
         this.warnings = warnings;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public Employee setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +21,7 @@ public class VariableSalaryEmployee {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Su número de empleado.
@@ -91,13 +92,24 @@ public class VariableSalaryEmployee {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public VariableSalaryEmployee setEmployee(String employee) {
+    public VariableSalaryEmployee setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public VariableSalaryEmployee setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public VariableSalaryEmployee setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

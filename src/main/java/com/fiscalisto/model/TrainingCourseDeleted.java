@@ -33,8 +33,8 @@ public class TrainingCourseDeleted {
     /**
      * true si se canceló porque tenía constancias emitidas.
      */
-    @JsonProperty("cancelled")
-    private Boolean cancelled;
+    @JsonProperty("canceled")
+    private Boolean canceled;
 
     /**
      * Identificador del objeto, con su prefijo (iss_, inv_, ret_, cus_, prd_, emp_, bat_, brn_, whs_, stm_, adj_, evt_, whe_).
@@ -75,12 +75,12 @@ public class TrainingCourseDeleted {
     /**
      * true si se canceló porque tenía constancias emitidas.
      */
-    public Boolean getCancelled() {
-        return cancelled;
+    public Boolean getCanceled() {
+        return canceled;
     }
 
-    public TrainingCourseDeleted setCancelled(Boolean cancelled) {
-        this.cancelled = cancelled;
+    public TrainingCourseDeleted setCanceled(Boolean canceled) {
+        this.canceled = canceled;
         return this;
     }
 }

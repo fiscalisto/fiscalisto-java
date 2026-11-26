@@ -31,6 +31,10 @@ public final class Page<T> {
     @JsonIgnore
     private Function<String, Page<T>> fetch;
 
+    /** Asked with ending_before: the next page is the newer one, and each is read oldest first. */
+    @JsonIgnore
+    private boolean forward;
+
     public List<T> getData() {
         return data == null ? List.of() : data;
     }
@@ -43,15 +47,16 @@ public final class Page<T> {
         return url;
     }
 
-    void setFetch(Function<String, Page<T>> fetch) {
+    void setFetch(Function<String, Page<T>> fetch, boolean forward) {
         this.fetch = fetch;
+        this.forward = forward;
     }
 
-    /** La página siguiente, o null cuando no hay más. */
+    /** La página siguiente (con ending_before, la de los más recientes), o null cuando no hay más. */
     public Page<T> next() {
         List<T> items = getData();
         if (!hasMore || items.isEmpty() || fetch == null) return null;
-        JsonNode id = ApiClient.MAPPER.valueToTree(items.get(items.size() - 1)).get("id");
+        JsonNode id = ApiClient.MAPPER.valueToTree(items.get(forward ? 0 : items.size() - 1)).get("id");
         return fetch.apply(id == null ? null : id.asText());
     }
 
@@ -73,7 +78,8 @@ public final class Page<T> {
             @Override
             public T next() {
                 if (!hasNext()) throw new NoSuchElementException();
-                return page.getData().get(index++);
+                List<T> items = page.getData();
+                return items.get(page.forward ? items.size() - 1 - index++ : index++);
             }
         };
     }

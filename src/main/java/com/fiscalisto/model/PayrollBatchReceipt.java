@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 
@@ -31,7 +32,7 @@ public class PayrollBatchReceipt {
      * El empleado (emp_…), cuando Fiscalisto calculó el recibo.
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * El RFC del empleado.
@@ -57,7 +58,7 @@ public class PayrollBatchReceipt {
      * El recibo (inv_…, una factura tipo N); también el que el SAT rechazó.
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<Invoice> invoice;
 
     /**
      * Folio fiscal que asigna el SAT (UUID del Timbre Fiscal Digital), en mayúsculas.
@@ -109,13 +110,24 @@ public class PayrollBatchReceipt {
     /**
      * El empleado (emp_…), cuando Fiscalisto calculó el recibo.
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public PayrollBatchReceipt setEmployee(String employee) {
+    public PayrollBatchReceipt setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollBatchReceipt setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollBatchReceipt setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**
@@ -159,13 +171,24 @@ public class PayrollBatchReceipt {
     /**
      * El recibo (inv_…, una factura tipo N); también el que el SAT rechazó.
      */
-    public String getInvoice() {
+    public StringOr<Invoice> getInvoice() {
         return invoice;
     }
 
-    public PayrollBatchReceipt setInvoice(String invoice) {
+    public PayrollBatchReceipt setInvoice(StringOr<Invoice> invoice) {
         this.invoice = invoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollBatchReceipt setInvoice(String id) {
+        return setInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollBatchReceipt setInvoice(Invoice invoice) {
+        return setInvoice(StringOr.of(invoice));
     }
 
     /**

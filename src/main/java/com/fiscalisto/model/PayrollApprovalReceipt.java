@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 
@@ -19,7 +20,7 @@ public class PayrollApprovalReceipt {
      * emp_…
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Su nombre.
@@ -54,13 +55,24 @@ public class PayrollApprovalReceipt {
     /**
      * emp_…
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public PayrollApprovalReceipt setEmployee(String employee) {
+    public PayrollApprovalReceipt setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollApprovalReceipt setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollApprovalReceipt setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

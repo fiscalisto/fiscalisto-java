@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * ScheduleSettings: Los horarios de la empresa (Ajustes › Horarios): cuánto vale una cotización nueva y a qué hora vence, y a qué hora corren las reglas «Cada mañana», los hallazgos diarios y el resumen semanal, en su zona horaria.
@@ -23,7 +24,7 @@ public class ScheduleSettings {
      * El emisor (iss_…) con que se leyeron; valen para toda la empresa.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * true en producción (llaves fk_live_), false en pruebas (fk_test_). Lo de pruebas no vale ante el SAT.
@@ -82,13 +83,24 @@ public class ScheduleSettings {
     /**
      * El emisor (iss_…) con que se leyeron; valen para toda la empresa.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public ScheduleSettings setIssuer(String issuer) {
+    public ScheduleSettings setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ScheduleSettings setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public ScheduleSettings setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

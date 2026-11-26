@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdateWebhookEndpointParams: los campos de «Actualizar un webhook».
@@ -43,6 +44,12 @@ public class UpdateWebhookEndpointParams {
      */
     @JsonProperty("api_version")
     private String apiVersion;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Dirección https de su servidor que recibe los avisos.
@@ -101,6 +108,18 @@ public class UpdateWebhookEndpointParams {
 
     public UpdateWebhookEndpointParams setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateWebhookEndpointParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

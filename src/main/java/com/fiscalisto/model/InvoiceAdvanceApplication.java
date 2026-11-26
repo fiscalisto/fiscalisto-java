@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * InvoiceAdvanceApplication: La aplicación del anticipo: método, nota de aplicación y su estado.
@@ -16,7 +18,7 @@ public class InvoiceAdvanceApplication {
      * El anticipo, como factura (inv_…).
      */
     @JsonProperty("advance")
-    private String advance;
+    private StringOr<Invoice> advance;
 
     /**
      * El folio fiscal del anticipo.
@@ -44,7 +46,7 @@ public class InvoiceAdvanceApplication {
      * La nota de aplicación del anticipo (inv_…), con method egreso.
      */
     @JsonProperty("credit_note")
-    private String creditNote;
+    private StringOr<Invoice> creditNote;
 
     /**
      * Por qué no se timbró la nota de aplicación (repita con la misma Idempotency-Key).
@@ -55,13 +57,24 @@ public class InvoiceAdvanceApplication {
     /**
      * El anticipo, como factura (inv_…).
      */
-    public String getAdvance() {
+    public StringOr<Invoice> getAdvance() {
         return advance;
     }
 
-    public InvoiceAdvanceApplication setAdvance(String advance) {
+    public InvoiceAdvanceApplication setAdvance(StringOr<Invoice> advance) {
         this.advance = advance;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public InvoiceAdvanceApplication setAdvance(String id) {
+        return setAdvance(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public InvoiceAdvanceApplication setAdvance(Invoice advance) {
+        return setAdvance(StringOr.of(advance));
     }
 
     /**
@@ -107,13 +120,24 @@ public class InvoiceAdvanceApplication {
     /**
      * La nota de aplicación del anticipo (inv_…), con method egreso.
      */
-    public String getCreditNote() {
+    public StringOr<Invoice> getCreditNote() {
         return creditNote;
     }
 
-    public InvoiceAdvanceApplication setCreditNote(String creditNote) {
+    public InvoiceAdvanceApplication setCreditNote(StringOr<Invoice> creditNote) {
         this.creditNote = creditNote;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public InvoiceAdvanceApplication setCreditNote(String id) {
+        return setCreditNote(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public InvoiceAdvanceApplication setCreditNote(Invoice creditNote) {
+        return setCreditNote(StringOr.of(creditNote));
     }
 
     /**

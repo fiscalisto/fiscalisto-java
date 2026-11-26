@@ -26,7 +26,7 @@ public class ListSupplierInvoicesParams {
     private String startingAfter;
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     @JsonProperty("issuer")
     private String issuer;
@@ -46,7 +46,31 @@ public class ListSupplierInvoicesParams {
     private String supplier;
 
     /**
-     * Solo las que llegaron desde este día (AAAA-MM-DD).
+     * Llegadas desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("received[gte]")
+    private String receivedGte;
+
+    /**
+     * Llegadas después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("received[gt]")
+    private String receivedGt;
+
+    /**
+     * Llegadas hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("received[lte]")
+    private String receivedLte;
+
+    /**
+     * Llegadas antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("received[lt]")
+    private String receivedLt;
+
+    /**
+     * Igual que received[gte]; se conserva por compatibilidad.
      */
     @JsonProperty("received_since")
     private String receivedSince;
@@ -81,7 +105,7 @@ public class ListSupplierInvoicesParams {
     }
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     public String getIssuer() {
         return issuer;
@@ -119,7 +143,55 @@ public class ListSupplierInvoicesParams {
     }
 
     /**
-     * Solo las que llegaron desde este día (AAAA-MM-DD).
+     * Llegadas desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getReceivedGte() {
+        return receivedGte;
+    }
+
+    public ListSupplierInvoicesParams setReceivedGte(String receivedGte) {
+        this.receivedGte = receivedGte;
+        return this;
+    }
+
+    /**
+     * Llegadas después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getReceivedGt() {
+        return receivedGt;
+    }
+
+    public ListSupplierInvoicesParams setReceivedGt(String receivedGt) {
+        this.receivedGt = receivedGt;
+        return this;
+    }
+
+    /**
+     * Llegadas hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getReceivedLte() {
+        return receivedLte;
+    }
+
+    public ListSupplierInvoicesParams setReceivedLte(String receivedLte) {
+        this.receivedLte = receivedLte;
+        return this;
+    }
+
+    /**
+     * Llegadas antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getReceivedLt() {
+        return receivedLt;
+    }
+
+    public ListSupplierInvoicesParams setReceivedLt(String receivedLt) {
+        this.receivedLt = receivedLt;
+        return this;
+    }
+
+    /**
+     * Igual que received[gte]; se conserva por compatibilidad.
      */
     public String getReceivedSince() {
         return receivedSince;

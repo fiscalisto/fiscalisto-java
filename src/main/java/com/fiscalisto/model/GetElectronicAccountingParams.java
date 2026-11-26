@@ -63,7 +63,7 @@ public class GetElectronicAccountingParams {
     private String procedureNumber;
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     @JsonProperty("issuer")
     private String issuer;
@@ -161,7 +161,7 @@ public class GetElectronicAccountingParams {
     }
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     public String getIssuer() {
         return issuer;

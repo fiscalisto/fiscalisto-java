@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * EmployeeNoticeSettings: Qué avisos les llegan a los empleados del emisor en Mi nómina (al celular o a su correo). Cada empleado puede apagar los suyos.
@@ -29,7 +30,7 @@ public class EmployeeNoticeSettings {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Avisar cada recibo nuevo en cuanto se timbra.
@@ -112,13 +113,24 @@ public class EmployeeNoticeSettings {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public EmployeeNoticeSettings setIssuer(String issuer) {
+    public EmployeeNoticeSettings setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public EmployeeNoticeSettings setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public EmployeeNoticeSettings setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

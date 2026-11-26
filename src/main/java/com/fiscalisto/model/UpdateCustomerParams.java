@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * UpdateCustomerParams: los campos de «Actualizar un cliente».
@@ -15,6 +16,12 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateCustomerParams {
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
     /**
      * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
      */
@@ -98,6 +105,18 @@ public class UpdateCustomerParams {
      */
     @JsonProperty("payment_terms")
     private String paymentTerms;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateCustomerParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+    }
 
     /**
      * RFC (Rfc), 12 caracteres una persona moral y 13 una física.

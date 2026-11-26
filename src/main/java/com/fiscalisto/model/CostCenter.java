@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * CostCenter: Un centro de costo del emisor: una obra, proyecto, sucursal o área por la que separa sus ingresos y gastos.
  */
@@ -30,6 +32,12 @@ public class CostCenter {
      */
     @JsonProperty("object")
     private String object;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor del centro de costo.
@@ -106,6 +114,18 @@ public class CostCenter {
 
     public CostCenter setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CostCenter setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

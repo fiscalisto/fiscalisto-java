@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * CustomerDataRequestSubmission: CustomerDataRequestSubmission.
@@ -60,7 +62,7 @@ public class CustomerDataRequestSubmission {
      * El cliente (cus_…) en el catálogo del emisor: el nuevo, o el que ya existía con ese RFC.
      */
     @JsonProperty("customer")
-    private String customer;
+    private StringOr<Customer> customer;
 
     /**
      * true si quedó en el catálogo. false si el cliente ya existía con otros datos: aplíquelos con POST /v1/customers/{id} si son correctos.
@@ -163,13 +165,24 @@ public class CustomerDataRequestSubmission {
     /**
      * El cliente (cus_…) en el catálogo del emisor: el nuevo, o el que ya existía con ese RFC.
      */
-    public String getCustomer() {
+    public StringOr<Customer> getCustomer() {
         return customer;
     }
 
-    public CustomerDataRequestSubmission setCustomer(String customer) {
+    public CustomerDataRequestSubmission setCustomer(StringOr<Customer> customer) {
         this.customer = customer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public CustomerDataRequestSubmission setCustomer(String id) {
+        return setCustomer(StringOr.<Customer>id(id));
+    }
+
+    @JsonIgnore
+    public CustomerDataRequestSubmission setCustomer(Customer customer) {
+        return setCustomer(StringOr.of(customer));
     }
 
     /**

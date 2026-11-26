@@ -6,6 +6,7 @@ import com.fiscalisto.model.BacktestRuleParams;
 import com.fiscalisto.model.CreateRuleParams;
 import com.fiscalisto.model.Deleted;
 import com.fiscalisto.model.ListRuleRunsParams;
+import com.fiscalisto.model.ListRuleVersionsParams;
 import com.fiscalisto.model.ListRulesParams;
 import com.fiscalisto.model.OrderRulesParams;
 import com.fiscalisto.model.Rule;
@@ -235,12 +236,16 @@ public final class RulesService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/reglas/list-rule-versions
      */
-    public RuleVersionList listVersions(String id, RequestOptions options) {
-        return api.request("GET", "/v1/rules/" + ApiClient.encode(id) + "/versions", null, null, false, RuleVersionList.class, options);
+    public RuleVersionList listVersions(String id, ListRuleVersionsParams params, RequestOptions options) {
+        return api.request("GET", "/v1/rules/" + ApiClient.encode(id) + "/versions", null, params, false, RuleVersionList.class, options);
+    }
+
+    public RuleVersionList listVersions(String id, ListRuleVersionsParams params) {
+        return listVersions(id, params, null);
     }
 
     public RuleVersionList listVersions(String id) {
-        return listVersions(id, null);
+        return listVersions(id, null, null);
     }
 
     /**

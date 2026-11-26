@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CreateProductParams: los campos de «Crear un producto».
@@ -21,6 +22,12 @@ public class CreateProductParams {
      */
     @JsonProperty("issuer")
     private String issuer;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Nombre corto para encontrarlo, solo para usted; en el CFDI va description.
@@ -185,6 +192,18 @@ public class CreateProductParams {
 
     public CreateProductParams setIssuer(String issuer) {
         this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateProductParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

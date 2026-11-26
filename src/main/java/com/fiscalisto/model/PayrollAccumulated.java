@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,7 +33,7 @@ public class PayrollAccumulated {
      * iss_…
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Año (Ejercicio).
@@ -44,7 +45,7 @@ public class PayrollAccumulated {
      * El empleado que pidió (emp_…), o null.
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Los recibos vigentes con fecha de pago en el año.
@@ -91,13 +92,24 @@ public class PayrollAccumulated {
     /**
      * iss_…
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public PayrollAccumulated setIssuer(String issuer) {
+    public PayrollAccumulated setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollAccumulated setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollAccumulated setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -120,13 +132,24 @@ public class PayrollAccumulated {
     /**
      * El empleado que pidió (emp_…), o null.
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public PayrollAccumulated setEmployee(String employee) {
+    public PayrollAccumulated setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollAccumulated setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollAccumulated setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdateSupplierGroupParams: los campos de «Actualizar un grupo de proveedores».
@@ -39,6 +40,12 @@ public class UpdateSupplierGroupParams {
      */
     @JsonProperty("remove_suppliers")
     private List<String> removeSuppliers;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Nombre.
@@ -87,6 +94,18 @@ public class UpdateSupplierGroupParams {
 
     public UpdateSupplierGroupParams setRemoveSuppliers(List<String> removeSuppliers) {
         this.removeSuppliers = removeSuppliers;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateSupplierGroupParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

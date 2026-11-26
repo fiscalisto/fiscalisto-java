@@ -26,7 +26,7 @@ public class ListSatInvoicesParams {
     private String startingAfter;
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     @JsonProperty("issuer")
     private String issuer;
@@ -54,16 +54,28 @@ public class ListSatInvoicesParams {
     private String counterpartyTaxId;
 
     /**
-     * Con fecha desde este día (AAAA-MM-DD).
+     * Con fecha desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    @JsonProperty("date_gte")
+    @JsonProperty("date[gte]")
     private String dateGte;
 
     /**
-     * Con fecha hasta este día (AAAA-MM-DD), incluido.
+     * Con fecha después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    @JsonProperty("date_lte")
+    @JsonProperty("date[gt]")
+    private String dateGt;
+
+    /**
+     * Con fecha hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("date[lte]")
     private String dateLte;
+
+    /**
+     * Con fecha antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("date[lt]")
+    private String dateLt;
 
     /**
      * Solo las de este centro de costo (ccn_…), o none para las que no tienen.
@@ -84,6 +96,18 @@ public class ListSatInvoicesParams {
      */
     @JsonProperty("cash_confirmation")
     private String cashConfirmation;
+
+    /**
+     * Igual que date[gte]; se conserva por compatibilidad.
+     */
+    @JsonProperty("date_gte")
+    private String dateGteValue;
+
+    /**
+     * Igual que date[lte]; se conserva por compatibilidad.
+     */
+    @JsonProperty("date_lte")
+    private String dateLteValue;
 
     /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
@@ -115,7 +139,7 @@ public class ListSatInvoicesParams {
     }
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     public String getIssuer() {
         return issuer;
@@ -167,7 +191,7 @@ public class ListSatInvoicesParams {
     }
 
     /**
-     * Con fecha desde este día (AAAA-MM-DD).
+     * Con fecha desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
     public String getDateGte() {
         return dateGte;
@@ -179,7 +203,19 @@ public class ListSatInvoicesParams {
     }
 
     /**
-     * Con fecha hasta este día (AAAA-MM-DD), incluido.
+     * Con fecha después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getDateGt() {
+        return dateGt;
+    }
+
+    public ListSatInvoicesParams setDateGt(String dateGt) {
+        this.dateGt = dateGt;
+        return this;
+    }
+
+    /**
+     * Con fecha hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
     public String getDateLte() {
         return dateLte;
@@ -187,6 +223,18 @@ public class ListSatInvoicesParams {
 
     public ListSatInvoicesParams setDateLte(String dateLte) {
         this.dateLte = dateLte;
+        return this;
+    }
+
+    /**
+     * Con fecha antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getDateLt() {
+        return dateLt;
+    }
+
+    public ListSatInvoicesParams setDateLt(String dateLt) {
+        this.dateLt = dateLt;
         return this;
     }
 
@@ -225,6 +273,30 @@ public class ListSatInvoicesParams {
 
     public ListSatInvoicesParams setCashConfirmation(String cashConfirmation) {
         this.cashConfirmation = cashConfirmation;
+        return this;
+    }
+
+    /**
+     * Igual que date[gte]; se conserva por compatibilidad.
+     */
+    public String getDateGteValue() {
+        return dateGteValue;
+    }
+
+    public ListSatInvoicesParams setDateGteValue(String dateGteValue) {
+        this.dateGteValue = dateGteValue;
+        return this;
+    }
+
+    /**
+     * Igual que date[lte]; se conserva por compatibilidad.
+     */
+    public String getDateLteValue() {
+        return dateLteValue;
+    }
+
+    public ListSatInvoicesParams setDateLteValue(String dateLteValue) {
+        this.dateLteValue = dateLteValue;
         return this;
     }
 }

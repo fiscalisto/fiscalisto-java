@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * StockAdjustment: Un ajuste de existencias: lo que entró o salió de un almacén por inventario inicial, merma, robo, conteo…
@@ -33,6 +34,12 @@ public class StockAdjustment {
      */
     @JsonProperty("object")
     private String object;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor.
@@ -119,6 +126,18 @@ public class StockAdjustment {
 
     public StockAdjustment setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public StockAdjustment setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

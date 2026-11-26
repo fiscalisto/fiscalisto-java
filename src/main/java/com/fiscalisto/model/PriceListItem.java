@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 
@@ -19,7 +20,7 @@ public class PriceListItem {
      * Un producto de su catálogo (prd_…): toma su clave, unidad, precio e impuestos.
      */
     @JsonProperty("product")
-    private String product;
+    private StringOr<Product> product;
 
     /**
      * Unidad aduana (UnidadAduana), c_UnidadAduana.
@@ -48,13 +49,24 @@ public class PriceListItem {
     /**
      * Un producto de su catálogo (prd_…): toma su clave, unidad, precio e impuestos.
      */
-    public String getProduct() {
+    public StringOr<Product> getProduct() {
         return product;
     }
 
-    public PriceListItem setProduct(String product) {
+    public PriceListItem setProduct(StringOr<Product> product) {
         this.product = product;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PriceListItem setProduct(String id) {
+        return setProduct(StringOr.<Product>id(id));
+    }
+
+    @JsonIgnore
+    public PriceListItem setProduct(Product product) {
+        return setProduct(StringOr.of(product));
     }
 
     /**

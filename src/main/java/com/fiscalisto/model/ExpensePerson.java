@@ -2,9 +2,13 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
+
+import java.util.Map;
 
 /**
  * ExpensePerson: Alguien que viaja o gasta por el emisor: un empleado (de Nómina) o alguien por honorarios. Tiene un enlace propio para subir sus facturas sin cuenta.
@@ -48,7 +52,7 @@ public class ExpensePerson {
      * Su empleado de Nómina (emp_…), o null si es por honorarios.
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Su nombre.
@@ -91,6 +95,12 @@ public class ExpensePerson {
      */
     @JsonProperty("archived")
     private Boolean archived;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cuándo se agregó.
@@ -163,13 +173,24 @@ public class ExpensePerson {
     /**
      * Su empleado de Nómina (emp_…), o null si es por honorarios.
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public ExpensePerson setEmployee(String employee) {
+    public ExpensePerson setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public ExpensePerson setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public ExpensePerson setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**
@@ -253,6 +274,18 @@ public class ExpensePerson {
 
     public ExpensePerson setArchived(Boolean archived) {
         this.archived = archived;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public ExpensePerson setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

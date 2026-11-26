@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CreateTicketParams: los campos de «Registrar un ticket».
@@ -125,6 +126,12 @@ public class CreateTicketParams {
      */
     @JsonProperty("lines")
     private List<CreateTicketParamsLine> lines;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor (iss_…) que vendió. Por omisión, su único emisor.
@@ -350,6 +357,18 @@ public class CreateTicketParams {
 
     public CreateTicketParams setLines(List<CreateTicketParamsLine> lines) {
         this.lines = lines;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateTicketParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,7 +40,7 @@ public class Invoice {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * La sucursal (brn_…) desde donde se timbró, o null (el domicilio fiscal del emisor). Sus pagos y notas de crédito la siguen.
@@ -62,9 +63,9 @@ public class Invoice {
     private String type;
 
     /**
-     * processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada, sin el UUID aún (se resuelve sola, como processing). Una cancelación en espera del cliente no cambia status: sigue valid, con cancellation.status pending. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
+     * draft: un borrador, sin timbrar (POST /v1/invoices con draft: true, o hecho en Fiscalisto): se cambia con POST /v1/invoices/{id}, se timbra con POST /v1/invoices/{id}/stamp y se borra con DELETE /v1/invoices/{id}. processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada, sin el UUID aún (se resuelve sola, como processing). Una cancelación en espera del cliente no cambia status: sigue valid, con cancellation.status pending. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
      * <p>
-     * Valores: processing, pending, valid, rejected, canceled.
+     * Valores: draft, processing, pending, valid, rejected, canceled.
      */
     @JsonProperty("status")
     private String status;
@@ -249,13 +250,13 @@ public class Invoice {
      * La factura recurrente (rin_…) que la timbró sola, o null si se timbró con una llamada.
      */
     @JsonProperty("recurring_invoice")
-    private String recurringInvoice;
+    private StringOr<RecurringInvoice> recurringInvoice;
 
     /**
      * Los tickets (`tkt_…`) que factura: el que su cliente facturó en la autofactura, el que su equipo facturó desde la página del ticket o los que asoció a ella. Vacío en las demás; los de una factura global están en GET /v1/tickets con `status=global`.
      */
     @JsonProperty("tickets")
-    private List<String> tickets;
+    private List<StringOr<Ticket>> tickets;
 
     /**
      * Qué timbró la factura; `null` si se timbró fuera de Fiscalisto.
@@ -274,6 +275,12 @@ public class Invoice {
      */
     @JsonProperty("metadata")
     private Map<String, String> metadata;
+
+    /**
+     * Solo en un borrador (status draft).
+     */
+    @JsonProperty("draft")
+    private InvoiceDraft draft;
 
     /**
      * Avisos sobre la factura (solo en la respuesta que la timbra o, con 202, la que la deja en proceso): se timbra como se mandó.
@@ -338,13 +345,24 @@ public class Invoice {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public Invoice setIssuer(String issuer) {
+    public Invoice setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Invoice setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public Invoice setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -386,9 +404,9 @@ public class Invoice {
     }
 
     /**
-     * processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada, sin el UUID aún (se resuelve sola, como processing). Una cancelación en espera del cliente no cambia status: sigue valid, con cancellation.status pending. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
+     * draft: un borrador, sin timbrar (POST /v1/invoices con draft: true, o hecho en Fiscalisto): se cambia con POST /v1/invoices/{id}, se timbra con POST /v1/invoices/{id}/stamp y se borra con DELETE /v1/invoices/{id}. processing: el PAC no ha contestado (se resuelve sola; escuche invoice.stamped). valid: timbrada. pending: timbrada, sin el UUID aún (se resuelve sola, como processing). Una cancelación en espera del cliente no cambia status: sigue valid, con cancellation.status pending. rejected: el SAT o el PAC no la aceptaron (ver error). canceled: cancelada.
      * <p>
-     * Valores: processing, pending, valid, rejected, canceled.
+     * Valores: draft, processing, pending, valid, rejected, canceled.
      */
     public String getStatus() {
         return status;
@@ -782,23 +800,34 @@ public class Invoice {
     /**
      * La factura recurrente (rin_…) que la timbró sola, o null si se timbró con una llamada.
      */
-    public String getRecurringInvoice() {
+    public StringOr<RecurringInvoice> getRecurringInvoice() {
         return recurringInvoice;
     }
 
-    public Invoice setRecurringInvoice(String recurringInvoice) {
+    public Invoice setRecurringInvoice(StringOr<RecurringInvoice> recurringInvoice) {
         this.recurringInvoice = recurringInvoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Invoice setRecurringInvoice(String id) {
+        return setRecurringInvoice(StringOr.<RecurringInvoice>id(id));
+    }
+
+    @JsonIgnore
+    public Invoice setRecurringInvoice(RecurringInvoice recurringInvoice) {
+        return setRecurringInvoice(StringOr.of(recurringInvoice));
     }
 
     /**
      * Los tickets (`tkt_…`) que factura: el que su cliente facturó en la autofactura, el que su equipo facturó desde la página del ticket o los que asoció a ella. Vacío en las demás; los de una factura global están en GET /v1/tickets con `status=global`.
      */
-    public List<String> getTickets() {
+    public List<StringOr<Ticket>> getTickets() {
         return tickets;
     }
 
-    public Invoice setTickets(List<String> tickets) {
+    public Invoice setTickets(List<StringOr<Ticket>> tickets) {
         this.tickets = tickets;
         return this;
     }
@@ -836,6 +865,18 @@ public class Invoice {
 
     public Invoice setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Solo en un borrador (status draft).
+     */
+    public InvoiceDraft getDraft() {
+        return draft;
+    }
+
+    public Invoice setDraft(InvoiceDraft draft) {
+        this.draft = draft;
         return this;
     }
 

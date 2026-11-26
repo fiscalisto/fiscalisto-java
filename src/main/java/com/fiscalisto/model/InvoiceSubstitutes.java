@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * InvoiceSubstitutes: La factura que esta sustituyó y si quedó cancelada.
@@ -16,7 +18,7 @@ public class InvoiceSubstitutes {
      * La factura sustituida (inv_…).
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<Invoice> invoice;
 
     /**
      * true si la sustituida ya quedó cancelada. false no es definitivo: vea substitutes.cancellation.
@@ -39,13 +41,24 @@ public class InvoiceSubstitutes {
     /**
      * La factura sustituida (inv_…).
      */
-    public String getInvoice() {
+    public StringOr<Invoice> getInvoice() {
         return invoice;
     }
 
-    public InvoiceSubstitutes setInvoice(String invoice) {
+    public InvoiceSubstitutes setInvoice(StringOr<Invoice> invoice) {
         this.invoice = invoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public InvoiceSubstitutes setInvoice(String id) {
+        return setInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public InvoiceSubstitutes setInvoice(Invoice invoice) {
+        return setInvoice(StringOr.of(invoice));
     }
 
     /**

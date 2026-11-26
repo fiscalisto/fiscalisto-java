@@ -20,7 +20,7 @@ public final class EventsService {
     /**
      * Listar eventos
      * <p>
-     * Los de los últimos 30 días, los más recientes primero.
+     * Los de los últimos 30 días, los más recientes primero. Para leer hacia adelante sin perder ninguno (lo que llegó después del último que procesó), mande ending_before con ese evento y repita con el primero de data mientras has_more sea true.
      * <p>
      * GET /v1/events
      * <p>

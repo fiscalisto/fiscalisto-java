@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * CreateCustomerDataRequestParams: los campos de «Pedirle sus datos fiscales a un cliente».
  */
@@ -36,6 +38,12 @@ public class CreateCustomerDataRequestParams {
      */
     @JsonProperty("expires_in_days")
     private Long expiresInDays;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor (iss_…) que va a facturarle. Por omisión, su único emisor.
@@ -88,5 +96,17 @@ public class CreateCustomerDataRequestParams {
     @JsonIgnore
     public CreateCustomerDataRequestParams setExpiresInDays(long expiresInDays) {
         return setExpiresInDays(Long.valueOf(expiresInDays));
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateCustomerDataRequestParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
     }
 }

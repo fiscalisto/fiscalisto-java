@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.Map;
 
@@ -126,7 +128,7 @@ public class Issuer {
      * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
      */
     @JsonProperty("sandbox")
-    private String sandbox;
+    private StringOr<Sandbox> sandbox;
 
     /**
      * Su reloj de prueba (solo emisores de prueba): la hora que es «hoy» para él, o null si va con la hora real. Vea POST /v1/issuers/{id}/test_clock.
@@ -365,13 +367,24 @@ public class Issuer {
     /**
      * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
      */
-    public String getSandbox() {
+    public StringOr<Sandbox> getSandbox() {
         return sandbox;
     }
 
-    public Issuer setSandbox(String sandbox) {
+    public Issuer setSandbox(StringOr<Sandbox> sandbox) {
         this.sandbox = sandbox;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Issuer setSandbox(String id) {
+        return setSandbox(StringOr.<Sandbox>id(id));
+    }
+
+    @JsonIgnore
+    public Issuer setSandbox(Sandbox sandbox) {
+        return setSandbox(StringOr.of(sandbox));
     }
 
     /**

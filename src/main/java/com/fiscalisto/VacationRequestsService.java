@@ -6,7 +6,6 @@ import com.fiscalisto.model.ApproveVacationRequestParams;
 import com.fiscalisto.model.ListVacationRequestsParams;
 import com.fiscalisto.model.RejectVacationRequestParams;
 import com.fiscalisto.model.VacationRequest;
-import com.fiscalisto.model.VacationRequestList;
 
 /**
  * Nómina: client.vacationRequests().
@@ -27,16 +26,29 @@ public final class VacationRequestsService {
      * <p>
      * Vea https://fiscalisto.com/docs/api/referencia/nomina/list-vacation-requests
      */
-    public VacationRequestList list(ListVacationRequestsParams params, RequestOptions options) {
-        return api.request("GET", "/v1/vacation_requests", null, params, false, VacationRequestList.class, options);
+    public Page<VacationRequest> list(ListVacationRequestsParams params, RequestOptions options) {
+        return api.list("/v1/vacation_requests", params, VacationRequest.class, options);
     }
 
-    public VacationRequestList list(ListVacationRequestsParams params) {
+    public Page<VacationRequest> list(ListVacationRequestsParams params) {
         return list(params, null);
     }
 
-    public VacationRequestList list() {
+    public Page<VacationRequest> list() {
         return list(null, null);
+    }
+
+    /** Listar solicitudes de vacaciones: todos, página por página ({@code for (var x : …AutoPaging(…))}). */
+    public Iterable<VacationRequest> listAutoPaging(ListVacationRequestsParams params, RequestOptions options) {
+        return list(params, options).autoPagingIterable();
+    }
+
+    public Iterable<VacationRequest> listAutoPaging(ListVacationRequestsParams params) {
+        return listAutoPaging(params, null);
+    }
+
+    public Iterable<VacationRequest> listAutoPaging() {
+        return listAutoPaging(null, null);
     }
 
     /**

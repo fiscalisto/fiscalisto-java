@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,7 +21,7 @@ public class PayrollBankFilePayment {
      * El empleado (emp_…); null si el recibo lo timbró otro sistema y no hay empleado con ese RFC.
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Número de empleado (NumEmpleado).
@@ -67,13 +68,24 @@ public class PayrollBankFilePayment {
     /**
      * El empleado (emp_…); null si el recibo lo timbró otro sistema y no hay empleado con ese RFC.
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public PayrollBankFilePayment setEmployee(String employee) {
+    public PayrollBankFilePayment setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollBankFilePayment setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollBankFilePayment setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

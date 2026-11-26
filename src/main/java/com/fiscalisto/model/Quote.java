@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Quote: Una cotización: su cliente la ve en una liga, la acepta, pide cambios o la rechaza, y se factura.
@@ -38,7 +40,7 @@ public class Quote {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Su serie y folio, como lo ve el cliente (COT-12).
@@ -162,7 +164,13 @@ public class Quote {
      * La factura (inv_…) que se timbró de ella, o null.
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<Invoice> invoice;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cuándo se creó.
@@ -209,13 +217,24 @@ public class Quote {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public Quote setIssuer(String issuer) {
+    public Quote setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Quote setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public Quote setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -463,12 +482,35 @@ public class Quote {
     /**
      * La factura (inv_…) que se timbró de ella, o null.
      */
-    public String getInvoice() {
+    public StringOr<Invoice> getInvoice() {
         return invoice;
     }
 
-    public Quote setInvoice(String invoice) {
+    public Quote setInvoice(StringOr<Invoice> invoice) {
         this.invoice = invoice;
+        return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Quote setInvoice(String id) {
+        return setInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public Quote setInvoice(Invoice invoice) {
+        return setInvoice(StringOr.of(invoice));
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public Quote setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

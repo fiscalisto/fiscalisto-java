@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdatePriceListParams: los campos de «Actualizar una lista de precios».
@@ -69,6 +70,12 @@ public class UpdatePriceListParams {
      */
     @JsonProperty("items")
     private List<UpdatePriceListParamsItem> items;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Mayoreo, Distribuidor, Buen Fin…
@@ -185,6 +192,18 @@ public class UpdatePriceListParams {
 
     public UpdatePriceListParams setItems(List<UpdatePriceListParamsItem> items) {
         this.items = items;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdatePriceListParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

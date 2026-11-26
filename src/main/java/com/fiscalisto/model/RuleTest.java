@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class RuleTest {
      * El movimiento del banco, su id en /v1/accounting/bank_movements: bwd_… un retiro, btx_… un depósito.
      */
     @JsonProperty("bank_movement")
-    private String bankMovement;
+    private StringOr<BankTransaction> bankMovement;
 
     /**
      * Si se cumplen sus condiciones.
@@ -125,13 +126,24 @@ public class RuleTest {
     /**
      * El movimiento del banco, su id en /v1/accounting/bank_movements: bwd_… un retiro, btx_… un depósito.
      */
-    public String getBankMovement() {
+    public StringOr<BankTransaction> getBankMovement() {
         return bankMovement;
     }
 
-    public RuleTest setBankMovement(String bankMovement) {
+    public RuleTest setBankMovement(StringOr<BankTransaction> bankMovement) {
         this.bankMovement = bankMovement;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public RuleTest setBankMovement(String id) {
+        return setBankMovement(StringOr.<BankTransaction>id(id));
+    }
+
+    @JsonIgnore
+    public RuleTest setBankMovement(BankTransaction bankMovement) {
+        return setBankMovement(StringOr.of(bankMovement));
     }
 
     /**

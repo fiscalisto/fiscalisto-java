@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * SalesOrder: Un pedido de venta: lo que su cliente pidió, cómo se entrega (remisiones) y cómo se factura y se cobra.
@@ -38,7 +40,7 @@ public class SalesOrder {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * Su serie y folio (PED-12).
@@ -82,7 +84,7 @@ public class SalesOrder {
      * La cotización (quo_…) de donde salió, o null.
      */
     @JsonProperty("quote")
-    private String quote;
+    private StringOr<Quote> quote;
 
     /**
      * La moneda.
@@ -237,6 +239,12 @@ public class SalesOrder {
     private String cancelReason;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * Cuándo se creó.
      */
     @JsonProperty("created_at")
@@ -281,13 +289,24 @@ public class SalesOrder {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public SalesOrder setIssuer(String issuer) {
+    public SalesOrder setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SalesOrder setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public SalesOrder setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -367,13 +386,24 @@ public class SalesOrder {
     /**
      * La cotización (quo_…) de donde salió, o null.
      */
-    public String getQuote() {
+    public StringOr<Quote> getQuote() {
         return quote;
     }
 
-    public SalesOrder setQuote(String quote) {
+    public SalesOrder setQuote(StringOr<Quote> quote) {
         this.quote = quote;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SalesOrder setQuote(String id) {
+        return setQuote(StringOr.<Quote>id(id));
+    }
+
+    @JsonIgnore
+    public SalesOrder setQuote(Quote quote) {
+        return setQuote(StringOr.of(quote));
     }
 
     /**
@@ -700,6 +730,18 @@ public class SalesOrder {
 
     public SalesOrder setCancelReason(String cancelReason) {
         this.cancelReason = cancelReason;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public SalesOrder setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

@@ -51,6 +51,18 @@ public class ErrorBodyError {
     private String messageEs;
 
     /**
+     * Con api_key_expired, cuándo dejó de servir la llave (ISO 8601, UTC).
+     */
+    @JsonProperty("expired_at")
+    private String expiredAt;
+
+    /**
+     * Con api_key_revoked, cuándo se revocó la llave (ISO 8601, UTC).
+     */
+    @JsonProperty("revoked_at")
+    private String revokedAt;
+
+    /**
      * La explicación de este código en la documentación.
      */
     @JsonProperty("doc_url")
@@ -139,6 +151,30 @@ public class ErrorBodyError {
 
     public ErrorBodyError setMessageEs(String messageEs) {
         this.messageEs = messageEs;
+        return this;
+    }
+
+    /**
+     * Con api_key_expired, cuándo dejó de servir la llave (ISO 8601, UTC).
+     */
+    public String getExpiredAt() {
+        return expiredAt;
+    }
+
+    public ErrorBodyError setExpiredAt(String expiredAt) {
+        this.expiredAt = expiredAt;
+        return this;
+    }
+
+    /**
+     * Con api_key_revoked, cuándo se revocó la llave (ISO 8601, UTC).
+     */
+    public String getRevokedAt() {
+        return revokedAt;
+    }
+
+    public ErrorBodyError setRevokedAt(String revokedAt) {
+        this.revokedAt = revokedAt;
         return this;
     }
 

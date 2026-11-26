@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * ListInvoicesParams: los campos de «Listar facturas».
  */
@@ -26,15 +28,15 @@ public class ListInvoicesParams {
     private String startingAfter;
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     @JsonProperty("issuer")
     private String issuer;
 
     /**
-     * valid, pending, canceled, rejected o processing.
+     * valid, pending, canceled, rejected o processing; draft lista solo los borradores (sin él no salen). Con draft no van payment_status ni cost_center.
      * <p>
-     * Valores: valid, pending, canceled, rejected, processing.
+     * Valores: valid, pending, canceled, rejected, processing, draft.
      */
     @JsonProperty("status")
     private String status;
@@ -62,22 +64,76 @@ public class ListInvoicesParams {
     private String paymentStatus;
 
     /**
-     * Creadas desde, en ISO 8601. Un día solo (2026-10-01) cuenta desde su inicio en hora de la Ciudad de México.
+     * Con fecha del CFDI desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    @JsonProperty("created_gte")
-    private String createdGte;
+    @JsonProperty("date[gte]")
+    private String dateGte;
 
     /**
-     * Creadas hasta, en ISO 8601. Un día solo (2026-10-31) incluye el día completo en hora de la Ciudad de México.
+     * Con fecha del CFDI después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    @JsonProperty("created_lte")
-    private String createdLte;
+    @JsonProperty("date[gt]")
+    private String dateGt;
+
+    /**
+     * Con fecha del CFDI hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("date[lte]")
+    private String dateLte;
+
+    /**
+     * Con fecha del CFDI antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("date[lt]")
+    private String dateLt;
 
     /**
      * Solo las de este centro de costo (ccn_…), o none para las que no tienen.
      */
     @JsonProperty("cost_center")
     private String costCenter;
+
+    /**
+     * Creados desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("created[gte]")
+    private String createdGte;
+
+    /**
+     * Creados después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("created[gt]")
+    private String createdGt;
+
+    /**
+     * Creados hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("created[lte]")
+    private String createdLte;
+
+    /**
+     * Creados antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("created[lt]")
+    private String createdLt;
+
+    /**
+     * Solo los que tienen este valor en esta llave de su metadata: metadata[pedido]=A-1042. Hasta 10 llaves, todas deben coincidir.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
+     * Igual que created[gte]; se conserva por compatibilidad.
+     */
+    @JsonProperty("created_gte")
+    private String createdGteValue;
+
+    /**
+     * Igual que created[lte]; se conserva por compatibilidad.
+     */
+    @JsonProperty("created_lte")
+    private String createdLteValue;
 
     /**
      * Cuántos por página, de 1 a 100. Por omisión 10.
@@ -109,7 +165,7 @@ public class ListInvoicesParams {
     }
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     public String getIssuer() {
         return issuer;
@@ -121,9 +177,9 @@ public class ListInvoicesParams {
     }
 
     /**
-     * valid, pending, canceled, rejected o processing.
+     * valid, pending, canceled, rejected o processing; draft lista solo los borradores (sin él no salen). Con draft no van payment_status ni cost_center.
      * <p>
-     * Valores: valid, pending, canceled, rejected, processing.
+     * Valores: valid, pending, canceled, rejected, processing, draft.
      */
     public String getStatus() {
         return status;
@@ -175,26 +231,50 @@ public class ListInvoicesParams {
     }
 
     /**
-     * Creadas desde, en ISO 8601. Un día solo (2026-10-01) cuenta desde su inicio en hora de la Ciudad de México.
+     * Con fecha del CFDI desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    public String getCreatedGte() {
-        return createdGte;
+    public String getDateGte() {
+        return dateGte;
     }
 
-    public ListInvoicesParams setCreatedGte(String createdGte) {
-        this.createdGte = createdGte;
+    public ListInvoicesParams setDateGte(String dateGte) {
+        this.dateGte = dateGte;
         return this;
     }
 
     /**
-     * Creadas hasta, en ISO 8601. Un día solo (2026-10-31) incluye el día completo en hora de la Ciudad de México.
+     * Con fecha del CFDI después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    public String getCreatedLte() {
-        return createdLte;
+    public String getDateGt() {
+        return dateGt;
     }
 
-    public ListInvoicesParams setCreatedLte(String createdLte) {
-        this.createdLte = createdLte;
+    public ListInvoicesParams setDateGt(String dateGt) {
+        this.dateGt = dateGt;
+        return this;
+    }
+
+    /**
+     * Con fecha del CFDI hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getDateLte() {
+        return dateLte;
+    }
+
+    public ListInvoicesParams setDateLte(String dateLte) {
+        this.dateLte = dateLte;
+        return this;
+    }
+
+    /**
+     * Con fecha del CFDI antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getDateLt() {
+        return dateLt;
+    }
+
+    public ListInvoicesParams setDateLt(String dateLt) {
+        this.dateLt = dateLt;
         return this;
     }
 
@@ -207,6 +287,90 @@ public class ListInvoicesParams {
 
     public ListInvoicesParams setCostCenter(String costCenter) {
         this.costCenter = costCenter;
+        return this;
+    }
+
+    /**
+     * Creados desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getCreatedGte() {
+        return createdGte;
+    }
+
+    public ListInvoicesParams setCreatedGte(String createdGte) {
+        this.createdGte = createdGte;
+        return this;
+    }
+
+    /**
+     * Creados después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getCreatedGt() {
+        return createdGt;
+    }
+
+    public ListInvoicesParams setCreatedGt(String createdGt) {
+        this.createdGt = createdGt;
+        return this;
+    }
+
+    /**
+     * Creados hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getCreatedLte() {
+        return createdLte;
+    }
+
+    public ListInvoicesParams setCreatedLte(String createdLte) {
+        this.createdLte = createdLte;
+        return this;
+    }
+
+    /**
+     * Creados antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getCreatedLt() {
+        return createdLt;
+    }
+
+    public ListInvoicesParams setCreatedLt(String createdLt) {
+        this.createdLt = createdLt;
+        return this;
+    }
+
+    /**
+     * Solo los que tienen este valor en esta llave de su metadata: metadata[pedido]=A-1042. Hasta 10 llaves, todas deben coincidir.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public ListInvoicesParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Igual que created[gte]; se conserva por compatibilidad.
+     */
+    public String getCreatedGteValue() {
+        return createdGteValue;
+    }
+
+    public ListInvoicesParams setCreatedGteValue(String createdGteValue) {
+        this.createdGteValue = createdGteValue;
+        return this;
+    }
+
+    /**
+     * Igual que created[lte]; se conserva por compatibilidad.
+     */
+    public String getCreatedLteValue() {
+        return createdLteValue;
+    }
+
+    public ListInvoicesParams setCreatedLteValue(String createdLteValue) {
+        this.createdLteValue = createdLteValue;
         return this;
     }
 }

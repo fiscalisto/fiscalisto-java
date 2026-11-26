@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * PayrollOrgChartDepartment: PayrollOrgChartDepartment.
@@ -29,7 +30,7 @@ public class PayrollOrgChartDepartment {
      * Su responsable (emp_…).
      */
     @JsonProperty("lead")
-    private String lead;
+    private StringOr<Employee> lead;
 
     /**
      * Personas en él.
@@ -76,13 +77,24 @@ public class PayrollOrgChartDepartment {
     /**
      * Su responsable (emp_…).
      */
-    public String getLead() {
+    public StringOr<Employee> getLead() {
         return lead;
     }
 
-    public PayrollOrgChartDepartment setLead(String lead) {
+    public PayrollOrgChartDepartment setLead(StringOr<Employee> lead) {
         this.lead = lead;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollOrgChartDepartment setLead(String id) {
+        return setLead(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollOrgChartDepartment setLead(Employee lead) {
+        return setLead(StringOr.of(lead));
     }
 
     /**

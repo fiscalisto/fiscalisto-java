@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CreateRepseContractParams: los campos de «Registrar un contrato de servicios especializados».
@@ -129,6 +130,12 @@ public class CreateRepseContractParams {
      */
     @JsonProperty("workers")
     private List<CreateRepseContractParamsWorker> workers;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
@@ -341,6 +348,18 @@ public class CreateRepseContractParams {
 
     public CreateRepseContractParams setWorkers(List<CreateRepseContractParamsWorker> workers) {
         this.workers = workers;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateRepseContractParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

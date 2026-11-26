@@ -36,8 +36,8 @@ public class CompanyReportYear {
     /**
      * Ingresos facturados y cancelados.
      */
-    @JsonProperty("income_cancelled")
-    private BigDecimal incomeCancelled;
+    @JsonProperty("income_canceled")
+    private BigDecimal incomeCanceled;
 
     /**
      * Por ciento de ingresos en PUE.
@@ -72,8 +72,8 @@ public class CompanyReportYear {
     /**
      * Gastos recibidos y cancelados.
      */
-    @JsonProperty("expenses_cancelled")
-    private BigDecimal expensesCancelled;
+    @JsonProperty("expenses_canceled")
+    private BigDecimal expensesCanceled;
 
     /**
      * Por ciento de lo PPD ya pagado.
@@ -166,18 +166,18 @@ public class CompanyReportYear {
     /**
      * Ingresos facturados y cancelados.
      */
-    public BigDecimal getIncomeCancelled() {
-        return incomeCancelled;
+    public BigDecimal getIncomeCanceled() {
+        return incomeCanceled;
     }
 
-    public CompanyReportYear setIncomeCancelled(BigDecimal incomeCancelled) {
-        this.incomeCancelled = incomeCancelled;
+    public CompanyReportYear setIncomeCanceled(BigDecimal incomeCanceled) {
+        this.incomeCanceled = incomeCanceled;
         return this;
     }
 
     @JsonIgnore
-    public CompanyReportYear setIncomeCancelled(double incomeCancelled) {
-        return setIncomeCancelled(BigDecimal.valueOf(incomeCancelled));
+    public CompanyReportYear setIncomeCanceled(double incomeCanceled) {
+        return setIncomeCanceled(BigDecimal.valueOf(incomeCanceled));
     }
 
     /**
@@ -268,18 +268,18 @@ public class CompanyReportYear {
     /**
      * Gastos recibidos y cancelados.
      */
-    public BigDecimal getExpensesCancelled() {
-        return expensesCancelled;
+    public BigDecimal getExpensesCanceled() {
+        return expensesCanceled;
     }
 
-    public CompanyReportYear setExpensesCancelled(BigDecimal expensesCancelled) {
-        this.expensesCancelled = expensesCancelled;
+    public CompanyReportYear setExpensesCanceled(BigDecimal expensesCanceled) {
+        this.expensesCanceled = expensesCanceled;
         return this;
     }
 
     @JsonIgnore
-    public CompanyReportYear setExpensesCancelled(double expensesCancelled) {
-        return setExpensesCancelled(BigDecimal.valueOf(expensesCancelled));
+    public CompanyReportYear setExpensesCanceled(double expensesCanceled) {
+        return setExpensesCanceled(BigDecimal.valueOf(expensesCanceled));
     }
 
     /**

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * WebhookRecovery: Los eventos que un webhook no recibió, mandados otra vez: desde cuándo se buscaron, cuántos salieron y, si quedaron más de 1,000, desde dónde seguir.
@@ -23,7 +24,7 @@ public class WebhookRecovery {
      * El webhook (whe_…) al que se mandaron.
      */
     @JsonProperty("endpoint")
-    private String endpoint;
+    private StringOr<WebhookEndpoint> endpoint;
 
     /**
      * Desde cuándo se buscaron: el since que mandó, o la creación del webhook si es posterior.
@@ -58,13 +59,24 @@ public class WebhookRecovery {
     /**
      * El webhook (whe_…) al que se mandaron.
      */
-    public String getEndpoint() {
+    public StringOr<WebhookEndpoint> getEndpoint() {
         return endpoint;
     }
 
-    public WebhookRecovery setEndpoint(String endpoint) {
+    public WebhookRecovery setEndpoint(StringOr<WebhookEndpoint> endpoint) {
         this.endpoint = endpoint;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public WebhookRecovery setEndpoint(String id) {
+        return setEndpoint(StringOr.<WebhookEndpoint>id(id));
+    }
+
+    @JsonIgnore
+    public WebhookRecovery setEndpoint(WebhookEndpoint endpoint) {
+        return setEndpoint(StringOr.of(endpoint));
     }
 
     /**

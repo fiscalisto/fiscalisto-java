@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Ticket: Una venta que su comprador puede facturar él mismo en el portal del emisor (autofactura).
@@ -53,9 +55,9 @@ public class Ticket {
     private String code;
 
     /**
-     * pending (se puede facturar), invoiced (su comprador lo facturó: la factura en invoice), global (entró en la factura global del periodo) o cancelled.
+     * pending (se puede facturar), invoiced (su comprador lo facturó: la factura en invoice), global (entró en la factura global del periodo) o canceled.
      * <p>
-     * Valores: pending, invoiced, global, cancelled.
+     * Valores: pending, invoiced, global, canceled.
      */
     @JsonProperty("status")
     private String status;
@@ -118,13 +120,13 @@ public class Ticket {
      * La factura (inv_…) que hizo su comprador, o null.
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<Invoice> invoice;
 
     /**
      * La factura global (inv_…) en que entró, o null.
      */
     @JsonProperty("global_invoice")
-    private String globalInvoice;
+    private StringOr<Invoice> globalInvoice;
 
     /**
      * Lo que ya cubren las facturas de un ticket dividido en varias (la autofactura lo permite con `split_max`), con impuestos. 0 si no se ha dividido; un ticket `pending` con más de 0 tiene `total - invoiced_amount` por facturar con el mismo código, y un ticket `invoiced` dividido tiene `invoice` null.
@@ -149,6 +151,12 @@ public class Ticket {
      */
     @JsonProperty("buyer")
     private TicketBuyer buyer;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cuándo se registró.
@@ -229,9 +237,9 @@ public class Ticket {
     }
 
     /**
-     * pending (se puede facturar), invoiced (su comprador lo facturó: la factura en invoice), global (entró en la factura global del periodo) o cancelled.
+     * pending (se puede facturar), invoiced (su comprador lo facturó: la factura en invoice), global (entró en la factura global del periodo) o canceled.
      * <p>
-     * Valores: pending, invoiced, global, cancelled.
+     * Valores: pending, invoiced, global, canceled.
      */
     public String getStatus() {
         return status;
@@ -363,25 +371,47 @@ public class Ticket {
     /**
      * La factura (inv_…) que hizo su comprador, o null.
      */
-    public String getInvoice() {
+    public StringOr<Invoice> getInvoice() {
         return invoice;
     }
 
-    public Ticket setInvoice(String invoice) {
+    public Ticket setInvoice(StringOr<Invoice> invoice) {
         this.invoice = invoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Ticket setInvoice(String id) {
+        return setInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public Ticket setInvoice(Invoice invoice) {
+        return setInvoice(StringOr.of(invoice));
     }
 
     /**
      * La factura global (inv_…) en que entró, o null.
      */
-    public String getGlobalInvoice() {
+    public StringOr<Invoice> getGlobalInvoice() {
         return globalInvoice;
     }
 
-    public Ticket setGlobalInvoice(String globalInvoice) {
+    public Ticket setGlobalInvoice(StringOr<Invoice> globalInvoice) {
         this.globalInvoice = globalInvoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public Ticket setGlobalInvoice(String id) {
+        return setGlobalInvoice(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public Ticket setGlobalInvoice(Invoice globalInvoice) {
+        return setGlobalInvoice(StringOr.of(globalInvoice));
     }
 
     /**
@@ -434,6 +464,18 @@ public class Ticket {
 
     public Ticket setBuyer(TicketBuyer buyer) {
         this.buyer = buyer;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public Ticket setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

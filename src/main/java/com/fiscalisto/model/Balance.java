@@ -40,7 +40,7 @@ public class Balance {
     private Boolean unlimited;
 
     /**
-     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres y pagos.
+     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres y pagos. Si solo le quedan timbres de regalo, llega al quedar 2.
      */
     @JsonProperty("low_balance_at")
     private Long lowBalanceAt;
@@ -123,7 +123,7 @@ public class Balance {
     }
 
     /**
-     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres y pagos.
+     * Con esta cantidad o menos llega balance.low (y otra vez al acabarse). Se elige en Desarrolladores › Timbres y pagos. Si solo le quedan timbres de regalo, llega al quedar 2.
      */
     public Long getLowBalanceAt() {
         return lowBalanceAt;

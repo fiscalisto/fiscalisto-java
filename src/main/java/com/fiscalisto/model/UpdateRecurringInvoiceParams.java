@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * UpdateRecurringInvoiceParams: los campos de «Cambiar o pausar una factura recurrente».
  */
@@ -31,7 +33,7 @@ public class UpdateRecurringInvoiceParams {
     private UpdateRecurringInvoiceParamsInvoice invoice;
 
     /**
-     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
      */
     @JsonProperty("send_email")
     private Boolean sendEmail;
@@ -49,6 +51,12 @@ public class UpdateRecurringInvoiceParams {
      */
     @JsonProperty("active")
     private Boolean active;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Nombre.
@@ -87,7 +95,7 @@ public class UpdateRecurringInvoiceParams {
     }
 
     /**
-     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía.
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
      */
     public Boolean getSendEmail() {
         return sendEmail;
@@ -121,6 +129,18 @@ public class UpdateRecurringInvoiceParams {
 
     public UpdateRecurringInvoiceParams setActive(Boolean active) {
         this.active = active;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateRecurringInvoiceParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

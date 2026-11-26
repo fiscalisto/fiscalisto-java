@@ -26,6 +26,12 @@ public class ListPayableInvoicesParams {
     private Long limit;
 
     /**
+     * El id (folio fiscal) de la última de la página anterior, para la siguiente.
+     */
+    @JsonProperty("starting_after")
+    private String startingAfter;
+
+    /**
      * Solo las de este proveedor (su RFC).
      */
     @JsonProperty("supplier_tax_id")
@@ -64,6 +70,18 @@ public class ListPayableInvoicesParams {
     @JsonIgnore
     public ListPayableInvoicesParams setLimit(long limit) {
         return setLimit(Long.valueOf(limit));
+    }
+
+    /**
+     * El id (folio fiscal) de la última de la página anterior, para la siguiente.
+     */
+    public String getStartingAfter() {
+        return startingAfter;
+    }
+
+    public ListPayableInvoicesParams setStartingAfter(String startingAfter) {
+        this.startingAfter = startingAfter;
+        return this;
     }
 
     /**

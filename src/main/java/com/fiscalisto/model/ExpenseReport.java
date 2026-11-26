@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ExpenseReport: Una comprobación de viáticos (un viaje) o de gastos de un periodo: sus gastos revisados contra la ley y la política, y el dinero dado o devuelto. Al aprobarla sus facturas se deducen y entra en las pólizas por 107.01.
@@ -241,6 +242,12 @@ public class ExpenseReport {
      */
     @JsonProperty("movements")
     private List<ExpenseMovement> movements;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Cuándo se abrió.
@@ -749,6 +756,18 @@ public class ExpenseReport {
 
     public ExpenseReport setMovements(List<ExpenseMovement> movements) {
         this.movements = movements;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public ExpenseReport setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

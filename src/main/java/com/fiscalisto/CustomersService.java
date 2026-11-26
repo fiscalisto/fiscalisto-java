@@ -91,7 +91,7 @@ public final class CustomersService {
     /**
      * Buscar clientes
      * <p>
-     * Con un lenguaje de búsqueda, como el de Stripe: campo:'valor' (igual, sin importar mayúsculas), campo~'valor' (contiene, 3 caracteres o más), &gt;, &gt;=, &lt; y &lt;= en números y fechas, -campo:'valor' (no) y campo:null; hasta 10 cláusulas unidas con AND o con OR. Se busca por tax_id, legal_name, email, zip, tax_system, use y created. Los más recientes primero, por páginas como las listas. Una búsqueda que no se entiende responde search_query_invalid diciendo dónde.
+     * Con un lenguaje de búsqueda, como el de Stripe: campo:'valor' (igual, sin importar mayúsculas), campo~'valor' (contiene, 3 caracteres o más), &gt;, &gt;=, &lt; y &lt;= en números y fechas, -campo:'valor' (no) y campo:null; hasta 10 cláusulas unidas con AND o con OR. Se busca por tax_id, legal_name, email, zip, tax_system, use, created y metadata (metadata['order_id']:'123', con la llave entre corchetes). Los más recientes primero, por páginas como las listas. Una búsqueda que no se entiende responde search_query_invalid diciendo dónde.
      * <p>
      * GET /v1/customers/search
      * <p>

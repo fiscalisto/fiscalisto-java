@@ -138,6 +138,7 @@ public final class FiscalistoClient {
     private final RecurringInvoicesService recurringInvoices;
     private final QuotesService quotes;
     private final SalesOrdersService salesOrders;
+    private final ApiKeysService apiKeys;
     private final WebhookEndpointsService webhookEndpoints;
     private final EventsService events;
 
@@ -282,6 +283,7 @@ public final class FiscalistoClient {
         this.recurringInvoices = new RecurringInvoicesService(api);
         this.quotes = new QuotesService(api);
         this.salesOrders = new SalesOrdersService(api);
+        this.apiKeys = new ApiKeysService(api);
         this.webhookEndpoints = new WebhookEndpointsService(api);
         this.events = new EventsService(api);
     }
@@ -929,6 +931,11 @@ public final class FiscalistoClient {
     /** Pedidos. */
     public SalesOrdersService salesOrders() {
         return salesOrders;
+    }
+
+    /** Llaves de API. */
+    public ApiKeysService apiKeys() {
+        return apiKeys;
     }
 
     /** Webhooks. */

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * WebhookDelivery: Lo que pasó con un evento en un webhook: su último intento, cuántos lleva y cuándo va el siguiente.
@@ -29,13 +30,13 @@ public class WebhookDelivery {
      * El webhook (whe_…).
      */
     @JsonProperty("webhook_endpoint")
-    private String webhookEndpoint;
+    private StringOr<WebhookEndpoint> webhookEndpoint;
 
     /**
      * El evento (evt_…). Reenvíelo con POST /v1/events/{id}/resend.
      */
     @JsonProperty("event")
-    private String event;
+    private StringOr<Event> event;
 
     /**
      * El tipo del evento (invoice.stamped…).
@@ -124,25 +125,47 @@ public class WebhookDelivery {
     /**
      * El webhook (whe_…).
      */
-    public String getWebhookEndpoint() {
+    public StringOr<WebhookEndpoint> getWebhookEndpoint() {
         return webhookEndpoint;
     }
 
-    public WebhookDelivery setWebhookEndpoint(String webhookEndpoint) {
+    public WebhookDelivery setWebhookEndpoint(StringOr<WebhookEndpoint> webhookEndpoint) {
         this.webhookEndpoint = webhookEndpoint;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public WebhookDelivery setWebhookEndpoint(String id) {
+        return setWebhookEndpoint(StringOr.<WebhookEndpoint>id(id));
+    }
+
+    @JsonIgnore
+    public WebhookDelivery setWebhookEndpoint(WebhookEndpoint webhookEndpoint) {
+        return setWebhookEndpoint(StringOr.of(webhookEndpoint));
     }
 
     /**
      * El evento (evt_…). Reenvíelo con POST /v1/events/{id}/resend.
      */
-    public String getEvent() {
+    public StringOr<Event> getEvent() {
         return event;
     }
 
-    public WebhookDelivery setEvent(String event) {
+    public WebhookDelivery setEvent(StringOr<Event> event) {
         this.event = event;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public WebhookDelivery setEvent(String id) {
+        return setEvent(StringOr.<Event>id(id));
+    }
+
+    @JsonIgnore
+    public WebhookDelivery setEvent(Event event) {
+        return setEvent(StringOr.of(event));
     }
 
     /**

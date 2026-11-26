@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdateQuoteParams: los campos de «Cambiar una cotización».
@@ -55,6 +56,12 @@ public class UpdateQuoteParams {
     private String paymentMethod;
 
     /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    @JsonProperty("paid_later")
+    private Boolean paidLater;
+
+    /**
      * Uso del CFDI (UsoCFDI), clave de c_UsoCFDI. Por omisión G03, o S01 con régimen 616.
      */
     @JsonProperty("use")
@@ -77,6 +84,12 @@ public class UpdateQuoteParams {
      */
     @JsonProperty("terms")
     private String terms;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Un cliente de su catálogo (cus_…), uno con sus datos fiscales (como en POST /v1/invoices: se agrega a sus clientes) o solo name y email si aún no los tiene.
@@ -158,6 +171,18 @@ public class UpdateQuoteParams {
     }
 
     /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    public Boolean getPaidLater() {
+        return paidLater;
+    }
+
+    public UpdateQuoteParams setPaidLater(Boolean paidLater) {
+        this.paidLater = paidLater;
+        return this;
+    }
+
+    /**
      * Uso del CFDI (UsoCFDI), clave de c_UsoCFDI. Por omisión G03, o S01 con régimen 616.
      */
     public String getUse() {
@@ -202,6 +227,18 @@ public class UpdateQuoteParams {
 
     public UpdateQuoteParams setTerms(String terms) {
         this.terms = terms;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateQuoteParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 }

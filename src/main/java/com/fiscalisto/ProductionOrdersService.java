@@ -131,7 +131,7 @@ public final class ProductionOrdersService {
     /**
      * Cancelar una orden de producción
      * <p>
-     * Los componentes regresan a su almacén y lo producido sale (status cancelled). Una ya cancelada: 400 inventory_refused.
+     * Los componentes regresan a su almacén y lo producido sale (status canceled). Una ya cancelada: 400 inventory_refused.
      * <p>
      * POST /v1/production_orders/{id}/cancel
      * <p>

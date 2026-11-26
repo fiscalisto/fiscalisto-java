@@ -2,30 +2,274 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
- * UpdateInvoiceParams: los campos de «Actualizar una factura».
+ * UpdateInvoiceParams: De un borrador, la factura entera, como en POST /v1/invoices (draft no se manda). De una factura timbrada, solo cost_center y notes.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateInvoiceParams {
     /**
-     * Su centro de costo (ccn_…), o null para quitárselo. Solo facturas, notas de crédito y recibos de nómina timbrados.
+     * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
+     */
+    @JsonProperty("issuer")
+    private String issuer;
+
+    /**
+     * Sucursal (brn_…) desde donde se factura: su código postal va en LugarExpedicion, su dirección en el PDF y, si las tiene, sus series. Sin ella, el domicilio fiscal del emisor (la Matriz).
+     */
+    @JsonProperty("branch")
+    private String branch;
+
+    /**
+     * Su centro de costo (ccn_…): la obra, proyecto, sucursal o área a la que pertenece, para ver ingresos y gastos por centro en Reportes. No cambia el CFDI. Sus notas de crédito lo toman solas.
      */
     @JsonProperty("cost_center")
     private String costCenter;
 
     /**
-     * Nota para el cliente en el PDF (hasta 1,000 caracteres), o null para quitarla. No va en el XML: la factura timbrada no cambia y el siguiente PDF (GET /v1/invoices/{id}/pdf, el correo) ya la lleva. Cada cambio queda en el historial de la factura en Fiscalisto.
+     * Almacén (whs_…) de donde salen sus productos con track_stock. Por omisión, el de su sucursal (o el de la Matriz).
+     */
+    @JsonProperty("warehouse")
+    private String warehouse;
+
+    /**
+     * El cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos. Obligatorio salvo en un traslado (type T), cuyo receptor es el propio emisor.
+     */
+    @JsonProperty("customer")
+    private StringOr<UpdateInvoiceParamsCustomer> customer;
+
+    /**
+     * Conceptos (Conceptos), al menos uno.
+     */
+    @JsonProperty("items")
+    private List<UpdateInvoiceParamsItem> items;
+
+    /**
+     * I ingreso (por omisión; con global, factura global) o T traslado. Notas de crédito: POST /v1/credit_notes. Pagos: POST /v1/payments.
+     * <p>
+     * Valores: I, T.
+     */
+    @JsonProperty("type")
+    private String type;
+
+    /**
+     * Complemento Carta Porte 3.1 (traslado de mercancías).
+     */
+    @JsonProperty("carta_porte")
+    private UpdateInvoiceParamsCartaPorte cartaPorte;
+
+    /**
+     * Solo en un traslado (type T) sin carta_porte: la regla de la RMF 2026 que lo permite. 2.7.7.2.1 mercancías propias en un traslado local (no medicamentos, hidrocarburos ni mercancías para despacho aduanero); 2.7.7.2.2 paquetería o mensajería en primera o última milla, un concepto por paquete con su número de guía en sku; 2.7.7.2.3 grúa de arrastre o salvamento local, relacionando con related (05) la factura de ingreso del servicio. Mandarlo es declarar que el traslado no transita por ningún tramo de jurisdicción federal. Los conceptos van con unit_price 0 y taxability 01 (por omisión en un traslado).
+     * <p>
+     * Valores: 2.7.7.2.1, 2.7.7.2.2, 2.7.7.2.3.
+     */
+    @JsonProperty("carta_porte_exemption")
+    private String cartaPorteExemption;
+
+    /**
+     * Complemento INE (procesos electorales).
+     */
+    @JsonProperty("ine")
+    private UpdateInvoiceParamsIne ine;
+
+    /**
+     * Complemento de leyendas fiscales.
+     */
+    @JsonProperty("leyendas")
+    private List<UpdateInvoiceParamsLeyenda> leyendas;
+
+    /**
+     * Complemento de donatarias: un recibo de donativo. El emisor debe ser donataria (tax_system 603) con su oficio en donation_authorization (POST /v1/issuers/{id}).
+     */
+    @JsonProperty("donation")
+    private UpdateInvoiceParamsDonation donation;
+
+    /**
+     * Impuestos locales (complemento implocal): traslados y retenciones estatales.
+     */
+    @JsonProperty("local_taxes")
+    private List<UpdateInvoiceParamsLocalTax> localTaxes;
+
+    /**
+     * Exportación (Exportacion), c_Exportacion: 01 no aplica (por omisión), 02 definitiva con clave A1 (lleva comercio_exterior), 03 temporal (sin él), 04 definitiva con clave distinta a A1 o sin enajenación (con o sin comercio_exterior; con él, incoterm opcional).
+     * <p>
+     * Valores: 01, 02, 03, 04.
+     */
+    @JsonProperty("export")
+    private String export;
+
+    /**
+     * Complemento de comercio exterior 2.0.
+     */
+    @JsonProperty("comercio_exterior")
+    private UpdateInvoiceParamsComercioExterior comercioExterior;
+
+    /**
+     * Factura global a público en general (InformacionGlobal): periodicidad, meses y año.
+     */
+    @JsonProperty("global")
+    private UpdateInvoiceParamsGlobal global;
+
+    /**
+     * Uso del CFDI (UsoCFDI), clave de c_UsoCFDI. Por omisión G03, o S01 con régimen 616.
+     */
+    @JsonProperty("use")
+    private String use;
+
+    /**
+     * Forma de pago (FormaPago), clave de c_FormaPago: 01 efectivo, 03 transferencia, 04 tarjeta de crédito, 28 débito, 99 por definir… Obligatoria con PUE; con PPD es 99.
+     */
+    @JsonProperty("payment_form")
+    private String paymentForm;
+
+    /**
+     * Método de pago (MetodoPago): PUE (una sola exhibición, por omisión) o PPD (en parcialidades o diferido, se cobra con complementos de pago).
+     * <p>
+     * Valores: PUE, PPD.
+     */
+    @JsonProperty("payment_method")
+    private String paymentMethod;
+
+    /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    @JsonProperty("paid_later")
+    private Boolean paidLater;
+
+    /**
+     * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
+     */
+    @JsonProperty("currency")
+    private String currency;
+
+    /**
+     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     */
+    @JsonProperty("series")
+    private String series;
+
+    /**
+     * Observaciones que aparecen en el PDF (no van en el XML).
      */
     @JsonProperty("notes")
     private String notes;
 
     /**
-     * Su centro de costo (ccn_…), o null para quitárselo. Solo facturas, notas de crédito y recibos de nómina timbrados.
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    @JsonProperty("payment_terms")
+    private String paymentTerms;
+
+    /**
+     * Idioma del PDF: es (por omisión) o en.
+     * <p>
+     * Valores: es, en, bi.
+     */
+    @JsonProperty("pdf_language")
+    private String pdfLanguage;
+
+    /**
+     * Addenda del receptor (Walmart, Soriana…), con sus propios campos.
+     */
+    @JsonProperty("addenda")
+    private UpdateInvoiceParamsAddenda addenda;
+
+    /**
+     * CFDI relacionados (CfdiRelacionados): tipo de relación de c_TipoRelacion y los UUID.
+     */
+    @JsonProperty("related")
+    private UpdateInvoiceParamsRelated related;
+
+    /**
+     * Tipo de cambio a pesos (TipoCambio). Obligatorio si la moneda no es MXN; use el del DOF del día anterior.
+     */
+    @JsonProperty("exchange_rate")
+    private BigDecimal exchangeRate;
+
+    /**
+     * Folio (Folio) de esta factura en vez del siguiente de la serie: ese número toma su lugar en la numeración. También acepta un texto de hasta 40 caracteres sin «|» ("TIME002", "000120"), como lo acepta el SAT (Anexo 20): va solo en esta factura y la numeración no cambia; "120" es el folio 120. Si otro CFDI del RFC y la serie ya lo tiene, se rechaza.
+     */
+    @JsonProperty("folio")
+    private Long folio;
+
+    /**
+     * Con un folio elegido: true para que los siguientes sigan desde ese número.
+     */
+    @JsonProperty("continue_sequence")
+    private Boolean continueSequence;
+
+    /**
+     * Fecha de emisión (Fecha) si no es ahora, AAAA-MM-DDTHH:MM:SS hora de la Ciudad de México: hasta 72 horas antes.
+     */
+    @JsonProperty("date")
+    private String date;
+
+    /**
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
+     */
+    @JsonProperty("send_email")
+    private Boolean sendEmail;
+
+    /**
+     * Correos con copia, separados por comas.
+     */
+    @JsonProperty("email_cc")
+    private String emailCc;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
+     * Solo en POST /v1/invoices. true: la guarda como borrador (status draft) sin timbrar ni usar timbres, con las mismas revisiones que al timbrar (un error responde invoice_invalid; los avisos vienen en warnings). Se cambia con POST /v1/invoices/{id}, se timbra con POST /v1/invoices/{id}/stamp y se borra con DELETE /v1/invoices/{id}; también aparece en Por facturar de Fiscalisto. Idempotency-Key es opcional: con ella, repetir la solicitud devuelve el mismo borrador. En las demás rutas que reciben una factura no cambia nada.
+     */
+    @JsonProperty("draft")
+    private Boolean draft;
+
+    /**
+     * Solo en POST /v1/invoices. true: responde 202 en cuanto la factura queda guardada con su folio (status processing) y la timbra después de responder; invoice.stamped o invoice.failed dicen cómo terminó. En las demás rutas que reciben una factura no cambia nada.
+     */
+    @JsonProperty("async")
+    private Boolean async;
+
+    /**
+     * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
+     */
+    public String getIssuer() {
+        return issuer;
+    }
+
+    public UpdateInvoiceParams setIssuer(String issuer) {
+        this.issuer = issuer;
+        return this;
+    }
+
+    /**
+     * Sucursal (brn_…) desde donde se factura: su código postal va en LugarExpedicion, su dirección en el PDF y, si las tiene, sus series. Sin ella, el domicilio fiscal del emisor (la Matriz).
+     */
+    public String getBranch() {
+        return branch;
+    }
+
+    public UpdateInvoiceParams setBranch(String branch) {
+        this.branch = branch;
+        return this;
+    }
+
+    /**
+     * Su centro de costo (ccn_…): la obra, proyecto, sucursal o área a la que pertenece, para ver ingresos y gastos por centro en Reportes. No cambia el CFDI. Sus notas de crédito lo toman solas.
      */
     public String getCostCenter() {
         return costCenter;
@@ -37,7 +281,254 @@ public class UpdateInvoiceParams {
     }
 
     /**
-     * Nota para el cliente en el PDF (hasta 1,000 caracteres), o null para quitarla. No va en el XML: la factura timbrada no cambia y el siguiente PDF (GET /v1/invoices/{id}/pdf, el correo) ya la lleva. Cada cambio queda en el historial de la factura en Fiscalisto.
+     * Almacén (whs_…) de donde salen sus productos con track_stock. Por omisión, el de su sucursal (o el de la Matriz).
+     */
+    public String getWarehouse() {
+        return warehouse;
+    }
+
+    public UpdateInvoiceParams setWarehouse(String warehouse) {
+        this.warehouse = warehouse;
+        return this;
+    }
+
+    /**
+     * El cliente (Receptor): el id de uno de su catálogo (cus_…) o sus datos. Obligatorio salvo en un traslado (type T), cuyo receptor es el propio emisor.
+     */
+    public StringOr<UpdateInvoiceParamsCustomer> getCustomer() {
+        return customer;
+    }
+
+    public UpdateInvoiceParams setCustomer(StringOr<UpdateInvoiceParamsCustomer> customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public UpdateInvoiceParams setCustomer(String id) {
+        return setCustomer(StringOr.<UpdateInvoiceParamsCustomer>id(id));
+    }
+
+    @JsonIgnore
+    public UpdateInvoiceParams setCustomer(UpdateInvoiceParamsCustomer customer) {
+        return setCustomer(StringOr.of(customer));
+    }
+
+    /**
+     * Conceptos (Conceptos), al menos uno.
+     */
+    public List<UpdateInvoiceParamsItem> getItems() {
+        return items;
+    }
+
+    public UpdateInvoiceParams setItems(List<UpdateInvoiceParamsItem> items) {
+        this.items = items;
+        return this;
+    }
+
+    /**
+     * I ingreso (por omisión; con global, factura global) o T traslado. Notas de crédito: POST /v1/credit_notes. Pagos: POST /v1/payments.
+     * <p>
+     * Valores: I, T.
+     */
+    public String getType() {
+        return type;
+    }
+
+    public UpdateInvoiceParams setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * Complemento Carta Porte 3.1 (traslado de mercancías).
+     */
+    public UpdateInvoiceParamsCartaPorte getCartaPorte() {
+        return cartaPorte;
+    }
+
+    public UpdateInvoiceParams setCartaPorte(UpdateInvoiceParamsCartaPorte cartaPorte) {
+        this.cartaPorte = cartaPorte;
+        return this;
+    }
+
+    /**
+     * Solo en un traslado (type T) sin carta_porte: la regla de la RMF 2026 que lo permite. 2.7.7.2.1 mercancías propias en un traslado local (no medicamentos, hidrocarburos ni mercancías para despacho aduanero); 2.7.7.2.2 paquetería o mensajería en primera o última milla, un concepto por paquete con su número de guía en sku; 2.7.7.2.3 grúa de arrastre o salvamento local, relacionando con related (05) la factura de ingreso del servicio. Mandarlo es declarar que el traslado no transita por ningún tramo de jurisdicción federal. Los conceptos van con unit_price 0 y taxability 01 (por omisión en un traslado).
+     * <p>
+     * Valores: 2.7.7.2.1, 2.7.7.2.2, 2.7.7.2.3.
+     */
+    public String getCartaPorteExemption() {
+        return cartaPorteExemption;
+    }
+
+    public UpdateInvoiceParams setCartaPorteExemption(String cartaPorteExemption) {
+        this.cartaPorteExemption = cartaPorteExemption;
+        return this;
+    }
+
+    /**
+     * Complemento INE (procesos electorales).
+     */
+    public UpdateInvoiceParamsIne getIne() {
+        return ine;
+    }
+
+    public UpdateInvoiceParams setIne(UpdateInvoiceParamsIne ine) {
+        this.ine = ine;
+        return this;
+    }
+
+    /**
+     * Complemento de leyendas fiscales.
+     */
+    public List<UpdateInvoiceParamsLeyenda> getLeyendas() {
+        return leyendas;
+    }
+
+    public UpdateInvoiceParams setLeyendas(List<UpdateInvoiceParamsLeyenda> leyendas) {
+        this.leyendas = leyendas;
+        return this;
+    }
+
+    /**
+     * Complemento de donatarias: un recibo de donativo. El emisor debe ser donataria (tax_system 603) con su oficio en donation_authorization (POST /v1/issuers/{id}).
+     */
+    public UpdateInvoiceParamsDonation getDonation() {
+        return donation;
+    }
+
+    public UpdateInvoiceParams setDonation(UpdateInvoiceParamsDonation donation) {
+        this.donation = donation;
+        return this;
+    }
+
+    /**
+     * Impuestos locales (complemento implocal): traslados y retenciones estatales.
+     */
+    public List<UpdateInvoiceParamsLocalTax> getLocalTaxes() {
+        return localTaxes;
+    }
+
+    public UpdateInvoiceParams setLocalTaxes(List<UpdateInvoiceParamsLocalTax> localTaxes) {
+        this.localTaxes = localTaxes;
+        return this;
+    }
+
+    /**
+     * Exportación (Exportacion), c_Exportacion: 01 no aplica (por omisión), 02 definitiva con clave A1 (lleva comercio_exterior), 03 temporal (sin él), 04 definitiva con clave distinta a A1 o sin enajenación (con o sin comercio_exterior; con él, incoterm opcional).
+     * <p>
+     * Valores: 01, 02, 03, 04.
+     */
+    public String getExport() {
+        return export;
+    }
+
+    public UpdateInvoiceParams setExport(String export) {
+        this.export = export;
+        return this;
+    }
+
+    /**
+     * Complemento de comercio exterior 2.0.
+     */
+    public UpdateInvoiceParamsComercioExterior getComercioExterior() {
+        return comercioExterior;
+    }
+
+    public UpdateInvoiceParams setComercioExterior(UpdateInvoiceParamsComercioExterior comercioExterior) {
+        this.comercioExterior = comercioExterior;
+        return this;
+    }
+
+    /**
+     * Factura global a público en general (InformacionGlobal): periodicidad, meses y año.
+     */
+    public UpdateInvoiceParamsGlobal getGlobal() {
+        return global;
+    }
+
+    public UpdateInvoiceParams setGlobal(UpdateInvoiceParamsGlobal global) {
+        this.global = global;
+        return this;
+    }
+
+    /**
+     * Uso del CFDI (UsoCFDI), clave de c_UsoCFDI. Por omisión G03, o S01 con régimen 616.
+     */
+    public String getUse() {
+        return use;
+    }
+
+    public UpdateInvoiceParams setUse(String use) {
+        this.use = use;
+        return this;
+    }
+
+    /**
+     * Forma de pago (FormaPago), clave de c_FormaPago: 01 efectivo, 03 transferencia, 04 tarjeta de crédito, 28 débito, 99 por definir… Obligatoria con PUE; con PPD es 99.
+     */
+    public String getPaymentForm() {
+        return paymentForm;
+    }
+
+    public UpdateInvoiceParams setPaymentForm(String paymentForm) {
+        this.paymentForm = paymentForm;
+        return this;
+    }
+
+    /**
+     * Método de pago (MetodoPago): PUE (una sola exhibición, por omisión) o PPD (en parcialidades o diferido, se cobra con complementos de pago).
+     * <p>
+     * Valores: PUE, PPD.
+     */
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public UpdateInvoiceParams setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+    }
+
+    /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    public Boolean getPaidLater() {
+        return paidLater;
+    }
+
+    public UpdateInvoiceParams setPaidLater(Boolean paidLater) {
+        this.paidLater = paidLater;
+        return this;
+    }
+
+    /**
+     * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    public UpdateInvoiceParams setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+    }
+
+    /**
+     * Serie (Serie), hasta 25 caracteres. Cada serie lleva sus propios folios.
+     */
+    public String getSeries() {
+        return series;
+    }
+
+    public UpdateInvoiceParams setSeries(String series) {
+        this.series = series;
+        return this;
+    }
+
+    /**
+     * Observaciones que aparecen en el PDF (no van en el XML).
      */
     public String getNotes() {
         return notes;
@@ -45,6 +536,174 @@ public class UpdateInvoiceParams {
 
     public UpdateInvoiceParams setNotes(String notes) {
         this.notes = notes;
+        return this;
+    }
+
+    /**
+     * Condiciones de pago (CondicionesDePago), hasta 1,000 caracteres sin «|»: «Crédito a 30 días», «50 % anticipo». Van en el XML y en el PDF; solo en ingresos y egresos. No cambian cuándo vence (due_date usa los días de crédito del cliente).
+     */
+    public String getPaymentTerms() {
+        return paymentTerms;
+    }
+
+    public UpdateInvoiceParams setPaymentTerms(String paymentTerms) {
+        this.paymentTerms = paymentTerms;
+        return this;
+    }
+
+    /**
+     * Idioma del PDF: es (por omisión) o en.
+     * <p>
+     * Valores: es, en, bi.
+     */
+    public String getPdfLanguage() {
+        return pdfLanguage;
+    }
+
+    public UpdateInvoiceParams setPdfLanguage(String pdfLanguage) {
+        this.pdfLanguage = pdfLanguage;
+        return this;
+    }
+
+    /**
+     * Addenda del receptor (Walmart, Soriana…), con sus propios campos.
+     */
+    public UpdateInvoiceParamsAddenda getAddenda() {
+        return addenda;
+    }
+
+    public UpdateInvoiceParams setAddenda(UpdateInvoiceParamsAddenda addenda) {
+        this.addenda = addenda;
+        return this;
+    }
+
+    /**
+     * CFDI relacionados (CfdiRelacionados): tipo de relación de c_TipoRelacion y los UUID.
+     */
+    public UpdateInvoiceParamsRelated getRelated() {
+        return related;
+    }
+
+    public UpdateInvoiceParams setRelated(UpdateInvoiceParamsRelated related) {
+        this.related = related;
+        return this;
+    }
+
+    /**
+     * Tipo de cambio a pesos (TipoCambio). Obligatorio si la moneda no es MXN; use el del DOF del día anterior.
+     */
+    public BigDecimal getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public UpdateInvoiceParams setExchangeRate(BigDecimal exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateInvoiceParams setExchangeRate(double exchangeRate) {
+        return setExchangeRate(BigDecimal.valueOf(exchangeRate));
+    }
+
+    /**
+     * Folio (Folio) de esta factura en vez del siguiente de la serie: ese número toma su lugar en la numeración. También acepta un texto de hasta 40 caracteres sin «|» ("TIME002", "000120"), como lo acepta el SAT (Anexo 20): va solo en esta factura y la numeración no cambia; "120" es el folio 120. Si otro CFDI del RFC y la serie ya lo tiene, se rechaza.
+     */
+    public Long getFolio() {
+        return folio;
+    }
+
+    public UpdateInvoiceParams setFolio(Long folio) {
+        this.folio = folio;
+        return this;
+    }
+
+    @JsonIgnore
+    public UpdateInvoiceParams setFolio(long folio) {
+        return setFolio(Long.valueOf(folio));
+    }
+
+    /**
+     * Con un folio elegido: true para que los siguientes sigan desde ese número.
+     */
+    public Boolean getContinueSequence() {
+        return continueSequence;
+    }
+
+    public UpdateInvoiceParams setContinueSequence(Boolean continueSequence) {
+        this.continueSequence = continueSequence;
+        return this;
+    }
+
+    /**
+     * Fecha de emisión (Fecha) si no es ahora, AAAA-MM-DDTHH:MM:SS hora de la Ciudad de México: hasta 72 horas antes.
+     */
+    public String getDate() {
+        return date;
+    }
+
+    public UpdateInvoiceParams setDate(String date) {
+        this.date = date;
+        return this;
+    }
+
+    /**
+     * true para mandar el PDF y el XML por correo al timbrar, con el diseño de Fiscalisto. Por omisión no se envía. A un cliente con «Enviar al timbrar: Nunca» no se le envía aunque sea true: warnings lo dice y POST /v1/invoices/{id}/send sí se la manda.
+     */
+    public Boolean getSendEmail() {
+        return sendEmail;
+    }
+
+    public UpdateInvoiceParams setSendEmail(Boolean sendEmail) {
+        this.sendEmail = sendEmail;
+        return this;
+    }
+
+    /**
+     * Correos con copia, separados por comas.
+     */
+    public String getEmailCc() {
+        return emailCc;
+    }
+
+    public UpdateInvoiceParams setEmailCc(String emailCc) {
+        this.emailCc = emailCc;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateInvoiceParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+    }
+
+    /**
+     * Solo en POST /v1/invoices. true: la guarda como borrador (status draft) sin timbrar ni usar timbres, con las mismas revisiones que al timbrar (un error responde invoice_invalid; los avisos vienen en warnings). Se cambia con POST /v1/invoices/{id}, se timbra con POST /v1/invoices/{id}/stamp y se borra con DELETE /v1/invoices/{id}; también aparece en Por facturar de Fiscalisto. Idempotency-Key es opcional: con ella, repetir la solicitud devuelve el mismo borrador. En las demás rutas que reciben una factura no cambia nada.
+     */
+    public Boolean getDraft() {
+        return draft;
+    }
+
+    public UpdateInvoiceParams setDraft(Boolean draft) {
+        this.draft = draft;
+        return this;
+    }
+
+    /**
+     * Solo en POST /v1/invoices. true: responde 202 en cuanto la factura queda guardada con su folio (status processing) y la timbra después de responder; invoice.stamped o invoice.failed dicen cómo terminó. En las demás rutas que reciben una factura no cambia nada.
+     */
+    public Boolean getAsync() {
+        return async;
+    }
+
+    public UpdateInvoiceParams setAsync(Boolean async) {
+        this.async = async;
         return this;
     }
 }

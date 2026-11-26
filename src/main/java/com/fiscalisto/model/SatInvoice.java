@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,7 +39,7 @@ public class SatInvoice {
      * El emisor de su cuenta (iss_…) a quien pertenece esta factura.
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * El folio fiscal (UUID del timbre).
@@ -190,7 +191,7 @@ public class SatInvoice {
      * La descarga (sdl_…) que la trajo, o null.
      */
     @JsonProperty("sat_download")
-    private String satDownload;
+    private StringOr<SatDownload> satDownload;
 
     /**
      * Cuándo llegó.
@@ -237,13 +238,24 @@ public class SatInvoice {
     /**
      * El emisor de su cuenta (iss_…) a quien pertenece esta factura.
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public SatInvoice setIssuer(String issuer) {
+    public SatInvoice setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SatInvoice setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public SatInvoice setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -548,13 +560,24 @@ public class SatInvoice {
     /**
      * La descarga (sdl_…) que la trajo, o null.
      */
-    public String getSatDownload() {
+    public StringOr<SatDownload> getSatDownload() {
         return satDownload;
     }
 
-    public SatInvoice setSatDownload(String satDownload) {
+    public SatInvoice setSatDownload(StringOr<SatDownload> satDownload) {
         this.satDownload = satDownload;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SatInvoice setSatDownload(String id) {
+        return setSatDownload(StringOr.<SatDownload>id(id));
+    }
+
+    @JsonIgnore
+    public SatInvoice setSatDownload(SatDownload satDownload) {
+        return setSatDownload(StringOr.of(satDownload));
     }
 
     /**

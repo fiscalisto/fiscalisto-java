@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * QuoteCustomer: A quién va: tax_id null si aún no tiene sus datos fiscales; catalog_id es su cliente (cus_…) en su catálogo, o null.
@@ -34,7 +36,7 @@ public class QuoteCustomer {
      * El cliente (cus_…) en su catálogo, o null si no está en él.
      */
     @JsonProperty("catalog_id")
-    private String catalogId;
+    private StringOr<Customer> catalogId;
 
     /**
      * RFC (Rfc), 12 caracteres una persona moral y 13 una física.
@@ -75,12 +77,23 @@ public class QuoteCustomer {
     /**
      * El cliente (cus_…) en su catálogo, o null si no está en él.
      */
-    public String getCatalogId() {
+    public StringOr<Customer> getCatalogId() {
         return catalogId;
     }
 
-    public QuoteCustomer setCatalogId(String catalogId) {
+    public QuoteCustomer setCatalogId(StringOr<Customer> catalogId) {
         this.catalogId = catalogId;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public QuoteCustomer setCatalogId(String id) {
+        return setCatalogId(StringOr.<Customer>id(id));
+    }
+
+    @JsonIgnore
+    public QuoteCustomer setCatalogId(Customer catalogId) {
+        return setCatalogId(StringOr.of(catalogId));
     }
 }

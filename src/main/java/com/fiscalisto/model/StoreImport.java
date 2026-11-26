@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class StoreImport {
      * La conexión (stc_…).
      */
     @JsonProperty("store_connection")
-    private String storeConnection;
+    private StringOr<StoreConnection> storeConnection;
 
     /**
      * Desde qué día se buscaron pedidos.
@@ -84,13 +85,24 @@ public class StoreImport {
     /**
      * La conexión (stc_…).
      */
-    public String getStoreConnection() {
+    public StringOr<StoreConnection> getStoreConnection() {
         return storeConnection;
     }
 
-    public StoreImport setStoreConnection(String storeConnection) {
+    public StoreImport setStoreConnection(StringOr<StoreConnection> storeConnection) {
         this.storeConnection = storeConnection;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public StoreImport setStoreConnection(String id) {
+        return setStoreConnection(StringOr.<StoreConnection>id(id));
+    }
+
+    @JsonIgnore
+    public StoreImport setStoreConnection(StoreConnection storeConnection) {
+        return setStoreConnection(StringOr.of(storeConnection));
     }
 
     /**

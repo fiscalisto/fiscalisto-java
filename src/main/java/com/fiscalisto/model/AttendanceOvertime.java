@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * AttendanceOvertime: Las horas extra que la empresa autorizó o rechazó para un día de un empleado, antes o después de ese día.
@@ -29,7 +30,7 @@ public class AttendanceOvertime {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * El día, AAAA-MM-DD.
@@ -82,13 +83,24 @@ public class AttendanceOvertime {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public AttendanceOvertime setEmployee(String employee) {
+    public AttendanceOvertime setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public AttendanceOvertime setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public AttendanceOvertime setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**

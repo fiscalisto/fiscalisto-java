@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdateProductParams: los campos de «Actualizar un producto».
@@ -16,6 +17,12 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateProductParams {
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
     /**
      * Nombre corto para encontrarlo, solo para usted; en el CFDI va description.
      */
@@ -165,6 +172,18 @@ public class UpdateProductParams {
      */
     @JsonProperty("category")
     private String category;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateProductParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+    }
 
     /**
      * Nombre corto para encontrarlo, solo para usted; en el CFDI va description.

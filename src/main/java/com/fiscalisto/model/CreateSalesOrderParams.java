@@ -10,6 +10,7 @@ import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CreateSalesOrderParams: los campos de «Crear un pedido».
@@ -48,6 +49,12 @@ public class CreateSalesOrderParams {
     private Boolean confirm;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
      */
     @JsonProperty("currency")
@@ -72,6 +79,12 @@ public class CreateSalesOrderParams {
      */
     @JsonProperty("payment_method")
     private String paymentMethod;
+
+    /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    @JsonProperty("paid_later")
+    private Boolean paidLater;
 
     /**
      * Uso del CFDI (UsoCFDI), clave de c_UsoCFDI. Por omisión G03, o S01 con régimen 616.
@@ -172,10 +185,12 @@ public class CreateSalesOrderParams {
     }
 
     /** Solo el id. */
+    @JsonIgnore
     public CreateSalesOrderParams setCustomer(String id) {
         return setCustomer(StringOr.<CreateSalesOrderParamsCustomer>id(id));
     }
 
+    @JsonIgnore
     public CreateSalesOrderParams setCustomer(CreateSalesOrderParamsCustomer customer) {
         return setCustomer(StringOr.of(customer));
     }
@@ -201,6 +216,18 @@ public class CreateSalesOrderParams {
 
     public CreateSalesOrderParams setConfirm(Boolean confirm) {
         this.confirm = confirm;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateSalesOrderParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 
@@ -256,6 +283,18 @@ public class CreateSalesOrderParams {
 
     public CreateSalesOrderParams setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+        return this;
+    }
+
+    /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    public Boolean getPaidLater() {
+        return paidLater;
+    }
+
+    public CreateSalesOrderParams setPaidLater(Boolean paidLater) {
+        this.paidLater = paidLater;
         return this;
     }
 

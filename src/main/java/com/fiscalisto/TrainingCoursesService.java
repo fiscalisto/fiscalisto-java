@@ -111,7 +111,7 @@ public final class TrainingCoursesService {
     /**
      * Borrar un curso de capacitación
      * <p>
-     * Lo borra si nadie tiene su constancia; si alguien la tiene, lo cancela (cancelled true), porque las copias se conservan a disposición de la STPS (artículo 26, fracción III).
+     * Lo borra si nadie tiene su constancia; si alguien la tiene, lo cancela (canceled true), porque las copias se conservan a disposición de la STPS (artículo 26, fracción III).
      * <p>
      * DELETE /v1/training_courses/{id}
      * <p>

@@ -10,6 +10,7 @@ import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UpdateSalesOrderParams: los campos de «Cambiar un pedido».
@@ -28,6 +29,12 @@ public class UpdateSalesOrderParams {
      */
     @JsonProperty("items")
     private List<UpdateSalesOrderParamsItem> items;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Moneda, clave ISO 4217 de c_Moneda (MXN, USD, EUR…). Por omisión MXN.
@@ -54,6 +61,12 @@ public class UpdateSalesOrderParams {
      */
     @JsonProperty("payment_method")
     private String paymentMethod;
+
+    /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    @JsonProperty("paid_later")
+    private Boolean paidLater;
 
     /**
      * Uso del CFDI (UsoCFDI), clave de c_UsoCFDI. Por omisión G03, o S01 con régimen 616.
@@ -130,10 +143,12 @@ public class UpdateSalesOrderParams {
     }
 
     /** Solo el id. */
+    @JsonIgnore
     public UpdateSalesOrderParams setCustomer(String id) {
         return setCustomer(StringOr.<UpdateSalesOrderParamsCustomer>id(id));
     }
 
+    @JsonIgnore
     public UpdateSalesOrderParams setCustomer(UpdateSalesOrderParamsCustomer customer) {
         return setCustomer(StringOr.of(customer));
     }
@@ -147,6 +162,18 @@ public class UpdateSalesOrderParams {
 
     public UpdateSalesOrderParams setItems(List<UpdateSalesOrderParamsItem> items) {
         this.items = items;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public UpdateSalesOrderParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 
@@ -202,6 +229,18 @@ public class UpdateSalesOrderParams {
 
     public UpdateSalesOrderParams setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+        return this;
+    }
+
+    /**
+     * Con PUE: true si aún no le pagan («Por cobrar» en la app) aunque se pagará este mes.
+     */
+    public Boolean getPaidLater() {
+        return paidLater;
+    }
+
+    public UpdateSalesOrderParams setPaidLater(Boolean paidLater) {
+        this.paidLater = paidLater;
         return this;
     }
 

@@ -260,4 +260,29 @@ class ClientTest {
         assertThrows(Webhooks.VerificationException.class,
                 () -> Webhooks.verify(body, h, secret, at.plus(Duration.ofMinutes(10)), Webhooks.DEFAULT_TOLERANCE));
     }
+
+    @Test
+    void expandReadsTheIdOrTheObject() throws IOException {
+        List<String> queries = new ArrayList<>();
+        FiscalistoClient c = client((ex, body) -> {
+            String q = ex.getRequestURI().getRawQuery();
+            queries.add(q);
+            if (q == null) {
+                reply(ex, 200, "{\"id\":\"inv_1\",\"issuer\":\"iss_1\",\"recurring_invoice\":null,\"tickets\":[\"tkt_1\"]}");
+                return;
+            }
+            reply(ex, 200, "{\"id\":\"inv_1\",\"issuer\":{\"id\":\"iss_1\",\"legal_name\":\"ESCUELA KEMPER URGATE\"},\"recurring_invoice\":\"rin_1\",\"tickets\":[{\"id\":\"tkt_1\",\"object\":\"ticket\"}]}");
+        });
+        Invoice plain = c.invoices().get("inv_1", null);
+        assertEquals("iss_1", plain.getIssuer().getId());
+        assertNull(plain.getIssuer().getObject());
+        assertNull(plain.getRecurringInvoice());
+        assertEquals("tkt_1", plain.getTickets().get(0).getId());
+        Invoice inv = c.invoices().get("inv_1", null, RequestOptions.expand("issuer").addExpand("tickets"));
+        assertEquals("expand%5B%5D=issuer&expand%5B%5D=tickets", queries.get(1));
+        assertEquals("ESCUELA KEMPER URGATE", inv.getIssuer().getObject().getLegalName());
+        assertEquals("iss_1", inv.getIssuer().getId());
+        assertEquals("rin_1", inv.getRecurringInvoice().getId());
+        assertEquals("tkt_1", inv.getTickets().get(0).getObject().getId());
+    }
 }

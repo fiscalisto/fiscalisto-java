@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * CreateCustomerGroupParams: los campos de «Crear un grupo de clientes».
@@ -99,6 +100,12 @@ public class CreateCustomerGroupParams {
      */
     @JsonProperty("prep_days")
     private Long prepDays;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * Emisor (iss_…). Si la llave tiene un solo emisor o la cuenta tiene uno solo, puede omitirse.
@@ -290,5 +297,17 @@ public class CreateCustomerGroupParams {
     @JsonIgnore
     public CreateCustomerGroupParams setPrepDays(long prepDays) {
         return setPrepDays(Long.valueOf(prepDays));
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public CreateCustomerGroupParams setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
     }
 }

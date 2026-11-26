@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
 import java.util.Map;
@@ -61,7 +63,7 @@ public class AccountKey {
      * El entorno de prueba (sbx_…) de la llave: solo ve sus emisores, webhooks y eventos. null si es de la cuenta.
      */
     @JsonProperty("sandbox")
-    private String sandbox;
+    private StringOr<Sandbox> sandbox;
 
     /**
      * Id de la llave.
@@ -150,12 +152,23 @@ public class AccountKey {
     /**
      * El entorno de prueba (sbx_…) de la llave: solo ve sus emisores, webhooks y eventos. null si es de la cuenta.
      */
-    public String getSandbox() {
+    public StringOr<Sandbox> getSandbox() {
         return sandbox;
     }
 
-    public AccountKey setSandbox(String sandbox) {
+    public AccountKey setSandbox(StringOr<Sandbox> sandbox) {
         this.sandbox = sandbox;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public AccountKey setSandbox(String id) {
+        return setSandbox(StringOr.<Sandbox>id(id));
+    }
+
+    @JsonIgnore
+    public AccountKey setSandbox(Sandbox sandbox) {
+        return setSandbox(StringOr.of(sandbox));
     }
 }

@@ -2,11 +2,14 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * WebhookEndpoint: Una dirección de su servidor que recibe eventos.
@@ -36,7 +39,7 @@ public class WebhookEndpoint {
      * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
      */
     @JsonProperty("sandbox")
-    private String sandbox;
+    private StringOr<Sandbox> sandbox;
 
     /**
      * Dirección https de su servidor que recibe los avisos.
@@ -89,6 +92,12 @@ public class WebhookEndpoint {
     private String apiVersion;
 
     /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
+
+    /**
      * Cuándo se creó, ISO 8601 con la hora de la Ciudad de México (-06:00).
      */
     @JsonProperty("created_at")
@@ -139,13 +148,24 @@ public class WebhookEndpoint {
     /**
      * El entorno de prueba (sbx_…) al que pertenece, o null si es de la cuenta. Vea /v1/sandboxes.
      */
-    public String getSandbox() {
+    public StringOr<Sandbox> getSandbox() {
         return sandbox;
     }
 
-    public WebhookEndpoint setSandbox(String sandbox) {
+    public WebhookEndpoint setSandbox(StringOr<Sandbox> sandbox) {
         this.sandbox = sandbox;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public WebhookEndpoint setSandbox(String id) {
+        return setSandbox(StringOr.<Sandbox>id(id));
+    }
+
+    @JsonIgnore
+    public WebhookEndpoint setSandbox(Sandbox sandbox) {
+        return setSandbox(StringOr.of(sandbox));
     }
 
     /**
@@ -243,6 +263,18 @@ public class WebhookEndpoint {
 
     public WebhookEndpoint setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public WebhookEndpoint setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

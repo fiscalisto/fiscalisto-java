@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ListSatFindingCounterpartiesParams {
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     @JsonProperty("issuer")
     private String issuer;
@@ -40,16 +40,28 @@ public class ListSatFindingCounterpartiesParams {
     private String direction;
 
     /**
-     * CFDI desde este día (AAAA-MM-DD).
+     * De los CFDI con fecha desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    @JsonProperty("date_gte")
+    @JsonProperty("date[gte]")
     private String dateGte;
 
     /**
-     * CFDI hasta este día (AAAA-MM-DD, completo).
+     * De los CFDI con fecha después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
-    @JsonProperty("date_lte")
+    @JsonProperty("date[gt]")
+    private String dateGt;
+
+    /**
+     * De los CFDI con fecha hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("date[lte]")
     private String dateLte;
+
+    /**
+     * De los CFDI con fecha antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    @JsonProperty("date[lt]")
+    private String dateLt;
 
     /**
      * Solo los de esta gravedad: critical, warning o info.
@@ -66,7 +78,19 @@ public class ListSatFindingCounterpartiesParams {
     private String code;
 
     /**
-     * El emisor (iss_…). Puede omitirse si la llave o la cuenta tienen uno solo.
+     * Igual que date[gte]; se conserva por compatibilidad.
+     */
+    @JsonProperty("date_gte")
+    private String dateGteValue;
+
+    /**
+     * Igual que date[lte]; se conserva por compatibilidad.
+     */
+    @JsonProperty("date_lte")
+    private String dateLteValue;
+
+    /**
+     * Solo los de este emisor (iss_…). Sin él, los de todos los emisores que la llave puede usar, emisor por emisor (cada objeto dice el suyo en issuer); con más de 25, mándelo.
      */
     public String getIssuer() {
         return issuer;
@@ -121,7 +145,7 @@ public class ListSatFindingCounterpartiesParams {
     }
 
     /**
-     * CFDI desde este día (AAAA-MM-DD).
+     * De los CFDI con fecha desde, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
     public String getDateGte() {
         return dateGte;
@@ -133,7 +157,19 @@ public class ListSatFindingCounterpartiesParams {
     }
 
     /**
-     * CFDI hasta este día (AAAA-MM-DD, completo).
+     * De los CFDI con fecha después de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getDateGt() {
+        return dateGt;
+    }
+
+    public ListSatFindingCounterpartiesParams setDateGt(String dateGt) {
+        this.dateGt = dateGt;
+        return this;
+    }
+
+    /**
+     * De los CFDI con fecha hasta, incluido. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
      */
     public String getDateLte() {
         return dateLte;
@@ -141,6 +177,18 @@ public class ListSatFindingCounterpartiesParams {
 
     public ListSatFindingCounterpartiesParams setDateLte(String dateLte) {
         this.dateLte = dateLte;
+        return this;
+    }
+
+    /**
+     * De los CFDI con fecha antes de, sin incluirlo. Una fecha ISO 8601: un día (2026-10-01) es ese día en hora de la Ciudad de México; con hora (2026-10-01T09:00:00-06:00), ese segundo.
+     */
+    public String getDateLt() {
+        return dateLt;
+    }
+
+    public ListSatFindingCounterpartiesParams setDateLt(String dateLt) {
+        this.dateLt = dateLt;
         return this;
     }
 
@@ -167,6 +215,30 @@ public class ListSatFindingCounterpartiesParams {
 
     public ListSatFindingCounterpartiesParams setCode(String code) {
         this.code = code;
+        return this;
+    }
+
+    /**
+     * Igual que date[gte]; se conserva por compatibilidad.
+     */
+    public String getDateGteValue() {
+        return dateGteValue;
+    }
+
+    public ListSatFindingCounterpartiesParams setDateGteValue(String dateGteValue) {
+        this.dateGteValue = dateGteValue;
+        return this;
+    }
+
+    /**
+     * Igual que date[lte]; se conserva por compatibilidad.
+     */
+    public String getDateLteValue() {
+        return dateLteValue;
+    }
+
+    public ListSatFindingCounterpartiesParams setDateLteValue(String dateLteValue) {
+        this.dateLteValue = dateLteValue;
         return this;
     }
 }

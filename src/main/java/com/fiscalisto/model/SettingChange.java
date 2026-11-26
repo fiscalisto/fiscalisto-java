@@ -2,9 +2,11 @@
 
 package com.fiscalisto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * SettingChange: Un cambio a un ajuste de la empresa (Ajustes › Cambios): cuál (setting, su id, y name, su nombre en la app), de qué a qué como lo escribe la app (before, after), quién (changed_by: su nombre; null si fue con la API o su cuenta ya no existe) y por dónde (source: app, api o mcp), cuándo, si ya se deshizo (undone) y si todavía se puede deshacer (undoable: es el cambio más reciente de ese ajuste).
@@ -28,7 +30,7 @@ public class SettingChange {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * true en producción (llaves fk_live_), false en pruebas (fk_test_). Lo de pruebas no vale ante el SAT.
@@ -119,13 +121,24 @@ public class SettingChange {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public SettingChange setIssuer(String issuer) {
+    public SettingChange setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public SettingChange setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public SettingChange setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**

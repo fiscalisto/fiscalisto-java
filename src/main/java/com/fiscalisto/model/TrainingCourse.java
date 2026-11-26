@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,7 +39,7 @@ public class TrainingCourse {
      * El emisor (iss_…).
      */
     @JsonProperty("issuer")
-    private String issuer;
+    private StringOr<Issuer> issuer;
 
     /**
      * El nombre del curso.
@@ -91,8 +92,8 @@ public class TrainingCourse {
     /**
      * Si se canceló teniendo constancias emitidas (se conservan).
      */
-    @JsonProperty("cancelled")
-    private Boolean cancelled;
+    @JsonProperty("canceled")
+    private Boolean canceled;
 
     /**
      * El registro del agente externo ante la STPS.
@@ -187,13 +188,24 @@ public class TrainingCourse {
     /**
      * El emisor (iss_…).
      */
-    public String getIssuer() {
+    public StringOr<Issuer> getIssuer() {
         return issuer;
     }
 
-    public TrainingCourse setIssuer(String issuer) {
+    public TrainingCourse setIssuer(StringOr<Issuer> issuer) {
         this.issuer = issuer;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public TrainingCourse setIssuer(String id) {
+        return setIssuer(StringOr.<Issuer>id(id));
+    }
+
+    @JsonIgnore
+    public TrainingCourse setIssuer(Issuer issuer) {
+        return setIssuer(StringOr.of(issuer));
     }
 
     /**
@@ -300,12 +312,12 @@ public class TrainingCourse {
     /**
      * Si se canceló teniendo constancias emitidas (se conservan).
      */
-    public Boolean getCancelled() {
-        return cancelled;
+    public Boolean getCanceled() {
+        return canceled;
     }
 
-    public TrainingCourse setCancelled(Boolean cancelled) {
-        this.cancelled = cancelled;
+    public TrainingCourse setCanceled(Boolean canceled) {
+        this.canceled = canceled;
         return this;
     }
 

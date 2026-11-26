@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Map;
+
 /**
  * Tag: Una etiqueta del emisor: una palabra suya para juntar facturas y órdenes de compra.
  */
@@ -30,6 +32,12 @@ public class Tag {
      */
     @JsonProperty("object")
     private String object;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor de la etiqueta.
@@ -102,6 +110,18 @@ public class Tag {
 
     public Tag setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public Tag setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 

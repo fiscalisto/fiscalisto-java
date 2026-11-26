@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * PurchaseReceipt: Un ticket de compra del emisor sin factura: lo que se leyó de su foto y si ya se pidió, llegó o no es deducible.
@@ -33,6 +35,12 @@ public class PurchaseReceipt {
      */
     @JsonProperty("object")
     private String object;
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    @JsonProperty("metadata")
+    private Map<String, String> metadata;
 
     /**
      * El emisor (el que compró).
@@ -132,7 +140,7 @@ public class PurchaseReceipt {
      * La factura recibida (sat_…) que lo cubre, si ya llegó con las descargas del SAT, o null.
      */
     @JsonProperty("invoice")
-    private String invoice;
+    private StringOr<SatInvoice> invoice;
 
     /**
      * Cuándo quedó facturado, o null.
@@ -185,6 +193,18 @@ public class PurchaseReceipt {
 
     public PurchaseReceipt setObject(String object) {
         this.object = object;
+        return this;
+    }
+
+    /**
+     * Sus propios datos: hasta 50 llaves de 40 caracteres con valores de texto de hasta 500. No van al CFDI; vuelven en el objeto y en los webhooks.
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public PurchaseReceipt setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
         return this;
     }
 
@@ -385,13 +405,24 @@ public class PurchaseReceipt {
     /**
      * La factura recibida (sat_…) que lo cubre, si ya llegó con las descargas del SAT, o null.
      */
-    public String getInvoice() {
+    public StringOr<SatInvoice> getInvoice() {
         return invoice;
     }
 
-    public PurchaseReceipt setInvoice(String invoice) {
+    public PurchaseReceipt setInvoice(StringOr<SatInvoice> invoice) {
         this.invoice = invoice;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PurchaseReceipt setInvoice(String id) {
+        return setInvoice(StringOr.<SatInvoice>id(id));
+    }
+
+    @JsonIgnore
+    public PurchaseReceipt setInvoice(SatInvoice invoice) {
+        return setInvoice(StringOr.of(invoice));
     }
 
     /**

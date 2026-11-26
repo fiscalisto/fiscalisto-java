@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * EventResend: Un evento que se mandó otra vez: a cuántos webhooks salió. Cada entrega es un intento aparte, ahora; véalo en las entregas del webhook.
@@ -23,7 +24,7 @@ public class EventResend {
      * El evento (evt_…) que se mandó otra vez.
      */
     @JsonProperty("event")
-    private String event;
+    private StringOr<Event> event;
 
     /**
      * A cuántos webhooks salió. 0 si ninguno encendido escucha ese tipo de evento.
@@ -46,13 +47,24 @@ public class EventResend {
     /**
      * El evento (evt_…) que se mandó otra vez.
      */
-    public String getEvent() {
+    public StringOr<Event> getEvent() {
         return event;
     }
 
-    public EventResend setEvent(String event) {
+    public EventResend setEvent(StringOr<Event> event) {
         this.event = event;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public EventResend setEvent(String id) {
+        return setEvent(StringOr.<Event>id(id));
+    }
+
+    @JsonIgnore
+    public EventResend setEvent(Event event) {
+        return setEvent(StringOr.of(event));
     }
 
     /**

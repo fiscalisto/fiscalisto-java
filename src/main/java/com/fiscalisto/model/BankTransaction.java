@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -102,13 +103,13 @@ public class BankTransaction {
      * Las facturas (inv_…) que pagó, si está conciliado.
      */
     @JsonProperty("invoices")
-    private List<String> invoices;
+    private List<StringOr<Invoice>> invoices;
 
     /**
      * El complemento de pago (inv_…) timbrado con él, o null.
      */
     @JsonProperty("payment")
-    private String payment;
+    private StringOr<Invoice> payment;
 
     /**
      * Si está abierto, las facturas que parece pagar (por monto, RFC, folio en el concepto y fecha): invoices, lo que toca a cada una (amounts), method, confidence (high o medium) y por qué (reasons). null si ninguna encaja.
@@ -290,11 +291,11 @@ public class BankTransaction {
     /**
      * Las facturas (inv_…) que pagó, si está conciliado.
      */
-    public List<String> getInvoices() {
+    public List<StringOr<Invoice>> getInvoices() {
         return invoices;
     }
 
-    public BankTransaction setInvoices(List<String> invoices) {
+    public BankTransaction setInvoices(List<StringOr<Invoice>> invoices) {
         this.invoices = invoices;
         return this;
     }
@@ -302,13 +303,24 @@ public class BankTransaction {
     /**
      * El complemento de pago (inv_…) timbrado con él, o null.
      */
-    public String getPayment() {
+    public StringOr<Invoice> getPayment() {
         return payment;
     }
 
-    public BankTransaction setPayment(String payment) {
+    public BankTransaction setPayment(StringOr<Invoice> payment) {
         this.payment = payment;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public BankTransaction setPayment(String id) {
+        return setPayment(StringOr.<Invoice>id(id));
+    }
+
+    @JsonIgnore
+    public BankTransaction setPayment(Invoice payment) {
+        return setPayment(StringOr.of(payment));
     }
 
     /**

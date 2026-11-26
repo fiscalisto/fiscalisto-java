@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiscalisto.StringOr;
 
 /**
  * PayrollOrgChartEmployee: PayrollOrgChartEmployee.
@@ -17,7 +18,7 @@ public class PayrollOrgChartEmployee {
      * El empleado (emp_…).
      */
     @JsonProperty("employee")
-    private String employee;
+    private StringOr<Employee> employee;
 
     /**
      * Su número de empleado.
@@ -53,7 +54,7 @@ public class PayrollOrgChartEmployee {
      * Su jefe directo (emp_…); null si está arriba.
      */
     @JsonProperty("manager")
-    private String manager;
+    private StringOr<Employee> manager;
 
     /**
      * Personas directamente a su cargo.
@@ -70,13 +71,24 @@ public class PayrollOrgChartEmployee {
     /**
      * El empleado (emp_…).
      */
-    public String getEmployee() {
+    public StringOr<Employee> getEmployee() {
         return employee;
     }
 
-    public PayrollOrgChartEmployee setEmployee(String employee) {
+    public PayrollOrgChartEmployee setEmployee(StringOr<Employee> employee) {
         this.employee = employee;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollOrgChartEmployee setEmployee(String id) {
+        return setEmployee(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollOrgChartEmployee setEmployee(Employee employee) {
+        return setEmployee(StringOr.of(employee));
     }
 
     /**
@@ -142,13 +154,24 @@ public class PayrollOrgChartEmployee {
     /**
      * Su jefe directo (emp_…); null si está arriba.
      */
-    public String getManager() {
+    public StringOr<Employee> getManager() {
         return manager;
     }
 
-    public PayrollOrgChartEmployee setManager(String manager) {
+    public PayrollOrgChartEmployee setManager(StringOr<Employee> manager) {
         this.manager = manager;
         return this;
+    }
+
+    /** Solo el id. */
+    @JsonIgnore
+    public PayrollOrgChartEmployee setManager(String id) {
+        return setManager(StringOr.<Employee>id(id));
+    }
+
+    @JsonIgnore
+    public PayrollOrgChartEmployee setManager(Employee manager) {
+        return setManager(StringOr.of(manager));
     }
 
     /**

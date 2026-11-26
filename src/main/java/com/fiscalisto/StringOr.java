@@ -73,7 +73,8 @@ public final class StringOr<T> {
 
         @Override
         public JsonDeserializer<?> createContextual(DeserializationContext ctxt, BeanProperty property) {
-            JavaType type = property != null ? property.getType() : ctxt.getContextualType();
+            // The value's own type: a List<StringOr<Ticket>>'s items get StringOr<Ticket>.
+            JavaType type = ctxt.getContextualType() != null ? ctxt.getContextualType() : property != null ? property.getType() : null;
             if (type != null && type.isReferenceType()) type = type.getReferencedType();
             JavaType t = type == null ? null : type.containedType(0);
             return new Deserializer(t);
