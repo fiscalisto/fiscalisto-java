@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UpdateInvoiceParamsGlobal {
     /**
-     * Periodicidad (Periodicidad), c_Periodicidad: 01 diario, 02 semanal, 03 quincenal, 04 mensual, 05 bimestral.
+     * Periodicidad (Periodicidad), c_Periodicidad: 01 diario, 02 semanal o 04 mensual; 05 bimestral solo en el Régimen de Incorporación Fiscal (621). La regla 2.7.1.21 de la RMF 2026 no permite 03 quincenal.
      * <p>
      * Obligatorio.
      */
@@ -44,7 +44,7 @@ public class UpdateInvoiceParamsGlobal {
     private Boolean keepConcepts;
 
     /**
-     * Periodicidad (Periodicidad), c_Periodicidad: 01 diario, 02 semanal, 03 quincenal, 04 mensual, 05 bimestral.
+     * Periodicidad (Periodicidad), c_Periodicidad: 01 diario, 02 semanal o 04 mensual; 05 bimestral solo en el Régimen de Incorporación Fiscal (621). La regla 2.7.1.21 de la RMF 2026 no permite 03 quincenal.
      * <p>
      * Obligatorio.
      */

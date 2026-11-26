@@ -30,9 +30,9 @@ public class UpdateSelfInvoicingParams {
     private Long windowDays;
 
     /**
-     * c_Periodicidad de la factura global con los tickets que nadie facturó: 01 diaria, 02 semanal, 03 quincenal, 04 mensual.
+     * c_Periodicidad de la factura global con los tickets que nadie facturó: 01 diaria, 02 semanal o 04 mensual (regla 2.7.1.21 de la RMF 2026; 03 quincenal no).
      * <p>
-     * Valores: 01, 02, 03, 04.
+     * Valores: 01, 02, 04.
      */
     @JsonProperty("global_periodicity")
     private String globalPeriodicity;
@@ -185,9 +185,9 @@ public class UpdateSelfInvoicingParams {
     }
 
     /**
-     * c_Periodicidad de la factura global con los tickets que nadie facturó: 01 diaria, 02 semanal, 03 quincenal, 04 mensual.
+     * c_Periodicidad de la factura global con los tickets que nadie facturó: 01 diaria, 02 semanal o 04 mensual (regla 2.7.1.21 de la RMF 2026; 03 quincenal no).
      * <p>
-     * Valores: 01, 02, 03, 04.
+     * Valores: 01, 02, 04.
      */
     public String getGlobalPeriodicity() {
         return globalPeriodicity;

@@ -54,9 +54,9 @@ public class SelfInvoicing {
     private Long windowDays;
 
     /**
-     * Cada cuánto se timbra sola la factura global con lo que nadie facturó: 01 diaria, 02 semanal, 03 quincenal, 04 mensual.
+     * Cada cuánto se timbra sola la factura global con lo que nadie facturó: 01 diaria, 02 semanal o 04 mensual (regla 2.7.1.21 de la RMF 2026).
      * <p>
-     * Valores: 01, 02, 03, 04.
+     * Valores: 01, 02, 04.
      */
     @JsonProperty("global_periodicity")
     private String globalPeriodicity;
@@ -257,9 +257,9 @@ public class SelfInvoicing {
     }
 
     /**
-     * Cada cuánto se timbra sola la factura global con lo que nadie facturó: 01 diaria, 02 semanal, 03 quincenal, 04 mensual.
+     * Cada cuánto se timbra sola la factura global con lo que nadie facturó: 01 diaria, 02 semanal o 04 mensual (regla 2.7.1.21 de la RMF 2026).
      * <p>
-     * Valores: 01, 02, 03, 04.
+     * Valores: 01, 02, 04.
      */
     public String getGlobalPeriodicity() {
         return globalPeriodicity;
